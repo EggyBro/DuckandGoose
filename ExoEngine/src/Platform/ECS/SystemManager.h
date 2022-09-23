@@ -1,11 +1,11 @@
 #pragma once
 
 #include "Types.h"
-#include "ECSprecompiled.h"
+#include "empch.h"
 
-namespace BaseEngine
+namespace EM
 {
-	class SystemManager
+	class EM_API SystemManager
 	{
 	public:
 		template<typename T>
@@ -13,11 +13,11 @@ namespace BaseEngine
 		{
 			const char* typeName = typeid(T).name();
 
-			assert(mSystems.find(typeName) == mSystems.end() && "Registering system more than once.");
+			assert(mSystems.find(typeName) == mSystems.end() && "Registering systEM more than once.");
 
-			auto system = std::make_shared<T>();
-			mSystems.insert({ typeName, system });
-			return system;
+			auto systEM = std::make_shared<T>();
+			mSystems.insert({ typeName, systEM });
+			return systEM;
 		}
 
 		template<typename T>
@@ -34,10 +34,10 @@ namespace BaseEngine
 		{
 			for (auto const& pair : mSystems)
 			{
-				auto const& system = pair.second;
+				auto const& systEM = pair.second;
 
 
-				system->mEntities.erase(entity);
+				systEM->mEntities.erase(entity);
 			}
 		}
 
@@ -46,23 +46,23 @@ namespace BaseEngine
 			for (auto const& pair : mSystems)
 			{
 				auto const& type = pair.first;
-				auto const& system = pair.second;
-				auto const& systemSignature = mSignatures[type];
+				auto const& systEM = pair.second;
+				auto const& systEMSignature = mSignatures[type];
 
-				if ((entitySignature & systemSignature) == systemSignature)
+				if ((entitySignature & systEMSignature) == systEMSignature)
 				{
-					system->mEntities.insert(entity);
+					systEM->mEntities.insert(entity);
 				}
 				else
 				{
-					system->mEntities.erase(entity);
+					systEM->mEntities.erase(entity);
 				}
 			}
 		}
 
 	private:
 		std::unordered_map<const char*, SignatureID> mSignatures{};
-		std::unordered_map<const char*, std::shared_ptr<System>> mSystems{};
+		std::unordered_map<const char*, std::shared_ptr<SystEM>> mSystems{};
 	};
 
 }

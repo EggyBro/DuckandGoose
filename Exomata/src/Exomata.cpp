@@ -1,13 +1,14 @@
+#include "ExoEngine.h"
 #include "ExoEngine/EntryPoint.h"
 
-class EXOMATA : public EM::Application
+class Exomata : public EM::Application
 {
 public:
-	EXOMATA() 
+	Exomata() 
 	{
 
 	}
-	~EXOMATA() 
+	~Exomata() 
 	{
 
 	}
@@ -15,5 +16,5 @@ public:
 
 EM::Application* EM::CreateApplication()
 {
-	return new EXOMATA();
+	return new Exomata();
 }

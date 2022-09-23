@@ -2,11 +2,11 @@
 
 #include "ComponentManager.h"
 #include "EntityManager.h"
-#include "SystemManager.h"
+#include "SystEMManager.h"
 #include "Types.h"
-#include "ECSprecompiled.h"
+#include "empch.h"
 
-namespace BaseEngine
+namespace EM
 {
 	class ECS
 	{
@@ -15,7 +15,7 @@ namespace BaseEngine
 		{
 			mComponentManager = std::make_unique<ComponentManager>();
 			mEntityManager = std::make_unique<EntityManager>();
-			mSystemManager = std::make_unique<SystemManager>();
+			mSystEMManager = std::make_unique<SystemManager>();
 		}
 
 
@@ -31,7 +31,7 @@ namespace BaseEngine
 
 			mComponentManager->EntityDestroyed(entity);
 
-			mSystemManager->EntityDestroyed(entity);
+			mSystEMManager->EntityDestroyed(entity);
 		}
 
 
@@ -51,19 +51,19 @@ namespace BaseEngine
 			signature.set(mComponentManager->GetComponentType<T>(), true);
 			mEntityManager->SetSignature(entity, signature);
 
-			mSystemManager->EntitySignatureChanged(entity, signature);
+			mSystEMManager->EntitySignatureChanged(entity, signature);
 		}
 
 		template<typename T>
-		void RemoveComponent(EntityID entity)
+		void REMoveComponent(EntityID entity)
 		{
-			mComponentManager->RemoveComponent<T>(entity);
+			mComponentManager->REMoveComponent<T>(entity);
 
 			auto signature = mEntityManager->GetSignature(entity);
 			signature.set(mComponentManager->GetComponentType<T>(), false);
 			mEntityManager->SetSignature(entity, signature);
 
-			mSystemManager->EntitySignatureChanged(entity, signature);
+			mSystEMManager->EntitySignatureChanged(entity, signature);
 		}
 
 		template<typename T>
@@ -81,20 +81,20 @@ namespace BaseEngine
 
 		// System methods
 		template<typename T>
-		std::shared_ptr<T> RegisterSystem()
+		std::shared_ptr<T> RegisterSystEM()
 		{
-			return mSystemManager->RegisterSystem<T>();
+			return mSystEMManager->RegisterSystEM<T>();
 		}
 
 		template<typename T>
-		void SetSystemSignature(SignatureID signature)
+		void SetSystEMSignature(SignatureID signature)
 		{
-			mSystemManager->SetSignature<T>(signature);
+			mSystEMManager->SetSignature<T>(signature);
 		}
 
 	private:
 		std::unique_ptr<ComponentManager> mComponentManager;
 		std::unique_ptr<EntityManager> mEntityManager;
-		std::unique_ptr<SystemManager> mSystemManager;
+		std::unique_ptr<SystemManager> mSystEMManager;
 	};
 }

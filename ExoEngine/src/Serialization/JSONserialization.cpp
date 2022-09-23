@@ -1,8 +1,9 @@
+#include "empch.h"
 #include "JSONserialization.h"
 
-namespace BaseEngine
+namespace EM
 {
-	std::string BaseEngine::JSONSerializer::Serialize() const
+	std::string JSONSerializer::Serialize() const
 	{
 		rapidjson::StringBuffer ss;
 		rapidjson::Writer<rapidjson::StringBuffer> writer(ss);
@@ -13,7 +14,7 @@ namespace BaseEngine
 		return "";
 	}
 
-	bool BaseEngine::JSONSerializer::Deserialize(const std::string& stringbuffer)
+	bool JSONSerializer::Deserialize(const std::string& stringbuffer)
 	{
 		rapidjson::Document doc;
 		doc.Parse(stringbuffer.c_str());
@@ -28,7 +29,7 @@ namespace BaseEngine
 		return true;
 	}
 
-	bool BaseEngine::JSONSerializer::DeserializeFromFile(const std::string& filePath)
+	bool JSONSerializer::DeserializeFromFile(const std::string& filePath)
 	{
 		std::ifstream ifs(filePath);
 		std::stringstream buffer;
@@ -38,7 +39,7 @@ namespace BaseEngine
 		return Deserialize(buffer.str());
 	}
 
-	bool BaseEngine::JSONSerializer::SerializeToFile(const std::string& filePath)
+	bool JSONSerializer::SerializeToFile(const std::string& filePath)
 	{
 		std::ofstream ofs(filePath);
 		std::string str = Serialize();
@@ -49,7 +50,7 @@ namespace BaseEngine
 		return true;
 	}
 
-	bool BaseEngine::JSONSerializer::InitDocument(const std::string& stringbuffer, rapidjson::Document& doc)
+	bool JSONSerializer::InitDocument(const std::string& stringbuffer, rapidjson::Document& doc)
 	{
 		if (stringbuffer.empty())
 			return false;
@@ -63,7 +64,7 @@ namespace BaseEngine
 
 	Player::~Player() {};
 
-	bool BaseEngine::Player::Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const
+	bool Player::Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const
 	{
 		writer->StartObject();
 
@@ -81,7 +82,7 @@ namespace BaseEngine
 		return true;
 	}
 
-	bool BaseEngine::Player::Deserialize(const rapidjson::Value& obj)
+	bool Player::Deserialize(const rapidjson::Value& obj)
 	{
 		Name(obj["name"].GetString());
 		Health(obj["health"].GetInt());

@@ -14,6 +14,7 @@ namespace EM {
 					 m_Height,
 					 m_CurrentWidth,
 					 m_CurrentHeight;
+		bool Vsync;
 		double mouseX, mouseY;
 	};
 
@@ -55,6 +56,6 @@ namespace EM {
 		static void Mousescroll_callback(GLFWwindow* window, double xoffset, double yoffset); // mouse scrolling
 		static void Mouseposition_callback(GLFWwindow* window, double xpos, double ypos); // mouse position
 		
-		void ToggleVsync(bool& value);// vync based on internal
+		void ToggleVsync(bool value);// vync based on internal
 	};
 }

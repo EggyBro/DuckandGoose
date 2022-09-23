@@ -1,10 +1,11 @@
 #pragma once
+#pragma once
 
+#include "empch.h"
 #include "Types.h"
-#include "ECSprecompiled.h"
 #include "ComponentArray.h"
 
-namespace BaseEngine
+namespace EM
 {
 	class ComponentManager
 	{
@@ -61,7 +62,7 @@ namespace BaseEngine
 		void EntityDestroyed(EntityID entity)
 		{
 			// Notify each component array that an entity has been destroyed
-			// If it has a component for that entity, it will remove it
+			// If it has a component for that entity, it will rEMove it
 			for (auto const& pair : mComponentArrays)
 			{
 				auto const& component = pair.second;

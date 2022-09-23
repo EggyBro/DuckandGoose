@@ -1,6 +1,6 @@
 #include "empch.h"
 #include "Window.h"
-
+#include "ExoEngine/Input/Input.h"
 
 namespace EM{
 	void Window::Init()
@@ -28,7 +28,7 @@ namespace EM{
 		//fullscreen
 		m_monitor = glfwGetPrimaryMonitor();
 
-		//set initialize window width & height to current 
+		//set initialize window width & height to current (to be set in rapidjson file)
 		m_windowData.m_CurrentWidth = m_windowData.m_Width;
 		m_windowData.m_CurrentHeight = m_windowData.m_Height;
 
@@ -48,20 +48,28 @@ namespace EM{
 	
 		/* Make the window's context current */
 		glfwMakeContextCurrent(m_window);
-
-		glfwSwapInterval(1);
+		glfwSetWindowUserPointer(m_window, &m_windowData);
+		
+		//context
+		ToggleVsync(true);
 
 		if(glewInit() != GLEW_OK)
 			EM_EXO_ASSERT(!glewInit(), "GLEW init has failed - abort program...");
 		
+		glfwSetWindowSizeCallback(m_window, Window_size_callback);
+		glfwSetCursorPosCallback(m_window, Mouseposition_callback);
+
+
+
 	}
 	void Window::Update()
 	{
+		/* Poll for and process events */
+		glfwPollEvents();
 		/* Swap front and back buffers */
 		glfwSwapBuffers(m_window);
 
-		/* Poll for and process events */
-		glfwPollEvents();
+
 	}
 	void Window::End()
 	{
@@ -69,23 +77,44 @@ namespace EM{
 	}
 	void Window::ErrorCallback(int error, const char* description)
 	{
+		EM_EXO_ERROR("GLFW ERROR {0} : {1}", error, description);
 	}
 	void Window::Window_size_callback(GLFWwindow* window, int width, int height)
 	{
+		WindowProps& data = *(WindowProps*)glfwGetWindowUserPointer(window);
+		data.m_Width = width;
+		data.m_Height = height;
+		glViewport(0, 0, data.m_Width, data.m_Height);
+		EM_EXO_INFO("Window Current Size ({0}, {1})", data.m_Width, data.m_Height);
 	}
 	void Window::Key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 	{
+		InputSystem::GetInstance()->SetKeyStatus(key, action);
+		EM_EXO_INFO("Window Current Size ({0})", action);
 	}
 	void Window::Mousebutton_callback(GLFWwindow* window, int button, int action, int mode)
 	{
+
 	}
 	void Window::Mousescroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	{
+
 	}
 	void Window::Mouseposition_callback(GLFWwindow* window, double xpos, double ypos)
 	{
+		WindowProps& data = *(WindowProps*)glfwGetWindowUserPointer(window);
+		data.mouseX = xpos;
+		data.mouseY = ypos;
+
+		EM_EXO_INFO("Mouse Current Position(x:{0}, y:{1})", data.mouseX, data.mouseY);
 	}
-	void Window::ToggleVsync(bool& value)
+	void Window::ToggleVsync(bool value)
 	{
+		if (value)
+			glfwSwapInterval(1);
+		else
+			glfwSwapInterval(0);
+
+		m_windowData.Vsync = value;
 	}
 }

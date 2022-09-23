@@ -1,11 +1,11 @@
 #pragma once
-
+#include "empch.h"
 #include "Types.h"
-#include "ECSprecompiled.h"
+#include "ExoEngine/Core.h"
 
-namespace BaseEngine
+namespace EM
 {
-	class IComponentArray
+	class EM_API IComponentArray
 	{
 	public:
 		virtual ~IComponentArray() = default;
@@ -34,17 +34,17 @@ namespace BaseEngine
 			assert(mEntityToIndexMap.find(entity) != mEntityToIndexMap.end() && "Removing non-existent component.");
 
 			// Copy element at end into deleted element's place to maintain density
-			size_t indexOfRemovedEntity = mEntityToIndexMap[entity];
-			size_t indexOfLastElement = mSize - 1;
-			mComponentArray[indexOfRemovedEntity] = mComponentArray[indexOfLastElement];
+			size_t indexofRemovedEntity = mEntityToIndexMap[entity];
+			size_t indexofLastElement = mSize - 1;
+			mComponentArray[indexofRemovedEntity] = mComponentArray[indexofLastElement];
 
 			// Update map to point to moved spot
-			Entity entityOfLastElement = mIndexToEntityMap[indexOfLastElement];
-			mEntityToIndexMap[entityOfLastElement] = indexOfRemovedEntity;
-			mIndexToEntityMap[indexOfRemovedEntity] = entityOfLastElement;
+			Entity entityOfLastElement = mIndexToEntityMap[indexofLastElement];
+			mEntityToIndexMap[entityOfLastElement] = indexofRemovedEntity;
+			mIndexToEntityMap[indexofRemovedEntity] = entityOfLastElement;
 
 			mEntityToIndexMap.erase(entity);
-			mIndexToEntityMap.erase(indexOfLastElement);
+			mIndexToEntityMap.erase(indexofLastElement);
 
 			--mSize;
 		}

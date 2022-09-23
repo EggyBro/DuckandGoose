@@ -1,10 +1,11 @@
 #pragma once
 
 #include "Types.h"
+#include "ExoEngine/Log.h"
 
-namespace BaseEngine
+namespace EM
 {
-	class EntityManager
+	class EM_API EntityManager
 	{
 	public:
 		EntityManager()
@@ -19,10 +20,10 @@ namespace BaseEngine
 		EntityID CreateEntity()
 		{
 			assert(mLivingEntityCount < MAX_ENTITIES && "Too many entities in existence.");
-
+			//EM_EXO_ASSERT(mLivingEntityCount < MAX_ENTITIES && "Too many entities in existence.")
 			// Take an ID from the front of the queue
 			EntityID id = mAvailableEntities.front();
-			mAvailableEntities.pop();	//Removes elements from the front of the queue
+			mAvailableEntities.pop();	//REMoves elEMents from the front of the queue
 			++mLivingEntityCount;	//Dictates how many entities are alive
 
 			return id;

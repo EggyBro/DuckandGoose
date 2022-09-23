@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ECSprecompiled.h"
+#include "empch.h"
 
-namespace BaseEngine
+namespace EM
 {
 	//Alias for ID
 	typedef std::uint32_t IDType;
@@ -23,7 +23,7 @@ namespace BaseEngine
 	//The list of Components that an Entity has instances of.
 	typedef std::bitset<MAX_COMPONENTS> SignatureID;
 
-	class System
+	class SystEM
 	{
 	public:
 		std::set<EntityID> mEntities;

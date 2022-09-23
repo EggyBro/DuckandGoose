@@ -1,7 +1,9 @@
 #include "empch.h"
 #include "Application.h"
+#include "Events/ApplicationEvent.h"
 #include "Log.h"
 #include "Platform/Window/Window.h"
+
 
 namespace EM {
 
@@ -17,9 +19,12 @@ namespace EM {
 		m_Systems.SystemIncrement(system);
 		system->Init();
 	}
+
 	void Application::Run() 
 	{
-
+		//testing event TO BE REMOVED
+		WindowResizingEvent e(1280, 720);
+		EM_TRACE(e);
 		//Window
 		Window* window = new Window;
 		window->Init();

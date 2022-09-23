@@ -1,6 +1,6 @@
 #pragma once
 #include "ExoEngine/Core.h"
-#include "Platform/System/System.h"
+#include "Platform/SystEM/SystEM.h"
 
 namespace EM {
 
@@ -10,7 +10,7 @@ namespace EM {
 		SystemManager() = default;
 		~SystemManager();
 
-		void SystemIncrement(System* system);
+		void SystemIncrement(System* systEM);
 		void SystemIndex(unsigned int index, System* system);
 		//Destroy Systems
 		void DeleteSystem();
