@@ -4,6 +4,7 @@
 #include "Log.h"
 #include "Events/EventHandler.h"
 #include "Platform/System/SystemManager.h"
+#include "Platform/Graphics/Shader.h"
 
 namespace EM {
 
@@ -21,6 +22,7 @@ namespace EM {
 
 	private:
 		SystemManager m_Systems;
+		
 	
 	};
 	 

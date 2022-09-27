@@ -3,6 +3,8 @@
 #include "ExoEngine/Input/Input.h"
 
 namespace EM{
+
+
 	void Window::Init()
 	{
 		/* Initialize the library */
@@ -49,13 +51,12 @@ namespace EM{
 		/* Make the window's context current */
 		glfwMakeContextCurrent(m_window);
 		glfwSetWindowUserPointer(m_window, &m_windowData);
-		
-		//context
-		ToggleVsync(true);
 
 		if(glewInit() != GLEW_OK)
 			EM_EXO_ASSERT(!glewInit(), "GLEW init has failed - abort program...");
-		
+
+		//context
+		ToggleVsync(true);
 		glfwSetWindowSizeCallback(m_window, Window_size_callback);
 		glfwSetCursorPosCallback(m_window, Mouseposition_callback);
 
@@ -85,20 +86,19 @@ namespace EM{
 		data.m_Width = width;
 		data.m_Height = height;
 		glViewport(0, 0, data.m_Width, data.m_Height);
-		EM_EXO_INFO("Window Current Size ({0}, {1})", data.m_Width, data.m_Height);
+		//EM_EXO_INFO("Window Current Size ({0}, {1})", data.m_Width, data.m_Height);//debug purpose tb removed
 	}
 	void Window::Key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 	{
 		InputSystem::GetInstance()->SetKeyStatus(key, action);
-		EM_EXO_INFO("Window Current Size ({0})", action);
 	}
 	void Window::Mousebutton_callback(GLFWwindow* window, int button, int action, int mode)
 	{
-
+		InputSystem::GetInstance()->SetMouseStatus(button, action);
 	}
 	void Window::Mousescroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	{
-
+	
 	}
 	void Window::Mouseposition_callback(GLFWwindow* window, double xpos, double ypos)
 	{
@@ -106,7 +106,7 @@ namespace EM{
 		data.mouseX = xpos;
 		data.mouseY = ypos;
 
-		EM_EXO_INFO("Mouse Current Position(x:{0}, y:{1})", data.mouseX, data.mouseY);
+		//EM_EXO_INFO("Mouse Current Position(x:{0}, y:{1})", data.mouseX, data.mouseY);//debug purpose tb removed
 	}
 	void Window::ToggleVsync(bool value)
 	{

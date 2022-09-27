@@ -1,6 +1,6 @@
 #include "matrix3D.h"
 
-namespace Framework
+namespace EM
 {
 	Mat3D::Mat3D() :value{ 0.0f, 0.0f, 0.0f ,
 								   0.0f, 0.0f, 0.0f ,

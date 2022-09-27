@@ -2,6 +2,7 @@
 
 #include "Types.h"
 #include "empch.h"
+#include "../Core.h"
 
 namespace EM
 {
@@ -13,11 +14,11 @@ namespace EM
 		{
 			const char* typeName = typeid(T).name();
 
-			assert(mSystems.find(typeName) == mSystems.end() && "Registering systEM more than once.");
+			assert(mSystems.find(typeName) == mSystems.end() && "Registering system more than once.");
 
-			auto systEM = std::make_shared<T>();
-			mSystems.insert({ typeName, systEM });
-			return systEM;
+			auto system = std::make_shared<T>();
+			mSystems.insert({ typeName, system });
+			return system;
 		}
 
 		template<typename T>
@@ -34,10 +35,10 @@ namespace EM
 		{
 			for (auto const& pair : mSystems)
 			{
-				auto const& systEM = pair.second;
+				auto const& system = pair.second;
 
 
-				systEM->mEntities.erase(entity);
+				system->mEntities.erase(entity);
 			}
 		}
 
@@ -46,16 +47,16 @@ namespace EM
 			for (auto const& pair : mSystems)
 			{
 				auto const& type = pair.first;
-				auto const& systEM = pair.second;
-				auto const& systEMSignature = mSignatures[type];
+				auto const& system = pair.second;
+				auto const& systemSignature = mSignatures[type];
 
-				if ((entitySignature & systEMSignature) == systEMSignature)
+				if ((entitySignature & systemSignature) == systemSignature)
 				{
-					systEM->mEntities.insert(entity);
+					system->mEntities.insert(entity);
 				}
 				else
 				{
-					systEM->mEntities.erase(entity);
+					system->mEntities.erase(entity);
 				}
 			}
 		}

@@ -10,7 +10,7 @@ namespace EM {
 		
 		virtual std::string GetName() = 0;
 		virtual ~System() {};
-		//SystEM function
+		//System function
 		virtual void Init() = 0 {};
 		virtual void Update() = 0 {};
 		virtual void End() = 0 {};

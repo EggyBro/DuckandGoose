@@ -10,7 +10,7 @@ namespace EM {
 		SystemManager() = default;
 		~SystemManager();
 
-		void SystemIncrement(System* systEM);
+		void SystemIncrement(System* system);
 		void SystemIndex(unsigned int index, System* system);
 		//Destroy Systems
 		void DeleteSystem();

@@ -68,7 +68,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>EM_PLATFORM_WINDOWS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)ExoEngine\src;$(SolutionDir)ExoEngine\vendor\spdlog\include;$(SolutionDir)ExoEngine\vendor\glm;$(SolutionDir)ExoEngine\vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ExoEngine\src;$(SolutionDir)ExoEngine\vendor\spdlog\include;$(SolutionDir)ExoEngine\vendor\glm;$(SolutionDir)ExoEngine\vendor;$(SolutionDir)ExoEngine\vendor\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
@@ -90,7 +90,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>EM_PLATFORM_WINDOWS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)ExoEngine\src;$(SolutionDir)ExoEngine\vendor\spdlog\include;$(SolutionDir)ExoEngine\vendor\glm;$(SolutionDir)ExoEngine\vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ExoEngine\src;$(SolutionDir)ExoEngine\vendor\spdlog\include;$(SolutionDir)ExoEngine\vendor\glm;$(SolutionDir)ExoEngine\vendor;$(SolutionDir)ExoEngine\vendor\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>

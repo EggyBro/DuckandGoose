@@ -8,6 +8,7 @@
 #include "rapidjson/stringbuffer.h"	// wrapper of C stream for prettywriter as output
 #include "rapidjson/prettywriter.h"	// for stringify JSON
 #include "ExoEngine/Core.h"
+
 namespace EM
 {
 	class EM_API JSONSerializer

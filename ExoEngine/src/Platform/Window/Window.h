@@ -18,7 +18,7 @@ namespace EM {
 		double mouseX, mouseY;
 	};
 
-	class EM_API Window : public EM::System
+	class EM_API Window : public System
 	{
 	public:
 		Window() : m_window{ nullptr }, m_monitor{ nullptr },
@@ -28,6 +28,7 @@ namespace EM {
 		~Window() = default;
 
 	public:
+		
 		//Initialize
 		virtual void Init() override;
 		//update
@@ -37,10 +38,11 @@ namespace EM {
 
 		//Getter
 		//Window name
-		std::string GetName() { return m_windowData.Title; }
+		virtual std::string GetName() override { return m_windowData.Title; }
 		WindowProps Getter() const { return m_windowData; }
 		GLFWwindow* GetWindow() const { return m_window; }
 		GLFWmonitor* GetMonitor() const { return m_monitor; }
+
 	private:
 		GLFWwindow* m_window;
 		GLFWmonitor* m_monitor;

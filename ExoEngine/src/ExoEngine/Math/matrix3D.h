@@ -1,7 +1,7 @@
 #pragma once
 #include "Vmath.h"
 
-namespace Framework
+namespace EM
 {
 	typedef union Mat3D
 	{

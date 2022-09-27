@@ -3,7 +3,7 @@
 #include "Events/ApplicationEvent.h"
 #include "Log.h"
 #include "Platform/Window/Window.h"
-
+#include "Platform/Graphics/Graphics.h"
 
 namespace EM {
 
@@ -22,18 +22,21 @@ namespace EM {
 
 	void Application::Run() 
 	{
-		//testing event TO BE REMOVED
-		WindowResizingEvent e(1280, 720);
-		EM_TRACE(e);
-		//Window
-		Window* window = new Window;
-		window->Init();
-		m_Systems.SystemIndex(0, window); //1st layer window
+		Window* m_window = new Window;
+		m_window->Init();
+		m_Systems.SystemIndex(0, m_window); //1st layer window
 
+		Graphic* m_graphic = new Graphic;
+		m_graphic->Init();
+		m_Systems.SystemIndex(1, m_graphic);
 
-		while (!glfwWindowShouldClose(window->GetWindow()))
+		while (!glfwWindowShouldClose(m_window->GetWindow()))
 		{
-			window->Update();
+			glClearColor(0.1f, 0.1f, 0.1f, 1);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			//m_shader->Bind();
+			m_graphic->Update();
+			m_window->Update();
 		}
 
 		End();

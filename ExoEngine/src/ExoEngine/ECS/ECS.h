@@ -55,7 +55,7 @@ namespace EM
 		}
 
 		template<typename T>
-		void REMoveComponent(EntityID entity)
+		void RemoveComponent(EntityID entity)
 		{
 			mComponentManager->REMoveComponent<T>(entity);
 
@@ -81,13 +81,13 @@ namespace EM
 
 		// System methods
 		template<typename T>
-		std::shared_ptr<T> RegisterSystEM()
+		std::shared_ptr<T> RegisterSystem()
 		{
 			return mSystEMManager->RegisterSystEM<T>();
 		}
 
 		template<typename T>
-		void SetSystEMSignature(SignatureID signature)
+		void SetSystemSignature(SignatureID signature)
 		{
 			mSystEMManager->SetSignature<T>(signature);
 		}
