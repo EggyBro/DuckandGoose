@@ -1,27 +1,26 @@
 #pragma once
-#include "empch.h"
 #include "Types.h"
-#include "ExoEngine/Core.h"
+#include "empch.h"
+#include "Component.h"
 
 namespace EM
 {
-	class EM_API IComponentArray
+	class IComponentArray
 	{
 	public:
 		virtual ~IComponentArray() = default;
-		virtual void EntityDestroyed(EntityID entity) = 0;
-	};
 
+		virtual void EntityDestroyed(Entity entity) = 0;
+	};
 
 	template<typename T>
 	class ComponentArray : public IComponentArray
 	{
 	public:
-		void InsertData(EntityID entity, T component)
+		void InsertData(Entity entity, T component)
 		{
 			assert(mEntityToIndexMap.find(entity) == mEntityToIndexMap.end() && "Component added to same entity more than once.");
 
-			// Put new entry at end and update the maps
 			size_t newIndex = mSize;
 			mEntityToIndexMap[entity] = newIndex;
 			mIndexToEntityMap[newIndex] = entity;
@@ -29,27 +28,27 @@ namespace EM
 			++mSize;
 		}
 
-		void RemoveData(EntityID entity)
+		void RemoveData(Entity entity)
 		{
 			assert(mEntityToIndexMap.find(entity) != mEntityToIndexMap.end() && "Removing non-existent component.");
 
 			// Copy element at end into deleted element's place to maintain density
-			size_t indexofRemovedEntity = mEntityToIndexMap[entity];
-			size_t indexofLastElement = mSize - 1;
-			mComponentArray[indexofRemovedEntity] = mComponentArray[indexofLastElement];
+			size_t indexOfRemovedEntity = mEntityToIndexMap[entity];
+			size_t indexOfLastElement = mSize - 1;
+			mComponentArray[indexOfRemovedEntity] = mComponentArray[indexOfLastElement];
 
 			// Update map to point to moved spot
-			Entity entityOfLastElement = mIndexToEntityMap[indexofLastElement];
-			mEntityToIndexMap[entityOfLastElement] = indexofRemovedEntity;
-			mIndexToEntityMap[indexofRemovedEntity] = entityOfLastElement;
+			Entity entityOfLastElement = mIndexToEntityMap[indexOfLastElement];
+			mEntityToIndexMap[entityOfLastElement] = indexOfRemovedEntity;
+			mIndexToEntityMap[indexOfRemovedEntity] = entityOfLastElement;
 
 			mEntityToIndexMap.erase(entity);
-			mIndexToEntityMap.erase(indexofLastElement);
+			mIndexToEntityMap.erase(indexOfLastElement);
 
 			--mSize;
 		}
 
-		T& GetData(EntityID entity)
+		T& GetData(Entity entity)
 		{
 			assert(mEntityToIndexMap.find(entity) != mEntityToIndexMap.end() && "Retrieving non-existent component.");
 
@@ -57,7 +56,7 @@ namespace EM
 			return mComponentArray[mEntityToIndexMap[entity]];
 		}
 
-		void EntityDestroyed(EntityID entity) override
+		void EntityDestroyed(Entity entity) override
 		{
 			if (mEntityToIndexMap.find(entity) != mEntityToIndexMap.end())
 			{
@@ -67,11 +66,8 @@ namespace EM
 		}
 
 	private:
-		// The packed array of components (of generic type T),
-		// set to a specified maximum amount, matching the maximum number
-		// of entities allowed to exist simultaneously, so that each entity
-		// has a unique spot.
-		std::array<T, MAX_ENTITIES> mComponentArray;
+
+		std::vector<T> mComponentArray {MAX_ENTITIES};
 
 		// Map from an entity ID to an array index.
 		std::unordered_map<Entity, size_t> mEntityToIndexMap;

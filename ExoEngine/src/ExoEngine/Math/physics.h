@@ -1,15 +1,18 @@
-#ifndef PHYSICS_H_
-#define PHYSICS_H_
-namespace EXOMATA {
+#pragma once
+
+#include "empch.h"
+#include "Vmath.h"
+
+namespace EM {
     //collision logic
     struct wall {
+        vec2D	p0;
         vec2D	p1;
-        vec2D	p2;
         vec2D	normal;
     };
     struct circle {
         vec2D   center;
-        float	rad; //mass tied to radius
+        float	radius; //mass tied to radius
     };
     struct castRay {
         vec2D	pt0;
@@ -21,7 +24,7 @@ namespace EXOMATA {
 
     \param[in] pt1
     start point of wall
-	\param[in] pt2
+    \param[in] pt2
     end point of wall
 
     \return
@@ -34,7 +37,7 @@ namespace EXOMATA {
 
     \param[in] pos
     coordinate point of circle
-	\param[in] radius
+    \param[in] radius
     radius of circle
 
     \return
@@ -47,7 +50,7 @@ namespace EXOMATA {
 
     \param[in] pos
     start point of ray
-	\param[in] dir
+    \param[in] dir
     direction of ray
 
     \return
@@ -60,21 +63,21 @@ namespace EXOMATA {
 
     \param[in] circle
     struct of the circle to check
-	\param[in] entnextpos
+    \param[in] entnextpos
     end position of the circle
     \param[in] wall
     struct of the wall to check
-	\param[out] colpt
+    \param[out] colpt
     point of collision between entity and wall
     \param[out] colnorm
     normal at point of collision
-	\param[out] coltime
+    \param[out] coltime
     time of collision
 
     \return
     boolean indicating collision true or false
     *//**************************************************************************/
-    bool wallCollision(const circle &circle, const vec2D &entnextpos, const wall &wall, vec2D &colpt, vec2D &colnorm, float &coltime); 
+    bool wallCollision(const circle& circle, const vec2D& entnextpos, const wall& wall, vec2D& colpt, vec2D& colnorm, float& coltime, bool& edgecheck);
     /***************************************************************************//*!
     \brief
     calculates collision between a circle and edge of wall
@@ -84,21 +87,21 @@ namespace EXOMATA {
     with the wall
     \param[in] circle
     struct of the circle to check
-	\param[in] entnextpos
+    \param[in] entnextpos
     end position of the circle
     \param[in] wall
     struct of the wall to check
-	\param[out] colpt
+    \param[out] colpt
     point of collision between entity and wall
     \param[out] colnorm
     normal at point of collision
-	\param[out] coltime
+    \param[out] coltime
     time of collision
 
     \return
     boolean indicating collision true or false
     *//**************************************************************************/
-    bool edgeCollision(bool willcollide, const circle &circle, const vec2D &entnextpos, const wall &wall, vec2D &colpt, vec2D &colnorm,	float &coltime);
+    bool edgeCollision(bool willcollide, const circle& circle, const vec2D& entnextpos, const wall& wall, vec2D& colpt, vec2D& colnorm, float& coltime);
     /***************************************************************************//*!
     \brief
     calculates collision between two circles
@@ -109,11 +112,11 @@ namespace EXOMATA {
     velocity of first circle
     \param[in] ent2
     struct of the second circle
-	\param[in] ent2vel
+    \param[in] ent2vel
     velocity of second circle
     \param[out] ent1colpt
     point of collision for first circle
-	\param[out] ent2colpt
+    \param[out] ent2colpt
     point of collision for second circle
     \param[out] coltime
     time of collision
@@ -121,10 +124,10 @@ namespace EXOMATA {
     \return
     boolean indicating collision true or false
     *//**************************************************************************/
-    bool objCollision(const circle &ent1, const vec2D &ent1vel, const circle &ent2, const vec2D &ent2vel, vec2D &ent1colpt, vec2D &ent2colpt, float &coltime);
+    bool objCollision(const circle& ent1, const vec2D& ent1vel, const circle& ent2, const vec2D& ent2vel, vec2D& ent1colpt, vec2D& ent2colpt, float& coltime);
     /***************************************************************************//*!
     \brief
-    calculates collision between a cone and a circle. Used for hit detection. 
+    calculates collision between a cone and a circle. Used for hit detection.
 
     \param[in] ent1
     struct of the circle which will be the cone
@@ -140,21 +143,42 @@ namespace EXOMATA {
     \return
     boolean indicating collision true or false
     *//**************************************************************************/
-    bool coneCollision(const circle &ent1, const int startAngle, const int endAngle, bool lr, const circle &ent2);
+    bool coneCollision(const circle& ent1, const int startAngle, const int endAngle, bool lr, const circle& ent2);
     /***************************************************************************//*!
     \brief
     calculates collision response between a circle and wall
 
     \param[in] colpt
     point of collision
-	\param[in] ptnorm
+    \param[in] ptnorm
     normal at point of reflection
     \param[out] entnextpos
     next position of object
-	\param[out] reflectiondir
+    \param[out] reflectiondir
     normalised direction of the reflected vector
     *//**************************************************************************/
-    void wallBounce(const vec2D &colpt, const vec2D &ptnorm, vec2D &entnextpos, vec2D &reflectiondir);
+    void wallBounce(const vec2D& colpt, const vec2D& ptnorm, vec2D& entnextpos, vec2D& reflectiondir);
+    /***************************************************************************//*!
+    \brief
+    calculates collision between two rectangles
+
+    \param[in] max1
+    top right edge of first object
+    \param[in] min1
+    bottom left edge of first object
+    \param[in] vel1
+    velocity of first object
+    \param[in] max2
+    top right edge of second object
+    \param[in] min2
+    bottom left edge of second object
+    \param[in] vel2
+    velocity of second object
+
+    \return
+    boolean indicating collision true or false
+    *//**************************************************************************/
+    bool boundingBoxCollision(vec2D max1, vec2D min1, vec2D vel1, vec2D max2, vec2D min2, vec2D vel2);
     /***************************************************************************//*!
     \brief
     calculates collision response between a circle and edge
@@ -165,22 +189,22 @@ namespace EXOMATA {
     time of collision
     \param[in] ent1vel
     velocity of first circle
-	\param[in] ent1colpt
+    \param[in] ent1colpt
     point of collision for object 1
     \param[in] ent2vel
     velocity of second circle
-	\param[in] ent2colpt
+    \param[in] ent2colpt
     point of collision for object 2
     \param[out] ent1newvel
     new velocity of object 1
-	\param[out] ent1nextpos
+    \param[out] ent1nextpos
     next position of object 1
     \param[out] ent2newvel
     new velocity of object 2
-	\param[out] ent2nextpos
+    \param[out] ent2nextpos
     next position of object 2
     *//**************************************************************************/
-    void circleBounce(const vec2D &colnorm, const float coltime, vec2D &ent1vel, vec2D &ent1colpt, vec2D &ent2vel, vec2D &ent2colpt, vec2D &ent1newvel, vec2D &ent1nextpos, vec2D &ent2newvel, vec2D &ent2nextpos);
+    void circleBounce(const vec2D& colnorm, const float coltime, vec2D& ent1vel, vec2D& ent1colpt, vec2D& ent2vel, vec2D& ent2colpt, vec2D& ent1newvel, vec2D& ent1nextpos, vec2D& ent2newvel, vec2D& ent2nextpos);
     /***************************************************************************//*!
     \brief
     calculates collision response between a circle and edge
@@ -189,18 +213,16 @@ namespace EXOMATA {
     normal at point of collision
     \param[in] colpt
     point of collision
-	\param[out] entnextpos
+    \param[out] entnextpos
     next position of object
     \param[out] reflectionnorm
     normalised direction of the reflected vector
     *//**************************************************************************/
-    void obstacleBounce(const vec2D &colnorm, const vec2D &colpt, vec2D &entnextpos,vec2D &reflectionnorm);
+    void obstacleBounce(const vec2D& colnorm, const vec2D& colpt, vec2D& entnextpos, vec2D& reflectionnorm);
 
     //acceleration, deceleration logic
-    void accelent(vec2D &entvel, vec2D dir, float mag, float lim);
-    void decelent(vec2D &entvel);
+    void accelent(vec2D& entvel, vec2D dir, float mag, float lim);
+    void decelent(vec2D& entvel);
     //gravity logic
-
     //friction logic
 }
-#endif

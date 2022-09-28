@@ -1,43 +1,87 @@
 #include "empch.h"
 #include "Graphics.h"
-
+#include <glm/gtc/matrix_transform.hpp>
+#include "ExoEngine/Input/Input.h"
+#include <GLFW/glfw3.h>
 namespace EM {
+
 	//for testing purpose
 	void Graphic::Init()
 	{
 		m_shader.reset(new Shader("Assets/Shaders/basic.shader"));
-		glGenVertexArrays(1, &m_VertexArray);
-		glBindVertexArray(m_VertexArray);
 
-		glGenBuffers(1, &m_VertexBuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
 
-		float vertices[3 * 3] = {
-			-0.5f, -0.5f, 0.0f,
+		m_vertexArr.reset(VertexArray::Create());
+
+		float vertices[] = {
+			-0.5f, -0.5f, 0.0f, //per vertex->
 			 0.5f, -0.5f, 0.0f,
-			 0.0f,  0.5f, 0.0f
+			 0.5f,  0.5f, 0.0f,
+			-0.5f,  0.5f, 0.0f,
 		};
+		m_Vbuffer.reset(new VertexBuffer(vertices, sizeof(vertices)));
+		
+		m_vertexArr->AddVertexBuffer(m_Vbuffer);
 
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		unsigned int indices[] = { 0, 1, 2,
+								   2, 3, 0};
+		m_Ibuffer.reset(new IndexBuffer(indices, sizeof(indices) / sizeof(unsigned int)));
+		m_vertexArr->SetIndexBuffer(m_Ibuffer);
 
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+		//player
+		player.position = { -0.1f, 0.1f };
+		player.scale = { 0.1f, 0.1f };
 
-		glGenBuffers(1, &m_IndexBuffer);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer);
-
-		unsigned int indices[3] = { 0, 1, 2 };
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
+		//wall
+		wall.position = { 0.1f, 0.1f };
+		wall.scale = { 0.1f, 0.1 };
 	}
+	//testing purpose for now
+	//to be fix as now is calling two draw calls
+	//need to create a proper rendering calls
 	void Graphic::Update()
 	{
 		m_shader->Bind();
-		glBindVertexArray(m_VertexArray);
-		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+		m_vertexArr->Bind();
+		{
+			glm::mat4 transform = glm::translate(glm::mat4(1.f), { player.position, 0.0f }) *
+				glm::rotate(glm::mat4(1.0f), player.dir, glm::vec3(0.f, 0.f, 1.f)) *
+				glm::scale(glm::mat4(1.f), { player.scale, 1.0f });
+			m_shader->SetUniform("u_Mvp", transform);
+			glDrawElements(GL_TRIANGLES, m_Ibuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+		}
+		{
+			glm::mat4 transform2 = glm::translate(glm::mat4(1.f), { wall.position, 0.0f }) *
+				glm::rotate(glm::mat4(1.0f), wall.dir, glm::vec3(0.f, 0.f, 1.f)) *
+				glm::scale(glm::mat4(1.f), { wall.scale, 1.0f });
+			m_shader->SetUniform("u_Mvp", transform2);
+			glDrawElements(GL_TRIANGLES, m_Ibuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+		}
+		if (p_Input->isKeyPressed(GLFW_KEY_W))
+		{
+			player.position.y += 0.01f;
+		}
+		if (p_Input->isKeyPressed(GLFW_KEY_S))
+		{
+			player.position.y -= 0.01f;
+		}
+		if (p_Input->isKeyPressed(GLFW_KEY_A))
+		{
+			player.position.x -= 0.01f;
+		}
+		if (p_Input->isKeyPressed(GLFW_KEY_D))
+		{
+			player.position.x += 0.01f;
+		}
+		
+		
+
+
 	}
+
 	void Graphic::End()
 	{
 
 	}
+	
 }

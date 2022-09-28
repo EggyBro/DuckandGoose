@@ -59,7 +59,7 @@ namespace EM{
 		ToggleVsync(true);
 		glfwSetWindowSizeCallback(m_window, Window_size_callback);
 		glfwSetCursorPosCallback(m_window, Mouseposition_callback);
-
+		glfwSetKeyCallback(m_window, Key_callback);
 
 
 	}
@@ -70,7 +70,8 @@ namespace EM{
 		/* Swap front and back buffers */
 		glfwSwapBuffers(m_window);
 
-
+		glClear(GL_COLOR_BUFFER_BIT);
+		glClearColor(0.f, 0.f, 0.f, 1.f);
 	}
 	void Window::End()
 	{

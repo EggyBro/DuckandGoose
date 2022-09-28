@@ -1,6 +1,7 @@
 #include "Vmath.h"
 
-namespace Framework
+
+namespace EM
 {
 	vec2D::vec2D() : vector{ 0,0 } ///defualt cotr
 	{
@@ -42,6 +43,13 @@ namespace Framework
 		value.x /= rhs.value.x;
 		value.y /= rhs.value.y;
 
+		return *this;
+	}
+
+	vec2D vec2D::operator = (const vec2D& lhs)
+	{
+		value.x = lhs.value.x;
+		value.y = lhs.value.y;
 		return *this;
 	}
 

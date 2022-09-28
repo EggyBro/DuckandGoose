@@ -1,6 +1,6 @@
 #pragma once
 #include "ExoEngine/Core.h"
-#include "Platform/SystEM/SystEM.h"
+#include "Platform/System/System.h"
 
 namespace EM {
 

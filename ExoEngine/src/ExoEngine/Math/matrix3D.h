@@ -1,5 +1,6 @@
 #pragma once
 #include "Vmath.h"
+#include "empch.h"
 
 namespace EM
 {

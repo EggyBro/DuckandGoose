@@ -1,5 +1,4 @@
 #pragma once
-
 #include "empch.h"
 
 namespace EM
@@ -8,24 +7,18 @@ namespace EM
 	typedef std::uint32_t IDType;
 
 	//Entity is simply an ID
-	typedef IDType EntityID;
+	typedef IDType Entity;
 
 	//Used to define the size of arrays, may use vector
-	const EntityID MAX_ENTITIES = 5000;
+	const Entity MAX_ENTITIES = 5000;
 
-	//UniqueID used to group identify Components
-	typedef IDType ComponentTypeID;
+	//UniqueID used to identify Components
+	typedef IDType ComponentType;
 
 	//Used to define the size of component array
-	const ComponentTypeID MAX_COMPONENTS = 32;
+	const ComponentType MAX_COMPONENTS = 32;
 
-	//Represents the ArcheType/Signature and what components it can handle
-	//The list of Components that an Entity has instances of.
-	typedef std::bitset<MAX_COMPONENTS> SignatureID;
-
-	class SystEM
-	{
-	public:
-		std::set<EntityID> mEntities;
-	};
+	// 32 bit signature containing which component an entity has
+	// The list of Components that an Entity has instances of based on the unique ID of the Signature.
+	typedef std::bitset<MAX_COMPONENTS> Signature;
 }

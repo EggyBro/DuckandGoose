@@ -2,7 +2,7 @@
 
 #include "ComponentManager.h"
 #include "EntityManager.h"
-#include "SystEMManager.h"
+#include "SystemManager.h"
 #include "Types.h"
 #include "empch.h"
 
@@ -15,7 +15,7 @@ namespace EM
 		{
 			mComponentManager = std::make_unique<ComponentManager>();
 			mEntityManager = std::make_unique<EntityManager>();
-			mSystEMManager = std::make_unique<SystemManager>();
+			mSystemManager = std::make_unique<SystemManagerN>();
 		}
 
 
@@ -31,7 +31,7 @@ namespace EM
 
 			mComponentManager->EntityDestroyed(entity);
 
-			mSystEMManager->EntityDestroyed(entity);
+			mSystemManager->EntityDestroyed(entity);
 		}
 
 
@@ -51,19 +51,19 @@ namespace EM
 			signature.set(mComponentManager->GetComponentType<T>(), true);
 			mEntityManager->SetSignature(entity, signature);
 
-			mSystEMManager->EntitySignatureChanged(entity, signature);
+			mSystemManager->EntitySignatureChanged(entity, signature);
 		}
 
 		template<typename T>
 		void RemoveComponent(EntityID entity)
 		{
-			mComponentManager->REMoveComponent<T>(entity);
+			mComponentManager->RemoveComponent<T>(entity);
 
 			auto signature = mEntityManager->GetSignature(entity);
 			signature.set(mComponentManager->GetComponentType<T>(), false);
 			mEntityManager->SetSignature(entity, signature);
 
-			mSystEMManager->EntitySignatureChanged(entity, signature);
+			mSystemManager->EntitySignatureChanged(entity, signature);
 		}
 
 		template<typename T>
@@ -83,18 +83,18 @@ namespace EM
 		template<typename T>
 		std::shared_ptr<T> RegisterSystem()
 		{
-			return mSystEMManager->RegisterSystEM<T>();
+			return mSystemManager->RegisterSystem<T>();
 		}
 
 		template<typename T>
 		void SetSystemSignature(SignatureID signature)
 		{
-			mSystEMManager->SetSignature<T>(signature);
+			mSystemManager->SetSignature<T>(signature);
 		}
 
 	private:
 		std::unique_ptr<ComponentManager> mComponentManager;
 		std::unique_ptr<EntityManager> mEntityManager;
-		std::unique_ptr<SystemManager> mSystEMManager;
+		std::unique_ptr<SystemManagerN> mSystemManager;
 	};
 }

@@ -23,7 +23,7 @@ namespace EM
 			//EM_EXO_ASSERT(mLivingEntityCount < MAX_ENTITIES && "Too many entities in existence.")
 			// Take an ID from the front of the queue
 			EntityID id = mAvailableEntities.front();
-			mAvailableEntities.pop();	//REMoves elEMents from the front of the queue
+			mAvailableEntities.pop();	//Removes elements from the front of the queue
 			++mLivingEntityCount;	//Dictates how many entities are alive
 
 			return id;
@@ -41,6 +41,7 @@ namespace EM
 			--mLivingEntityCount;
 		}
 
+		//Parse the entity's signature into an array of Signatures
 		void SetSignature(EntityID entity, SignatureID signature)
 		{
 			assert(entity < MAX_ENTITIES && "Entity out of range.");
@@ -49,6 +50,7 @@ namespace EM
 			mSignatures[entity] = signature;
 		}
 
+		//Get the Signature of the entity
 		SignatureID GetSignature(EntityID entity)
 		{
 			assert(entity < MAX_ENTITIES && "Entity out of range.");
@@ -63,7 +65,8 @@ namespace EM
 		std::queue<EntityID> mAvailableEntities{};
 
 		// Array of signatures where the index corresponds to the entity ID
-		std::array<SignatureID, MAX_ENTITIES> mSignatures{};
+		//std::array<SignatureID, MAX_ENTITIES> mSignatures{};
+		std::vector<SignatureID> mSignatures {};
 
 		// Total living entities - used to keep limits on how many exist
 		uint32_t mLivingEntityCount{};

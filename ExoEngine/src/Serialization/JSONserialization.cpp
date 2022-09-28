@@ -9,7 +9,7 @@ namespace EM
 		rapidjson::Writer<rapidjson::StringBuffer> writer(ss);
 		if (Serialize(&writer)) 
 		{ 
-			return ss.GetString(); 
+			return ss.GetString();
 		}
 		return "";
 	}
@@ -58,35 +58,5 @@ namespace EM
 		std::string validJson(stringbuffer);
 
 		return !doc.Parse(validJson.c_str()).HasParseError() ? true : false;
-	}
-
-	Player::Player() : _name{ "Player" }, _health{ 0 }, _armour{ 0 } {};
-
-	Player::~Player() {};
-
-	bool Player::Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const
-	{
-		writer->StartObject();
-
-		writer->String("name"); // create Id property
-		writer->String(_name.c_str());  // write the Id value from the object instance
-
-		writer->String("health");
-		writer->Int(_health);
-
-		writer->String("armour");
-		writer->Double(_armour);
-
-		writer->EndObject();
-
-		return true;
-	}
-
-	bool Player::Deserialize(const rapidjson::Value& obj)
-	{
-		Name(obj["name"].GetString());
-		Health(obj["health"].GetInt());
-		Armour(obj["armour"].GetDouble());
-		return true;
 	}
 }

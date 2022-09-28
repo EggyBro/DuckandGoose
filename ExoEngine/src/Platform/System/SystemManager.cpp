@@ -1,6 +1,7 @@
 #include "empch.h"
 #include "SystemManager.h"
 namespace EM {
+
 	SystemManager::~SystemManager()
 	{
 	}

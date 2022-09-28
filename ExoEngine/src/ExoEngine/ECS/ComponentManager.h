@@ -1,16 +1,14 @@
 #pragma once
-#pragma once
-
-#include "empch.h"
-#include "Types.h"
 #include "ComponentArray.h"
+#include "Types.h"
+#include "empch.h"
 
 namespace EM
 {
 	class ComponentManager
 	{
 	public:
-		template<typename T>
+		template <typename T>
 		void RegisterComponent()
 		{
 			const char* typeName = typeid(T).name();
@@ -21,14 +19,13 @@ namespace EM
 			mComponentTypes.insert({ typeName, mNextComponentType });
 
 			// Create a ComponentArray pointer and add it to the component arrays map
-			mComponentArrays.insert({ typeName, std::make_shared<ComponentArray<T>>() });
+			mComponentArrays.insert({typename, std::make_shared<ComponentArray<T>>()});
 
-			// Increment the value so that the next component registered will be different
 			++mNextComponentType;
 		}
 
-		template<typename T>
-		ComponentTypeID GetComponentType()
+		template <typename T>
+		ComponentType GetComponentType()
 		{
 			const char* typeName = typeid(T).name();
 
@@ -39,47 +36,29 @@ namespace EM
 		}
 
 		template<typename T>
-		void AddComponent(EntityID entity, T component)
+		void AddComponent(Entity entity, T Component)
 		{
 			// Add a component to the array for an entity
-			GetComponentArray<T>()->InsertData(entity, component);
+			// Serialize the Component here
+			
 		}
 
 		template<typename T>
-		void RemoveComponent(EntityID entity)
+		void SerializeToBuild(Entity entity, T Component)
 		{
-			// Remove a component from the array for an entity
-			GetComponentArray<T>()->RemoveData(entity);
-		}
-
-		template<typename T>
-		T& GetComponent(EntityID entity)
-		{
-			// Get a reference to a component from the array for an entity
-			return GetComponentArray<T>()->GetData(entity);
-		}
-
-		void EntityDestroyed(EntityID entity)
-		{
-			// Notify each component array that an entity has been destroyed
-			// If it has a component for that entity, it will rEMove it
-			for (auto const& pair : mComponentArrays)
-			{
-				auto const& component = pair.second;
-
-				component->EntityDestroyed(entity);
-			}
+			//Serialize all the data into file
 		}
 
 	private:
+
 		// Map from type string pointer to a component type
-		std::unordered_map<const char*, ComponentTypeID> mComponentTypes{};
+		std::unordered_map<const char*, ComponentType> mComponentTypes{};
 
 		// Map from type string pointer to a component array
 		std::unordered_map<const char*, std::shared_ptr<IComponentArray>> mComponentArrays{};
 
-		// The component type to be assigned to the next registered component - starting at 0
-		ComponentTypeID mNextComponentType{};
+		//Initial component type id
+		static const ComponentType mNextComponentType{};
 
 		// Convenience function to get the statically casted pointer to the ComponentArray of type T.
 		template<typename T>

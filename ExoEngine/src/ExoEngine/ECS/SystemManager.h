@@ -3,10 +3,11 @@
 #include "Types.h"
 #include "empch.h"
 #include "../Core.h"
+#include "Platform/System/System.h"
 
 namespace EM
 {
-	class EM_API SystemManager
+	class EM_API SystemManagerN
 	{
 	public:
 		template<typename T>
@@ -36,8 +37,6 @@ namespace EM
 			for (auto const& pair : mSystems)
 			{
 				auto const& system = pair.second;
-
-
 				system->mEntities.erase(entity);
 			}
 		}
@@ -63,7 +62,7 @@ namespace EM
 
 	private:
 		std::unordered_map<const char*, SignatureID> mSignatures{};
-		std::unordered_map<const char*, std::shared_ptr<SystEM>> mSystems{};
+		std::unordered_map<const char*, std::shared_ptr<System>> mSystems{};
 	};
 
 }

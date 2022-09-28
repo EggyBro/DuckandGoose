@@ -5,7 +5,7 @@
 #include "Events/EventHandler.h"
 #include "Platform/System/SystemManager.h"
 #include "Platform/Graphics/Shader.h"
-
+//#include "EntryPoint.h"
 namespace EM {
 
 	class EM_API Application
@@ -22,7 +22,6 @@ namespace EM {
 
 	private:
 		SystemManager m_Systems;
-		
 	
 	};
 	 

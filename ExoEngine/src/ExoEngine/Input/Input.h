@@ -1,7 +1,7 @@
 #pragma once
 #include "ExoEngine/Core.h"
 
-
+#define p_Input EM::InputSystem::GetInstance()
 namespace EM {
 
 	using keystatus = int;

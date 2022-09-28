@@ -1,9 +1,10 @@
 #pragma once
 
-#include<iostream>
+#include <iostream>
 #include <math.h>
+#include "empch.h"
 
-namespace Framework
+namespace EM
 {
 	typedef union vec2D
 	{
