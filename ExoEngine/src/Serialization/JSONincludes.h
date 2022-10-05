@@ -1,4 +1,5 @@
 #pragma once
+//All include files for rapidJSON
 
 #include "rapidjson/include/rapidjson/rapidjson.h"
 #include "rapidjson/include/rapidjson/document.h"		// rapidjson's DOM-style API

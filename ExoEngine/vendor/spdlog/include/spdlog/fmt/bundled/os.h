@@ -84,7 +84,7 @@ FMT_MODULE_EXPORT_BEGIN
 
   +---------------+-----------------------------+
   | Type          | Definition                  |
-  +===============+=============================+
+  +=+=+
   | cstring_view  | basic_cstring_view<char>    |
   +---------------+-----------------------------+
   | wcstring_view | basic_cstring_view<wchar_t> |

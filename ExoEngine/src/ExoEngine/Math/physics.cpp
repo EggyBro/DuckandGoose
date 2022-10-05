@@ -2,7 +2,18 @@
 
 
 namespace EM {
-    wall buildWall(vec2D pt1, vec2D pt2) {
+    //class functions
+    void entityPhysics::accelent(vec2D& entvel, vec2D applied) {
+        entvel += applied;
+        entvel = entvel * 0.99f;
+    }
+    void entityPhysics::friction(vec2D& entvel) {
+        entvel -= 0.5f * entvel;
+    }
+    void entityPhysics::gravity(vec2D& entvel) {
+        entvel.value.y -= 9.8f;
+    }
+    /*wall entityCollision::buildWall(vec2D pt1, vec2D pt2) {
         wall newWall;
         newWall.p0 = pt1;
         newWall.p1 = pt2;
@@ -12,20 +23,20 @@ namespace EM {
         Normalize(newWall.normal, newWall.normal);
         return newWall;
     }
-    circle buildCircle(vec2D pos, float radius) {
+    circle entityCollision::buildCircle(vec2D pos, float radius) {
         circle newCirc;
         newCirc.center = pos;
         newCirc.radius = radius;
         return newCirc;
     }
-    castRay buildRay(vec2D pos, vec2D dir) {
+    castRay entityCollision::buildRay(vec2D pos, vec2D dir) {
         castRay newCast;
         newCast.pt0 = pos;
         newCast.dir = dir;
         return newCast;
-    }
+    } NOT FUNCTIONING CURRENTLY--------------------------------------------------------------------------------------------*/
     //circle to wall
-    bool wallCollision(const circle &circle, const vec2D &entnextpos, const wall &wall, vec2D &colpt, vec2D &colnorm, float &coltime, bool & edgecheck) {
+    bool entityCollision::wallCollision(const circle &circle, const vec2D &entnextpos, const wall &wall, vec2D &colpt, vec2D &colnorm, float &coltime) {
         float circdot = dotProduct(wall.normal, circle.center);
         float normaldot = dotProduct(wall.normal, wall.p0);
 
@@ -81,7 +92,7 @@ namespace EM {
         return 0;
     }
     //circle to edge
-    bool edgeCollision(bool willcollide, const circle &circle, const vec2D &entnextpos, const wall &wall, vec2D &colpt, vec2D &colnorm,	float &coltime) {
+    bool entityCollision::edgeCollision(bool willcollide, const circle &circle, const vec2D &entnextpos, const wall &wall, vec2D &colpt, vec2D &colnorm,	float &coltime) {
         vec2D circVel = entnextpos - circle.center;
         vec2D normVel;
         Normalize(normVel, circVel);
@@ -185,7 +196,7 @@ namespace EM {
         return 0;
     }
     //circle to circle
-    bool objCollision(const circle &ent1, const vec2D &ent1vel, const circle &ent2, const vec2D &ent2vel, vec2D &ent1colpt, vec2D &ent2colpt, float &coltime) {
+    bool entityCollision::objCollision(const circle &ent1, const vec2D &ent1vel, const circle &ent2, const vec2D &ent2vel, vec2D &ent1colpt, vec2D &ent2colpt, float &coltime) {
         vec2D relativeVel = ent1vel - ent2vel;
         circle tempCirc;
         tempCirc.center = ent2.center;
@@ -221,10 +232,10 @@ namespace EM {
         }
     }
     //cone circle collision
-    bool coneCollision(const circle &ent1, const int startAngle, const int endAngle, bool lr, const circle &ent2) {
+    bool entityCollision::coneCollision(const circle &ent1, const int startAngle, const int endAngle, bool lr, const circle &ent2) {
         vec2D dist0 = ent2.center - ent1.center;
-        float startRad = startAngle / 180 * (atan(1) * 4);
-        float endRad = endAngle / 180 * (atan(1) * 4);
+        float startRad = (float)(startAngle / 180 * (atan(1) * 4));
+        float endRad = (float)(endAngle / 180 * (atan(1) * 4));
         vec2D dir1;
         vec2D dir2;
         if (length(dist0) > ent1.radius + ent2.radius) {
@@ -269,7 +280,7 @@ namespace EM {
         return 1;
     }
     //AABB Collision
-    bool boundingBoxCollision(vec2D max1, vec2D min1, vec2D vel1, vec2D max2, vec2D min2, vec2D vel2) {
+    bool entityCollision::boundingBoxCollision(vec2D max1, vec2D min1, vec2D vel1, vec2D max2, vec2D min2, vec2D vel2) {
         //Static collision
         if (!(min1.value.x > max2.value.x || min2.value.x > max1.value.x || max1.value.y < min2.value.y || max2.value.y < min1.value.y)) {
             return true;
@@ -337,7 +348,7 @@ namespace EM {
     }
 
     //circle wall reaction
-    void wallBounce(const vec2D &colpt, const vec2D &ptnorm, vec2D &entnextpos, vec2D &reflectiondir) {
+    void entityCollision::wallBounce(const vec2D &colpt, const vec2D &ptnorm, vec2D &entnextpos, vec2D &reflectiondir) {
         vec2D penPoint = entnextpos - colpt;
         float dotprod = 2 * (dotProduct(penPoint, ptnorm));
         entnextpos = colpt + penPoint - (dotprod * ptnorm);
@@ -345,7 +356,7 @@ namespace EM {
         Normalize(reflectiondir, reflectiondir);
     }
     //circle circle reaction
-    void circleBounce(const vec2D &colnorm, const float coltime, vec2D &ent1vel, vec2D &ent1colpt, vec2D &ent2vel, vec2D &ent2colpt, vec2D &ent1newvel, vec2D &ent1nextpos, vec2D &ent2newvel, vec2D &ent2nextpos) {
+    void entityCollision::circleBounce(const vec2D &colnorm, const float coltime, vec2D &ent1vel, vec2D &ent1colpt, vec2D &ent2vel, vec2D &ent2colpt, vec2D &ent1newvel, vec2D &ent1nextpos, vec2D &ent2newvel, vec2D &ent2nextpos) {
         float magA = dotProduct(ent1vel, colnorm);
         float magB = dotProduct(ent2vel, colnorm);
         float forceMagnitude = 2 * (magA - magB) / (1 + 1);
@@ -355,23 +366,11 @@ namespace EM {
         ent2nextpos = ent2colpt + ent2newvel * (1 - coltime);
     }
     //circle obstacle reaction
-    void obstacleBounce(const vec2D &colnorm, const vec2D &colpt, vec2D &entnextpos, vec2D &reflectionnorm) {
+    void entityCollision::obstacleBounce(const vec2D &colnorm, const vec2D &colpt, vec2D &entnextpos, vec2D &reflectionnorm) {
         vec2D penPoint = entnextpos - colpt;
         float dotprod = 2 * (dotProduct(penPoint, colnorm));
         entnextpos = colpt + penPoint - (dotprod * colnorm);
         reflectionnorm = entnextpos - colpt;
         Normalize(reflectionnorm, reflectionnorm);
-    }
-
-    void accelent(vec2D &entvel, vec2D dir, float mag, float lim) {
-        entvel += (dir * mag);
-        if (length(entvel) >= lim) {
-            entvel = 0.9 * entvel;
-        }
-    }
-    void decelent(vec2D &entvel) {
-        if (length(entvel) > 0) {
-            entvel -= entvel * 0.5;
-        }
     }
 }

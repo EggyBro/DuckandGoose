@@ -1,8 +1,23 @@
+/*!*************************************************************************
+****
+\file ECS.h
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 28/09/2022
+\brief  This file contains the coordinator for the three systems in place
+that manages the ECS, the component, entity and system manager communicates
+with each other using this class
+****************************************************************************
+***/
+
 #pragma once
 
 #include "ComponentManager.h"
 #include "EntityManager.h"
-#include "SystemManager.h"
+#include "Platform/System/SystemManager.h"
 #include "Types.h"
 #include "empch.h"
 
@@ -15,17 +30,17 @@ namespace EM
 		{
 			mComponentManager = std::make_unique<ComponentManager>();
 			mEntityManager = std::make_unique<EntityManager>();
-			mSystemManager = std::make_unique<SystemManagerN>();
+			mSystemManager = std::make_unique<SystemManager>();
 		}
 
 
 		// Entity methods
-		EntityID CreateEntity()
+		Entity CreateEntity()
 		{
 			return mEntityManager->CreateEntity();
 		}
 
-		void DestroyEntity(EntityID entity)
+		void DestroyEntity(Entity entity)
 		{
 			mEntityManager->DestroyEntity(entity);
 
@@ -33,7 +48,6 @@ namespace EM
 
 			mSystemManager->EntityDestroyed(entity);
 		}
-
 
 		// Component methods
 		template<typename T>
@@ -43,7 +57,7 @@ namespace EM
 		}
 
 		template<typename T>
-		void AddComponent(EntityID entity, T component)
+		void AddComponent(Entity entity, T component)
 		{
 			mComponentManager->AddComponent<T>(entity, component);
 
@@ -55,7 +69,7 @@ namespace EM
 		}
 
 		template<typename T>
-		void RemoveComponent(EntityID entity)
+		void RemoveComponent(Entity entity)
 		{
 			mComponentManager->RemoveComponent<T>(entity);
 
@@ -67,13 +81,13 @@ namespace EM
 		}
 
 		template<typename T>
-		T& GetComponent(EntityID entity)
+		T& GetComponent(Entity entity)
 		{
 			return mComponentManager->GetComponent<T>(entity);
 		}
 
 		template<typename T>
-		ComponentTypeID GetComponentType()
+		ComponentType GetComponentType()
 		{
 			return mComponentManager->GetComponentType<T>();
 		}
@@ -87,7 +101,7 @@ namespace EM
 		}
 
 		template<typename T>
-		void SetSystemSignature(SignatureID signature)
+		void SetSystemSignature(Signature signature)
 		{
 			mSystemManager->SetSignature<T>(signature);
 		}
@@ -95,6 +109,6 @@ namespace EM
 	private:
 		std::unique_ptr<ComponentManager> mComponentManager;
 		std::unique_ptr<EntityManager> mEntityManager;
-		std::unique_ptr<SystemManagerN> mSystemManager;
+		std::unique_ptr<SystemManager> mSystemManager;
 	};
 }

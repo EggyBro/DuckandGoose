@@ -39,3 +39,5 @@
 /Exomata/.vs/Exotama/v16
 /Exomata/Exomata/x64/Debug
 /Exomata/x64/Debug
+x64/Debug/ExoEngine.dll
+x64/Debug/ExoEngine.pdb

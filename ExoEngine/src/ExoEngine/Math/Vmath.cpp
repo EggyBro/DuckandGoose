@@ -53,6 +53,21 @@ namespace EM
 		return *this;
 	}
 
+	vec2D& vec2D::operator+=(float& rhs)
+	{
+		value.x += rhs;
+		value.y += rhs;
+		return *this;
+	}
+
+	vec2D& vec2D::operator-=(float& rhs)
+	{
+		value.x -= rhs;
+		value.y -= rhs;
+		return *this;
+	}
+
+
 	vec2D  vec2D::operator -() const /// function to make vector into negative
 	{
 		return vec2D(-value.x, -value.y);

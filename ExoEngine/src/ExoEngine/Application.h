@@ -22,7 +22,6 @@ namespace EM {
 
 	private:
 		SystemManager m_Systems;
-	
 	};
 	 
 	//To be defined in CLIENT

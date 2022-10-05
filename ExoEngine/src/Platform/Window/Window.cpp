@@ -1,18 +1,33 @@
 #include "empch.h"
 #include "Window.h"
 #include "ExoEngine/Input/Input.h"
+#include "Platform/LevelEditor/LevelEditor.h"
+
 
 namespace EM{
 
+	Window::Window() : m_window{ nullptr }, m_monitor{ nullptr },
+		m_windowData{ windowData.GetTitle(), windowData.GetWidth(), windowData.GetHeight(), windowData.GetCurrWidth(), windowData.GetCurrHeight(), 0, 0 },//should be serialized
+		m_vsync{ false }, previousTime{glfwGetTime()}, frameCount{0}
+	{
+		windowData.DeserializeFromFile("Window.json");
+		m_windowData.Title = windowData.GetTitle();
+		m_windowData.m_Width = windowData.GetWidth();
+		m_windowData.m_Height = windowData.GetHeight();
+		m_windowData.m_CurrentWidth = windowData.GetCurrWidth();
+		m_windowData.m_CurrentHeight = windowData.GetCurrHeight();
+	};
 
 	void Window::Init()
 	{
+
 		/* Initialize the library */
 		if (!glfwInit())
 		{
 			EM_EXO_ASSERT(!glfwInit(), "\aGLFW init has failed - exit project...");
 		}
 		glfwSetErrorCallback(ErrorCallback);
+
 
 		//specify the constraints
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -61,20 +76,50 @@ namespace EM{
 		glfwSetCursorPosCallback(m_window, Mouseposition_callback);
 		glfwSetKeyCallback(m_window, Key_callback);
 
+		previousTime = glfwGetTime(); 
+		frameCount = 0;
+
 
 	}
 	void Window::Update()
 	{
+
 		/* Poll for and process events */
 		glfwPollEvents();
+
+
 		/* Swap front and back buffers */
 		glfwSwapBuffers(m_window);
+		//set initialize window width & height to current (to be set in rapidjson file)
+		m_windowData.m_CurrentWidth = m_windowData.m_Width;
+		m_windowData.m_CurrentHeight = m_windowData.m_Height;
+
+		windowData.SetCurrWidth(m_windowData.m_CurrentWidth);
+		windowData.SetCurrHeight(m_windowData.m_CurrentHeight);
+		windowData.SetWidth(windowData.GetCurrWidth());
+		windowData.SetHeight(windowData.GetCurrHeight());
 
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClearColor(0.f, 0.f, 0.f, 1.f);
+		windowData.SerializeToFile("Window.json");
 	}
+	void Window::SetWindowFPS()
+	{
+		double currentTime = glfwGetTime();
+		frameCount++;
+		if (currentTime - previousTime >= 1.0f)
+		{
+			std::stringstream ss;
+			ss << windowData.GetTitle() << " " << " [" << frameCount << " FPS]";
+			glfwSetWindowTitle(m_window, ss.str().c_str());
+			frameCount = 0;
+			previousTime = currentTime;
+		}
+	}
+
 	void Window::End()
 	{
+		glfwDestroyWindow(m_window);
 		glfwTerminate();
 	}
 	void Window::ErrorCallback(int error, const char* description)

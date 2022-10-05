@@ -1,3 +1,16 @@
+/*!*************************************************************************
+****
+\file Types.h
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 28/09/2022
+\brief  Typedefs for various data types to be used in the ECS
+****************************************************************************
+***/
+
 #pragma once
 #include "empch.h"
 

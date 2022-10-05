@@ -1,3 +1,17 @@
+/*!*************************************************************************
+****
+\file SystemManager.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 28/09/2022
+\brief  This file contains a general implementation of a System Manager in
+place of the ECS. It stores a vector of systems registered during runtime
+****************************************************************************
+***/
+
 #include "empch.h"
 #include "SystemManager.h"
 namespace EM {

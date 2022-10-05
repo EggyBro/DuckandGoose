@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file JSONserialization.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 28/09/2022
+\brief  This file contains the function definitions for the JSONSerializer
+class which allows child classes of this class to define the data type they
+serialize and deserialize using virtual functions.
+****************************************************************************
+***/
+
 #include "empch.h"
 #include "JSONserialization.h"
 

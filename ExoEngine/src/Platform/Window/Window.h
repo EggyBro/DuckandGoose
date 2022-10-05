@@ -1,8 +1,15 @@
 #pragma once
 #include "ExoEngine.h"
 #include "ExoEngine/Core.h"
+
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_glfw.h"
+#include"imgui/imgui_impl_opengl3.h"
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include "ExoEngine/ECS/Components.h"
+
 
 namespace EM {
 
@@ -21,9 +28,7 @@ namespace EM {
 	class EM_API Window : public System
 	{
 	public:
-		Window() : m_window{ nullptr }, m_monitor{ nullptr },
-			m_windowData{ "Exomata", 1280, 720, 0, 0, 0, 0},//should be serialized
-			m_vsync{ false }{};
+		Window();
 
 		~Window() = default;
 
@@ -33,6 +38,9 @@ namespace EM {
 		virtual void Init() override;
 		//update
 		virtual void Update() override;
+
+		//virtual voide Draw() override;
+		
 		//Delete window
 		virtual void End() override;
 
@@ -43,11 +51,16 @@ namespace EM {
 		GLFWwindow* GetWindow() const { return m_window; }
 		GLFWmonitor* GetMonitor() const { return m_monitor; }
 
+		void SetWindowFPS();
+
 	private:
 		GLFWwindow* m_window;
 		GLFWmonitor* m_monitor;
 		WindowProps m_windowData;
 		bool m_vsync;
+		double previousTime;
+		int frameCount;
+		WinData windowData;
 
 	private:
 		// Event callback functions
@@ -59,5 +72,6 @@ namespace EM {
 		static void Mouseposition_callback(GLFWwindow* window, double xpos, double ypos); // mouse position
 		
 		void ToggleVsync(bool value);// vync based on internal
+
 	};
 }

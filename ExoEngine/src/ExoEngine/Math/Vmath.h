@@ -25,6 +25,8 @@ namespace EM
 		vec2D operator *= (const vec2D& rhs);
 		vec2D operator /= (const vec2D& rhs);
 		vec2D operator = (const vec2D& lhs);
+		vec2D& operator += (float& rhs);
+		vec2D& operator -= (float& rhs);
 
 		vec2D operator -() const;
 
