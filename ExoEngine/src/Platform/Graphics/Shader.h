@@ -1,3 +1,15 @@
+/*!*************************************************************************
+****
+\file			Shader.h
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			28-9-2022
+\brief			This file contain function declaration for Shader classes
+
+****************************************************************************
+***/
 #pragma once
 #include <glm/glm.hpp>
 #include <GL/glew.h>

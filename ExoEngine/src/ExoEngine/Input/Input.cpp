@@ -1,3 +1,19 @@
+/*!*************************************************************************
+****
+\file Input.cpp
+\author Cheung Jun Yin Matthew
+\par DP email: j.cheung@digipen.edu
+\par Course: csd2400
+\par Section: a
+\par Milestone 1
+\date 28-9-2022
+\brief  The input manager is responsible for retrieving keyboard and mouse input,
+the input systems provides us with a way to fetch information on inputs in a simple
+and effective manner. Allowing the user to view whether the keys or mouse are pressed,
+released or being held.
+
+****************************************************************************
+***/
 #include "empch.h"
 #include "Input.h"
 

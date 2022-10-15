@@ -59,14 +59,17 @@ namespace EM
 
 		vec2D& GetPos() { return position; }
 		vec2D& GetScale() { return scale; }
+		float& GetRot() { return rot; }
 
 		void SetPos(vec2D Pos) { position = Pos; }
 		void SetScale(vec2D Scale) { scale = Scale; }
+		void SetRot(float value) { rot = value; }
 
 
 	private:
 		vec2D position;
 		vec2D scale;
+		float rot;
 	};
 
 	//Window Component

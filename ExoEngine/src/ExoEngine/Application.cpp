@@ -1,3 +1,15 @@
+/*!*************************************************************************
+****
+\file			Application.cpp
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			28-9-2022
+\brief			This file contain the main game loop
+
+****************************************************************************
+***/
 #include "empch.h"
 #include "Application.h"
 #include "Events/ApplicationEvent.h"

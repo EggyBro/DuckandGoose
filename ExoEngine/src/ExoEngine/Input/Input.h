@@ -1,3 +1,16 @@
+/*!*************************************************************************
+****
+\file Input.h
+\author Cheung Jun Yin Matthew
+\par DP email: j.cheung@digipen.edu
+\par Course: csd2400
+\par Section: a
+\par Milestone 1
+\date 28-9-2022
+\brief  header file for Input.cpp
+
+****************************************************************************
+***/
 #pragma once
 #include "ExoEngine/Core.h"
 

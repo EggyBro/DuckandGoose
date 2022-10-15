@@ -33,6 +33,7 @@
     <ClInclude Include="src\ExoEngine\Math\Vmath.h" />
     <ClInclude Include="src\Platform\Graphics\Graphics.h" />
     <ClInclude Include="src\Platform\Graphics\Shader.h" />
+    <ClInclude Include="src\Platform\Graphics\Texture.h" />
     <ClInclude Include="src\Platform\Graphics\VertexBuffer.h" />
     <ClInclude Include="src\Platform\LevelEditor\LevelEditor.h" />
     <ClInclude Include="src\Platform\System\System.h" />
@@ -49,6 +50,7 @@
     <ClInclude Include="vendor\imgui\imstb_rectpack.h" />
     <ClInclude Include="vendor\imgui\imstb_textedit.h" />
     <ClInclude Include="vendor\imgui\imstb_truetype.h" />
+    <ClInclude Include="vendor\stb_image\stb_image.h" />
     <ClInclude Include="vendor\spdlog\include\spdlog\async.h" />
     <ClInclude Include="vendor\spdlog\include\spdlog\async_logger-inl.h" />
     <ClInclude Include="vendor\spdlog\include\spdlog\async_logger.h" />
@@ -170,6 +172,7 @@
     </ClCompile>
     <ClCompile Include="src\Platform\Graphics\Graphics.cpp" />
     <ClCompile Include="src\Platform\Graphics\Shader.cpp" />
+    <ClCompile Include="src\Platform\Graphics\Texture.cpp" />
     <ClCompile Include="src\Platform\Graphics\VertexBuffer.cpp" />
     <ClCompile Include="src\Platform\LevelEditor\LevelEditor.cpp" />
     <ClCompile Include="src\Platform\System\SystemManager.cpp" />
@@ -202,6 +205,10 @@
     <ClCompile Include="vendor\imgui\imgui_widgets.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="vendor\stb_image\stb_image.cpp">
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -260,6 +267,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>empch.h</PrecompiledHeaderFile>
+      <DisableSpecificWarnings>4251;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

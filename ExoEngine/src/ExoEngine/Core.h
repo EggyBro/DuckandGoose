@@ -1,3 +1,17 @@
+/*!*************************************************************************
+****
+\file			Core.h
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			28-9-2022
+\brief			This file contain the neccesary Macro that compile important 
+				system to dll
+
+
+****************************************************************************
+***/
 #pragma once
 //Engine into dll
 #ifdef EM_PLATFORM_WINDOWS

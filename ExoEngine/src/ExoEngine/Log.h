@@ -1,3 +1,16 @@
+/*!*************************************************************************
+****
+\file Log.h
+\author Cheung Jun Yin Matthew
+\par DP email: j.cheung@digipen.edu
+\par Course: csd2400
+\par Section: a
+\par Milestone 1
+\date 28-9-2022
+\brief  This file holds the assert system for the project
+
+****************************************************************************
+***/
 #pragma once
 #include "core.h"
 #include "spdlog/spdlog.h"

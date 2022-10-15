@@ -1,3 +1,15 @@
+/*!*************************************************************************
+****
+\file			Application.h
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			28-9-2022
+\brief			This file contain the neccesary declaration functions for class Application.
+
+****************************************************************************
+***/
 #pragma once
 
 #include "Core.h"
@@ -22,6 +34,7 @@ namespace EM {
 
 	private:
 		SystemManager m_Systems;
+
 	};
 	 
 	//To be defined in CLIENT

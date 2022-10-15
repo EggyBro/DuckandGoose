@@ -5,5 +5,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="glew32.dll" />
+    <None Include="Assets\Shaders\texture.shader" />
+    <None Include="Assets\Shaders\basic.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Textures\DuckandGoose.png" />
   </ItemGroup>
 </Project>

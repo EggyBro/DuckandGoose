@@ -21,6 +21,8 @@
     <ClCompile Include="vendor\imgui\imgui_tables.cpp" />
     <ClCompile Include="vendor\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\Platform\System\SystemManager.cpp" />
+    <ClCompile Include="src\Platform\Graphics\Texture.cpp" />
+    <ClCompile Include="vendor\stb_image\stb_image.cpp" />
     <ClCompile Include="src\Debug\debug_draw.cpp" />
     <ClCompile Include="src\Serialization\JSONserialization.cpp" />
     <ClCompile Include="src\Platform\System\SystemManager.cpp" />
@@ -174,6 +176,8 @@
     <ClInclude Include="src\Serialization\JSONincludes.h" />
     <ClInclude Include="src\Serialization\JSONserialization.h" />
     <ClInclude Include="src\Platform\System\SystemManager.h" />
+    <ClInclude Include="src\Platform\Graphics\Texture.h" />
+    <ClInclude Include="vendor\stb_image\stb_image.h" />
     <ClInclude Include="vendor\imgui\imconfig.h" />
     <ClInclude Include="vendor\imgui\imgui.h" />
     <ClInclude Include="vendor\imgui\imgui_impl_glfw.h" />

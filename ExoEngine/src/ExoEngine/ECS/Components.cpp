@@ -65,6 +65,7 @@ namespace EM
 	{
 		position = vec2D(obj["posX"].GetFloat(), obj["posY"].GetFloat());
 		scale = vec2D(obj["scaleX"].GetFloat(), obj["scaleY"].GetFloat());
+		rot = obj["Rot"].GetFloat();
 		return true;
 	}
 	bool Transform::Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const
@@ -78,6 +79,8 @@ namespace EM
 		writer->Double(scale.value.x);
 		writer->Key("scaleY");
 		writer->Double(scale.value.y);
+		writer->Key("Rot");
+		writer->Double(rot);
 		writer->EndObject();
 		return true;
 	}

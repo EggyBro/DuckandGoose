@@ -1,3 +1,15 @@
+/*!*************************************************************************
+****
+\file			VertexBuffer.cpp
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			28-9-2022
+\brief			This file handle vertexbuffer, indexbuffer, vertaxarray
+
+****************************************************************************
+***/
 #include "empch.h"
 #include "VertexBuffer.h"
 
@@ -76,7 +88,8 @@ namespace EM{
 		vertexbuffer->Bind();
 		//do the layout here
 		BufferLayout layout = {
-			{ShaderDataType::Float3, "position"}
+			{ShaderDataType::Float3, "position"},
+			{ShaderDataType::Float2, "a_TexCoord"}
 		};
 
 		for (const auto& element : layout)

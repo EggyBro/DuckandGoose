@@ -1,3 +1,16 @@
+/*!*************************************************************************
+****
+\file			VertexBuffer.h
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			28-9-2022
+\brief			This file contain the neccesary declaration functions for class vertexbuffer,
+				vertexarray, index array and buffer element and layout.
+
+****************************************************************************
+***/
 #pragma once
 #include <GL/glew.h>
 namespace EM
