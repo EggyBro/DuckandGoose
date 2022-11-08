@@ -8,8 +8,6 @@
     <ClCompile Include="src\Platform\Graphics\VertexBuffer.cpp" />
     <ClCompile Include="src\Platform\Window\Window.cpp" />
     <ClCompile Include="src\Platform\Graphics\Shader.cpp" />
-    <ClCompile Include="src\Platform\Graphics\Graphics.cpp" />
-    <ClCompile Include="src\Platform\System\SystemManager.cpp" />
     <ClCompile Include="src\ExoEngine\Math\matrix3D.cpp" />
     <ClCompile Include="src\ExoEngine\Math\physics.cpp" />
     <ClCompile Include="src\ExoEngine\Math\Vmath.cpp" />
@@ -20,12 +18,9 @@
     <ClCompile Include="vendor\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="vendor\imgui\imgui_tables.cpp" />
     <ClCompile Include="vendor\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="src\Platform\System\SystemManager.cpp" />
     <ClCompile Include="src\Platform\Graphics\Texture.cpp" />
     <ClCompile Include="vendor\stb_image\stb_image.cpp" />
-    <ClCompile Include="src\Debug\debug_draw.cpp" />
     <ClCompile Include="src\Serialization\JSONserialization.cpp" />
-    <ClCompile Include="src\Platform\System\SystemManager.cpp" />
     <ClCompile Include="vendor\imgui\imgui.cpp" />
     <ClCompile Include="vendor\imgui\imgui_demo.cpp" />
     <ClCompile Include="vendor\imgui\imgui_draw.cpp" />
@@ -34,16 +29,42 @@
     <ClCompile Include="vendor\imgui\imgui_tables.cpp" />
     <ClCompile Include="vendor\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\Platform\LevelEditor\LevelEditor.cpp" />
-    <ClCompile Include="src\ExoEngine\ECS\Components.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\Components.cpp" />
+    <ClCompile Include="src\ExoEngine\ResourceManager\ResourceManager.cpp" />
+    <ClCompile Include="src\ExoEngine\Timer\Time.cpp" />
+    <ClCompile Include="src\Platform\Graphics\Renderer.cpp" />
+    <ClCompile Include="src\Platform\Graphics\VertexArray.cpp" />
+    <ClCompile Include="src\Platform\Graphics\Buffer.cpp" />
+    <ClCompile Include="src\Platform\Graphics\Camera2D.cpp" />
+    <ClCompile Include="src\Platform\Graphics\Graphics.cpp" />
+    <ClCompile Include="src\ExoEngine\Math\matrix4x4.cpp" />
+    <ClCompile Include="src\ExoEngine\Math\Vec3.cpp" />
+    <ClCompile Include="src\Platform\Graphics\TextRendering.cpp" />
+    <ClCompile Include="src\Platform\Graphics\FrameBuffer.cpp" />
+    <ClCompile Include="src\ExoEngine\Audio\AudioEngine.cpp" />
+    <ClCompile Include="src\Platform\Physics\CollisionSystem.cpp" />
+    <ClCompile Include="src\Platform\Physics\PhysicsSystem.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\SceneManager.cpp" />
+    <ClCompile Include="src\ExoEngine\Audio\AudioEngine.cpp" />
+    <ClCompile Include="src\Platform\Graphics\SpriteRendering.cpp" />
+    <ClCompile Include="src\ExoEngine\Animation\Animation.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\Transform.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\RigidBody.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\WinData.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\Collider.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\NameTag.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\Sprite.cpp" />
+    <ClCompile Include="src\Platform\Logic\LogicSystem.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\Logic.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\PlayerMovement.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\EnemyMovement.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\Player.cpp" />
+    <ClCompile Include="vendor\imgui\ImGuizmo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
     <ClInclude Include="src\empch.h" />
     <ClInclude Include="src\ExoEngine\EntryPoint.h" />
-    <ClInclude Include="src\ExoEngine\Events\ApplicationEvent.h" />
-    <ClInclude Include="src\ExoEngine\Events\EventHandler.h" />
-    <ClInclude Include="src\ExoEngine\Events\KeysEvent.h" />
-    <ClInclude Include="src\ExoEngine\Events\MouseEvent.h" />
     <ClInclude Include="src\ExoEngine\Log.h" />
     <ClInclude Include="src\ExoEngine.h" />
     <ClInclude Include="src\ExoEngine\Application.h" />
@@ -166,11 +187,45 @@
     <ClInclude Include="vendor\spdlog\include\spdlog\stopwatch.h" />
     <ClInclude Include="vendor\spdlog\include\spdlog\tweakme.h" />
     <ClInclude Include="vendor\spdlog\include\spdlog\version.h" />
-    <ClInclude Include="src\ExoEngine\ECS\Components.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\Components.h" />
     <ClInclude Include="src\ExoEngine\ECS\Types.h" />
     <ClInclude Include="src\ExoEngine\ECS\EntityManager.h" />
     <ClInclude Include="src\ExoEngine\ECS\ComponentManager.h" />
     <ClInclude Include="src\ExoEngine\ECS\ComponentArray.h" />
+    <ClInclude Include="src\ExoEngine\ResourceManager\ResourceManager.h" />
+    <ClInclude Include="src\ExoEngine\Timer\Time.h" />
+    <ClInclude Include="src\Platform\Graphics\Renderer.h" />
+    <ClInclude Include="src\Platform\Graphics\VertexArray.h" />
+    <ClInclude Include="src\Platform\Graphics\Buffer.h" />
+    <ClInclude Include="src\Platform\Graphics\Camera2D.h" />
+    <ClInclude Include="src\ExoEngine\Timer\Fps.h" />
+    <ClInclude Include="src\ExoEngine\ECS\ECS.h" />
+    <ClInclude Include="src\Platform\Graphics\TextRendering.h" />
+    <ClInclude Include="src\Platform\Graphics\FrameBuffer.h" />
+    <ClInclude Include="src\Platform\Physics\CollisionSystem.h" />
+    <ClInclude Include="src\Platform\Physics\PhysicsSystem.h" />
+    <ClInclude Include="src\ExoEngine\ECS\SceneManager.h" />
+    <ClInclude Include="src\ExoEngine\Math\matrix4x4.h" />
+    <ClInclude Include="src\ExoEngine\Math\Vec3.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\IComponent.h" />
+    <ClInclude Include="src\Platform\Logic\LogicSystem.h" />
+    <ClInclude Include="src\ExoEngine\Audio\AudioEngine.h" />
+    <ClInclude Include="src\Platform\Graphics\SpriteRendering.h" />
+    <ClInclude Include="src\ExoEngine\Animation\Animation.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\Transform.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\RigidBody.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\WinData.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\Collider.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\NameTag.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\Logic.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\IScript.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\Sprite.h" />
+    <ClInclude Include="src\ExoEngine\Math\RigidBody.h" />
+    <ClInclude Include="src\ExoEngine\Math\transformation.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\PlayerMovement.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\EnemyMovement.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\Player.h" />
+    <ClInclude Include="vendor\imgui\ImGuizmo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />
@@ -188,5 +243,8 @@
     <ClInclude Include="vendor\imgui\imstb_textedit.h" />
     <ClInclude Include="vendor\imgui\imstb_truetype.h" />
     <ClInclude Include="src\Platform\LevelEditor\LevelEditor.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="vendor\freetype\libs\freetype.lib" />
   </ItemGroup>
 </Project>

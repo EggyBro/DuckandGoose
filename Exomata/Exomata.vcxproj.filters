@@ -6,9 +6,8 @@
   <ItemGroup>
     <None Include="glew32.dll" />
     <None Include="Assets\Shaders\texture.shader" />
-    <None Include="Assets\Shaders\basic.shader" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\Textures\DuckandGoose.png" />
+    <None Include="Assets\Shaders\Line.shader" />
+    <None Include="Assets\Shaders\text.shader" />
+    <None Include="Assets\Shaders\Circle.Shader" />
   </ItemGroup>
 </Project>

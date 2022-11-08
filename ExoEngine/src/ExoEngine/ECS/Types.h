@@ -23,7 +23,7 @@ namespace EM
 	typedef IDType Entity;
 
 	//Used to define the size of arrays, may use vector
-	const Entity MAX_ENTITIES = 5000;
+	const Entity MAX_ENTITIES = 10; //Limit 799
 
 	//UniqueID used to identify Components
 	typedef IDType ComponentType;

@@ -3,23 +3,26 @@
 
 namespace EM {
     //class functions
-    void entityPhysics::accelent(vec2D& entvel, vec2D applied) {
-        entvel += applied;
-        entvel = entvel * 0.99f;
+    vec2D entityPhysics::accelent(vec2D& entvel, vec2D applied, float dt) {
+        entvel += applied * dt;
+        entvel = entvel * 0.99f * dt;
+        return entvel;
     }
-    void entityPhysics::friction(vec2D& entvel) {
-        entvel -= 0.5f * entvel;
+    vec2D entityPhysics::friction(vec2D& entvel, float dt) {
+        entvel -= entvel * 9.5f * dt;
+        return entvel;
     }
-    void entityPhysics::gravity(vec2D& entvel) {
-        entvel.value.y -= 9.8f;
+    vec2D entityPhysics::gravity(vec2D& entvel, float dt) {
+        entvel.y -= 9.8f * dt;
+        return entvel;
     }
     /*wall entityCollision::buildWall(vec2D pt1, vec2D pt2) {
         wall newWall;
         newWall.p0 = pt1;
         newWall.p1 = pt2;
         vec2D temp = newWall.p0 - newWall.p1;
-        newWall.normal.value.x = -temp.value.y;
-        newWall.normal.value.y = temp.value.x;
+        newWall.normal.x = -temp.y;
+        newWall.normal.y = temp.x;
         Normalize(newWall.normal, newWall.normal);
         return newWall;
     }
@@ -36,14 +39,14 @@ namespace EM {
         return newCast;
     } NOT FUNCTIONING CURRENTLY--------------------------------------------------------------------------------------------*/
     //circle to wall
-    bool entityCollision::wallCollision(const circle &circle, const vec2D &entnextpos, const wall &wall, vec2D &colpt, vec2D &colnorm, float &coltime) {
+    bool entityCollision::wallCollision(const circle_bound&circle, const vec2D &entnextpos, const wall &wall, vec2D &colpt, vec2D &colnorm, float &coltime) {
         float circdot = dotProduct(wall.normal, circle.center);
         float normaldot = dotProduct(wall.normal, wall.p0);
 
         vec2D circVel = entnextpos - circle.center;
         vec2D circVelNormal;
-        circVelNormal.value.x =  circVel.value.y;
-        circVelNormal.value.y = -circVel.value.x;
+        circVelNormal.x =  circVel.y;
+        circVelNormal.y = -circVel.x;
 
         vec2D p0plusrad = (wall.p0 + circle.radius * wall.normal);
         vec2D p1plusrad = (wall.p1 + circle.radius * wall.normal);
@@ -92,11 +95,11 @@ namespace EM {
         return 0;
     }
     //circle to edge
-    bool entityCollision::edgeCollision(bool willcollide, const circle &circle, const vec2D &entnextpos, const wall &wall, vec2D &colpt, vec2D &colnorm,	float &coltime) {
+    bool entityCollision::edgeCollision(bool willcollide, const circle_bound&circle, const vec2D &entnextpos, const wall &wall, vec2D &colpt, vec2D &colnorm,	float &coltime) {
         vec2D circVel = entnextpos - circle.center;
         vec2D normVel;
         Normalize(normVel, circVel);
-        vec2D velNormal = vec2D(normVel.value.y, -normVel.value.x);
+        vec2D velNormal = vec2D(normVel.y, -normVel.x);
         if (willcollide) {
             if (dotProduct(wall.p0 - circle.center, wall.p1 - wall.p0) > 0) {
                 float m = dotProduct(wall.p0 - circle.center, normVel);
@@ -196,9 +199,9 @@ namespace EM {
         return 0;
     }
     //circle to circle
-    bool entityCollision::objCollision(const circle &ent1, const vec2D &ent1vel, const circle &ent2, const vec2D &ent2vel, vec2D &ent1colpt, vec2D &ent2colpt, float &coltime) {
+    bool entityCollision::objCollision(const circle_bound&ent1, const vec2D &ent1vel, const circle_bound&ent2, const vec2D &ent2vel, vec2D &ent1colpt, vec2D &ent2colpt, float &coltime) {
         vec2D relativeVel = ent1vel - ent2vel;
-        circle tempCirc;
+        circle_bound tempCirc;
         tempCirc.center = ent2.center;
         tempCirc.radius = ent1.radius + ent2.radius;
         castRay tempRay;
@@ -231,112 +234,64 @@ namespace EM {
             return 1;
         }
     }
-    //cone circle collision
-    bool entityCollision::coneCollision(const circle &ent1, const int startAngle, const int endAngle, bool lr, const circle &ent2) {
-        vec2D dist0 = ent2.center - ent1.center;
-        float startRad = (float)(startAngle / 180 * (atan(1) * 4));
-        float endRad = (float)(endAngle / 180 * (atan(1) * 4));
-        vec2D dir1;
-        vec2D dir2;
-        if (length(dist0) > ent1.radius + ent2.radius) {
-            return 0;
-        }
-        //check if within cone
-        if(lr) {
-            //get start and end of cone
-            dir1.value.x = -cos(startRad);
-            dir1.value.y = sin(startRad);
-            dir2.value.x = -cos(endRad);
-            dir2.value.y = -sin(endRad);
-        }
-        else {
-            //get start and end of cone
-            dir1.value.x = cos(startRad);
-            dir1.value.y = sin(startRad);
-            dir2.value.x = cos(endRad);
-            dir2.value.y = -sin(endRad);
-        }
-        //check if above or below midpoint
-        if (atan(dist0.value.y/dist0.value.x) > 0) {
-            vec2D dist0Normal;
-            dist0Normal.value.x = dir1.value.y;
-            dist0Normal.value.y = -dir1.value.x;
-            vec2D extended = ent2.center + (ent2.radius * dist0Normal);
-            vec2D dist1 = extended - ent1.center;
-            if (length(dist1) > ent1.radius || atan(dist1.value.y / dist1.value.x) > startRad) {
-                return 0;
-            }
-        }
-        else {
-            vec2D dist0Normal;
-            dist0Normal.value.x = -dir2.value.y;
-            dist0Normal.value.y = dir2.value.x;
-            vec2D extended = ent2.center + (ent2.radius * dist0Normal);
-            vec2D dist1 = extended - ent1.center;
-            if (length(dist1) > ent1.radius || -atan(dist1.value.y / dist1.value.x) > endRad) {
-                return 0;
-            }
-        }
-        return 1;
-    }
     //AABB Collision
-    bool entityCollision::boundingBoxCollision(vec2D max1, vec2D min1, vec2D vel1, vec2D max2, vec2D min2, vec2D vel2) {
+    bool entityCollision::boundingBoxCollision(vec2D max1, vec2D min1, vec2D vel1, vec2D max2, vec2D min2, vec2D vel2, float dt) {
         //Static collision
-        if (!(min1.value.x > max2.value.x || min2.value.x > max1.value.x || max1.value.y < min2.value.y || max2.value.y < min1.value.y)) {
+        if (!(min1.x > max2.x || min2.x > max1.x || max1.y < min2.y || max2.y < min1.y)) {
             return true;
         }
         //dynamic collision
         float tFirst = 0;
-        float tLast = 1;
+        float tLast = dt;//dt
         vec2D relvel = vel2 - vel1;
         vec2D dFirst = min1 - max2;
         vec2D dLast = max1 - min2;
-        if (relvel.value.x < 0) {
-            if (min1.value.x > max2.value.x) {
+        if (relvel.x < 0) {
+            if (min1.x > max2.x) {
                 return false;
             }
-            if (max1.value.x < min2.value.x && dFirst.value.x / relvel.value.x > tFirst) {
-                tFirst = std::max(dFirst.value.x / relvel.value.x, tFirst);
+            if (max1.x < min2.x && dFirst.x / relvel.x > tFirst) {
+                tFirst = std::max(dFirst.x / relvel.x, tFirst);
             }
-            if (max1.value.x > min2.value.x && (dLast.value.x / relvel.value.x) < tLast) {
-                tLast = std::min(dLast.value.x / relvel.value.x, tLast);
+            if (max1.x > min2.x && (dLast.x / relvel.x) < tLast) {
+                tLast = std::min(dLast.x / relvel.x, tLast);
             }
         }
-        if (relvel.value.x > 0) {
-            if (max1.value.x < min2.value.x) {
+        if (relvel.x > 0) {
+            if (max1.x < min2.x) {
                 return false;
             }
-            if (min1.value.x > max2.value.x && (dFirst.value.x / relvel.value.x) > tFirst) {
-                tFirst = std::max(dFirst.value.x / relvel.value.x, tFirst);
+            if (min1.x > max2.x && (dFirst.x / relvel.x) > tFirst) {
+                tFirst = std::max(dFirst.x / relvel.x, tFirst);
             }
-            if (max1.value.x > min2.value.x && dLast.value.x / relvel.value.x < tLast) {
-                tLast = std::min(dLast.value.x / relvel.value.x, tLast);
+            if (max1.x > min2.x && dLast.x / relvel.x < tLast) {
+                tLast = std::min(dLast.x / relvel.x, tLast);
             }
         }
         if (tFirst > tLast) {
             return false;
         }
-        if (relvel.value.y < 0) {
-            if (min1.value.y > max2.value.y) {
+        if (relvel.y < 0) {
+            if (min1.y > max2.y) {
                 return false;
             }
-            if (max1.value.y < min2.value.y && (dFirst.value.y / relvel.value.y) > tFirst) {
-                tFirst = std::max((max1.value.y - min2.value.y) / relvel.value.y, tFirst);
+            if (max1.y < min2.y && (dFirst.y / relvel.y) > tFirst) {
+                tFirst = std::max((max1.y - min2.y) / relvel.y, tFirst);
             }
-            if (max1.value.y > min2.value.y && (dLast.value.y / relvel.value.y) < tLast) {
-                tLast = std::min((min1.value.y - max2.value.y) / relvel.value.y, tLast);
+            if (max1.y > min2.y && (dLast.y / relvel.y) < tLast) {
+                tLast = std::min((min1.y - max2.y) / relvel.y, tLast);
             }
 
         }
-        if (relvel.value.y > 0) {
-            if (max1.value.y < min2.value.y) {
+        if (relvel.y > 0) {
+            if (max1.y < min2.y) {
                 return false;
             }
-            if (min1.value.y > max2.value.y && (dFirst.value.y / relvel.value.y) > tFirst) {
-                tFirst = std::max((min1.value.y - max2.value.y) / relvel.value.y, tFirst);
+            if (min1.y > max2.y && (dFirst.y / relvel.y) > tFirst) {
+                tFirst = std::max((min1.y - max2.y) / relvel.y, tFirst);
             }
-            if (max1.value.y > min2.value.y && (dLast.value.y / relvel.value.y) < tLast) {
-                tLast = std::min((max1.value.y - min2.value.y) / relvel.value.y, tLast);
+            if (max1.y > min2.y && (dLast.y / relvel.y) < tLast) {
+                tLast = std::min((max1.y - min2.y) / relvel.y, tLast);
             }
 
         }
@@ -346,7 +301,20 @@ namespace EM {
         //if all falls through, return no collision
         return false;
     }
-
+    //circle aabb collision
+    bool entityCollision::boundingBoxCircle(const circle_bound& ent1, vec2D max2, vec2D min2) {
+        if (min2.x - ent1.center.x > ent1.radius || ent1.center.x - max2.x > ent1.radius ||
+            min2.y - ent1.center.y > ent1.radius || ent1.center.y - max2.y > ent1.radius) {
+            return 0;
+        }
+        vec2D topleft(min2.x, max2.y);
+        vec2D bottomright(max2.x, min2.y);
+        if (distance(ent1.center, min2) > ent1.radius && distance(ent1.center, max2) > ent1.radius &&
+            distance(ent1.center, topleft) > ent1.radius && distance(ent1.center, bottomright) > ent1.radius) {
+            return 0;
+        }
+        return 1;
+    }
     //circle wall reaction
     void entityCollision::wallBounce(const vec2D &colpt, const vec2D &ptnorm, vec2D &entnextpos, vec2D &reflectiondir) {
         vec2D penPoint = entnextpos - colpt;
@@ -372,5 +340,21 @@ namespace EM {
         entnextpos = colpt + penPoint - (dotprod * colnorm);
         reflectionnorm = entnextpos - colpt;
         Normalize(reflectionnorm, reflectionnorm);
+    }
+    void accelent(vec2D &entvel, vec2D dir, float mag, float lim) {
+        entvel += (dir * mag);
+        if (length(entvel) >= lim) {
+            entvel = 0.9f * entvel;
+        }
+    }
+    void decelent(vec2D &entvel) {
+        if (length(entvel) > 0) {
+            entvel -= entvel * 0.5;
+        }
+    }
+
+    void Knockback()
+    {
+
     }
 }

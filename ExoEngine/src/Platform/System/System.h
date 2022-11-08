@@ -14,8 +14,9 @@
 #pragma once
 #include "ExoEngine/Core.h"
 #include "ExoEngine/ECS/Types.h"
-
 namespace EM {
+	template class EM_API std::set<Entity>;
+	//template class EM_API std::basic_string<char, std::char_traits<char>, std::allocator<char>>;
 
 	class EM_API System
 	{
@@ -25,11 +26,11 @@ namespace EM {
 		virtual ~System() {};
 		//System function
 		virtual void Init() = 0 {};
-		virtual void Update() = 0 {};
+		virtual void Update(float Frametime) { UNREFERENCED_PARAMETER(Frametime); };
 		virtual void End() = 0 {};
 
 	protected:
-		std::string m_DebugName;
+		 std::string m_DebugName;
 
 	};
 }

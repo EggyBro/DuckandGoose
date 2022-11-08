@@ -6,12 +6,16 @@
 
 namespace EM
 {
+#ifdef _MSC_VER
+	// Supress warning: nonstandard extension used : nameless struct/union
+#pragma warning( disable : 4201 )
+#endif
 	typedef union vec2D
 	{
-		struct vec_mem {
+		struct {
 			float x;
 			float y;
-		} vector, value;
+		};
 
 
 		float m[2];
@@ -30,30 +34,25 @@ namespace EM
 
 		vec2D operator -() const;
 
-	} vec2D, Vec2, Point2D, Pt2;
+		void Vec2Set(vec2D& curr, float x_, float y_);
 
-	/*
-	inline void StreamRead(ISerializer& stream, Vec2& v)
-	{
-		StreamRead(stream, v.value.x);
-		StreamRead(stream, v.value.y);
-	}
-	*/
 
-	//tools
-	void Vec2Set(Vec2& curr, float x_, float y_);
+		//tools
+
+
+		//MATH function
+		
+
+	}Vector2D;
 
 	vec2D operator - (const vec2D& lhs, const vec2D& rhs);
 	vec2D operator + (const vec2D& lhs, const vec2D& rhs);
 	vec2D operator * (const vec2D& lhs, float rhs);
 	vec2D operator * (float lhs, const vec2D& rhs);
 	vec2D operator / (const vec2D& lhs, float rhs);
+	 void Normalize(vec2D& result, const vec2D Vec0); //normalize the vector
 
-
-	//MATH function
-	void Normalize(vec2D& result, const vec2D Vec0); //normalize the vector
-
-	float length(const vec2D& Vec0); // return the length of the vector 
+	 float length(const vec2D& Vec0); // return the length of the vector 
 
 	float squarelength(const vec2D& vec0);//return the length of the vector after squaring it
 
@@ -64,4 +63,9 @@ namespace EM
 	float dotProduct(const vec2D& Vec0, const vec2D& Vec1);
 
 	float crossproduct(const vec2D& Vec0, const vec2D& Vec1);
+
+	vec2D  ADV_OrthProj(const vec2D& Vec0, const vec2D& Vec1);
+
+
+
 }

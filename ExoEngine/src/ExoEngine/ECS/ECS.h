@@ -21,18 +21,26 @@ with each other using this class
 #include "Types.h"
 #include "empch.h"
 
+#define p_ecs EM::ECS::GetInstance()
+
 namespace EM
 {
 	class ECS
 	{
 	public:
+
+		static ECS& GetInstance()
+		{
+			static ECS instance;
+			return instance;
+		}
+
 		void Init()
 		{
 			mComponentManager = std::make_unique<ComponentManager>();
 			mEntityManager = std::make_unique<EntityManager>();
 			mSystemManager = std::make_unique<SystemManager>();
 		}
-
 
 		// Entity methods
 		Entity CreateEntity()
@@ -43,10 +51,50 @@ namespace EM
 		void DestroyEntity(Entity entity)
 		{
 			mEntityManager->DestroyEntity(entity);
-
 			mComponentManager->EntityDestroyed(entity);
-
 			mSystemManager->EntityDestroyed(entity);
+		}
+
+		Entity CloneEntity(Entity entity)
+		{
+			Entity newEntity = mEntityManager->CreateEntity();
+			mEntityManager->SetSignature(newEntity, GetEntitySignature(entity));
+			for (ComponentType i = 0; i < GetTotalRegisteredComponents(); ++i)
+			{
+				if (GetEntitySignature(newEntity).test(i))
+				{
+					mComponentManager->GetComponentArrayFromType(i)->CopyComponent(entity, newEntity);
+				}
+			}
+			auto signature = mEntityManager->GetSignature(newEntity);
+			mSystemManager->EntitySignatureChanged(newEntity, signature);
+
+			return newEntity;
+		}
+
+		Signature GetEntitySignature(Entity entity)
+		{
+			return mEntityManager->GetSignature(entity);
+		}
+
+		void SetEntitySignature(Entity entity, Signature signature)
+		{
+			mEntityManager->SetSignature(entity, signature);
+		}
+
+		Entity GetTotalEntities()
+		{
+			return mEntityManager->GetTotalEntities();
+		}
+
+		void SetTotalEntitiesForWorldBuild(Entity entity)
+		{
+			mEntityManager->SetTotalEntitiesForWorld(entity);
+		}
+
+		void ResetEntities()
+		{
+			mEntityManager->ResetEntities();
 		}
 
 		// Component methods
@@ -64,8 +112,26 @@ namespace EM
 			auto signature = mEntityManager->GetSignature(entity);
 			signature.set(mComponentManager->GetComponentType<T>(), true);
 			mEntityManager->SetSignature(entity, signature);
-
 			mSystemManager->EntitySignatureChanged(entity, signature);
+		}
+
+		void AddComponentsSignature(Entity entity, Signature signature)
+		{
+			if (signature.test(GetComponentType<Transform>()))
+			{
+				Transform transform;
+				AddComponent<Transform>(entity, transform);
+			}
+			if (signature.test(GetComponentType<RigidBody>()))
+			{
+				RigidBody rigidbody;
+				AddComponent<RigidBody>(entity, rigidbody);
+			}
+			if (signature.test(GetComponentType<Sprite>()))
+			{
+				Sprite sprite;
+				AddComponent<Sprite>(entity, sprite);
+			}
 		}
 
 		template<typename T>
@@ -92,6 +158,47 @@ namespace EM
 			return mComponentManager->GetComponentType<T>();
 		}
 
+		std::string GetComponentTypeName(ComponentType Type)
+		{
+			return mComponentManager->GetComponentTypeName(Type);
+		}
+
+		template<typename T>
+		bool HaveComponent(Entity entity)
+		{
+			return mComponentManager->HaveComponent<T>(entity);
+		}
+
+		std::array<size_t, MAX_ENTITIES>& GetEntityToIndexMapECS(ComponentType Type)
+		{
+			return mComponentManager->GetEntityToIndexMap(Type);
+		}
+
+		std::array<Entity, MAX_ENTITIES>& GetIndexToEntityMapECS(ComponentType Type)
+		{
+			return mComponentManager->GetIndexToEntityMap(Type);
+		}
+
+		const ComponentType GetTotalRegisteredComponents()
+		{
+			return mComponentManager->GetTotalRegisteredComponents();
+		}
+
+		const size_t GetEntitySize(ComponentType Type)
+		{
+			return mComponentManager->GetEntitySize(Type);
+		}
+
+		void ClearArrayForWorldBuild(ComponentType Type)
+		{
+			return mComponentManager->ClearArrayForWorldBuild(Type);
+		}
+
+		std::shared_ptr<IComponentArray> GetComponentArrayFromType(ComponentType Type)
+		{
+			return mComponentManager->GetComponentArrayFromType(Type);
+		}
+
 
 		// System methods
 		template<typename T>
@@ -110,5 +217,6 @@ namespace EM
 		std::unique_ptr<ComponentManager> mComponentManager;
 		std::unique_ptr<EntityManager> mEntityManager;
 		std::unique_ptr<SystemManager> mSystemManager;
+		inline static std::unique_ptr<ECS> m_instance;
 	};
 }

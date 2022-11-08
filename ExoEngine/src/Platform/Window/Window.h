@@ -20,11 +20,11 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "ExoEngine/ECS/Components.h"
+#include "ExoEngine/ECS/Components/Components.h"
 
 
 namespace EM {
-
+	class EM_API WinData;
 	//properties used in window
 	struct WindowProps 
 	{
@@ -49,10 +49,8 @@ namespace EM {
 		//Initialize
 		virtual void Init() override;
 		//update
-		virtual void Update() override;
+		virtual void Update(float frametime) override;
 
-		//virtual voide Draw() override;
-		
 		//Delete window
 		virtual void End() override;
 
@@ -62,8 +60,6 @@ namespace EM {
 		WindowProps Getter() const { return m_windowData; }
 		GLFWwindow* GetWindow() const { return m_window; }
 		GLFWmonitor* GetMonitor() const { return m_monitor; }
-
-		void SetWindowFPS();
 
 	private:
 		GLFWwindow* m_window;

@@ -14,7 +14,7 @@
 #include "Window.h"
 #include "ExoEngine/Input/Input.h"
 #include "Platform/LevelEditor/LevelEditor.h"
-
+#include "ExoEngine/Timer/Time.h"
 
 namespace EM{
 
@@ -28,6 +28,7 @@ namespace EM{
 		m_windowData.m_Height = windowData.GetHeight();
 		m_windowData.m_CurrentWidth = windowData.GetCurrWidth();
 		m_windowData.m_CurrentHeight = windowData.GetCurrHeight();
+		windowData.SerializeToFile("Window.json");
 	};
 
 	void Window::Init()
@@ -87,51 +88,24 @@ namespace EM{
 		glfwSetWindowSizeCallback(m_window, Window_size_callback);
 		glfwSetCursorPosCallback(m_window, Mouseposition_callback);
 		glfwSetKeyCallback(m_window, Key_callback);
-
-		previousTime = glfwGetTime(); 
-		frameCount = 0;
-
-
+		glfwSetScrollCallback(m_window, Mousescroll_callback);
+		glfwSetMouseButtonCallback(m_window, Mousebutton_callback);
+		glfwSetFramebufferSizeCallback(m_window, Window_size_callback);
+		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	}
-	void Window::Update()
+	void Window::Update(float frametime)
 	{
-
+		(void)frametime;
+		Timer::GetInstance().Start(Systems::WINDOWS);
+		Timer::GetInstance().GetDT(Systems::WINDOWS);
 		/* Poll for and process events */
 		glfwPollEvents();
-
-
 		/* Swap front and back buffers */
 		glfwSwapBuffers(m_window);
-		//set initialize window width & height to current (to be set in rapidjson file)
-		m_windowData.m_CurrentWidth = m_windowData.m_Width;
-		m_windowData.m_CurrentHeight = m_windowData.m_Height;
 
-		windowData.SetCurrWidth(m_windowData.m_CurrentWidth);
-		windowData.SetCurrHeight(m_windowData.m_CurrentHeight);
-		windowData.SetWidth(windowData.GetCurrWidth());
-		windowData.SetHeight(windowData.GetCurrHeight());
-
-		glClear(GL_COLOR_BUFFER_BIT);
-		glClearColor(0.f, 0.f, 0.f, 1.f);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-		windowData.SerializeToFile("Window.json");
+		Timer::GetInstance().Update(Systems::WINDOWS);
 	}
   
-	void Window::SetWindowFPS()
-	{
-		double currentTime = glfwGetTime();
-		frameCount++;
-		if (currentTime - previousTime >= 1.0f)
-		{
-			std::stringstream ss;
-			ss << windowData.GetTitle() << " " << " [" << frameCount << " FPS]";
-			glfwSetWindowTitle(m_window, ss.str().c_str());
-			frameCount = 0;
-			previousTime = currentTime;
-		}
-	}
 
 	void Window::End()
 	{
@@ -152,6 +126,8 @@ namespace EM{
 	}
 	void Window::Key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 	{
+		UNREFERENCED_PARAMETER(window);
+		(void)scancode, (void)mode;
 		InputSystem::GetInstance()->SetKeyStatus(key, action);
 	}
 	void Window::Mousebutton_callback(GLFWwindow* window, int button, int action, int mode)
@@ -159,12 +135,14 @@ namespace EM{
 		(void)window, (void)mode;
 		InputSystem::GetInstance()->SetMouseStatus(button, action);
 	}
-	//void Window::Mousescroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-	//{
-	//
-	//}
+	void Window::Mousescroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+	{
+		(void)window, (void)xoffset, (void)yoffset;
+		InputSystem::GetInstance()->MouseScrollStatus = static_cast<int>(yoffset);
+	}
 	void Window::Mouseposition_callback(GLFWwindow* window, double xpos, double ypos)
 	{
+		
 		WindowProps& data = *(WindowProps*)glfwGetWindowUserPointer(window);
 		data.mouseX = xpos;
 		data.mouseY = ypos;

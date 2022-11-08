@@ -20,7 +20,16 @@ extern EM::Application* EM::CreateApplication();
 
 int main(int argc, char* argv[])
 {
-
+	(void)argc;
+	(void)argv;
+	//Mermory leak check
+	int tmpDbgFlag = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
+	tmpDbgFlag |= _CRTDBG_LEAK_CHECK_DF;
+	_CrtSetDbgFlag(tmpDbgFlag);
+	HWND hWnd = GetConsoleWindow();
+	ShowWindow(hWnd, SW_NORMAL);
+	
+	
 	EM::Log::Init();
 	auto app = EM::CreateApplication();
 	app->Run();

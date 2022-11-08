@@ -14,12 +14,10 @@
 
 #include "Core.h"
 #include "Log.h"
-#include "Events/EventHandler.h"
 #include "Platform/System/SystemManager.h"
-#include "Platform/Graphics/Shader.h"
-//#include "EntryPoint.h"
-namespace EM {
+#include "ECS/ECS.h"
 
+namespace EM {
 	class EM_API Application
 	{
 
@@ -33,8 +31,8 @@ namespace EM {
 		void End();
 
 	private:
-		SystemManager m_Systems;
-
+		//SystemManager m_Systems;
+		
 	};
 	 
 	//To be defined in CLIENT

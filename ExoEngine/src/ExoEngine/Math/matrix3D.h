@@ -6,12 +6,12 @@ namespace EM
 {
 	typedef union Mat3D
 	{
-		struct matrix_val
+		struct 
 		{
 			float m00, m01, m02;
 			float m10, m11, m12;
 			float m20, m21, m22;
-		} value;
+		};
 
 		float m[9];
 

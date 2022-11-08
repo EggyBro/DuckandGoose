@@ -13,7 +13,6 @@ serialize and deserialize using virtual functions.
 ****************************************************************************
 ***/
 
-#include "empch.h"
 #include "JSONserialization.h"
 
 namespace EM
@@ -21,7 +20,7 @@ namespace EM
 	std::string JSONSerializer::Serialize() const
 	{
 		rapidjson::StringBuffer ss;
-		rapidjson::Writer<rapidjson::StringBuffer> writer(ss);
+		rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(ss);
 		if (Serialize(&writer)) 
 		{ 
 			return ss.GetString();
@@ -46,7 +45,7 @@ namespace EM
 
 	bool JSONSerializer::DeserializeFromFile(const std::string& filePath)
 	{
-		std::ifstream ifs(filePath);
+		std::ifstream ifs(filePath, std::ios::in);
 		std::stringstream buffer;
 		buffer << ifs.rdbuf();
 		ifs.close();

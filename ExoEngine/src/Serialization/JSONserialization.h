@@ -15,6 +15,7 @@ serialize and deserialize using virtual functions.
 
 #pragma once
 #include "JSONincludes.h"
+#include "empch.h"
 #include "ExoEngine/Core.h"
 
 namespace EM
@@ -30,7 +31,7 @@ namespace EM
 			virtual bool Deserialize(const std::string& s);
 
 			virtual bool Deserialize(const rapidjson::Value& obj) = 0;
-			virtual bool Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const = 0;
+			virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const = 0;
 
 			virtual ~JSONSerializer() = default;
 

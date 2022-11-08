@@ -18,6 +18,7 @@
 #include "spdlog/fmt/ostr.h"
 
 namespace EM {
+	template class EM_API std::shared_ptr<spdlog::logger>;
 	class EM_API Log
 	{
 	public:
@@ -26,11 +27,12 @@ namespace EM {
 
 		static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
 		static std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
-
+		static std::string GetImguiLog();
 
 	private:
 		static std::shared_ptr<spdlog::logger> s_CoreLogger;
 		static std::shared_ptr<spdlog::logger> s_ClientLogger;
+		static std::ostringstream oss;
 	};
 }
 //Macros for logger

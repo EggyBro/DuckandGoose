@@ -11,16 +11,22 @@ namespace EM {
         vec2D	p1;
         vec2D	normal;
     };
-    struct circle {
+    struct circle_bound {
         vec2D   center;
         float	radius; //mass tied to radius
+    };
+
+    struct aabb
+    {
+        vec2D	min;
+        vec2D	max;
     };
     
     class entityPhysics {
         public: 
-            void accelent(vec2D& entvel, vec2D applied);
-            void friction(vec2D& entvel);
-            void gravity(vec2D& entvel);
+            vec2D accelent(vec2D& entvel, vec2D applied, float dt);
+            vec2D friction(vec2D& entvel, float dt);
+            vec2D gravity(vec2D& entvel, float dt);
     };
     class entityCollision {
         private:
@@ -29,6 +35,7 @@ namespace EM {
                 vec2D	dir;
             };
         public:
+            entityCollision() = default;
             //bool basicBoundingBox(vec2D max1, vec2D min1, vec2D max2, vec2D min2);
             /***************************************************************************//*!
             \brief
@@ -89,7 +96,7 @@ namespace EM {
             \return
             boolean indicating collision true or false
             *//**************************************************************************/
-            bool wallCollision(const circle& circle, const vec2D& entnextpos, const wall& wall, vec2D& colpt, vec2D& colnorm, float& coltime);
+            bool wallCollision(const circle_bound& circle, const vec2D& entnextpos, const wall& wall, vec2D& colpt, vec2D& colnorm, float& coltime);
             /***************************************************************************//*!
             \brief
             calculates collision between a circle and edge of wall
@@ -113,7 +120,7 @@ namespace EM {
             \return
             boolean indicating collision true or false
             *//**************************************************************************/
-            bool edgeCollision(bool willcollide, const circle& circle, const vec2D& entnextpos, const wall& wall, vec2D& colpt, vec2D& colnorm, float& coltime);
+            bool edgeCollision(bool willcollide, const circle_bound& circle, const vec2D& entnextpos, const wall& wall, vec2D& colpt, vec2D& colnorm, float& coltime);
             /***************************************************************************//*!
             \brief
             calculates collision between two circles
@@ -136,40 +143,7 @@ namespace EM {
             \return
             boolean indicating collision true or false
             *//**************************************************************************/
-            bool objCollision(const circle& ent1, const vec2D& ent1vel, const circle& ent2, const vec2D& ent2vel, vec2D& ent1colpt, vec2D& ent2colpt, float& coltime);
-            /***************************************************************************//*!
-            \brief
-            calculates collision between a cone and a circle. Used for hit detection.
-
-            \param[in] ent1
-            struct of the circle which will be the cone
-            \param[in] startAngle
-            angle of the start of the cone in degrees
-            \param[in] endAngle
-            angle of the end of the cone in degrees
-            \param[in] lr
-            bool indicating facing left or right (1 right, 0 left)
-            \param[in] ent2
-            struct of the second circle
-
-            \return
-            boolean indicating collision true or false
-            *//**************************************************************************/
-            bool coneCollision(const circle& ent1, const int startAngle, const int endAngle, bool lr, const circle& ent2);
-            /***************************************************************************//*!
-            \brief
-            calculates collision response between a circle and wall
-
-            \param[in] colpt
-            point of collision
-            \param[in] ptnorm
-            normal at point of reflection
-            \param[out] entnextpos
-            next position of object
-            \param[out] reflectiondir
-            normalised direction of the reflected vector
-            *//**************************************************************************/
-            void wallBounce(const vec2D& colpt, const vec2D& ptnorm, vec2D& entnextpos, vec2D& reflectiondir);
+            bool objCollision(const circle_bound& ent1, const vec2D& ent1vel, const circle_bound& ent2, const vec2D& ent2vel, vec2D& ent1colpt, vec2D& ent2colpt, float& coltime);
             /***************************************************************************//*!
             \brief
             calculates collision between two rectangles
@@ -186,11 +160,42 @@ namespace EM {
             bottom left edge of second object
             \param[in] vel2
             velocity of second object
+            \param[in] dt
+            delta time
 
             \return
             boolean indicating collision true or false
             *//**************************************************************************/
-            bool boundingBoxCollision(vec2D max1, vec2D min1, vec2D vel1, vec2D max2, vec2D min2, vec2D vel2);
+            bool boundingBoxCollision(vec2D max1, vec2D min1, vec2D vel1, vec2D max2, vec2D min2, vec2D vel2, float dt);
+            /***************************************************************************//*!
+            \brief
+            calculates collision between an aabb and a circle. Used for hit detection.
+
+            \param[in] ent1
+            struct of the circle to calculate collision with
+            \param[in] max2
+            max point of bounding box
+            \param[in] min2
+            min point of bounding box
+
+            \return
+            boolean indicating collision true or false
+            *//**************************************************************************/
+            bool boundingBoxCircle(const circle_bound& ent1, vec2D max2, vec2D min2);
+            /***************************************************************************//*!
+            \brief
+            calculates collision response between a circle and wall
+
+            \param[in] colpt
+            point of collision
+            \param[in] ptnorm
+            normal at point of reflection
+            \param[out] entnextpos
+            next position of object
+            \param[out] reflectiondir
+            normalised direction of the reflected vector
+            *//**************************************************************************/
+            void wallBounce(const vec2D& colpt, const vec2D& ptnorm, vec2D& entnextpos, vec2D& reflectiondir);
             /***************************************************************************//*!
             \brief
             calculates collision response between a circle and edge

@@ -17,6 +17,9 @@
 #define p_Input EM::InputSystem::GetInstance()
 namespace EM {
 
+	template class EM_API std::vector <int, std::allocator<int>>;
+	template class EM_API std::unordered_map<int, int, std::hash<int>, std::equal_to<int>, std::allocator<std::pair<const int, int>>>;
+
 	using keystatus = int;
 	using keycode = int;
 	using mousestatus = int;
@@ -47,12 +50,14 @@ namespace EM {
 
 		bool isKeyPressed(keycode key);
 
+		
 	public:
 		//data
 		std::unordered_map<keycode, keystatus> m_KeyStatus;
 		std::unordered_map<mousecode, mousestatus> m_MouseStatus;
 		std::vector<keycode> m_reset;
 		
+		double MouseScrollStatus = 0.0f;
 		
 	};
 }

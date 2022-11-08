@@ -20,7 +20,7 @@ on components added and will update all components belonging to the system
 #include "ComponentArray.h"
 #include "Types.h"
 #include "empch.h"
-#include "Components.h"
+#include "Components/Components.h"
 
 namespace EM
 {
@@ -35,13 +35,21 @@ namespace EM
 
 			assert(mComponentTypes.find(typeName) == mComponentTypes.end() && "Registering component type more than once.");
 
+			auto CompArray = std::make_shared<ComponentArray<T>>();
+
 			// Add this component type to the component type map
 			mComponentTypes.insert({ typeName, mNextComponentType });
 
 			// Create a ComponentArray pointer and add it to the component arrays map
-			mComponentArrays.insert({ typeName, std::make_shared<ComponentArray<T>>() });
+			mComponentArrays.insert({ typeName, CompArray });
+
+			ComponentType cType = mComponentTypes[typeName];
+
+			mComponentArraysFromType.try_emplace( cType , CompArray );
 
 			++mNextComponentType;
+
+			++ComponentsRegistered;
 		}
 
 		//Returns the ComponentType;
@@ -54,6 +62,20 @@ namespace EM
 
 			// Return this component's type - used for creating signatures
 			return mComponentTypes[typeName];
+		}
+
+		std::string GetComponentTypeName(ComponentType Type)
+		{
+			std::string TypeName;
+			for (std::unordered_map<const char*, ComponentType>::const_iterator it = mComponentTypes.begin(); it != mComponentTypes.end(); ++it) 
+			{
+				if (it->second == Type)
+				{
+					TypeName = it->first;
+				}
+			}
+			TypeName = TypeName.substr(TypeName.find_first_of("::") + 2, TypeName.length());
+			return TypeName;
 		}
 
 		//Add Components to the ComponentArray
@@ -80,6 +102,13 @@ namespace EM
 			return GetComponentArray<T>()->GetData(entity);
 		}
 
+
+		template<typename T>
+		bool HaveComponent(Entity entity)
+		{
+			return GetComponentArray<T>()->HaveComponent(entity);
+		}
+
 		// Notify each component array that an entity has been destroyed
 		// If it has a component for that entity, it will remove it
 		void EntityDestroyed(Entity entity)
@@ -92,7 +121,39 @@ namespace EM
 			}
 		}
 
+		std::array<size_t, MAX_ENTITIES>& GetEntityToIndexMap(ComponentType Type)
+		{
+			return GetComponentArrayFromType(Type)->GetEntityToIndexMap();
+		}
+
+		std::array<Entity, MAX_ENTITIES>& GetIndexToEntityMap(ComponentType Type)
+		{
+			return GetComponentArrayFromType(Type)->GetIndexToEntityMap();
+		}
+
+		const ComponentType GetTotalRegisteredComponents()
+		{
+			return ComponentsRegistered;
+		}
+
+		const size_t GetEntitySize(ComponentType Type)
+		{
+			return GetComponentArrayFromType(Type)->GetEntitySize();
+		}
+
+		void ClearArrayForWorldBuild(ComponentType Type)
+		{
+			GetComponentArrayFromType(Type)->ClearForWorldBuild();
+		}
+
+		inline std::shared_ptr<IComponentArray> GetComponentArrayFromType(ComponentType Type)
+		{
+			return mComponentArraysFromType[Type];
+		}
+
 	private:
+
+		inline static ComponentType ComponentsRegistered{};
 
 		// Map from type string pointer to a component type
 		std::unordered_map<const char*, ComponentType> mComponentTypes{};
@@ -100,8 +161,10 @@ namespace EM
 		// Map from type string pointer to a component array
 		std::unordered_map<const char*, std::shared_ptr<IComponentArray>> mComponentArrays{};
 
+		std::unordered_map<ComponentType, std::shared_ptr<IComponentArray>> mComponentArraysFromType{};
+
 		//Initial component type id
-		static const ComponentType mNextComponentType{};
+		ComponentType mNextComponentType{};
 
 		// Convenience function to get the statically casted pointer to the ComponentArray of type T.
 		template<typename T>
@@ -113,5 +176,6 @@ namespace EM
 
 			return std::static_pointer_cast<ComponentArray<T>>(mComponentArrays[typeName]);
 		}
+
 	};
 }
