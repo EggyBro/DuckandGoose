@@ -3,7 +3,7 @@
 \file			Shader.cpp
 \author			Huang Xin Xiang
 \par DP email:	h.xinxiang@digipen.edu
-\par Course:	Gam200
+\par Course:	CSD2400 / GAM200
 \section		A
 \date			28-9-2022
 \brief			This file contain functions that can bring the data into the shaders file 
@@ -14,7 +14,9 @@
 #include "empch.h"
 #include "Shader.h"
 namespace EM {
-
+	/*!*************************************************************************
+	Read the shader from file .shader file and determine vertex and fragment part
+	****************************************************************************/
 	static GLenum ShaderTypeFromString(const std::string& type)
 	{
 		if (type == "vertex")
@@ -25,6 +27,9 @@ namespace EM {
 		EM_EXO_ASSERT(false, "Wrong Shader Type!");
 		return 0;
 	}
+	/*!*************************************************************************
+	How the shader is been read and set
+	****************************************************************************/
 	Shader::Shader(const std::string& filepath)
 	{
 		std::string source = ReadFile(filepath);
@@ -39,7 +44,9 @@ namespace EM {
 		auto count = lastDot == std::string::npos ? filepath.size() - lastSlash : lastDot - lastSlash;
 		m_Name = filepath.substr(lastSlash, count);
 	}
-
+	/*!*************************************************************************
+	Set the correct vertex and fragment source into the compile function
+	****************************************************************************/
 	Shader::Shader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
 		:m_Name(name)
 	{
@@ -48,12 +55,16 @@ namespace EM {
 		sources[GL_FRAGMENT_SHADER] = fragmentSrc;
 		Compile(sources);
 	}
-
+	/*!*************************************************************************
+	Delete the shader program
+	****************************************************************************/
 	Shader::~Shader()
 	{
 		glDeleteProgram(m_RendererID);
 	}
-
+	/*!*************************************************************************
+	Set the correct file path to read the shader
+	****************************************************************************/
 	std::string Shader::ReadFile(const std::string& filepath)
 	{
 		std::string out;
@@ -80,7 +91,9 @@ namespace EM {
 		}
 		return out;
 	}
-
+	/*!*************************************************************************
+	Set how the shader is being read
+	****************************************************************************/
 	std::unordered_map<GLenum, std::string> Shader::Processing(const std::string& source)
 	{
 		std::unordered_map<GLenum, std::string> shader;
@@ -107,7 +120,9 @@ namespace EM {
 		}
 		return shader;
 	}
-
+	/*!*************************************************************************
+	Compile the shader
+	****************************************************************************/
 	void Shader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
 		GLuint program = glCreateProgram();
@@ -179,59 +194,79 @@ namespace EM {
 			glDeleteShader(id);
 		}
 	}
-
+	/*!*************************************************************************
+	Bind the shader
+	****************************************************************************/
 	void Shader::Bind() const
 	{
 		glUseProgram(m_RendererID);
 	}
-
+	/*!*************************************************************************
+	Unbind the shader
+	****************************************************************************/
 	void Shader::Unbind() const
 	{
 		glUseProgram(0);
 	}
-
+	/*!*************************************************************************
+	Overload function for the specific type (int)
+	****************************************************************************/
 	void Shader::SetUniform(const std::string& name, int value)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform1i(location, value);
 	}
-
+	/*!*************************************************************************
+	Overload function for the specific type (int)
+	****************************************************************************/
 	void Shader::SetUniform(const std::string& name, int* value, unsigned int count)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform1iv(location, count, value);
 	}
-
+	/*!*************************************************************************
+	Overload function for the specific type (float)
+	****************************************************************************/
 	void Shader::SetUniform(const std::string& name, float value)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform1f(location, value);
 	}
-
+	/*!*************************************************************************
+	Overload function for the specific type (float , float)
+	****************************************************************************/
 	void Shader::SetUniform(const std::string& name, const glm::vec2& value)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform2f(location, value.x, value.y);
 	}
-
+	/*!*************************************************************************
+	Overload function for the specific type (3 float)
+	****************************************************************************/
 	void Shader::SetUniform(const std::string& name, const glm::vec3& value)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform3f(location, value.x, value.y, value.z);
 	}
-
+	/*!*************************************************************************
+	Overload function for the specific type (4 float)
+	****************************************************************************/
 	void Shader::SetUniform(const std::string& name, const glm::vec4& value)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform4f(location, value.x, value.y, value.z, value.w);
 	}
-
+	/*!*************************************************************************
+	Overload function for the specific type matrix 3x3
+	****************************************************************************/
 	void Shader::SetUniform(const std::string& name, const glm::mat3& value)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniformMatrix3fv(location, 1, GL_FALSE, &value[0][0]);
 	}
-
+	/*!*************************************************************************
+	Overload function for the specific type matrix 4 x 4
+	****************************************************************************/
 	void Shader::SetUniform(const std::string& name, const glm::mat4& value)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());

@@ -1,3 +1,15 @@
+/*!*************************************************************************
+****
+\file			Camera2D.h
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			02-11-2022
+\brief			This file header contain the declaration for camera function
+****************************************************************************
+***/
+
 #pragma once
 #include "glm/glm.hpp" //for ortho, perspective and other matrices
 #include "Platform/Window/Window.h"
@@ -18,13 +30,16 @@ namespace EM {
 		void SetRotation(float rotation) { m_Rotation = rotation; RecalculateMatrix(); }
 
 		const glm::mat4& GetProjectionMatrix() const { return m_ProjectionMatrix; }
-		const glm::mat4& GetViewMatrix() const { return m_ViewMatrix; }
+		const glm::mat4& GetViewMatrix() const{ return m_ViewMatrix; }
 		const glm::mat4& GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
 		
 		float GetZoomLevel()const { return m_ZoomLevel; }
 		void SetZoomLevel(float level) { m_ZoomLevel = level; }
+		void resetZoomLevel();
 
 		bool MouseScrolling();
+
+		void Resize(float width, float height);
 	private:
 
 		glm::mat4 m_ProjectionMatrix ;

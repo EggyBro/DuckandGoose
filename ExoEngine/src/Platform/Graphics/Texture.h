@@ -3,9 +3,8 @@
 \file			Texture.h
 \author			Huang Xin Xiang
 \par DP email:	h.xinxiang@digipen.edu
-\par Course:	Gam200
-\section		A
-\date			28-9-2022
+\par Course:	CSD2400 / GAM200
+\date			09-28-2022
 \brief			This file contain the neccesary declaration functions for class texture.
 
 ****************************************************************************
@@ -29,6 +28,7 @@ namespace EM {
 		void SetTextureData(void* data, unsigned int size);
 
 		inline unsigned int GetWidth() const { return _width; }
+		/*void SetWidth(unsigned int width) { _width *= width; }*/
 		inline unsigned int GetHeight() const { return _height; }
 		inline unsigned int GetRendererID() const { return m_RendererID; }
 

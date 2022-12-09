@@ -1,3 +1,17 @@
+/*!*************************************************************************
+****
+\file Nametag.h
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 2/11/2022
+\brief  NameTag Component for tagging each entity with a string name
+
+****************************************************************************
+***/
+
 #pragma once
 #include "IComponent.h"
 #include "empch.h"
@@ -14,6 +28,14 @@ namespace EM
 
 		void SetNameTag(std::string name) { mName = name; }
 		std::string& GetNameTag() { return mName; }
+		/*!*************************************************************************
+		Retrieves Component Entity ID
+		****************************************************************************/
+		Entity& GetComponentEntityID() { return entityID; }
+		/*!*************************************************************************
+		Sets Components Entity ID
+		****************************************************************************/
+		void SetComponentEntityID(Entity& entity) { entityID = entity; }
 
 	private:
 		std::string mName;

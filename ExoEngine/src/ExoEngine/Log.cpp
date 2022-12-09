@@ -3,10 +3,8 @@
 \file Log.cpp
 \author Cheung Jun Yin Matthew
 \par DP email: j.cheung@digipen.edu
-\par Course: csd2400
-\par Section: a
-\par Milestone 1
-\date 28-9-2022
+\par Course: CSD2400 / GAM200 
+\date 11/2/2022
 \brief  This file holds the assert system for the project
 
 ****************************************************************************
@@ -20,6 +18,9 @@ namespace EM {
 	std::shared_ptr<spdlog::logger> Log::s_ClientLogger;
 	std::ostringstream Log::oss; // stream for imgui logger window
 
+	/*!*************************************************************************
+	Init loop for log
+	****************************************************************************/
 	void Log::Init()
 	{
 		//set pattern output in console(Date, month, time)
@@ -35,6 +36,9 @@ namespace EM {
 		s_ClientLogger->set_level(spdlog::level::trace);
 	}
 
+	/*!*************************************************************************
+	Log info to output to editor 
+	****************************************************************************/
 	std::string Log::GetImguiLog()
 	{
 		return oss.str();

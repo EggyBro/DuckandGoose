@@ -3,17 +3,15 @@
 \file			Core.h
 \author			Huang Xin Xiang
 \par DP email:	h.xinxiang@digipen.edu
-\par Course:	Gam200
-\section		A
-\date			28-9-2022
+\par Course:	CSD2400 / GAM200
+\date			9-28-2022
 \brief			This file contain the neccesary Macro that compile important 
 				system to dll
-
-
 ****************************************************************************
 ***/
 #pragma once
 #include <memory>
+
 //Engine into dll
 #ifdef EM_PLATFORM_WINDOWS
 	#ifdef EM_BUILD_DLL
@@ -27,6 +25,7 @@
 
 #define BIT(x) (x << 1)
 #define GETTEXTURE(x) ResourceManager::GetTexture(x)
+
 namespace EM {
 
 	template<typename T>

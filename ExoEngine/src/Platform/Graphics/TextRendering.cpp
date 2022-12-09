@@ -1,3 +1,14 @@
+/*!*************************************************************************
+****
+\file			TextRendering.cpp
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	CSD2400 / GAM200
+\date			02-11-2022
+\brief			This file header contain all the necessary defintion function
+                to render font
+****************************************************************************
+***/
 #include "empch.h"
 
 #include <freetype/include/ft2build.h>
@@ -6,10 +17,14 @@
 #include "ExoEngine/ResourceManager/ResourceManager.h"
 
 namespace EM {
+
+    /*!*************************************************************************
+    Init loop for render font
+    ****************************************************************************/
 	void Font::Init()
 	{
 		TextShader = ResourceManager::LoadShader("text", "Assets/Shaders/text.shader");;
-        Load("Assets/fonts/ArialItalic.ttf");
+        Load("Assets/fonts/hackdaddy.regular.otf");
         
      
 		glGenVertexArrays(1, &VAO);
@@ -22,6 +37,10 @@ namespace EM {
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 	}
+
+    /*!*************************************************************************
+    Load font
+    ****************************************************************************/
 	void Font::Load(const std::string& fontpath, unsigned int fontsize)
 	{
 
@@ -83,13 +102,15 @@ namespace EM {
         FT_Done_FreeType(ft);
 	}
 
+    /*!*************************************************************************
+    Render font
+    ****************************************************************************/
     void Font::RenderText(const std::string& text, glm::vec2 position , float scale, Camera2D& camera, glm::vec3 color)
 	{
         // activate corresponding render state	
         TextShader->Bind();
         TextShader->SetUniform("u_ViewProjection", camera.GetViewProjectionMatrix());
         TextShader->SetUniform("textColor", color);
-
         glActiveTexture(GL_TEXTURE0);
         glBindVertexArray(VAO);
 

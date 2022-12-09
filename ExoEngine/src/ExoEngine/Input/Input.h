@@ -3,12 +3,10 @@
 \file Input.h
 \author Cheung Jun Yin Matthew
 \par DP email: j.cheung@digipen.edu
-\par Course: csd2400
+\par Course: CSD2400 / GAM200
 \par Section: a
-\par Milestone 1
-\date 28-9-2022
+\date 9-28-2022
 \brief  header file for Input.cpp
-
 ****************************************************************************
 ***/
 #pragma once

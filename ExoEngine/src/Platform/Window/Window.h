@@ -7,7 +7,6 @@
 \section		A
 \date			28-9-2022
 \brief			This file contain the declaration function for window class
-
 ****************************************************************************
 ***/
 #pragma once
@@ -60,6 +59,7 @@ namespace EM {
 		WindowProps Getter() const { return m_windowData; }
 		GLFWwindow* GetWindow() const { return m_window; }
 		GLFWmonitor* GetMonitor() const { return m_monitor; }
+		
 
 	private:
 		GLFWwindow* m_window;
@@ -78,6 +78,7 @@ namespace EM {
 		static void Mousebutton_callback(GLFWwindow* window, int button, int action, int mode); // mouse input
 		static void Mousescroll_callback(GLFWwindow* window, double xoffset, double yoffset); // mouse scrolling
 		static void Mouseposition_callback(GLFWwindow* window, double xpos, double ypos); // mouse position
+		static void drop_callback(GLFWwindow* window, int count, const char** paths);
 		
 		void ToggleVsync(bool value);// vync based on internal
 

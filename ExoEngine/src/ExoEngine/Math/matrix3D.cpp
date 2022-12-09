@@ -1,3 +1,16 @@
+/*!*************************************************************************
+****
+\file			matrix3D.cpp
+\author			Lau Yong Hui
+\par DP email:	l.yonghui@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			16-09-2022
+\brief			This file contain the matrix3x3 liabry
+				and its corresponding functions for creation and computation
+
+****************************************************************************/
+#include "empch.h"
 #include "matrix3D.h"
 
 namespace EM

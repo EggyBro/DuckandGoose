@@ -1,3 +1,16 @@
+/*!*************************************************************************
+****
+\file			Vec3.cpp
+\author			Lau Yong Hui
+\par DP email:	l.yonghui@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			18-10-2022
+\brief			This file contain the Vector3 liabry
+				and its corresponding functions for creation and computation
+
+****************************************************************************/
+#include "empch.h"
 #include "Vec3.h"
 
 namespace EM
@@ -86,7 +99,7 @@ namespace EM
 		z = z_;
 	}
 
-	void Vec3::Normalize(Vec3& result, const Vec3 Vec0)
+	void Normalize(Vec3& result, const Vec3 Vec0)
 	{
 		float mag = sqrtf((Vec0.x * Vec0.x) + (Vec0.y * Vec0.y) + (Vec0.z * Vec0.z));
 		result.x = Vec0.x / mag;
@@ -95,35 +108,35 @@ namespace EM
 
 	}
 
-	float  Vec3::length(const Vec3& Vec0) ///calculate the length of the vector
+	float  length(const Vec3& Vec0) ///calculate the length of the vector
 	{
 		return (float)(sqrt(powf(Vec0.x, 2.0f) + powf(Vec0.y, 2.0f)+ powf(Vec0.z, 2.0f)));
 	}
 
-	 float Vec3::squarelength(const Vec3& Vec0)
+	 float squarelength(const Vec3& Vec0)
 	{
 		 return (float)(powf(Vec0.x, 2.0f) + powf(Vec0.y, 2.0f) + powf(Vec0.z, 2.0f));
 	}
 
-	 float Vec3::distance(const Vec3& vec_p0, const Vec3& vec_p1)
+	 float distance(const Vec3& vec_p0, const Vec3& vec_p1)
 	 {
 		 Vec3 temp = vec_p1 - vec_p0;
 		 return length(temp);
 	 }
 
-	 float Vec3::squaredistance(const Vec3& vec_p0, const Vec3& vec_p1)
+	 float squaredistance(const Vec3& vec_p0, const Vec3& vec_p1)
 	 {
 		 Vec3 temp = vec_p1 - vec_p0;//find the vector between the 2 point
 
 		 return powf(length(temp), 2.0f);//return the result after running the temp value through Length();
 	 }
 
-	  float Vec3::dotProduct(const Vec3& Vec0, const Vec3& Vec1)
+	  float dotProduct(const Vec3& Vec0, const Vec3& Vec1)
 	 {
 		 return (Vec0.x * Vec1.x + Vec0.y * Vec1.y + Vec0.z * Vec1.z);
 	 }
 
-	  Vec3 Vec3::crossproduct(const Vec3& Vec0, const Vec3& Vec1)
+	  Vec3 crossproduct(const Vec3& Vec0, const Vec3& Vec1)
 	  {
 		  Vec3 temp;
 		  temp.x = Vec0.y * Vec1.z - Vec0.z * Vec1.y;

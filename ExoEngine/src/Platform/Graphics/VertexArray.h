@@ -1,3 +1,14 @@
+/*!*************************************************************************
+****
+\file			VertexArray.h
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	CSD2400 / GAM200
+\date			02-11-2022
+\brief			This file contain VertexBuffer binding and unbind set the buffer
+				layout to tell house our buffer data will be read by our gpu
+****************************************************************************
+***/
 #pragma once
 #include "Buffer.h"
 namespace EM {

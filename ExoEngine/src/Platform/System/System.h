@@ -21,7 +21,13 @@ namespace EM {
 	class EM_API System
 	{
 	public:
+		/*!*************************************************************************
+		Container for all entities within this system
+		****************************************************************************/
 		std::set<Entity> mEntities;
+		/*!*************************************************************************
+		Returns name of System
+		****************************************************************************/
 		virtual std::string GetName() = 0;
 		virtual ~System() {};
 		//System function

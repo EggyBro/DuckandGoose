@@ -1,3 +1,17 @@
+/*!*************************************************************************
+****
+\file			matrix4x4.cpp
+\author			Lau Yong Hui
+\par DP email:	l.yonghui@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			18-10-2022
+\brief			This file contain the matrix4x4 liabry
+				and its corresponding functions for creation and computation
+
+****************************************************************************/
+#include "empch.h"
+#include"Platform/Window/Window.h"
 #include "matrix4x4.h"
 
 
@@ -237,21 +251,21 @@ namespace EM {
 
 	void RotDeg4x4(Mat4x4& Result, float angle, Vec3 Dir)
 	{
-		if (Dir.x != 0)
+		if (Dir.x >= 0.0f)
 		{
 
 			XRotDeg4x4(Result, angle);
 		}
 
 
-		if (Dir.y != 0)
+		if (Dir.y >= 0.0f)
 		{
 
 			YRotDeg4x4(Result, angle);
 		}
 
 
-		if (Dir.z != 0)
+		if (Dir.z >= 0.0f)
 		{
 
 			ZRotDeg4x4(Result, angle);

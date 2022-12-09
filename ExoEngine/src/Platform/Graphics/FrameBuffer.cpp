@@ -1,8 +1,33 @@
+/*!*************************************************************************
+****
+\file			FrameBuffer.cpp
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	CSD2400 / GAM200
+\date			11-02-2022
+\brief			This file binds the framebuffer and gets the pixel cooridnate
+				and can be used in it in level editor
+****************************************************************************
+***/
 #include "empch.h"
 #include "FrameBuffer.h"
 #include <GL/glew.h>
 namespace EM {
 
+	std::unique_ptr<FrameBuffer> FrameBuffer::_finstance{ nullptr };
+
+	std::unique_ptr<FrameBuffer>& FrameBuffer::GetInstance()
+	{
+		if (_finstance == nullptr)
+		{
+			_finstance = std::make_unique<FrameBuffer>();
+		}
+		return _finstance;
+	}
+
+	/*!*************************************************************************
+	return pixelData
+	****************************************************************************/
 	int FrameBuffer::ReadPixel(uint32_t attachmentIndex, int x, int y)
 	{
 		glReadBuffer(GL_COLOR_ATTACHMENT0 + attachmentIndex);
@@ -11,11 +36,18 @@ namespace EM {
 		return pixelData;
 	}
 	namespace Helper {
-		static GLenum TextureTarget(bool multisampled) // switch between multi-sampling and single sampling 
+
+		/*!*************************************************************************
+		Switch between multi-sampling and single sampling
+		****************************************************************************/
+		static GLenum TextureTarget(bool multisampled)  
 		{
 			return multisampled ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D;
 		}
 
+		/*!*************************************************************************
+		Check DepthFormat
+		****************************************************************************/
 		static bool IsDepthFormat(FrameBufferTextureFormat format)
 		{
 			switch (format)
@@ -26,19 +58,27 @@ namespace EM {
 			return false;
 		}
 
+		/*!*************************************************************************
+		Create texture
+		****************************************************************************/
 		static void CreateTextures(bool multisampled, uint32_t* outID, uint32_t count)
 		{
 			glCreateTextures(TextureTarget(multisampled), count, outID);
 		}
 
+		/*!*************************************************************************
+		Bind texture
+		****************************************************************************/
 		static void BindTexture(bool multisampled, uint32_t id)
 		{
 			glBindTexture(TextureTarget(multisampled), id);
 		}
 
-		// ColorAttachment 
-		// ie internalFormat - GL_RGBA8 format - GL_RGBA
-		// ie internalFormat - GL_R32I format - GL_RED_INTEGER (reading int from the shader file)
+		/*!*************************************************************************
+		ColorAttachment 
+		ie internalFormat - GL_RGBA8 format - GL_RGBA
+		ie internalFormat - GL_R32I format - GL_RED_INTEGER (reading int from the shader file)	
+		****************************************************************************/
 		static void AttachColorTexture(uint32_t id, int samples, GLenum internalFormat, GLenum format, uint32_t width, uint32_t height, size_t index)
 		{
 			bool multisampled = samples > 1;
@@ -61,8 +101,10 @@ namespace EM {
 
 		}
 
-		// DepthBufferAttachment :
-		// currently not using 
+		/*!*************************************************************************
+		DepthBufferAttachment :
+		currently not using 
+		****************************************************************************/
 		static void AttachDepthTexture(uint32_t id, int samples, GLenum format, GLenum attachmentType, uint32_t width, uint32_t height)
 		{
 			bool multisampled = samples > 1;
@@ -84,18 +126,26 @@ namespace EM {
 		}
 	}
 
-
+	/*!*************************************************************************
+	Find buffer specs
+	****************************************************************************/
 	const FrameBufferSpecification EM::FrameBuffer::GetSpecification() const
 	{
 		return m_Specification;
 	}
 
+	/*!*************************************************************************
+	Find color attachment
+	****************************************************************************/
 	uint32_t FrameBuffer::GetColorAttachmentRendererID(uint32_t index) const
 	{
 		//GM_CORE_ASSERT(index < m_ColorAttachments.size(), "");
 		return  m_ColorAttachments[index];
 	}
 
+	/*!*************************************************************************
+	Set frame specifications
+	****************************************************************************/
 	void FrameBuffer::SetFrameBufferSpecification(const FrameBufferSpecification& specification)
 	{
 		m_Specification = specification;
@@ -113,7 +163,9 @@ namespace EM {
 		Create();
 	}
 
-
+	/*!*************************************************************************
+	Resize frame specification
+	****************************************************************************/
 	void FrameBuffer::Resize(uint32_t width, uint32_t height)
 	{
 		// update the specification
@@ -122,6 +174,9 @@ namespace EM {
 		Create();
 	}
 
+	/*!*************************************************************************
+	Destructor
+	****************************************************************************/
 	FrameBuffer::~FrameBuffer()
 	{
 		// delete framebuffer object
@@ -132,7 +187,9 @@ namespace EM {
 		glDeleteRenderbuffers(1, &m_DepthAttachment);
 	}
 
-
+	/*!*************************************************************************
+	Create frame buffer
+	****************************************************************************/
 	void FrameBuffer::Create()
 	{
 		if (m_RendererID)
@@ -219,11 +276,18 @@ namespace EM {
 
 	}
 
+	/*!*************************************************************************
+	Bind frambuffer
+	****************************************************************************/
 	void FrameBuffer::Bind()
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, m_RendererID);
+		glViewport(0, 0, m_Specification.Width, m_Specification.Height);
 	}
 
+	/*!*************************************************************************
+ 	Unbind frambuffer
+	****************************************************************************/
 	void FrameBuffer::UnBind()
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);

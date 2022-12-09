@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file WinData.h
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 2/11/2022
+\brief  Window Component used to stored data regarding the window such as
+height and width of the window
+
+****************************************************************************
+***/
+
 #pragma once
 #include "IComponent.h"
 #include "empch.h"
@@ -5,7 +20,7 @@
 namespace EM
 {
 	//Window Component
-	class WinData : public IComponent
+	class WinData : public JSONSerializer
 	{
 	public:
 		WinData();

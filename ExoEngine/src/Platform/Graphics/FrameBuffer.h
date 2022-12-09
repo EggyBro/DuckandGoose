@@ -1,5 +1,17 @@
+/*!*************************************************************************
+****
+\file			FrameBuffer.h
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	CSD2400 / GAM200
+\date			11-02-2022
+\brief			This file header contain all the necessary declaration for 
+				framebuffer
+****************************************************************************
+***/
 #pragma once
 
+#define p_FrameBuffer EM::FrameBuffer::GetInstance()
 
 namespace EM {
 
@@ -28,7 +40,7 @@ namespace EM {
 
 	struct FrameBufferSpecification
 	{
-		uint32_t Width{}, Height{};
+		uint32_t Width{0}, Height{0};
 		FramebufferAttachmentSpecification Attachments;
 		uint32_t Samples = 1;
 		bool SwapChainTarget = false;
@@ -39,9 +51,10 @@ namespace EM {
 		FrameBuffer() = default;
 		~FrameBuffer();
 
-		const FrameBufferSpecification GetSpecification() const;
+		
 		uint32_t GetColorAttachmentRendererID(uint32_t index = 0) const;
 		void SetFrameBufferSpecification(const FrameBufferSpecification&);
+		const FrameBufferSpecification GetSpecification() const;
 
 		void Resize(uint32_t width, uint32_t height);
 
@@ -49,6 +62,7 @@ namespace EM {
 		void Create();
 		void Bind();
 		void UnBind();
+		static std::unique_ptr<FrameBuffer>& GetInstance();
 	private:
 		// framebuffer
 		uint32_t m_RendererID = 0;

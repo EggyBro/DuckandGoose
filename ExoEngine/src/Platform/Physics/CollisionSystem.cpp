@@ -1,156 +1,150 @@
-/*!*************************************************************************
-****
-\file			CollisionSystem.cpp
-\author			Tan Ek Hern
-\par DP email:	t.ekhern@digipen.edu
-\par Course:	Gam200
-\section		A
-\date			14-10-2022
-\brief			This file contains the necessary function definitions for
-                collision
-
-****************************************************************************
-***/
+/*!*****************************************************************************
+\file CollisionSystem.cpp
+\author Tan Ek Hern
+\par DP email: t.ekhern@digipen.edu
+\par Course: csd2125
+\par Section: a
+\par 
+\date 14-10-2022
+\brief  This file contains the function definitions for the collision system
+ 
+*******************************************************************************/
 #include "empch.h"
 #include "CollisionSystem.h"
 #include "ExoEngine/ResourceManager/ResourceManager.h"
 #include "ExoEngine/ECS/Components/Components.h"
+#include "ExoEngine/Math/Physics.h"
 
 namespace EM {
-    //extern ECS ecs;
-    void CollisionSystem::Init() {
-        //check which component has collision and add it to array
-        //assign collider to rigidbody component
-    }
+    /*!*************************************************************************
+	This function initialises the system. As there are no data members that require
+	initialization, this function is empty
+	****************************************************************************/
+    void CollisionSystem::Init() {}
+    /*!*************************************************************************
+	This function runs the logic of the system. It checks the list of entities with
+    a collision component in pairs to see which of them are colliding. If two objects
+    are colliding, collision response is dictated by the type of collider the object
+    has
+	****************************************************************************/
     void CollisionSystem::Update(float dt) {
+        (void)dt;
+        Timer::GetInstance().Start(Systems::COLLISION);
+        Timer::GetInstance().GetDT(Systems::COLLISION);
         //iterate through array of entities
         int k = 0;
         for (auto const& i : mEntities) {
-            auto& trans1 = p_ecs.GetComponent<Transform>(i);
-            vec2D ent1pos = trans1.GetPos();
-            //make j index i+1
             int l = 0;
             for (auto const& j : mEntities) {
                 if (i != j && l > k) {
-                    //auto& trans1 = p_ecs.GetComponent<Transform>(i);
-                    auto& trans2 = p_ecs.GetComponent<Transform>(j);
-                    //vec2D ent1pos = trans1.GetPos();
-                    vec2D ent2pos = trans2.GetPos();
-                    //do a distance check disqualifier
-                    //std::cout << "Distance: " << squaredistance(ent1pos, ent2pos) << "\n";
-                    if (ent2pos.x - ent1pos.x < 1 && ent2pos.x - ent1pos.x > -1 && ent2pos.y - ent1pos.y < 1 && ent2pos.y - ent1pos.y > -1) {
-                        //check entity 1 and 2 collider
-                        auto& rigid1 = p_ecs.GetComponent<RigidBody>(i);
-                        auto& rigid2 = p_ecs.GetComponent<RigidBody>(j);
-
-                        auto& col1 = p_ecs.GetComponent<Collider>(i);
-                        auto& col2 = p_ecs.GetComponent<Collider>(j);
-
-                        Collider::ColliderType e1 = col1.GetCollider();
-                        Collider::ColliderType e2 = col2.GetCollider();
-                        //apply collision based on entity 1 and 2 collider types
-                        //apply appropriate collision response
+                    auto& col1 = p_ecs.GetComponent<Collider>(i);
+                    auto& col2 = p_ecs.GetComponent<Collider>(j);
+                    auto& rigid1 = p_ecs.GetComponent<RigidBody>(i);
+                    auto& rigid2 = p_ecs.GetComponent<RigidBody>(j);
+                    Collider::ColliderType e1 = col1.GetCollider();
+                    Collider::ColliderType e2 = col2.GetCollider();
+                    col1.SetHit(0);
+                    col2.SetHit(0);
+                    vec2D offset1 = rigid1.GetNextPos() + col1.GetOffset();
+                    vec2D offset2 = rigid2.GetNextPos() + col2.GetOffset();
+                    std::cout << (int)e1 << ", " << (int)e2 << "\n";
+                    if (col1.GetAlive() && col2.GetAlive())
+                    {
                         if (e1 == Collider::ColliderType::circle) {
-                            circle_bound ent1;
-                            ent1.center = ent1pos;
-                            ent1.radius = col1.GetMax().x - ent1pos.x;
                             if (e2 == Collider::ColliderType::circle) {
-                                circle_bound ent2;
-                                ent1.center = ent2pos;
-                                ent1.radius = col2.GetMax().x - ent2pos.x;
-                                vec2D ent1colpt;
-                                vec2D ent2colpt;
-                                float coltime;
-                                if (ecm.objCollision(ent1, rigid1.GetVel(), ent2, rigid2.GetVel(), ent1colpt, ent2colpt, coltime)) {
-                                    std::cout << "hit\n";
-                                    vec2D colnorm = ent1colpt - ent2pos;
-                                    Normalize(colnorm, colnorm);
-                                    vec2D ent1newvel = rigid1.GetVel();
-                                    vec2D ent2newvel = rigid2.GetVel();
-                                    vec2D ent1nextpos = rigid1.GetNextPos();
-                                    vec2D ent2nextpos = rigid2.GetNextPos();
-                                    //ecm.circleBounce(colnorm, coltime, rigid1.GetVel(), ent1colpt, rigid2.GetVel(), ent2colpt, ent1newvel, ent1nextpos, ent2newvel, ent2nextpos);
-                                    rigid1.SetVel(ent1newvel);
-                                    rigid2.SetVel(ent2newvel);
-                                    rigid1.SetNextPos(ent1nextpos);
-                                    rigid2.SetNextPos(ent2nextpos);
+                                if (ecm.simpleCircleCircle(offset1, offset2, col1.GetRad(), col2.GetRad())) {
+                                    col1.SetHit(1);
+                                    vec2D norm1 = offset1 - offset2;
+                                    Normalize(norm1, norm1);
+                                    col1.SetNormal(norm1);
+                                    col2.SetHit(1);
+                                    vec2D norm2 = offset2 - offset1;
+                                    Normalize(norm2, norm2);
+                                    col2.SetNormal(norm2);
+                                    // std::cout << "hit\n";
                                 }
                             }
-                            else if (e2 == Collider::ColliderType::line) {
-                                wall wall2;
-                                wall2.p0 = col2.GetMin();
-                                wall2.p1 = col2.GetMax();
-                                vec2D temp = wall2.p1 - wall2.p0;
-                                wall2.normal.x = temp.y;
-                                wall2.normal.y = -temp.x;
-                                Normalize(wall2.normal, wall2.normal);
-                                vec2D colpt;
-                                vec2D colnorm;
-                                vec2D entnextpos = rigid1.GetNextPos();
-                                float coltime;
-                                if (ecm.wallCollision(ent1, entnextpos, wall2, colpt, colnorm, coltime)) {
-                                    std::cout << "hit\n";
-                                    vec2D reflectiondir;
-                                    //ecm.wallBounce(colpt, colnorm, entnextpos, reflectiondir);
-                                    rigid1.SetNextPos(entnextpos);
-                                }
-                            }
-                            else if (e2 == Collider::ColliderType::rect) {
-                                if (ecm.boundingBoxCircle(ent1, col2.GetMax(), col2.GetMin())) {
-                                    std::cout << "hit\n";
-                                    //hit detected. take damage
-                                }
-                            }
-                        }
-                        else if (e1 == Collider::ColliderType::line) {
-                            if (e2 == Collider::ColliderType::circle) {
-                                wall wall2;
-                                wall2.p0 = col1.GetMin();
-                                wall2.p1 = col1.GetMax();
-                                vec2D temp = wall2.p1 - wall2.p0;
-                                wall2.normal.x = temp.y;
-                                wall2.normal.y = -temp.x;
-                                Normalize(wall2.normal, wall2.normal);
-                                circle_bound ent1;
-                                ent1.center = ent2pos;
-                                ent1.radius = col2.GetMax().x - ent2pos.x;
-                                vec2D colpt;
-                                vec2D colnorm;
-                                vec2D entnextpos = rigid2.GetNextPos();
-                                float coltime;
-                                if (ecm.wallCollision(ent1, entnextpos, wall2, colpt, colnorm, coltime)) {
-                                    std::cout << "hit\n";
-                                    vec2D reflectiondir;
-                                    //ecm.wallBounce(colpt, colnorm, entnextpos, reflectiondir);
-                                    rigid2.SetNextPos(entnextpos);
+                            if (e2 == Collider::ColliderType::rect) {
+                                vec2D max2 = offset2 + col2.GetMax();
+                                vec2D min2 = offset2 - col2.GetMin();
+                                if (ecm.simpleCircleRect(offset1, col1.GetRad(), max2, min2, offset2)) {
+                                    std::cout << "Collision Circle-Rect\n";
+                                    col1.SetHit(1);
+                                    vec2D norm1 = offset1 - offset2;
+                                    Normalize(norm1, norm1);
+                                    col1.SetNormal(norm1);
+                                    col2.SetHit(1);
+                                    vec2D norm2 = offset2 - offset1;
+                                    Normalize(norm2, norm2);
+                                    col2.SetNormal(norm2);
+                                    // std::cout << "hit\n";
                                 }
                             }
                         }
                         else if (e1 == Collider::ColliderType::rect) {
                             if (e2 == Collider::ColliderType::circle) {
-                                circle_bound ent1;
-                                ent1.center = ent2pos;
-                                ent1.radius = col2.GetMax().x - ent2pos.x;
-                                if (ecm.boundingBoxCircle(ent1, col1.GetMax(), col1.GetMin())) {
-                                    std::cout << "hit\n";
-                                    //hit detected. take damage
+                                vec2D max1 = offset1 + col1.GetMax();
+                                vec2D min1 = offset1 - col1.GetMin();
+                                if (ecm.simpleCircleRect(offset2, col2.GetRad(), max1, min1, offset1)) {
+                                    std::cout << "Collision Rect-Circle\n";
+                                    col1.SetHit(1);
+                                    vec2D norm1 = offset1 - offset2;
+                                    Normalize(norm1, norm1);
+                                    col1.SetNormal(norm1);
+                                    col2.SetHit(1);
+                                    vec2D norm2 = offset2 - offset1;
+                                    Normalize(norm2, norm2);
+                                    col2.SetNormal(norm2);
+                                    // std::cout << "hit\n";
                                 }
                             }
-                            else if (e2 == Collider::ColliderType::rect) {
-                                if (ecm.boundingBoxCollision(col1.GetMax(), col1.GetMin(), rigid1.GetVel(), col2.GetMax(), col2.GetMin(), rigid2.GetVel(), dt)) {
-                                    std::cout << "hit\n";
-                                    //parry mechanics? 
+                            if (e2 == Collider::ColliderType::rect) {
+                                vec2D max1 = offset1 + col1.GetMax();
+                                vec2D min1 = offset1 - col1.GetMin();
+                                vec2D max2 = offset2 + col2.GetMax();
+                                vec2D min2 = offset2 - col2.GetMin();
+                                if (ecm.simpleRectRect(max1, min1, max2, min2)) {
+                                    vec2D colmax1 = offset1 + col1.GetMax() * 0.8f;
+                                    vec2D colmin1 = offset1 - col1.GetMin() * 0.8f;
+                                    vec2D colmax2 = offset2 + col2.GetMax() * 0.8f;
+                                    vec2D colmin2 = offset2 - col2.GetMin() * 0.8f;
+                                    vec2D line;
+                                    if (max1.x >= min2.x && max1.x < colmin2.x) {
+                                        line.x = -1.f;
+                                    }
+                                    else if (max2.x >= min1.x && max2.x < colmin1.x) {
+                                        line.x = 1.f;
+                                    }
+                                    else if (max1.y < colmin2.y && (max1.x > colmin2.x || min1.x < colmax2.x)) {
+                                        line.y = -1.f;
+                                    }
+                                    else if (max2.y < colmin1.y && (max2.x > colmin1.x || min2.x < colmax1.x)) {
+                                        line.y = 1.f;
+                                    }
+                                    col1.SetHit(1);
+                                    col1.SetNormal(line);
+                                    col2.SetHit(1);
+                                    col2.SetNormal(line * -1);
+                                    //std::cout << "hit\n";
                                 }
                             }
                         }
+                    }
+                    //playable area bounding box to be implemented
+                    else if (e1 == Collider::ColliderType::box) {
+
                     }
                 }
                 l++;
             }
             k++;
         }
+        Timer::GetInstance().Update(Systems::COLLISION);
     }
-    void CollisionSystem::End() {
-        //remove all entities from array
-    }
+    /*!*************************************************************************
+	This function ends the system. As there are no data members that require
+	initialization, there are no data members that need to be un-initialised. 
+	Therefore this function is empty
+	****************************************************************************/
+    void CollisionSystem::End() {}
 }

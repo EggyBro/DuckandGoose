@@ -22,8 +22,13 @@ namespace EM {
 	{
 
 	public:
-
-
+		enum class state
+		{
+			pause,
+			play,
+			quit
+		};
+		
 		Application();
 		virtual ~Application(); // will be override
 		void SystemInput(System* system);
@@ -31,7 +36,6 @@ namespace EM {
 		void End();
 
 	private:
-		//SystemManager m_Systems;
 		
 	};
 	 

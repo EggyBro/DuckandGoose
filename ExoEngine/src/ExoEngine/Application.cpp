@@ -5,9 +5,8 @@
 \par DP email:	h.xinxiang@digipen.edu
 \par Course:	Gam200
 \section		A
-\date			28-9-2022
+\date			9-28-2022
 \brief			This file contain the main game loop
-
 ****************************************************************************
 ***/
 #include "empch.h"
@@ -24,40 +23,52 @@
 #include "ECS/ECS.h"
 #include "ECS/SceneManager.h"
 #include "Audio/AudioEngine.h"
-#include "ExoEngine/Scripts/PlayerMovement.h"
+#include "ExoEngine/Scripts/PlayerController.h"
+#include "ExoEngine/Scripts/CollisionResponse.h"
 #include "Platform/Logic/LogicSystem.h"
-#include "ExoEngine//Scripts/EnemyMovement.h"
+#include "ExoEngine/Scripts/EnemyMovement.h"
+#include "ExoEngine/GUI/GUI.h"
 
 
 namespace EM {
+	bool end_state{false}; //placeholder
 
+/*!*************************************************************************
+Application constructor
+****************************************************************************/
 	Application::Application()
 	{
 		p_ecs.Init();
 		p_Scene->Init();
-		//p_Scene->DeserializeFromFile("SMTest.json");
 		FramePerSec::GetInstance().InitFrame();
 	}
 
+/*!*************************************************************************
+Application destructor
+****************************************************************************/
 	Application::~Application()
 	{
 	}
 
+/*!*************************************************************************
+System input
+****************************************************************************/
 	void Application::SystemInput(System* system)
 	{
 		(void)system;
 	}
 
+/*!*************************************************************************
+Run loop for application
+****************************************************************************/
 	void Application::Run() 
 	{
 		Timer::GetInstance().GlobalTimeStarter();
 		
 		Window* m_window = new Window;
 		m_window->Init();
-		p_Editor->Init(m_window);
 		p_Audio->Init();
-
-		
+		p_Editor->Init(m_window);
 
 		auto mGraphics = p_ecs.RegisterSystem<Graphic>();
 		{
@@ -91,92 +102,112 @@ namespace EM {
 			signature.set(p_ecs.GetComponentType<Transform>());
 			signature.set(p_ecs.GetComponentType<RigidBody>());
 			signature.set(p_ecs.GetComponentType<Collider>());
+			signature.set(p_ecs.GetComponentType<RigidBody>());
 			p_ecs.SetSystemSignature<CollisionSystem>(signature);
 		}
 		mCollision->Init();
+
+		//FOR DEBUGGING ECS 
+		//Scene Manager Requires some tweaking to entity serialization and deserialization
+		//RigidBody rb;
+		//Logic logic;
+		//Sprite sprite;
+		//NameTag name;
+		//Tag tag;
+
+		//Entity Background = p_ecs.CreateEntity();
+		//name.SetNameTag("BackGround");
+		//p_ecs.AddComponent<NameTag>(Background, name);
+		//p_ecs.AddComponent<Transform>(Background, TransformComponent);
+		//p_ecs.AddComponent<Sprite>(Background, SpriteComponent);
+		//p_ecs.AddComponent<RigidBody>(Background, rb);
+		//p_ecs.AddComponent<Collider>(Background, ColliderComponent);
+		//p_ecs.AddComponent<Tag>(Background, TagComponent);
+		//p_ecs.AddComponent<Logic>(Background, LogicComponent);
+
+		//Entity player = p_ecs.CreateEntity();
+		//name.SetNameTag("Player");
+		//sprite.SetTexture("Idle");
+		//p_ecs.AddComponent<Transform>(player, TransformComponent);
+		//p_ecs.AddComponent<RigidBody>(player, rb);
+		//p_ecs.AddComponent<Sprite>(player, sprite);
+		//p_ecs.AddComponent<NameTag>(player, name);
+		//p_ecs.AddComponent<Collider>(player, ColliderComponent);
+		//tag.SetTag("Player");
+		//p_ecs.AddComponent<Tag>(player, tag);
+		//p_ecs.AddComponent<Logic>(player, logic);	//Add Component
+		//p_ecs.GetComponent<Logic>(player).InsertScript(new PlayerController(), player);
+		//p_ecs.GetComponent<Logic>(player).InsertScript(new CollisionResponse(), player);
+
+
+		//Entity enemy = p_ecs.CreateEntity();
+		//Logic logic2;
+		//p_ecs.AddComponent<Transform>(enemy, TransformComponent);
+		//p_ecs.AddComponent<RigidBody>(enemy, rb);
+		//p_ecs.AddComponent<Sprite>(enemy, sprite);
+		//p_ecs.AddComponent<Collider>(enemy, ColliderComponent);
+		//p_ecs.AddComponent<Tag>(enemy, TagComponent);
+		//p_ecs.AddComponent<NameTag>(enemy, NameTagComponent);
+		//p_ecs.GetComponent<NameTag>(enemy).SetNameTag("Enemy");
+		//p_ecs.AddComponent<Logic>(enemy, logic2);
+		//p_ecs.GetComponent<Logic>(enemy).InsertScript(new EnemyMovement(), enemy);
+		//p_ecs.GetComponent<Logic>(enemy).InsertScript(new CollisionResponse(), enemy);
+
+		//Entity col = p_ecs.CreateEntity();
+		//p_ecs.AddComponent<Tag>(col, TagComponent);
+		//p_ecs.GetComponent<Tag>(col).SetTag("PlayerAttack");
+		//p_ecs.GetComponent<Tag>(col).SetTargetTag("Enemy");
+		//p_ecs.AddComponent<Sprite>(col, SpriteComponent);
+		//p_ecs.AddComponent<Transform>(col, TransformComponent);
+		//p_ecs.GetComponent<Transform>(col).SetComponentEntityID(player);
+		//p_ecs.GetComponent<Transform>(col).GetComponentEntityID();
+		//p_ecs.AddComponent<RigidBody>(col, rb);
+		//p_ecs.AddComponent<NameTag>(col, name);
+		//p_ecs.GetComponent<NameTag>(col).SetNameTag("PlayerAttackCollider");
+		//p_ecs.AddComponent<Collider>(col, ColliderComponent);
+		//p_ecs.AddComponent<Logic>(col, LogicComponent);
 		
-		//SM.DeserializeFromFile("SMTest.json");
-
-		/*while(p_ecs.GetTotalEntities() != MAX_ENTITIES - 1)
-		{
-			Entity player = p_ecs.CreateEntity();
-			NameTag name;
-			
-			name.SetNameTag("Player");
-			if (player % 2)
-			{
-				p_ecs.AddComponent<Transform>(player, TransformComponent);
-				p_ecs.AddComponent<NameTag>(player, NameTagComponent);
-				p_ecs.AddComponent<Collider>(player, ColliderComponent);
-				p_ecs.AddComponent<Sprite>(player, SpriteComponent);
-			}
-			else
-			{
-				name.SetNameTag("Enemy");
-				//transform.DeserializeFromFile("WallTransform.json");
-				p_ecs.AddComponent<Transform>(player, TransformComponent);
-				p_ecs.AddComponent<Sprite>(player, SpriteComponent);
-				p_ecs.AddComponent<NameTag>(player, name);
-			}
-			p_ecs.AddComponent<RigidBody>(player, RigidBodyComponent);
-		}
-		*/
-
-		Entity player = p_ecs.CreateEntity();
-		RigidBody rb;
-		Logic logic;
-		Sprite sprite;
-		NameTag name;
-		Player playerID;
-		name.SetNameTag("Player");
-		sprite.SetTexture("Idle");
-		IScript* base = new PlayerMovement();
-		logic.InsertScript("PlayerMovement", base, player);
-		p_ecs.AddComponent<Transform>(player, TransformComponent);
-		p_ecs.AddComponent<RigidBody>(player, rb);
-		p_ecs.AddComponent<Sprite>(player, sprite);
-		p_ecs.AddComponent<NameTag>(player, name);
-		p_ecs.AddComponent<Collider>(player, ColliderComponent);
-		Entity enemy = p_ecs.CloneEntity(player);
-		p_ecs.GetComponent<NameTag>(enemy).SetNameTag("Enemy");
-		p_ecs.AddComponent<Player>(player, playerID);
-		p_ecs.AddComponent<Logic>(player, logic);	//Add Component
-
-		Logic logic2;
-		IScript* enemyLogic = new EnemyMovement();
-		logic2.InsertScript("EnemyMovement", enemyLogic, enemy);
-		p_ecs.AddComponent<Logic>(enemy, logic2);
-		
-		while (!glfwWindowShouldClose(m_window->GetWindow())) //game loop
+		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{
 			FramePerSec::GetInstance().StartFrameCount();
 			Timer::GetInstance().Start(Systems::API);
 			Timer::GetInstance().GetDT(Systems::API);
-		
-			p_Audio->Update();
-			p_Editor->Update();
-			p_Editor->Draw();
-		
+
+			if (p_GUI->check_pause() == false)
+			{
+				p_Audio->Update();
+				p_Editor->Update();
+				if (p_Editor->show_window)
+				{
+					p_Editor->Draw();
+				}
+				mLogic->Update(Timer::GetInstance().GetGlobalDT());
+				mPosUpdate->Update();
+				mCollision->Update(Timer::GetInstance().GetGlobalDT());
+			}
+			end_state = p_GUI->Update(m_window);
+
+			p_Input->ResetPressedKey();//to fix the buggy error from glfwpollevent
+
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
-			mLogic->Update(Timer::GetInstance().GetGlobalDT());
-			mPosUpdate->Update();
-			mCollision->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
 		
 			
 			FramePerSec::GetInstance().EndFrameCount();
 			Timer::GetInstance().Update(Systems::API);
+			
 		}
-		
+		mLogic->End();
 		End();
 	}
 
-
+/*!*************************************************************************
+End loop for application
+****************************************************************************/
 	void Application::End()
 	{
-		p_Scene->SerializeToFile("SMTest.json");
+		//p_Scene->SerializeToFile("Assets/Scene/Level.json");
 		p_Editor->End();
 		p_Audio->Release();
 	}
-
 }

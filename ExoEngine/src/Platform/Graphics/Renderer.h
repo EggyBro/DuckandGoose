@@ -1,10 +1,21 @@
+/*!*************************************************************************
+****
+\file			Renderer.h
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	CSD2400 / GAM200
+\date			11-2-2022
+\brief			This file contain the declaration for Render class which
+				has all the necessary draw call for our game.		
+****************************************************************************
+***/
 #pragma once
-
 #include <glm/glm.hpp>
 #include "VertexArray.h"
 #include "ExoEngine/ResourceManager/ResourceManager.h"
 #include "SpriteRendering.h"
 #include "Camera2D.h"
+
 namespace EM {
 
 	class Renderer
@@ -47,7 +58,7 @@ namespace EM {
 
 		void DrawLine(const glm::vec3& position0, const glm::vec3& position1, const glm::vec4& color);
 		void DrawRect(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color);
-		void DrawCircle(const glm::mat4& transform, const glm::vec4& color, float depth = 1.0f, float decline = 0.01f);
+		void DrawCircle(const glm::mat4& transform, const glm::vec4& color, float depth = 0.01f, float decline = 0.01f);
 
 
 		//Information for renderer

@@ -16,19 +16,19 @@
 
 namespace EM
 {
-	//Alias for ID
+	// Alias for ID
 	typedef std::uint32_t IDType;
 
-	//Entity is simply an ID
+	// Entity is simply an ID
 	typedef IDType Entity;
 
-	//Used to define the size of arrays, may use vector
-	const Entity MAX_ENTITIES = 10; //Limit 799
+	// Used to define the size of arrays, may use vector
+	const Entity MAX_ENTITIES = 100; //Limit 800
 
-	//UniqueID used to identify Components
+	// UniqueID used to identify Components
 	typedef IDType ComponentType;
 
-	//Used to define the size of component array
+	// Used to define the size of component array
 	const ComponentType MAX_COMPONENTS = 32;
 
 	// 32 bit signature containing which component an entity has

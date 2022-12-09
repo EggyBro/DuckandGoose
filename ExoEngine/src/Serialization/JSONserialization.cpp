@@ -12,11 +12,14 @@ class which allows child classes of this class to define the data type they
 serialize and deserialize using virtual functions.
 ****************************************************************************
 ***/
-
+#include "empch.h"
 #include "JSONserialization.h"
 
 namespace EM
 {
+	/*!*************************************************************************
+	Json Serializer for calling Derived class Serialize function
+	****************************************************************************/
 	std::string JSONSerializer::Serialize() const
 	{
 		rapidjson::StringBuffer ss;
@@ -28,6 +31,9 @@ namespace EM
 		return "";
 	}
 
+	/*!*************************************************************************
+	Json Deserializer for calling Derived class Deserialize function
+	****************************************************************************/
 	bool JSONSerializer::Deserialize(const std::string& stringbuffer)
 	{
 		rapidjson::Document doc;
@@ -43,6 +49,9 @@ namespace EM
 		return true;
 	}
 
+	/*!*************************************************************************
+	Funtion for Deserializing to JSON file
+	****************************************************************************/
 	bool JSONSerializer::DeserializeFromFile(const std::string& filePath)
 	{
 		std::ifstream ifs(filePath, std::ios::in);
@@ -53,6 +62,9 @@ namespace EM
 		return Deserialize(buffer.str());
 	}
 
+	/*!*************************************************************************
+	Funtion for Serializing to JSON file
+	****************************************************************************/
 	bool JSONSerializer::SerializeToFile(const std::string& filePath)
 	{
 		std::ofstream ofs(filePath);
@@ -64,6 +76,9 @@ namespace EM
 		return true;
 	}
 
+	/*!*************************************************************************
+	Checks if Document can be Read
+	****************************************************************************/
 	bool JSONSerializer::InitDocument(const std::string& stringbuffer, rapidjson::Document& doc)
 	{
 		if (stringbuffer.empty())

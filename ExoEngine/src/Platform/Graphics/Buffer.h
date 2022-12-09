@@ -1,3 +1,15 @@
+/*!*************************************************************************
+****
+\file			Buffer.h
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	CSD2400 / GAM200
+\date			02-11-2022
+\brief			This file contain all the helper function needed for buffer
+				optimatization so that it will be easier to handle the buffer
+				data
+****************************************************************************
+***/
 #pragma once
 #include <GL/glew.h>
 //#include "VertexBuffer.h"
@@ -7,7 +19,7 @@ namespace EM {
 	{
 		None = 0, Float, Float2, Float3, Float4, Int, Int2, Int3, Int4, Mat3, Mat4, Bool
 	};
-
+	
 	static unsigned int ShaderDataTypeSize(ShaderDataType type)
 	{
 		switch (type)

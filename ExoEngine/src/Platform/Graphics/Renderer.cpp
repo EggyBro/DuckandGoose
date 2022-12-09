@@ -1,3 +1,15 @@
+/*!*************************************************************************
+****
+\file			Renderer.cpp
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	CSD2400 / GAM200
+\date			02-11-2022
+\brief			This file contain all the require draw call function defintion
+				for our graphic. There batch rendering doing in here too.
+				To maintain as less draw call as possible
+****************************************************************************
+***/
 #include "empch.h"
 #include "Renderer.h"
 
@@ -92,16 +104,25 @@ namespace EM {
 
 	}static r_Data;
 
+	/*!*************************************************************************
+	Set Clear Color
+	****************************************************************************/
 	void Renderer::SetClearColor(const glm::vec4& color)
 	{
 		glClearColor(color.r, color.g, color.b, color.a);
 	}
 
+	/*!*************************************************************************
+	Clear buffer
+	****************************************************************************/
 	void Renderer::Clear()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
+	/*!*************************************************************************
+	Init loop of Renderer
+	****************************************************************************/
 	void Renderer::Init()
 	{
 		glEnable(GL_BLEND);
@@ -221,6 +242,10 @@ namespace EM {
 		r_Data.CircleVertexBufferBase = new CircleVertex[r_Data.MaxVertices];
 		r_Data.CircleShader = ResourceManager::GetShader("CircleShader");
 	}
+
+	/*!*************************************************************************
+	Start rendering
+	****************************************************************************/
 	void Renderer::Begin(Camera2D& camera)
 	{
 		s_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
@@ -228,11 +253,18 @@ namespace EM {
 		StartBatch();
 	
 	}
+
+	/*!*************************************************************************
+	End loop of Renderer
+	****************************************************************************/
 	void Renderer::End()
 	{
 		Flush();
 	}
 
+	/*!*************************************************************************
+	Start batch rendering
+	****************************************************************************/
 	void Renderer::StartBatch()
 	{
 		//quad
@@ -253,6 +285,10 @@ namespace EM {
 		r_Data.CircleVertexBufferPtr = r_Data.CircleVertexBufferBase;
 		
 	}
+
+	/*!*************************************************************************
+	Flush is like pushing all the set buffer data into the GPU
+	****************************************************************************/
 	void Renderer::Flush()
 	{
 		//Quads
@@ -307,35 +343,51 @@ namespace EM {
 			r_Data.Infos.n_DrawCalls++;
 		}
 	}
+
+	/*!*************************************************************************
+	When the set max amount of buffer exceed the max limit, next batch will be called
+	****************************************************************************/
 	void Renderer::NextBatch()
 	{
 		Flush();
 		StartBatch();
 	}
+
+	/*!*************************************************************************
+	Release the buffer set in the gpu
+	****************************************************************************/
 	void Renderer::ShutDown()
 	{
 		delete[] r_Data.QuadVertexBufferBase;
 		delete[] r_Data.BoxVertexBufferBase;
 	}
-
+	/*!*************************************************************************
+	Set and bind the vertexarray to tell the gpu how to draw the  quad obj
+	****************************************************************************/
 	void Renderer::DrawIndexed(const MultiRefs<VertexArray>& vertexarray, unsigned int IndexCount)
 	{
 		vertexarray->Bind();
 		unsigned int count = IndexCount ? IndexCount : vertexarray->GetIndexBuffer()->GetCount();
 		glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
 	}
-
+	/*!*************************************************************************
+	Set and bind the vertexarray to tell the gpu how to draw the line obj
+	****************************************************************************/
 	void Renderer::DrawForLine(const MultiRefs<VertexArray>& vertexarray, unsigned int vertexCount)
 	{
 		vertexarray->Bind();
 		glDrawArrays(GL_LINES, 0, vertexCount);
 	}
-
+	/*!*************************************************************************
+	Overload function for Draw Quad using vec2 position with no texture just shader
+	****************************************************************************/
 	void Renderer::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color)
 	{
 		DrawQuad({ position.x, position.y, 0.0f }, size, color);
 	}
-
+	/*!*************************************************************************
+	Overload function for Draw Quad using vec3 position with no texture just shader
+	****************************************************************************/
 	void Renderer::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
@@ -343,7 +395,9 @@ namespace EM {
 
 		DrawQuad(transform, color);
 	}
-
+	/*!*************************************************************************
+	Overload function for Draw Quad using transform with no texture just shader
+	****************************************************************************/
 	void Renderer::DrawQuad(const glm::mat4& transform, const glm::vec4& color)
 	{
 		constexpr size_t BoxCount = 4;
@@ -361,12 +415,17 @@ namespace EM {
 
 		r_Data.Infos.n_Quad++;
 	}
-
+	/*!*************************************************************************
+	Overload function for Draw Quad using vec2 position with texture
+	****************************************************************************/
 	void Renderer:: DrawQuad(const glm::vec2& position, const glm::vec2& size, const MultiRefs<Texture>& texture)
 	{
 		DrawQuad({ position.x, position.y, 0.0f }, size, texture);
 	}
 	
+	/*!*************************************************************************
+Overload function for Draw Quad using vec3 position with texture
+****************************************************************************/
 	void Renderer::DrawQuad(const glm::vec3& position, const glm::vec2& size, const MultiRefs<Texture>& texture)
 	{
 
@@ -376,6 +435,9 @@ namespace EM {
 		DrawQuad(transform, texture);
 	}
 
+	/*!*************************************************************************
+	Overload function for Draw Quad using transform with texture
+	****************************************************************************/
 	void Renderer::DrawQuad(const glm::mat4& transform, const MultiRefs<Texture>& texture)
 	{
 
@@ -412,12 +474,17 @@ namespace EM {
 
 		r_Data.Infos.n_Quad++;
 	}
-
+	/*!*************************************************************************
+	Overload function for Draw Quad using vec2 position with no texture just shader and rotation 
+	****************************************************************************/
 	void Renderer::DrawQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const glm::vec4& color)
 	{
 		DrawQuad({ position.x, position.y, 0.0f }, size, rotation, color);
 	}
 
+	/*!*************************************************************************
+	Overload function for Draw Quad using vec3 position with no texture just shader and rotation
+	****************************************************************************/
 	void Renderer::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color)
 	{
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
@@ -427,11 +494,17 @@ namespace EM {
 		DrawQuad(transform, color);
 	}
 
+	/*!*************************************************************************
+	Overload function for Draw Quad using vec2 position with rotation and texture
+	****************************************************************************/
 	void Renderer::DrawQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const MultiRefs<Texture>& texture)
 	{
 		DrawQuad({ position.x, position.y, 0.0f }, size, rotation, texture);
 	}
 
+	/*!*************************************************************************
+	Overload function for Draw Quad using vec3 position with rotation and texture
+	****************************************************************************/
 	void Renderer::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const MultiRefs<Texture>& texture)
 	{
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
@@ -440,12 +513,17 @@ namespace EM {
 
 		DrawQuad(transform, texture);
 	}
-
+	/*!*************************************************************************
+	Overload function for Draw Quad using vec2 position with rotation and spritesheet
+	****************************************************************************/
 	void Renderer::DrawSprite(const glm::vec2& position, const glm::vec2& size, const float& rotation, const MultiRefs<SpriteRender>& sprite)
 	{
 		DrawSprite({ position.x, position.y, 0.0f }, size, rotation, sprite);
 	}
 
+	/*!*************************************************************************
+	Overload function for Draw Quad using vec3 position with rotation and spritesheet
+	****************************************************************************/
 	void Renderer::DrawSprite(const glm::vec3& position, const glm::vec2& size, const float& rotation, const MultiRefs<SpriteRender>& sprite)
 	{
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
@@ -454,7 +532,9 @@ namespace EM {
 
 		DrawSprite(transform, sprite);
 	}
-
+	/*!*************************************************************************
+	Overload function for Draw Quad using mat4 transform with rotation and spritesheet
+	****************************************************************************/
 	void Renderer::DrawSprite(const glm::mat4& transform, const MultiRefs<SpriteRender>& sprite)
 	{
 		float textureIndex = 0.0f;
@@ -490,7 +570,9 @@ namespace EM {
 		r_Data.QuadIndexCount += 6;
 		r_Data.Infos.n_Quad++;
 	}
-
+	/*!*************************************************************************
+	This function draw line using shaders
+	****************************************************************************/
 	void Renderer::DrawLine(const glm::vec3& position0, const glm::vec3& position1, const glm::vec4& color)
 	{
 		r_Data.LineVertexBufferPtr->Position = position0;
@@ -503,7 +585,9 @@ namespace EM {
 
 		r_Data.LineVertexCount += 2;
 	}
-
+	/*!*************************************************************************
+	This function draw rect using draw line 4 times
+	****************************************************************************/
 	void Renderer::DrawRect(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
 		glm::vec3 p0 = glm::vec3(position.x - size.x * 0.5f, position.y - size.y * 0.5f, position.z);
@@ -516,7 +600,9 @@ namespace EM {
 		DrawLine(p2, p3, color);
 		DrawLine(p3, p0, color);
 	}
-
+	/*!*************************************************************************
+	This function draw circle using shader
+	****************************************************************************/
 	void Renderer::DrawCircle(const glm::mat4& transform, const glm::vec4& color, float depth, float decline)
 	{
 		for (size_t i = 0; i < 4; i++)
@@ -533,12 +619,16 @@ namespace EM {
 
 		r_Data.Infos.n_Quad++;
 	}
-
+	/*!*************************************************************************
+	Reset the drawing information such as draw call, index used , buffer used.
+	****************************************************************************/
 	void Renderer::ResetInfo()
 	{
 		memset(&r_Data.Infos, 0, sizeof(Information));
 	}
-
+	/*!*************************************************************************
+	Get the drawing information such as draw call, index used , buffer used.
+	****************************************************************************/
 	Renderer::Information Renderer::GetInfo()
 	{
 		return r_Data.Infos;

@@ -9,7 +9,7 @@
 \date 28/09/2022
 \brief  This file contains all the Various Components to be used in the ECS
 in the future. Currently, Every Component is still handling its own data
-by inheriting from an abstract class of the JSONSerializer to serialize and
+by inheriting from an abstract class of IComponent to serialize and
 deserialize its data
 
 ****************************************************************************
@@ -22,12 +22,16 @@ deserialize its data
 #include "NameTag.h"
 #include "Sprite.h"
 #include "Logic.h"
-#include "Player.h"
+#include "Tag.h"
+#include "Audio.h"
 
+
+//Macros for creating default values of various components
 #define TransformComponent EM::Transform::Transform()
 #define RigidBodyComponent EM::RigidBody::RigidBody()
 #define ColliderComponent EM::Collider::Collider()
 #define NameTagComponent EM::NameTag::NameTag()
 #define SpriteComponent EM::Sprite::Sprite()
 #define LogicComponent EM::Logic::Logic()
-#define PlayerComponent EM::Player::Player()
+#define TagComponent EM::Tag::Tag()
+#define AudioComponent EM::Audio::Audio()
