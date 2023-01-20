@@ -7,6 +7,9 @@
 \date			02-11-2022
 \brief			This file contain VertexBuffer binding and unbind set the buffer
 				layout to tell house our buffer data will be read by our gpu
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"
@@ -20,7 +23,7 @@ namespace EM {
 	****************************************************************************/
 	VertexArray::VertexArray()
 	{
-		glCreateVertexArrays(1, &m_RenderID);
+		glCreateVertexArrays(1, &mRenderID);
 	}
 
 	/*!*************************************************************************
@@ -28,7 +31,7 @@ namespace EM {
 	****************************************************************************/
 	VertexArray::~VertexArray()
 	{
-		glDeleteVertexArrays(0, &m_RenderID);
+		glDeleteVertexArrays(0, &mRenderID);
 	}
 
 	/*!*************************************************************************
@@ -36,7 +39,7 @@ namespace EM {
 	****************************************************************************/
 	void VertexArray::Bind() const
 	{
-		glBindVertexArray(m_RenderID);
+		glBindVertexArray(mRenderID);
 	}
 
 	/*!*************************************************************************
@@ -52,20 +55,20 @@ namespace EM {
 	****************************************************************************/
 	void VertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexbuffer)
 	{
-		glBindVertexArray(m_RenderID);
+		glBindVertexArray(mRenderID);
 		vertexbuffer->Bind();
 
 		const auto& layout = vertexbuffer->GetLayout();
 		for (const auto& element : layout)
 		{
-			glEnableVertexAttribArray(m_VBIndex);
-			glVertexAttribPointer(m_VBIndex, element.GetComponentCount(),
+			glEnableVertexAttribArray(mVBIndex);
+			glVertexAttribPointer(mVBIndex, element.GetComponentCount(),
 				GL_FLOAT, element.Normalized, layout.GetStride(), (const void*) element.Offset);
 
-			m_VBIndex++;
+			mVBIndex++;
 		}
 
-		m_VertexBuffers.push_back(vertexbuffer);
+		mVertexBuffers.push_back(vertexbuffer);
 	}
 
 	/*!*************************************************************************
@@ -73,9 +76,9 @@ namespace EM {
 	****************************************************************************/
 	void VertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)
 	{
-		glBindVertexArray(m_RenderID);
+		glBindVertexArray(mRenderID);
 		indexBuffer->Bind();
 
-		m_IndexBuffers = indexBuffer;
+		mIndexBuffers = indexBuffer;
 	}
 }

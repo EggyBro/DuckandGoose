@@ -10,6 +10,8 @@
 \brief  RigidBody Component to describe material of object and the forces
 acting on said object.
 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 
@@ -37,14 +39,14 @@ namespace EM
 		vec2D& GetAccel() { return mAccel; }
 		vec2D& GetVel() { return mVelocity; }
 		vec2D& GetDir() { return mDirection; }
-		vec2D& GetNextPos() { return NextPos; }
+		vec2D& GetNextPos() { return mNextPos; }
 		float& GetFriction() { return mFriction; }
 		float& GetRestitution() { return mRestitution; }
 
 		void SetAccel(vec2D vel) { mAccel = vel; }
 		void SetVel(vec2D vel) { mVelocity = vel; }
 		void SetDir(vec2D dir) { mDirection = dir; }
-		void SetNextPos(vec2D vec) { NextPos = vec; }
+		void SetNextPos(vec2D vec) { mNextPos = vec; }
 		void SetVel(float velX, float velY) { mVelocity = vec2D(velX, velY); }
 		void SetDir(float dirX, float dirY) { mDirection = vec2D(dirX, dirY); }
 		void SetFriction(float value) { mFriction = value; }
@@ -63,7 +65,7 @@ namespace EM
 		vec2D mAccel;
 		vec2D mVelocity;
 		vec2D mDirection;
-		vec2D NextPos;
+		vec2D mNextPos;
 		float mFriction;
 		float mRestitution;
 	};

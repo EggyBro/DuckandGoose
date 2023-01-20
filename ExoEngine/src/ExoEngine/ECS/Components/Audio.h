@@ -8,6 +8,9 @@
 \par Milestone 2
 \date 28-10-2022
 \brief Header file for Audio.cpp
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #pragma once
@@ -31,15 +34,15 @@ namespace EM
 		virtual bool Deserialize(const rapidjson::Value& obj);
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
 		
-		void SetAudioPath(std::string input) { mAudiopath = input; }
-		void SetChannelGroup(AudioType input) { channelgroup = input; }
-		void SetLooping(bool isplayed) { is_looping = isplayed; }
-		void SetVolume(float vol) { volume = vol; }
+		void SetAudioPath(std::string input) { mAudioPath = input; }
+		void SetChannelGroup(AudioType input) { mChannelGroup = input; }
+		void SetLooping(bool isplayed) { is_Looping = isplayed; }
+		void SetVolume(float vol) {mVolume = vol; }
 
-		std::string GetAudioPath() { return mAudiopath; }
-		AudioType GetChannelGroup() { return channelgroup; }
-		bool GetLooping() { return is_looping; }
-		float GetVolume() { return volume; }
+		std::string GetAudioPath() { return mAudioPath; }
+		AudioType GetChannelGroup() { return mChannelGroup; }
+		bool GetLooping() { return is_Looping; }
+		float GetVolume() { return mVolume; }
 
 		/*!*************************************************************************
 		Retrieves Component Entity ID
@@ -56,10 +59,10 @@ namespace EM
 		
 
 	private:
-		std::string mAudiopath; 
-		AudioType channelgroup;
-		bool is_looping;
-		float volume;
+		std::string mAudioPath{};
+		AudioType mChannelGroup{};
+		bool is_Looping{};
+		float mVolume{};
 
 	};
 }

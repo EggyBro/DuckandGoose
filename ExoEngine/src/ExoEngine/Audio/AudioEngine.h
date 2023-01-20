@@ -8,6 +8,9 @@
 \par Milestone 2
 \date 10-10-2022
 \brief  Header file for AudioEngine.cpp  
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #pragma once
@@ -26,19 +29,19 @@ class CAudioEngine //Handles loading, unloading, playing, stopping and changing 
 
         FMOD::System* mpSystem;
 
-        int mnNextChannelId = 0;
+        int mNextChannelId = 0;
 
-        std::map<std::string, FMOD::Sound*> SoundMap;
+        std::map<std::string, FMOD::Sound*> mSoundMap;
         
 
         FMOD::ChannelGroup *BGM, *SFX, *Master;
         //FMOD::Channel*;
-        FMOD::Sound* sound;
+        FMOD::Sound* Msound;
 
         //SoundMap mSounds;
         //ChannelMap mChannels;
     public:
-        std::map<int, FMOD::Channel*> ChannelMap;
+        std::map<int, FMOD::Channel*> mChannelMap;
 
         enum class channel_groups { master, bgm, sfx };
         static std::unique_ptr<CAudioEngine>& GetInstance();
@@ -62,7 +65,7 @@ class CAudioEngine //Handles loading, unloading, playing, stopping and changing 
         bool IsPlaying(int nChannelId) const;
         float dbToVolume(float db);
         float VolumeTodB(float volume);
-        int GetPlayingChannels() { return (int)ChannelMap.size(); }
+        int GetPlayingChannels() { return (int)mChannelMap.size(); }
 
 };
 

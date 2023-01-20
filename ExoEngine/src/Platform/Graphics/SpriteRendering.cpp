@@ -6,6 +6,9 @@
 \par Course:	CSD2400 / GAM200
 \date			11-02-2022
 \brief			This file do rendering for sprite
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"
@@ -17,12 +20,12 @@ namespace EM {
 	Render sprite using glm
 	****************************************************************************/
 	SpriteRender::SpriteRender(const MultiRefs<Texture>& texture, const glm::vec2& min, const glm::vec2& max)
-		:m_Texture(texture)
+		:mTexture(texture)
 	{
-		m_TexCoords[0] = { min.x, min.y }; //bottom left
-		m_TexCoords[1] = { max.x, min.y }; //bottom right
-		m_TexCoords[2] = { max.x, max.y }; //top right
-		m_TexCoords[3] = { min.x, max.y }; //top left
+		mTexCoords[0] = { min.x, min.y }; //bottom left
+		mTexCoords[1] = { max.x, min.y }; //bottom right
+		mTexCoords[2] = { max.x, max.y }; //top right
+		mTexCoords[3] = { min.x, max.y }; //top left
 	}
 
 	/*!*************************************************************************

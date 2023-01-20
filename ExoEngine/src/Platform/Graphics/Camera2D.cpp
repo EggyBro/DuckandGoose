@@ -7,6 +7,9 @@
 \date			02-11-2022
 \brief			This file calculate the projection view matrix and aspect ratio
 				and set our world coordinates to view coordinates
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"
@@ -20,12 +23,12 @@ namespace EM {
 	Constructor for Camera2D
 	****************************************************************************/
 	Camera2D::Camera2D(float left, float right, float bottom, float top)//left, right, bottom and top
-		: m_ProjectionMatrix(glm::ortho(left, right, bottom, top, -1.0f, 1.0f)), m_ViewMatrix(1.0f),
-		m_Position{ 0.0f, 0.0f, 0.0f }
+		: mProjectionMatrix(glm::ortho(left, right, bottom, top, -1.0f, 1.0f)), mViewMatrix(1.0f),
+		mPosition{ 0.0f, 0.0f, 0.0f }
 	{ 
-		m_viewportWidth = m_window.Getter().m_Width;
-		m_viewportHeight = m_window.Getter().m_Height;
-		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
+		mViewportWidth = mWindow.Getter().m_Width;
+		mViewportHeight = mWindow.Getter().m_Height;
+		mViewProjectionMatrix = mProjectionMatrix * mViewMatrix;
 	}
 
 	/*!*************************************************************************
@@ -33,8 +36,8 @@ namespace EM {
 	****************************************************************************/
 	void Camera2D::SetProjection(float left, float right, float bottom, float top)
 	{
-		m_ProjectionMatrix = glm::ortho(left, right, bottom, top, -1.0f, 1.0f);
-		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
+		mProjectionMatrix = glm::ortho(left, right, bottom, top, -1.0f, 1.0f);
+		mViewProjectionMatrix = mProjectionMatrix * mViewMatrix;
 	}
 
 	/*!*************************************************************************
@@ -43,19 +46,19 @@ namespace EM {
 	bool Camera2D::MouseScrolling()
 	{
 		
-		if (p_Input->MouseScrollStatus < 0 )
+		if (p_Input->mMouseScrollStatus < 0 )
 		{
-			m_ZoomLevel -= 10.0f * Timer::GetInstance().GetGlobalDT();
+			mZoomLevel -= 10.0f * Timer::GetInstance().GetGlobalDT();
 		}
-		else if (p_Input->MouseScrollStatus > 0)
+		else if (p_Input->mMouseScrollStatus > 0)
 		{
-			m_ZoomLevel += 10.0f * Timer::GetInstance().GetGlobalDT();;
+			mZoomLevel += 10.0f * Timer::GetInstance().GetGlobalDT();;
 		}
-		m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
-		m_ZoomLevel = std::min(m_ZoomLevel, 5.00f);
-		p_Input->MouseScrollStatus = 0.0f;
+		mZoomLevel = std::max(mZoomLevel, 0.25f);
+		mZoomLevel = std::min(mZoomLevel, 5.00f);
+		p_Input->mMouseScrollStatus = 0.0f;
 
-		SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+		SetProjection(-mAspectRatio * mZoomLevel, mAspectRatio * mZoomLevel, -mZoomLevel, mZoomLevel);
 		RecalculateMatrix();
 		return false;
 	}
@@ -65,8 +68,8 @@ namespace EM {
 	****************************************************************************/
 	void Camera2D::Resize(float width, float height)
 	{
-		m_AspectRatio = width / height;
-		SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+		mAspectRatio = width / height;
+		SetProjection(-mAspectRatio * mZoomLevel, mAspectRatio * mZoomLevel, -mZoomLevel, mZoomLevel);
 	}
 
 	/*!*************************************************************************
@@ -74,7 +77,7 @@ namespace EM {
 	****************************************************************************/
 	void Camera2D::resetZoomLevel()
 	{
-		m_ZoomLevel = 1.0f;
+		mZoomLevel = 1.0f;
 	}
 
 	/*!*************************************************************************
@@ -86,7 +89,7 @@ namespace EM {
 		glm::vec3 worldup = glm::vec3(0.0f, 1.0f, 0.0f);
 		glm::vec3 right = glm::normalize(glm::cross(front, worldup));
 		glm::vec3 up = glm::normalize(glm::cross(right, front));
-		m_ViewMatrix = glm::lookAt(m_Position, m_Position + front, up);
-		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
+		mViewMatrix = glm::lookAt(mPosition, mPosition + front, up);
+		mViewProjectionMatrix = mProjectionMatrix * mViewMatrix;
 	}
 }

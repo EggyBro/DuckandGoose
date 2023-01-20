@@ -7,6 +7,9 @@
 \date			11-2-2022
 \brief			This file contain the declaration and definiton of a fps class
 				It helps to check our frametime during runtime.
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #pragma once
@@ -24,45 +27,45 @@ namespace EM {
 		****************************************************************************/
 		void InitFrame() 
 		{
-			m_counter = 0.0f;
-			MaxFrameRate = 60.0f;
-			m_FrameRate = MaxFrameRate;
-			m_FrameTime = 1 / m_FrameRate;
-			MinFrameTime = 1 / MaxFrameRate;
+			mCounter = 0.0f;
+			mMaxFrameRate = 60.0f;
+			mFrameRate = mMaxFrameRate;
+			mFrameTime = 1 / mFrameRate;
+			mMinFrameTime = 1 / mMaxFrameRate;
 		}
 
 		/*!*************************************************************************
 		Start frame count using glfwGetTime()
 		****************************************************************************/
-		void StartFrameCount() { m_start = (float)glfwGetTime(); }
+		void StartFrameCount() { mStart = (float)glfwGetTime(); }
 
 		/*!*************************************************************************
 		End frame count
 		****************************************************************************/
 		float EndFrameCount()
 		{
-			while (((float)glfwGetTime() - m_start) < MinFrameTime)
+			while (((float)glfwGetTime() - mStart) < mMinFrameTime)
 			{
 				float end = (float)glfwGetTime();
-				m_FrameTime = end - m_start;
-				m_Fps = 1.0f / m_FrameTime;
+				mFrameTime = end - mStart;
+				mFps = 1.0f / mFrameTime;
 			}
 			
-			return m_Fps;
+			return mFps;
 		}
 
 		/*!*************************************************************************
 		Return fps
 		****************************************************************************/
-		float GetFps()const { return m_Fps; }
+		float GetFps()const { return mFps; }
 		static FramePerSec& GetInstance()
 		{
 			static FramePerSec instance;
 			return instance;
 		}
 	private:
-		float m_counter, MaxFrameRate, m_FrameRate, m_FrameTime,
-			MinFrameTime, m_start, m_Fps;
+		float mCounter, mMaxFrameRate, mFrameRate, mFrameTime,
+			mMinFrameTime, mStart, mFps;
 	};
 
 }

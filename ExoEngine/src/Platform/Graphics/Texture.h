@@ -7,6 +7,8 @@
 \date			09-28-2022
 \brief			This file contain the neccesary declaration functions for class texture.
 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 
@@ -27,22 +29,22 @@ namespace EM {
 
 		void SetTextureData(void* data, unsigned int size);
 
-		inline unsigned int GetWidth() const { return _width; }
-		/*void SetWidth(unsigned int width) { _width *= width; }*/
-		inline unsigned int GetHeight() const { return _height; }
-		inline unsigned int GetRendererID() const { return m_RendererID; }
+		inline unsigned int GetWidth() const { return mWidth; }
+		/*void SetWidth(unsigned int width) { mWidth *= width; }*/
+		inline unsigned int GetHeight() const { return mHeight; }
+		inline unsigned int GetRendererID() const { return mRendererID; }
 
 		bool operator==(const Texture& other) const
 		{
-			return m_RendererID == other.GetRendererID();
+			return mRendererID == other.GetRendererID();
 		}
-		void setInternalFormat(unsigned int interformat) { inner_format = interformat; }
-		void setImageFormat(unsigned int imageformat) { image_format = imageformat; }
+		void setInternalFormat(unsigned int interformat) { mInnerFormat = interformat; }
+		void setImageFormat(unsigned int imageformat) { mImageFormat = imageformat; }
 	private:
-		unsigned int m_RendererID = 0;		//ID of the texture object
-		unsigned int _width, _height;	//width and height of the loaded image in pixels
-		unsigned int _wrapS, _wrapT;	// wrapping mode on S and T axis
-		unsigned int _FilterMin, _FilterMax; // filtering mode if texture pixels > or < screen pixels( 1648 by 720 )
-		unsigned int inner_format, image_format;
+		unsigned int mRendererID = 0;		//ID of the texture object
+		unsigned int mWidth, mHeight;	//width and height of the loaded image in pixels
+		unsigned int mWrapS, mWrapT;	// wrapping mode on S and T axis
+		unsigned int mFilterMin, mFilterMax; // filtering mode if texture pixels > or < screen pixels( 1648 by 720 )
+		unsigned int mInnerFormat, mImageFormat;
 	};
 }

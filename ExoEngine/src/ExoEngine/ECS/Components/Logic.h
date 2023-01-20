@@ -11,6 +11,8 @@
 Contains a vector for scripts which is looped and calls each scripts update
 function
 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 

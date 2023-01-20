@@ -7,6 +7,9 @@
 \date			11-02-2022
 \brief			This file header contain all the necessary declaration for 
 				framebuffer
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #pragma once
@@ -65,18 +68,18 @@ namespace EM {
 		static std::unique_ptr<FrameBuffer>& GetInstance();
 	private:
 		// framebuffer
-		uint32_t m_RendererID = 0;
-		FrameBufferSpecification m_Specification;
+		uint32_t mRendererID = 0;
+		FrameBufferSpecification mSpecification;
 		// framebuffer instance 
-		static std::unique_ptr<FrameBuffer> _finstance;
+		static std::unique_ptr<FrameBuffer> mInstance;
 
 		// contains all the ColorAttachmentSpecification (user has defined)
-		std::vector<FrameBufferTextureSpecification> m_ColorAttachmentSpecification;
+		std::vector<FrameBufferTextureSpecification> mColorAttachmentSpecification;
 		// depth attachment not using currently 
-		FrameBufferTextureSpecification m_DepthAttachmentSpecifiication = FrameBufferTextureFormat::NONE;
+		FrameBufferTextureSpecification mDepthAttachmentSpecifiication = FrameBufferTextureFormat::NONE;
 
 		// contains all the ColorAttachments renderID 
-		std::vector<uint32_t> m_ColorAttachments;
-		uint32_t m_DepthAttachment = 0;
+		std::vector<uint32_t> mColorAttachments;
+		uint32_t mDepthAttachment = 0;
 	};
 }

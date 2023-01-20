@@ -8,6 +8,8 @@
 \date			28-9-2022
 \brief			This file contain functions that can bring the data into the shaders file 
 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 
@@ -42,13 +44,13 @@ namespace EM {
 		lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
 		auto lastDot = filepath.rfind('.');
 		auto count = lastDot == std::string::npos ? filepath.size() - lastSlash : lastDot - lastSlash;
-		m_Name = filepath.substr(lastSlash, count);
+		mName = filepath.substr(lastSlash, count);
 	}
 	/*!*************************************************************************
 	Set the correct vertex and fragment source into the compile function
 	****************************************************************************/
 	Shader::Shader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
-		:m_Name(name)
+		:mName(name)
 	{
 		std::unordered_map<GLenum, std::string> sources;
 		sources[GL_VERTEX_SHADER] = vertexSrc;
@@ -60,7 +62,7 @@ namespace EM {
 	****************************************************************************/
 	Shader::~Shader()
 	{
-		glDeleteProgram(m_RendererID);
+		glDeleteProgram(mRendererID);
 	}
 	/*!*************************************************************************
 	Set the correct file path to read the shader
@@ -161,7 +163,7 @@ namespace EM {
 			shaderIDs[shaderIDIndex++] = shader;
 		}
 
-		m_RendererID = program;
+		mRendererID = program;
 
 		//link program
 		glLinkProgram(program);
@@ -199,7 +201,7 @@ namespace EM {
 	****************************************************************************/
 	void Shader::Bind() const
 	{
-		glUseProgram(m_RendererID);
+		glUseProgram(mRendererID);
 	}
 	/*!*************************************************************************
 	Unbind the shader
@@ -213,7 +215,7 @@ namespace EM {
 	****************************************************************************/
 	void Shader::SetUniform(const std::string& name, int value)
 	{
-		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+		GLint location = glGetUniformLocation(mRendererID, name.c_str());
 		glUniform1i(location, value);
 	}
 	/*!*************************************************************************
@@ -221,7 +223,7 @@ namespace EM {
 	****************************************************************************/
 	void Shader::SetUniform(const std::string& name, int* value, unsigned int count)
 	{
-		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+		GLint location = glGetUniformLocation(mRendererID, name.c_str());
 		glUniform1iv(location, count, value);
 	}
 	/*!*************************************************************************
@@ -229,7 +231,7 @@ namespace EM {
 	****************************************************************************/
 	void Shader::SetUniform(const std::string& name, float value)
 	{
-		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+		GLint location = glGetUniformLocation(mRendererID, name.c_str());
 		glUniform1f(location, value);
 	}
 	/*!*************************************************************************
@@ -237,7 +239,7 @@ namespace EM {
 	****************************************************************************/
 	void Shader::SetUniform(const std::string& name, const glm::vec2& value)
 	{
-		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+		GLint location = glGetUniformLocation(mRendererID, name.c_str());
 		glUniform2f(location, value.x, value.y);
 	}
 	/*!*************************************************************************
@@ -245,7 +247,7 @@ namespace EM {
 	****************************************************************************/
 	void Shader::SetUniform(const std::string& name, const glm::vec3& value)
 	{
-		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+		GLint location = glGetUniformLocation(mRendererID, name.c_str());
 		glUniform3f(location, value.x, value.y, value.z);
 	}
 	/*!*************************************************************************
@@ -253,7 +255,7 @@ namespace EM {
 	****************************************************************************/
 	void Shader::SetUniform(const std::string& name, const glm::vec4& value)
 	{
-		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+		GLint location = glGetUniformLocation(mRendererID, name.c_str());
 		glUniform4f(location, value.x, value.y, value.z, value.w);
 	}
 	/*!*************************************************************************
@@ -261,7 +263,7 @@ namespace EM {
 	****************************************************************************/
 	void Shader::SetUniform(const std::string& name, const glm::mat3& value)
 	{
-		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+		GLint location = glGetUniformLocation(mRendererID, name.c_str());
 		glUniformMatrix3fv(location, 1, GL_FALSE, &value[0][0]);
 	}
 	/*!*************************************************************************
@@ -269,7 +271,7 @@ namespace EM {
 	****************************************************************************/
 	void Shader::SetUniform(const std::string& name, const glm::mat4& value)
 	{
-		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+		GLint location = glGetUniformLocation(mRendererID, name.c_str());
 		glUniformMatrix4fv(location, 1, GL_FALSE, &value[0][0]);
 	}
 

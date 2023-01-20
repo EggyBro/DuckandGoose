@@ -9,6 +9,9 @@
 				to create a timer and use it as a tracker for our system
 				during runtime. It also have a deltatime for update and other
 				math implementation.
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"
@@ -22,13 +25,13 @@ namespace EM {
 	Timer::Timer()
 	{
 		GlobalTimeStarter();
-		for (int i = 0; i < t_StartTime.size(); i++)
+		for (int i = 0; i < mStartTime.size(); i++)
 			Start(static_cast<Systems>(i));
 
-		for (int i = 0; i < m_SystemDT.size(); i++)
-			m_SystemDT[i] = 0.016f;
+		for (int i = 0; i < mSystemDT.size(); i++)
+			mSystemDT[i] = 0.016f;
 
-		m_GlobalDT = (float)(1.0f / 60.0f);
+		mGlobalDT = (float)(1.0f / 60.0f);
 	}
 
 	/*!*************************************************************************
@@ -36,7 +39,7 @@ namespace EM {
 	****************************************************************************/
 	void Timer::RunTimeStarter()
 	{
-		RuntimeStart = clock();
+		mRunTimeStart = clock();
 	}
 
 	/*!*************************************************************************
@@ -44,7 +47,7 @@ namespace EM {
 	****************************************************************************/
 	void Timer::GlobalTimeStarter()
 	{
-		GlobalStart = clock();
+		mGlobalStart = clock();
 	}
 
 	/*!*************************************************************************
@@ -52,9 +55,9 @@ namespace EM {
 	****************************************************************************/
 	void Timer::Start(Systems system)
 	{
-		if (t_StartTime.size())
+		if (mStartTime.size())
 		{
-			t_StartTime[static_cast<int>(system)] = std::chrono::system_clock::now();
+			mStartTime[static_cast<int>(system)] = std::chrono::system_clock::now();
 		}
 	}
 
@@ -63,10 +66,10 @@ namespace EM {
 	****************************************************************************/
 	void Timer::Update(Systems system)
 	{
-		m_End = std::chrono::system_clock::now();
-		m_Start = GetStartTime(system);
-		m_DT = m_End - m_Start;
-		SetDeltaTime(system, m_DT.count() / 1000.f);
+		mEnd = std::chrono::system_clock::now();
+		mStart = GetStartTime(system);
+		mDT = mEnd - mStart;
+		SetDeltaTime(system, mDT.count() / 1000.f);
 	}
 
 	/*!*************************************************************************
@@ -74,8 +77,8 @@ namespace EM {
 	****************************************************************************/
 	void Timer::SetDeltaTime(Systems system, float deltatime)
 	{
-		if (m_SystemDT.size())
-			m_SystemDT[static_cast<int>(system)] = deltatime;
+		if (mSystemDT.size())
+			mSystemDT[static_cast<int>(system)] = deltatime;
 	}
 
 	/*!*************************************************************************
@@ -83,7 +86,7 @@ namespace EM {
 	****************************************************************************/
 	std::chrono::system_clock::time_point Timer::GetStartTime(Systems system)
 	{
-		return t_StartTime[static_cast<int>(system)];
+		return mStartTime[static_cast<int>(system)];
 	}
 
 	/*!*************************************************************************
@@ -99,12 +102,12 @@ namespace EM {
 	****************************************************************************/
 	void Timer::GlobalUpdate()
 	{
-		m_TotalRuntime = (float)(clock() - RuntimeStart) / 1000.0f;
-		m_GlobalDT = (float)(clock() - GlobalStart);
-		if (m_GlobalDT > 0)
-			m_fps = 1000.0f / m_GlobalDT;
+		mTotalRuntime = (float)(clock() - mRunTimeStart) / 1000.0f;
+		mGlobalDT = (float)(clock() - mGlobalStart);
+		if (mGlobalDT > 0)
+			mFps = 1000.0f / mGlobalDT;
 
-		m_GlobalDT = 1.0f / m_fps;
+		mGlobalDT = 1.0f / mFps;
 	}
 
 }

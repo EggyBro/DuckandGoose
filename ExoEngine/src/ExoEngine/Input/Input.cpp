@@ -11,6 +11,8 @@ the input systems provides us with a way to fetch information on inputs in a sim
 and effective manner. Allowing the user to view whether the keys or mouse are pressed,
 released or being held.
 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"
@@ -20,41 +22,41 @@ released or being held.
 
 namespace EM {
     
-    std::unique_ptr<InputSystem> m_Instance;
+    std::unique_ptr<InputSystem> mInstance;
     std::unique_ptr<InputSystem>& InputSystem::GetInstance()
     {
-        if (!m_Instance)
+        if (!mInstance)
         {
-            m_Instance = std::make_unique<InputSystem>();
+            mInstance = std::make_unique<InputSystem>();
         }
-        return m_Instance;
+        return mInstance;
     }
 
     /*!*************************************************************************
-    Store key pressed input feedback in vector m_reset
+    Store key pressed input feedback in vector mReset
     ****************************************************************************/
     bool InputSystem::KeyPressed(const int& key)
     {
-       // m_reset.push_back(key);
+       // mReset.push_back(key);
 
-        return m_KeyStatus[key] == GLFW_PRESS;
+        return mKeyStatus[key] == GLFW_PRESS;
     }
 
     /*!*************************************************************************
-    Store key hold input feedback status in m_KeyStatus
+    Store key hold input feedback status in mKeyStatus
     ****************************************************************************/
     bool InputSystem::KeyHold(const int& key)
     {
-        return m_KeyStatus[key] == GLFW_REPEAT || m_KeyStatus[key] == GLFW_PRESS;
+        return mKeyStatus[key] == GLFW_REPEAT || mKeyStatus[key] == GLFW_PRESS;
     }
 
     /*!*************************************************************************
-    Store key released input feedback in both vector m_reset and m_KeyStatus
+    Store key released input feedback in both vector mReset and mKeyStatus
     ****************************************************************************/
     bool InputSystem::KeyReleased(const int& key)
     {
-       // m_reset.push_back(key);
-        return m_KeyStatus[key] == GLFW_RELEASE;
+       // mReset.push_back(key);
+        return mKeyStatus[key] == GLFW_RELEASE;
     }
 
     /*!*************************************************************************
@@ -62,23 +64,23 @@ namespace EM {
     ****************************************************************************/
     void InputSystem::SetKeyStatus(keycode key, keystatus status)
     {
-        m_reset.emplace_back(key);
-        m_KeyStatus[key] = status;
+        mReset.emplace_back(key);
+        mKeyStatus[key] = status;
     }
 
     /*!*************************************************************************
-    Resets m_reset vector and m_KeyStatus map to empty
+    Resets mReset vector and mKeyStatus map to empty
     ****************************************************************************/
     void InputSystem::ResetPressedKey()
     {
-        for (auto& key : m_reset) 
+        for (auto& key : mReset) 
         {
-            if (m_KeyStatus[key] == GLFW_PRESS)
-                m_KeyStatus[key] = GLFW_REPEAT;
+            if (mKeyStatus[key] == GLFW_PRESS)
+                mKeyStatus[key] = GLFW_REPEAT;
         }
 
 
-        m_reset.clear();
+        mReset.clear();
     }
 
     /*!*************************************************************************
@@ -86,7 +88,7 @@ namespace EM {
     ****************************************************************************/
     bool InputSystem::MousePressed(const int& key)
     {
-        return m_MouseStatus[key] == GLFW_PRESS;
+        return mMouseStatus[key] == GLFW_PRESS;
     }
 
     /*!*************************************************************************
@@ -94,7 +96,7 @@ namespace EM {
     ****************************************************************************/
     bool InputSystem::MouseHold(const int& key)
     {
-        return m_MouseStatus[key] == GLFW_PRESS || m_MouseStatus[key] == GLFW_REPEAT;
+        return mMouseStatus[key] == GLFW_PRESS || mMouseStatus[key] == GLFW_REPEAT;
     }
 
     /*!*************************************************************************
@@ -102,7 +104,7 @@ namespace EM {
     ****************************************************************************/
     bool InputSystem::MouseIsReleased(const int& key)
     {
-        return m_MouseStatus[key] == GLFW_RELEASE;
+        return mMouseStatus[key] == GLFW_RELEASE;
     }
 
     /*!*************************************************************************
@@ -110,25 +112,25 @@ namespace EM {
     ****************************************************************************/
     void InputSystem::SetMouseStatus(mousecode key, mousestatus status)
     {
-        m_MouseStatus[key] = status;
+        mMouseStatus[key] = status;
     }
 
     /*!*************************************************************************
-    Reset mouse input status in m_MouseStatus to 0
+    Reset mouse input status in mMouseStatus to 0
     ****************************************************************************/
     void InputSystem::ResetPressedMouse()
     {
-        for (auto& [key, status] : m_MouseStatus)
+        for (auto& [key, status] : mMouseStatus)
             status = -1;
     }
 
     /*!*************************************************************************
-    Checks if key is pressed by finding m_KeyStatus
+    Checks if key is pressed by finding mKeyStatus
     ****************************************************************************/
     bool InputSystem::isKeyPressed(keycode key)
     {
-        auto it = m_KeyStatus.find(key);
-        if (it != m_KeyStatus.end())
+        auto it = mKeyStatus.find(key);
+        if (it != mKeyStatus.end())
             return it->second == GLFW_PRESS; //find the key in the map and execute the order
         
         return false;

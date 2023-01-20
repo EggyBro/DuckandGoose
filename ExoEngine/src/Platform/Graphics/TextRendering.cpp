@@ -7,6 +7,9 @@
 \date			02-11-2022
 \brief			This file header contain all the necessary defintion function
                 to render font
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"
@@ -27,10 +30,10 @@ namespace EM {
         Load("Assets/fonts/hackdaddy.regular.otf");
         
      
-		glGenVertexArrays(1, &VAO);
-		glGenBuffers(1, &VBO);
-		glBindVertexArray(VAO);
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		glGenVertexArrays(1, &mVao);
+		glGenBuffers(1, &mVbo);
+		glBindVertexArray(mVao);
+		glBindBuffer(GL_ARRAY_BUFFER, mVbo);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
@@ -112,7 +115,7 @@ namespace EM {
         TextShader->SetUniform("u_ViewProjection", camera.GetViewProjectionMatrix());
         TextShader->SetUniform("textColor", color);
         glActiveTexture(GL_TEXTURE0);
-        glBindVertexArray(VAO);
+        glBindVertexArray(mVao);
 
         // iterate through all characters
         std::string::const_iterator c;
@@ -138,7 +141,7 @@ namespace EM {
             // render glyph texture over quad
             glBindTexture(GL_TEXTURE_2D, ch.TextureID);
             // update content of VBO memory
-            glBindBuffer(GL_ARRAY_BUFFER, VBO);
+            glBindBuffer(GL_ARRAY_BUFFER, mVbo);
             glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices); // be sure to use glBufferSubData and not glBufferData
             glBindBuffer(GL_ARRAY_BUFFER, 0);
 

@@ -8,6 +8,8 @@
 \date			28-9-2022
 \brief			This file contain function that create a window using GLFW library
 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"
@@ -204,7 +206,7 @@ namespace EM{
 	void Window::Mousescroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	{
 		(void)window, (void)xoffset, (void)yoffset;
-		InputSystem::GetInstance()->MouseScrollStatus = static_cast<int>(yoffset);
+		InputSystem::GetInstance()->mMouseScrollStatus = static_cast<int>(yoffset);
 	}
 
 	/*!*************************************************************************

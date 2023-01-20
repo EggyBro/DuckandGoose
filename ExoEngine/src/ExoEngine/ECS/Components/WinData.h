@@ -10,6 +10,8 @@
 \brief  Window Component used to stored data regarding the window such as
 height and width of the window
 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 

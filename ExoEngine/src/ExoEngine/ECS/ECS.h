@@ -10,6 +10,9 @@
 \brief  This file contains the coordinator for the three systems in place
 that manages the ECS, the component, entity and system manager communicates
 with each other using this class
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 

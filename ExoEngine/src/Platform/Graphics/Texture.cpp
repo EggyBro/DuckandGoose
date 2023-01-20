@@ -7,6 +7,8 @@
 \date			09-28-2022
 \brief			This file contain the neccesary functions for loading the png and paste it on the window screen.
 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 
@@ -20,7 +22,7 @@ namespace EM {
 	Constructor for texture
 	****************************************************************************/
 	Texture::Texture()
-		:_width {0}, _height{ 0 }, _wrapS{ GL_LINEAR }, _wrapT{ GL_LINEAR }, _FilterMin{ GL_CLAMP_TO_BORDER }, _FilterMax{ GL_CLAMP_TO_BORDER }, inner_format{ GL_RGB8 }, image_format{ GL_RGBA }
+		:mWidth {0}, mHeight{ 0 }, mWrapS{ GL_LINEAR }, mWrapT{ GL_LINEAR }, mFilterMin{ GL_CLAMP_TO_BORDER }, mFilterMax{ GL_CLAMP_TO_BORDER }, mInnerFormat{ GL_RGB8 }, mImageFormat{ GL_RGBA }
 	{
 	}
 
@@ -29,7 +31,7 @@ namespace EM {
 	****************************************************************************/
 	Texture::~Texture()
 	{
-		glDeleteTextures(1, &m_RendererID);
+		glDeleteTextures(1, &mRendererID);
 	}
 
 	/*!*************************************************************************
@@ -37,7 +39,7 @@ namespace EM {
 	****************************************************************************/
 	void Texture::Bind(unsigned int slot) const
 	{
-		glBindTextureUnit(slot, m_RendererID);
+		glBindTextureUnit(slot, mRendererID);
 	}
 
 	/*!*************************************************************************
@@ -61,8 +63,8 @@ namespace EM {
 		}
 		if (data)
 		{
-			_width = width;
-			_height = height;
+			mWidth = width;
+			mHeight = height;
 
 			GLenum internalFormat = 0, dataFormat = 0;
 			if (channels == 4)
@@ -75,21 +77,21 @@ namespace EM {
 				internalFormat = GL_RGB8;
 				dataFormat = GL_RGB;
 			}
-			inner_format = internalFormat;
-			image_format = dataFormat;
+			mInnerFormat = internalFormat;
+			mImageFormat = dataFormat;
 
 			//EM_EXO_ASSERT(internalFormat && dataFormat, "Format not supported!");
 
-			glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
-			glTextureStorage2D(m_RendererID, 1, inner_format, _width, _height);
+			glCreateTextures(GL_TEXTURE_2D, 1, &mRendererID);
+			glTextureStorage2D(mRendererID, 1, mInnerFormat, mWidth, mHeight);
 
-			glTextureParameteri(m_RendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			glTextureParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			glTextureParameteri(mRendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTextureParameteri(mRendererID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-			glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
-			glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
+			glTextureParameteri(mRendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTextureParameteri(mRendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-			glTextureSubImage2D(m_RendererID, 0, 0, 0, _width, _height, image_format, GL_UNSIGNED_BYTE, data);
+			glTextureSubImage2D(mRendererID, 0, 0, 0, mWidth, mHeight, mImageFormat, GL_UNSIGNED_BYTE, data);
 
 			stbi_image_free(data);
 		}
@@ -100,14 +102,14 @@ namespace EM {
 	****************************************************************************/
 	void Texture::GenTexture(unsigned int width, unsigned int height)
 	{
-		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
-		glTextureStorage2D(m_RendererID, 1, inner_format, width, height);
+		glCreateTextures(GL_TEXTURE_2D, 1, &mRendererID);
+		glTextureStorage2D(mRendererID, 1, mInnerFormat, width, height);
 
-		glTextureParameteri(m_RendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTextureParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTextureParameteri(mRendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTextureParameteri(mRendererID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTextureParameteri(mRendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTextureParameteri(mRendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	}
 
 	/*!*************************************************************************
@@ -115,8 +117,8 @@ namespace EM {
 	****************************************************************************/
 	void Texture::SetTextureData(void* data, unsigned int size)
 	{
-		uint32_t bpp = image_format == GL_RGBA ? 4 : 3;
-		EM_EXO_ASSERT(size == _width * _height * bpp, "Data must be entire texture!");
-		glTextureSubImage2D(m_RendererID, 0, 0, 0, _width, _height, image_format, GL_UNSIGNED_BYTE, data);
+		uint32_t bpp = mImageFormat == GL_RGBA ? 4 : 3;
+		EM_EXO_ASSERT(size == mWidth * mHeight * bpp, "Data must be entire texture!");
+		glTextureSubImage2D(mRendererID, 0, 0, 0, mWidth, mHeight, mImageFormat, GL_UNSIGNED_BYTE, data);
 	}
 }

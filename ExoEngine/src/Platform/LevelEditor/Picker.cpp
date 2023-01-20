@@ -1,3 +1,17 @@
+/*!*************************************************************************
+****
+\file			Picker.cpp
+\author			Huang Xin Xiang
+\par DP email:  h.xinxiang@digipen.edu
+\par Course:	CSD2400 / GAM200
+\date			11-28-2022
+\brief			Picker.cpp contain function that will set the selectentity with a AABB boundering box around it
+				so that it takes the transform of the entity
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include "empch.h"
 #include "Picker.h"
 #include "LevelEditor.h"

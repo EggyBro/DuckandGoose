@@ -10,6 +10,9 @@
 \brief  This file contains the function declarations for the JSONSerializer
 class which allows child classes of this class to define the data type they
 serialize and deserialize using virtual functions.
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 

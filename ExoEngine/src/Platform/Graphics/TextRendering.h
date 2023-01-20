@@ -7,6 +7,9 @@
 \date			11-02-2022
 \brief			This file header contain all the necessary declaration function
 				for font rendering 
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #pragma once
@@ -41,7 +44,7 @@ namespace EM {
 	private:
 		MultiRefs<Shader> TextShader;
 		//MultiRefs<Camera2D> camera;
-		unsigned int VAO{ 0 }, VBO{ 0 };
+		unsigned int mVao{ 0 }, mVbo{ 0 };
 		
 	};
 }

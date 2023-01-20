@@ -9,6 +9,8 @@
 \brief			This file contain the main function for the pause menu
 				and the functions of the buttons. 
 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #pragma once
@@ -32,7 +34,7 @@ namespace EM
 	class EM_API gui_system 
 	{
 	private:
-		bool is_pause = { false }; //a boolean to see if the system is currently pause
+		bool is_Pause = { false }; //a boolean to see if the system is currently pause
 
 		struct button_bb // a pseudo bounding box not tied to collision meant to check if the cusor is touching the button
 		{
@@ -40,16 +42,16 @@ namespace EM
 			glm::vec2 min{ 0,0 };//buttom left of thr button
 		};
 
-		button_bb pause_button{}; //bounding box of the pause button (to be replace with factory)
-		button_bb continue_button{};//bounding box of the continue button (to be replace with factory)
-		float AspectRatio{}; //hold local value of aspecrt ratio
+		button_bb mPauseButton{}; //bounding box of the pause button (to be replace with factory)
+		button_bb mContinueButton{};//bounding box of the continue button (to be replace with factory)
+		float mAspectRatio{}; //hold local value of aspecrt ratio
 
 	public:
 		static std::unique_ptr<gui_system>& GetInstance(); //used to create an instance to work alongside the game during it's lifetime
 		
 		bool Update(Window* screen); // to be update in realtime  with the rest of the engine system
-		bool pause_switch = false; // a secondary boolean to prevent button from flickering 
-		glm::mat4 VPmat; //hold the viewprojection matrix passed from the camera
+		bool mPauseSwitch = false; // a secondary boolean to prevent button from flickering 
+		glm::mat4 VPmat{}; //hold the viewprojection matrix passed from the camera
 
 		void set_pause_button(vec2D pos, float scaleX, float scaleY); //set the position and scale of the pause button
 		void set_continue_button(vec2D pos, float scaleX, float scaleY);//set the position and scale of the continue button

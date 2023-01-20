@@ -8,6 +8,8 @@
 \date			2-11-2022
 \brief			This file contain function declaration for Shader classes
 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #pragma once
@@ -41,7 +43,7 @@ namespace EM {
 		void Compile(const std::unordered_map<GLenum, std::string>& shaderSources);
 	private:
 
-		unsigned int m_RendererID;
-		std::string m_Name;
+		unsigned int mRendererID;
+		std::string mName;
 	};
 }

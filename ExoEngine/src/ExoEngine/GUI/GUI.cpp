@@ -9,6 +9,8 @@
 \brief			This file contain the main function for the pause menu 
 				and the functions of the buttons
 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"
@@ -19,17 +21,17 @@
 
 namespace EM
 {
-	std::unique_ptr<gui_system> m_Instance; //create a unique pointer to be used outside of this file
+	std::unique_ptr<gui_system> mInstance; //create a unique pointer to be used outside of this file
 	/*!*************************************************************************
 	Create the instance for Class GUI
 	****************************************************************************/
 	 std::unique_ptr<gui_system>& gui_system::GetInstance()// in the even that no unique pointer is created, create one 
 	{
-		if (!m_Instance)// check if the unique pointer is created
+		if (!mInstance)// check if the unique pointer is created
 		{
-			m_Instance = std::make_unique<gui_system>();// create it, if it doesnt exist
+			mInstance = std::make_unique<gui_system>();// create it, if it doesnt exist
 		}
-		return m_Instance;//pass it back
+		return mInstance;//pass it back
 	}
 	 /*!*************************************************************************
 	Check the mouse cursor is in the bounding box
@@ -37,7 +39,7 @@ namespace EM
 	 bool gui_system::is_within_box(glm::vec2 cur, button_bb box)
 	 {
 		 //We factor in aspect ratio since graphic scale is proportionate to aspect ratio instead of screen
-		 if ((cur.x * AspectRatio > box.min.x && cur.y > box.min.y) && (cur.x * AspectRatio < box.max.x && cur.y < box.max.y))
+		 if ((cur.x * mAspectRatio > box.min.x && cur.y > box.min.y) && (cur.x * mAspectRatio < box.max.x && cur.y < box.max.y))
 			 return true;//return true if the position of the cursor is between both of the button minimun and maximum bounding point
 		 else
 			 return false;// return false if it isnt
@@ -47,10 +49,10 @@ namespace EM
 	****************************************************************************/
 	 void gui_system::set_pause_button(vec2D pos, float scaleX, float scaleY)
 	 {
-		 pause_button.max.y = pos.y + scaleY / 2;//create the upper Y coordinate bounding box by dividing the scale by 2 and adding it to the center position
-		 pause_button.max.x = (pos.x + (scaleX / 2));//create the upper X coordinate bounding box by dividing the scale by 2 and adding it to the center position
-		 pause_button.min.y = pos.y - scaleY / 2;//create the lower Y coordinate bounding box by dividing the scale by 2 and adding it to the center position
-		 pause_button.min.x = (pos.x - (scaleX / 2));//create the lower X coordinate bounding box by dividing the scale by 2 and adding it to the center position
+		 mPauseButton.max.y = pos.y + scaleY / 2;//create the upper Y coordinate bounding box by dividing the scale by 2 and adding it to the center position
+		 mPauseButton.max.x = (pos.x + (scaleX / 2));//create the upper X coordinate bounding box by dividing the scale by 2 and adding it to the center position
+		 mPauseButton.min.y = pos.y - scaleY / 2;//create the lower Y coordinate bounding box by dividing the scale by 2 and adding it to the center position
+		 mPauseButton.min.x = (pos.x - (scaleX / 2));//create the lower X coordinate bounding box by dividing the scale by 2 and adding it to the center position
 
 
 		
@@ -60,10 +62,10 @@ namespace EM
 	****************************************************************************/
 	 void gui_system::set_continue_button(vec2D pos, float scaleX, float scaleY)
 	 {
-		 continue_button.max.y = pos.y + scaleY / 2;//create the upper Y coordinate bounding box by dividing the scale by 2 and adding it to the center position
-		 continue_button.max.x = (pos.x + (scaleX / 2));//create the upper X coordinate bounding box by dividing the scale by 2 and adding it to the center position
-		 continue_button.min.y = pos.y - scaleY / 2;//create the lower Y coordinate bounding box by dividing the scale by 2 and adding it to the center position
-		 continue_button.min.x = (pos.x - (scaleX / 2));//create the lower X coordinate bounding box by dividing the scale by 2 and adding it to the center position
+		 mContinueButton.max.y = pos.y + scaleY / 2;//create the upper Y coordinate bounding box by dividing the scale by 2 and adding it to the center position
+		 mContinueButton.max.x = (pos.x + (scaleX / 2));//create the upper X coordinate bounding box by dividing the scale by 2 and adding it to the center position
+		 mContinueButton.min.y = pos.y - scaleY / 2;//create the lower Y coordinate bounding box by dividing the scale by 2 and adding it to the center position
+		 mContinueButton.min.x = (pos.x - (scaleX / 2));//create the lower X coordinate bounding box by dividing the scale by 2 and adding it to the center position
 	 }
 	 /*!*************************************************************************
 	Update the GUI system
@@ -74,7 +76,7 @@ namespace EM
 		
 		glm::vec2 mouse_pos{ static_cast<float>(screen->Getter().mouseX) , static_cast<float>(screen->Getter().mouseY) };//store the mouse position into a vector
 		glm::vec2 screen_size{ static_cast<float>(screen->Getter().m_Width),static_cast<float>(screen->Getter().m_Height) };//store the screen size into a vector
-		AspectRatio = screen_size.x / screen_size.y;//find and store the aspect ratio of the screen
+		mAspectRatio = screen_size.x / screen_size.y;//find and store the aspect ratio of the screen
 		
 
 		//function to convert mouse to screen position
@@ -84,16 +86,16 @@ namespace EM
 		mouse_pos -= glm::vec2{ 1, 1 };
 		mouse_pos.y *= -1;
 
-		if (is_pause == true)//check if the system is pause
+		if (is_Pause == true)//check if the system is pause
 		{	
-			if (is_within_box(mouse_pos, pause_button) && p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))//if system is pause and the quit button is pressed, tell the system to quit the game
+			if (is_within_box(mouse_pos, mPauseButton) && p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))//if system is pause and the quit button is pressed, tell the system to quit the game
 			{
 				return true;
 			}
 
-			if (is_within_box(mouse_pos, continue_button) && p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))//if system is pause and continue button is pressed, tell the system to resume the game
+			if (is_within_box(mouse_pos, mContinueButton) && p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))//if system is pause and continue button is pressed, tell the system to resume the game
 			{
-				is_pause = false;
+				is_Pause = false;
 			}
 			else return false;
 				
@@ -107,19 +109,19 @@ namespace EM
 	****************************************************************************/
 	bool gui_system::check_pause()//getter function for pause state
 	{
-		return is_pause;
+		return is_Pause;
 	}
 	/*!*************************************************************************
 	Pause states toggling
 	****************************************************************************/
 	void gui_system::toggle_pause()//if game is pause,unpause it. Or pause it if it is unpause.
 	{
-		if (is_pause == false)
+		if (is_Pause == false)
 		{
-			is_pause = true;
+			is_Pause = true;
 		}
 		else
-			is_pause = false;
+			is_Pause = false;
 	}
 
 	

@@ -6,6 +6,9 @@
 \par Course: CSD2400 / GAM200
 \date 9-28-2022
 \brief  Header file for LevelEditor.cpp
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #pragma once
@@ -45,7 +48,7 @@ namespace EM {
 		//for textures loading from files
 		void LoadTextureFromFile();
 	public:
-		bool show_window = true;
+		bool is_ShowWindow = true;
 		static std::unique_ptr<LevelEditor>& GetInstance();
 
 
@@ -69,33 +72,32 @@ namespace EM {
 
 	private:
 		
-		ImGuiDockNodeFlags dock_space_flags{};
-		Window* m_window{nullptr};
-		static std::unique_ptr<LevelEditor> m_instance;
+		ImGuiDockNodeFlags mDockSpaceFlags{};
+		Window* mWindow{nullptr};
+		static std::unique_ptr<LevelEditor> mInstance;
 		
 
 		//profiler
-		bool b_profile = false;
-		float m_SceneRuntime = 0.0f;
-		float m_UpdateTimer = 0.0f;
+		bool is_Profile = false;
+		float mSceneRuntime = 0.0f;
+		float mUpdateTimer = 0.0f;
 		std::array<float, 5> mSystemRunTime = { 0.0f,0.0f,0.0f,0.0f };
 		
 		
 	
 		//Content Browser
 		std::filesystem::path mAssetsPath= "Assets";
-		std::filesystem::path m_CurrentDirectory = mAssetsPath;
+		std::filesystem::path mCurrentDirectory = mAssetsPath;
 		
 		//Scene/guizmo
 		int mGizmoType = -1;
-		WinData mwindata;
+		WinData mWinData;
 
 		//For loading of scene usage
 		std::vector<std::string> mScenefile; //json file
 		// To keep track of the files
 		int mSelectedFile = -1;
 		std::vector<std::filesystem::directory_entry> mFileList;
-		ImVec4 _gameWindowSpecs;
 
 		//load audio from file
 		std::vector<std::string> mAudioFile;

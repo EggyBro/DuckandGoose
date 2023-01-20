@@ -9,6 +9,8 @@
 \brief  This file contains the component declaration as well as member function
 		definitions for the collider component of the game engine. 
  
+ Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 *******************************************************************************/
 #pragma once
 #include "IComponent.h"
@@ -62,7 +64,7 @@ namespace EM
 		Offset is a vector which is added to position to get the origin point of the
 		collider
 		****************************************************************************/
-		void SetOffset(vec2D input) { offset = input; }
+		void SetOffset(vec2D input) { mOffset = input; }
 		/*!*************************************************************************
 		This function sets the minimum point for AABB colliders
 		mMin is a vector which is added to the origin point of the collider to get
@@ -84,7 +86,7 @@ namespace EM
 		0 is no hit
 		1 is hit
 		****************************************************************************/
-		void SetHit(int input) { hit = input; }
+		void SetHit(int input) { mHit = input; }
 		/*!*************************************************************************
 		This function sets the normal for collision response in the event of a hit
 		Collision response is calculated in the collision system and input here
@@ -92,12 +94,12 @@ namespace EM
 		It will then be used by the collision response script to calculate the collision
 		counter-force. 
 		****************************************************************************/
-		void SetNormal(vec2D input) { CollisionNormal = input; }
+		void SetNormal(vec2D input) { mCollisionNormal = input; }
 
 		/*!*************************************************************************
 		This function sets the active state of the collision component
 		****************************************************************************/
-		void ToggleAlive() { mAlive = mAlive ? false : true; }
+		void ToggleAlive() { is_Alive = is_Alive ? false : true; }
 
 
 		/*!*************************************************************************
@@ -107,7 +109,7 @@ namespace EM
 		/*!*************************************************************************
 		This function returns the collider offset data member
 		****************************************************************************/
-		vec2D& GetOffset() { return offset; }
+		vec2D& GetOffset() { return mOffset; }
 		/*!*************************************************************************
 		This function returns the collider minimum point data member
 		****************************************************************************/
@@ -123,18 +125,16 @@ namespace EM
 		/*!*************************************************************************
 		This function returns the collider hit data member
 		****************************************************************************/
-		int GetHit() { return hit; }
+		int GetHit() { return mHit; }
 		/*!*************************************************************************
 		This function returns the collider normal response data member
 		****************************************************************************/
-		vec2D GetNormal() { return CollisionNormal; }
+		vec2D GetNormal() { return mCollisionNormal; }
 		/*!*************************************************************************
 		This function returns the collider acctive state data member
 		****************************************************************************/
-		bool GetAlive() { return mAlive; }
-		/*!*************************************************************************
-		Retrieves Component Entity ID
-		****************************************************************************/
+		bool GetAlive() { return is_Alive; }
+
 		Entity& GetComponentEntityID() { return entityID; }
 		/*!*************************************************************************
 		Sets Components Entity ID
@@ -143,12 +143,12 @@ namespace EM
 
 	private:
 		ColliderType mCol{};
-		vec2D CollisionNormal;
+		vec2D mCollisionNormal;
 		vec2D mMin;
 		vec2D mMax;
-		vec2D offset;
-		int hit;
+		vec2D mOffset;
+		int mHit;
 		float mRadius;
-		bool mAlive;
+		bool is_Alive;
 	};
 }

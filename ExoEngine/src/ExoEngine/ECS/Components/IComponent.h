@@ -9,6 +9,8 @@
 \date 2/11/2022
 \brief  This file contains the abstract class for IComponent
 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 
@@ -44,6 +46,6 @@ namespace EM
 		virtual void SetComponentEntityID(Entity& entity) = 0;
 
 	protected:
-		Entity entityID;
+		Entity entityID{};
 	};
 }

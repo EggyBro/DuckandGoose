@@ -8,6 +8,9 @@
 \date			11-2-2022
 \brief			This file contain the declaration function for Sprite class
 				which is the component for sprite rendering
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #pragma once
@@ -24,11 +27,11 @@ namespace EM {
 		virtual bool Deserialize(const rapidjson::Value & obj);
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>*writer) const;
 
-		void SetTexture(const std::string& name) { m_texturename = name; }
-		std::string &GetTexture() { return m_texturename; }
+		void SetTexture(const std::string& name) { mTextureName = name; }
+		std::string &GetTexture() { return mTextureName; }
 
-		void SetIndex(float& x) { m_index.x = x; } // y will always remind as zero
-		vec2D& GetIndex() { return m_index; }
+		void SetIndex(float& x) { mIndex.x = x; } // y will always remind as zero
+		vec2D& GetIndex() { return mIndex; }
 
 		void SetDisplayTime(float displaytime) { mDisplayTime = displaytime; };
 		float& GetDisplayTime() { return mDisplayTime; }
@@ -48,13 +51,13 @@ namespace EM {
 		void SetComponentEntityID(Entity& entity) { entityID = entity; }
 
 	public:
-		bool mIsSpriteSheet; // to tell whether we are using a spritesheet
-		bool mIsanimated;	// if is a spritesheet do we want it to be animated 
+		bool is_SpriteSheet; // to tell whether we are using a spritesheet
+		bool is_Animated;	// if is a spritesheet do we want it to be animated 
 		//altas 
 	private:
-		std::string m_texturename;
-		vec2D m_index, mUVcooridnates;
+		std::string mTextureName;
+		vec2D mIndex, mUVcooridnates;
 		float mDisplayTime;
-		//TODO insert a increment for mIndex so that it can lease with the animator
+		//TODO insert a increment for mIndex so that it can lease with the mAimator
 	};
 }

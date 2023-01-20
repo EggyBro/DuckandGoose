@@ -8,6 +8,8 @@
 \date 14-10-2022
 \brief  This file contains the function definitions for the physics system
  
+ Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 *******************************************************************************/
 #include "empch.h"
 #include "PhysicsSystem.h"

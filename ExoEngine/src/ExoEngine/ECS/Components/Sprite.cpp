@@ -9,6 +9,9 @@
 \brief			This file contain the defintion for Sprite class
 				which set private variables with default value and de/serialize
 				the necessary component variables
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"
@@ -19,19 +22,19 @@ namespace EM {
 	/*!*************************************************************************
 	Ctor for Sprite Component
 	****************************************************************************/
-	Sprite::Sprite() : m_texturename("Blank"), m_index({ 0.0f,0.0f }), mUVcooridnates({ 512.0f, 512.0f }),
-		mIsSpriteSheet(false), mIsanimated(false), mDisplayTime(0.1667f){}
+	Sprite::Sprite() : mTextureName("Blank"), mIndex({ 0.0f,0.0f }), mUVcooridnates({ 512.0f, 512.0f }),
+		is_SpriteSheet(false), is_Animated(false), mDisplayTime(0.1667f){}
 
 	/*!*************************************************************************
 	Deserialize for Sprite Component
 	****************************************************************************/
 	bool Sprite::Deserialize(const rapidjson::Value& obj)
 	{
-		m_texturename = std::string(obj["TextureName"].GetString());
-		m_index = vec2D(obj["Index_X"].GetFloat(), obj["Index_Y"].GetFloat());
+		mTextureName = std::string(obj["TextureName"].GetString());
+		mIndex = vec2D(obj["Index_X"].GetFloat(), obj["Index_Y"].GetFloat());
 		mUVcooridnates = vec2D(obj["Ucoordinates"].GetFloat(), obj["Vcoordinates"].GetFloat());
-		mIsSpriteSheet = bool(obj["IsSpriteSheet"].GetBool());
-		mIsanimated = bool(obj["IsAnimated"].GetBool());
+		is_SpriteSheet = bool(obj["IsSpriteSheet"].GetBool());
+		is_Animated = bool(obj["IsAnimated"].GetBool());
 		mDisplayTime = float(obj["DisplayTime"].GetFloat());
 		return true;
 	}
@@ -43,19 +46,19 @@ namespace EM {
 	{
 		writer->StartObject();
 		writer->Key("TextureName");
-		writer->String(m_texturename.c_str());
+		writer->String(mTextureName.c_str());
 		writer->Key("Index_X");
-		writer->Double(m_index.x);
+		writer->Double(mIndex.x);
 		writer->Key("Index_Y");
-		writer->Double(m_index.y);
+		writer->Double(mIndex.y);
 		writer->Key("Ucoordinates");
 		writer->Double(mUVcooridnates.x);
 		writer->Key("Vcoordinates");
 		writer->Double(mUVcooridnates.y);
 		writer->Key("IsSpriteSheet");
-		writer->Bool(mIsSpriteSheet);
+		writer->Bool(is_SpriteSheet);
 		writer->Key("IsAnimated");
-		writer->Bool(mIsanimated);
+		writer->Bool(is_Animated);
 		writer->Key("DisplayTime");
 		writer->Double(mDisplayTime);
 		writer->EndObject();

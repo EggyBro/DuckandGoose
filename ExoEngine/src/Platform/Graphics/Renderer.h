@@ -6,7 +6,10 @@
 \par Course:	CSD2400 / GAM200
 \date			11-2-2022
 \brief			This file contain the declaration for Render class which
-				has all the necessary draw call for our game.		
+				has all the necessary draw call for our game.	
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #pragma once

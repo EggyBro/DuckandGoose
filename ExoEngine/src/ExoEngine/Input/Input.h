@@ -7,6 +7,9 @@
 \par Section: a
 \date 9-28-2022
 \brief  header file for Input.cpp
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #pragma once
@@ -51,11 +54,11 @@ namespace EM {
 		
 	public:
 		//data
-		std::unordered_map<keycode, keystatus> m_KeyStatus;
-		std::unordered_map<mousecode, mousestatus> m_MouseStatus;
-		std::vector<keycode> m_reset;
+		std::unordered_map<keycode, keystatus> mKeyStatus;
+		std::unordered_map<mousecode, mousestatus> mMouseStatus;
+		std::vector<keycode> mReset;
 		
-		double MouseScrollStatus = 0.0f;
+		double mMouseScrollStatus = 0.0f;
 		
 	};
 }

@@ -7,6 +7,8 @@
 \date 11/2/2022
 \brief  This file holds the assert system for the project
 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"

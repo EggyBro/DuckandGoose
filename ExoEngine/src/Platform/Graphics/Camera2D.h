@@ -7,6 +7,10 @@
 \section		A
 \date			02-11-2022
 \brief			This file header contain the declaration for camera function
+
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 
@@ -23,18 +27,18 @@ namespace EM {
 
 		void SetProjection(float left, float right, float bottom, float top);
 
-		const glm::vec3& GetPosition() const { return m_Position; }
-		void SetPosition(const glm::vec3& position) { m_Position = position; RecalculateMatrix(); }
+		const glm::vec3& GetPosition() const { return mPosition; }
+		void SetPosition(const glm::vec3& position) { mPosition = position; RecalculateMatrix(); }
 
-		float GetRotation() const { return m_Rotation; }
-		void SetRotation(float rotation) { m_Rotation = rotation; RecalculateMatrix(); }
+		float GetRotation() const { return mRotation; }
+		void SetRotation(float rotation) { mRotation = rotation; RecalculateMatrix(); }
 
-		const glm::mat4& GetProjectionMatrix() const { return m_ProjectionMatrix; }
-		const glm::mat4& GetViewMatrix() const{ return m_ViewMatrix; }
-		const glm::mat4& GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
+		const glm::mat4& GetProjectionMatrix() const { return mProjectionMatrix; }
+		const glm::mat4& GetViewMatrix() const{ return mViewMatrix; }
+		const glm::mat4& GetViewProjectionMatrix() const { return mViewProjectionMatrix; }
 		
-		float GetZoomLevel()const { return m_ZoomLevel; }
-		void SetZoomLevel(float level) { m_ZoomLevel = level; }
+		float GetZoomLevel()const { return mZoomLevel; }
+		void SetZoomLevel(float level) { mZoomLevel = level; }
 		void resetZoomLevel();
 
 		bool MouseScrolling();
@@ -42,16 +46,16 @@ namespace EM {
 		void Resize(float width, float height);
 	private:
 
-		glm::mat4 m_ProjectionMatrix ;
-		glm::mat4 m_ViewMatrix;
-		glm::mat4 m_ViewProjectionMatrix;
-		glm::vec3 m_Position;
+		glm::mat4 mProjectionMatrix ;
+		glm::mat4 mViewMatrix;
+		glm::mat4 mViewProjectionMatrix;
+		glm::vec3 mPosition;
 		
-		float m_Rotation = 0.0f;
-		unsigned int m_viewportWidth, m_viewportHeight;
-		float m_AspectRatio = 0.0f;
-		float m_ZoomLevel = 1.0f;
-		Window m_window;
+		float mRotation = 0.0f;
+		unsigned int mViewportWidth, mViewportHeight;
+		float mAspectRatio = 0.0f;
+		float mZoomLevel = 1.0f;
+		Window mWindow;
 
 	private:
 		void RecalculateMatrix();

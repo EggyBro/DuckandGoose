@@ -8,6 +8,9 @@
 \brief			This file contain all the helper function needed for buffer
 				optimatization so that it will be easier to handle the buffer
 				data
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"

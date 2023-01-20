@@ -10,7 +10,8 @@
 \brief  AudioEngine.cpp utilises FMOD API calls to load, play, pause, stop and set
         volume.
 
-        Sounds are separated to 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"
@@ -44,9 +45,9 @@ API create sound
 ****************************************************************************/
 FMOD::Sound* CAudioEngine::Loadsound(const std::string& strSoundName, bool b_Looping)
 {
-    auto tFoundIt = SoundMap.find(strSoundName); //find if sound is loaded
+    auto tFoundIt = mSoundMap.find(strSoundName); //find if sound is loaded
     FMOD::Sound* pSound = nullptr; //create sound
-    if (tFoundIt != SoundMap.end())
+    if (tFoundIt != mSoundMap.end())
         return pSound; //if loaded exit function
 
     FMOD_MODE eMode = FMOD_DEFAULT;
@@ -55,7 +56,7 @@ FMOD::Sound* CAudioEngine::Loadsound(const std::string& strSoundName, bool b_Loo
     CAudioEngine::ErrorCheck(mpSystem->createSound(strSoundName.c_str(), eMode, NULL, &pSound));
     if (pSound) 
     {
-        SoundMap[strSoundName] = pSound; //if sound is created store in sound map
+        mSoundMap[strSoundName] = pSound; //if sound is created store in sound map
     }
     return pSound;
 }
@@ -67,10 +68,10 @@ FMOD API play sound using loaded audio
 int CAudioEngine::PlaySound(const std::string& strSoundName,  float fVolumedB)
 {
 
-    auto tFoundIt = SoundMap.find(strSoundName);
+    auto tFoundIt = mSoundMap.find(strSoundName);
     FMOD::Sound* pSound;
     
-    if (tFoundIt == SoundMap.end()) //iterate through channels, if not in any, load sound into a channel
+    if (tFoundIt == mSoundMap.end()) //iterate through channels, if not in any, load sound into a channel
     {
         pSound = Loadsound(strSoundName);
     }
@@ -82,16 +83,16 @@ int CAudioEngine::PlaySound(const std::string& strSoundName,  float fVolumedB)
     FMOD::Channel* pChannel = nullptr;
 
     //create new channel if no empty channels found
-    int nChannelId = mnNextChannelId++;
+    int nChannelId = mNextChannelId++;
     ErrorCheck(mpSystem->playSound(pSound, nullptr, false, &pChannel));
     if (pChannel)
     {
         FMOD_MODE currMode;
         pSound->getMode(&currMode);
         CAudioEngine::ErrorCheck(pChannel->setVolume(VolumeTodB(fVolumedB)));
-        ChannelMap[nChannelId] = pChannel;
+        mChannelMap[nChannelId] = pChannel;
     }
-    std::cout << ChannelMap.size() << std::endl;
+    std::cout << mChannelMap.size() << std::endl;
     return nChannelId;
 }
 
@@ -100,9 +101,9 @@ Uses FMOD setPaused() to pause audio
 ****************************************************************************/
 void CAudioEngine::PauseSound(int channelID)
 {
-    auto it = ChannelMap.find(channelID);
+    auto it = mChannelMap.find(channelID);
     
-    if (it != ChannelMap.end())
+    if (it != mChannelMap.end())
     {
         it->second->setPaused(true);
     }
@@ -113,9 +114,9 @@ Uses FMOD setPaused() and sets to false to unpause audio
 ****************************************************************************/
 void CAudioEngine::UnpauseSound(int channelID)
 {
-    auto it = ChannelMap.find(channelID);
+    auto it = mChannelMap.find(channelID);
     
-    if (it != ChannelMap.end())
+    if (it != mChannelMap.end())
     {
         it->second->setPaused(false);
     }
@@ -147,9 +148,9 @@ Sets audio volume
 ****************************************************************************/
 void CAudioEngine::SetVolume(int channelID, float vol)
 {
-    auto it = ChannelMap.find(channelID);
+    auto it = mChannelMap.find(channelID);
     
-    if (it != ChannelMap.end())
+    if (it != mChannelMap.end())
     {
         it->second->setVolume(VolumeTodB(vol));
     }
@@ -160,9 +161,9 @@ Stop all audio channels
 ****************************************************************************/
 void CAudioEngine::StopChannel(int channelID)
 {
-    auto it = ChannelMap.find(channelID); 
+    auto it = mChannelMap.find(channelID); 
     
-    if(it != ChannelMap.end())
+    if(it != mChannelMap.end())
     {
             it->second->stop();
     }   
@@ -175,9 +176,9 @@ float CAudioEngine::GetVolume(int channelID)
 {
     float audio_volume = 0.0f;
 
-    auto it = ChannelMap.find(channelID); 
+    auto it = mChannelMap.find(channelID); 
     
-    if(it != ChannelMap.end())
+    if(it != mChannelMap.end())
     {
        it->second->getVolume(&audio_volume);
     }
@@ -209,7 +210,7 @@ Update loop of CAudioEngine
 void CAudioEngine::Update()
 {
     std::vector<std::map<int, FMOD::Channel*>::iterator> pStoppedChannels;
-    for (auto it = ChannelMap.begin(); it != ChannelMap.end(); ++it)
+    for (auto it = mChannelMap.begin(); it != mChannelMap.end(); ++it)
     {
         bool bIsPlaying = false;
         it->second->isPlaying(&bIsPlaying);
@@ -221,10 +222,10 @@ void CAudioEngine::Update()
     }
     for (auto& it : pStoppedChannels)
     {
-        ChannelMap.erase(it);
+        mChannelMap.erase(it);
     }
-    if (ChannelMap.begin() == ChannelMap.end()) {
-        mnNextChannelId = 0;
+    if (mChannelMap.begin() == mChannelMap.end()) {
+        mNextChannelId = 0;
     }
     CAudioEngine::ErrorCheck(mpSystem->update());
 }
@@ -236,9 +237,9 @@ Release loop of CAudioEngine, releases all audio files
 void CAudioEngine::Release()
 {
     //std::map<std::string, FMOD::Sound*>::iterator sound_it;
-    // iterate through soundmap
+    // iterate through mSoundMap
     // release every sound
-    for (auto sound_it = SoundMap.begin(); sound_it != SoundMap.end(); sound_it++)
+    for (auto sound_it = mSoundMap.begin(); sound_it != mSoundMap.end(); sound_it++)
     {
         sound_it->second->release();
     }
@@ -262,9 +263,9 @@ Checks if audio is playing
 bool CAudioEngine::IsPlaying(int nChannelId) const
 {
     bool is_playing = false;
-    auto it = ChannelMap.find(nChannelId);
+    auto it = mChannelMap.find(nChannelId);
     //if not found return false
-    if (it != ChannelMap.end())
+    if (it != mChannelMap.end())
     {
         return it->second->isPlaying(&is_playing);
     }

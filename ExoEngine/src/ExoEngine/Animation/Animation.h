@@ -6,6 +6,9 @@
 \par Course:	CSD2400 / GAM200
 \date			11-11-2022
 \brief			Header file for animation.cpp
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #pragma once
@@ -20,10 +23,10 @@ namespace EM {
 	public:
 		struct FrameData
 		{
-			unsigned int TextureId; // which spritesheet is it using
-			float DisplayTime;		// how long does the frame last before changing the next frame
-			vec2D FrameIndex;		// the increment of the frame set to 0 when reach the last frame and y will always remind 0
-			float MaxFrame;			// To check for the last frame
+			unsigned int TextureId{}; // which spritesheet is it using
+			float DisplayTime{};		// how long does the frame last before changing the next frame
+			vec2D FrameIndex{};		// the increment of the frame set to 0 when reach the last frame and y will always remind 0
+			float MaxFrame{};			// To check for the last frame
 		};
 		Animation();
 		void AddFrameInfo(Sprite& sprite);
@@ -36,9 +39,9 @@ namespace EM {
 
 	private:
 		
-		std::vector<FrameData> frames;
-		float CurrentFrameIndex;// currentFrameIndex
-		float currentFrameTime; // decide when to transition to the next frame
+		std::vector<FrameData> mFrame;
+		float mCurrentFrameIndex;// mCurrentFrameIndex
+		float mCurrentFrameTime; // decide when to transition to the next frame
 		
 	};
 }

@@ -11,6 +11,8 @@
 component, grabbing the vector of scripts from the logic components and
 iterating through each script to call its update functions
 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"

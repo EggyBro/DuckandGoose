@@ -8,6 +8,8 @@
 \brief			This file contain the neccesary declaration functions for class vertexbuffer,
 				vertexarray, index array and buffer element and layout.
 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #pragma once
@@ -25,11 +27,11 @@ namespace EM
 		virtual void Unbind() const override;
 		virtual void SetBufferData(const void* data, unsigned int size) override;
 
-		virtual const BufferLayout& GetLayout() const override { return m_layout; }
-		virtual void  SetLayout(const BufferLayout& layout) override { m_layout = layout; }
+		virtual const BufferLayout& GetLayout() const override { return mLayout; }
+		virtual void  SetLayout(const BufferLayout& layout) override { mLayout = layout; }
 	private:
-		unsigned int m_RenderID;
-		BufferLayout m_layout;
+		unsigned int mRenderID;
+		BufferLayout mLayout;
 	};
 
 	
@@ -42,11 +44,11 @@ namespace EM
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
 
-		virtual unsigned int GetCount() const { return m_count; }
+		virtual unsigned int GetCount() const { return mCount; }
 	private:
 
-		unsigned int m_RenderID;
-		unsigned int m_count;
+		unsigned int mRenderID;
+		unsigned int mCount;
 	};
 	
 }

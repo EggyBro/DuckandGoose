@@ -7,6 +7,9 @@
 \date			11-02-2022
 \brief			This file binds the framebuffer and gets the pixel cooridnate
 				and can be used in it in level editor
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"
@@ -14,15 +17,15 @@
 #include <GL/glew.h>
 namespace EM {
 
-	std::unique_ptr<FrameBuffer> FrameBuffer::_finstance{ nullptr };
+	std::unique_ptr<FrameBuffer> FrameBuffer::mInstance{ nullptr };
 
 	std::unique_ptr<FrameBuffer>& FrameBuffer::GetInstance()
 	{
-		if (_finstance == nullptr)
+		if (mInstance == nullptr)
 		{
-			_finstance = std::make_unique<FrameBuffer>();
+			mInstance = std::make_unique<FrameBuffer>();
 		}
-		return _finstance;
+		return mInstance;
 	}
 
 	/*!*************************************************************************
@@ -131,7 +134,7 @@ namespace EM {
 	****************************************************************************/
 	const FrameBufferSpecification EM::FrameBuffer::GetSpecification() const
 	{
-		return m_Specification;
+		return mSpecification;
 	}
 
 	/*!*************************************************************************
@@ -139,8 +142,8 @@ namespace EM {
 	****************************************************************************/
 	uint32_t FrameBuffer::GetColorAttachmentRendererID(uint32_t index) const
 	{
-		//GM_CORE_ASSERT(index < m_ColorAttachments.size(), "");
-		return  m_ColorAttachments[index];
+		//GM_CORE_ASSERT(index < mColorAttachments.size(), "");
+		return  mColorAttachments[index];
 	}
 
 	/*!*************************************************************************
@@ -148,16 +151,16 @@ namespace EM {
 	****************************************************************************/
 	void FrameBuffer::SetFrameBufferSpecification(const FrameBufferSpecification& specification)
 	{
-		m_Specification = specification;
+		mSpecification = specification;
 
-		for (auto spec : m_Specification.Attachments.Attachments)
+		for (auto spec : mSpecification.Attachments.Attachments)
 		{
 			if (!Helper::IsDepthFormat(spec.TextureFormat))
 			{
-				m_ColorAttachmentSpecification.emplace_back(spec);
+				mColorAttachmentSpecification.emplace_back(spec);
 			}
 			else
-				m_DepthAttachmentSpecifiication = spec;
+				mDepthAttachmentSpecifiication = spec;
 		}
 
 		Create();
@@ -169,8 +172,8 @@ namespace EM {
 	void FrameBuffer::Resize(uint32_t width, uint32_t height)
 	{
 		// update the specification
-		m_Specification.Width = width;
-		m_Specification.Height = height;
+		mSpecification.Width = width;
+		mSpecification.Height = height;
 		Create();
 	}
 
@@ -180,11 +183,11 @@ namespace EM {
 	FrameBuffer::~FrameBuffer()
 	{
 		// delete framebuffer object
-		glDeleteFramebuffers(1, &m_RendererID);
+		glDeleteFramebuffers(1, &mRendererID);
 		// delete color attachment textures
-		glDeleteTextures((GLsizei)m_ColorAttachments.size(), m_ColorAttachments.data());
+		glDeleteTextures((GLsizei)mColorAttachments.size(), mColorAttachments.data());
 
-		glDeleteRenderbuffers(1, &m_DepthAttachment);
+		glDeleteRenderbuffers(1, &mDepthAttachment);
 	}
 
 	/*!*************************************************************************
@@ -192,47 +195,47 @@ namespace EM {
 	****************************************************************************/
 	void FrameBuffer::Create()
 	{
-		if (m_RendererID)
+		if (mRendererID)
 		{
 			// delete framebuffer object
-			glDeleteFramebuffers(1, &m_RendererID);
+			glDeleteFramebuffers(1, &mRendererID);
 			// delete color attachment textures
-			glDeleteTextures((GLsizei)m_ColorAttachments.size(), m_ColorAttachments.data());
+			glDeleteTextures((GLsizei)mColorAttachments.size(), mColorAttachments.data());
 			// delete renderbuffer objects
-			glDeleteRenderbuffers(1, &m_DepthAttachment);
+			glDeleteRenderbuffers(1, &mDepthAttachment);
 			// clear attachments
-			m_ColorAttachments.clear();
-			m_DepthAttachment = 0;
+			mColorAttachments.clear();
+			mDepthAttachment = 0;
 		}
 
 		// creating a framebuffer obj
-		glGenFramebuffers(1, &m_RendererID);
-		glBindFramebuffer(GL_FRAMEBUFFER, m_RendererID);
+		glGenFramebuffers(1, &mRendererID);
+		glBindFramebuffer(GL_FRAMEBUFFER, mRendererID);
 
-		bool multisample = m_Specification.Samples > 1; // check the specification if its multi-sampling 
+		bool multisample = mSpecification.Samples > 1; // check the specification if its multi-sampling 
 
 		// Attachments
-		if (m_ColorAttachmentSpecification.size())
+		if (mColorAttachmentSpecification.size())
 		{
 			// resize the ColorAttachment ID vector size to fit the ColorSpecification vector size (contains data properties of color attachment) 
-			m_ColorAttachments.resize(m_ColorAttachmentSpecification.size());
+			mColorAttachments.resize(mColorAttachmentSpecification.size());
 
 			// generates color attachments 
-			Helper::CreateTextures(multisample, m_ColorAttachments.data(), (uint32_t)m_ColorAttachments.size());
-			for (size_t i{ 0 }; i < m_ColorAttachments.size(); ++i)
+			Helper::CreateTextures(multisample, mColorAttachments.data(), (uint32_t)mColorAttachments.size());
+			for (size_t i{ 0 }; i < mColorAttachments.size(); ++i)
 			{
-				Helper::BindTexture(multisample, m_ColorAttachments[i]);
+				Helper::BindTexture(multisample, mColorAttachments[i]);
 
 				// switch between rendering RGBA8 for the game and RED_INTGER for shader 
-				switch (m_ColorAttachmentSpecification[i].TextureFormat)
+				switch (mColorAttachmentSpecification[i].TextureFormat)
 				{
 					// Current Game (RGBA8)
 				case FrameBufferTextureFormat::RGBA8:
-					Helper::AttachColorTexture(m_ColorAttachments[i], m_Specification.Samples, GL_RGBA8, GL_RGBA, m_Specification.Width, m_Specification.Height, i);
+					Helper::AttachColorTexture(mColorAttachments[i], mSpecification.Samples, GL_RGBA8, GL_RGBA, mSpecification.Width, mSpecification.Height, i);
 					break;
 					// Used to sample an int value from the fragment shader 
 				case FrameBufferTextureFormat::RED_INTEGER:
-					Helper::AttachColorTexture(m_ColorAttachments[i], m_Specification.Samples, GL_R32I, GL_RED_INTEGER, m_Specification.Width, m_Specification.Height, i);
+					Helper::AttachColorTexture(mColorAttachments[i], mSpecification.Samples, GL_R32I, GL_RED_INTEGER, mSpecification.Width, mSpecification.Height, i);
 					break;
 				}
 			}
@@ -240,26 +243,26 @@ namespace EM {
 
 
 		// generates Depth stencil attachment (not using)
-		if (m_DepthAttachmentSpecifiication.TextureFormat != FrameBufferTextureFormat::NONE)
+		if (mDepthAttachmentSpecifiication.TextureFormat != FrameBufferTextureFormat::NONE)
 		{
 			// create depth attachment 
-			Helper::CreateTextures(multisample, &m_DepthAttachment, 1);
-			Helper::BindTexture(multisample, m_DepthAttachment);
-			switch (m_DepthAttachmentSpecifiication.TextureFormat)
+			Helper::CreateTextures(multisample, &mDepthAttachment, 1);
+			Helper::BindTexture(multisample, mDepthAttachment);
+			switch (mDepthAttachmentSpecifiication.TextureFormat)
 			{
 			case FrameBufferTextureFormat::DEPTH24STENCIL8:
-				Helper::AttachDepthTexture(m_DepthAttachment, m_Specification.Samples, GL_DEPTH24_STENCIL8, GL_DEPTH_STENCIL_ATTACHMENT, m_Specification.Width, m_Specification.Height);
+				Helper::AttachDepthTexture(mDepthAttachment, mSpecification.Samples, GL_DEPTH24_STENCIL8, GL_DEPTH_STENCIL_ATTACHMENT, mSpecification.Width, mSpecification.Height);
 			}
 		}
 
 		// draw (max of 4 color attachments)
-		if (m_ColorAttachments.size() > 1)
+		if (mColorAttachments.size() > 1)
 		{
-			/*GM_CORE_ASSERT(m_ColorAttachments.size() <= 4, "Color AttachMent is more than 4");*/
+			/*GM_CORE_ASSERT(mColorAttachments.size() <= 4, "Color AttachMent is more than 4");*/
 			GLenum buffers[4] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3 };
-			glDrawBuffers((GLsizei)m_ColorAttachments.size(), buffers);
+			glDrawBuffers((GLsizei)mColorAttachments.size(), buffers);
 		}
-		else if (m_ColorAttachments.empty())
+		else if (mColorAttachments.empty())
 		{
 			// depth pass
 			glDrawBuffer(GL_NONE);
@@ -281,8 +284,8 @@ namespace EM {
 	****************************************************************************/
 	void FrameBuffer::Bind()
 	{
-		glBindFramebuffer(GL_FRAMEBUFFER, m_RendererID);
-		glViewport(0, 0, m_Specification.Width, m_Specification.Height);
+		glBindFramebuffer(GL_FRAMEBUFFER, mRendererID);
+		glViewport(0, 0, mSpecification.Width, mSpecification.Height);
 	}
 
 	/*!*************************************************************************

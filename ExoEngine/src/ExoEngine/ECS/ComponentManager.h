@@ -13,6 +13,8 @@ the ECS. Registered components can then be added to various systems and
 entities within the ECS. The system will then have a unique signature based
 on components added and will update all components belonging to the system
 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 

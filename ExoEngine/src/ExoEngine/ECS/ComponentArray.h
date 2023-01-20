@@ -12,6 +12,8 @@ components based on the type. This templated class is used for an ECS to map
 each entity to index and each index to entity to ensure a packed array of
 components
 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #pragma once

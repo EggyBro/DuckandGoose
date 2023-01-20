@@ -34,7 +34,7 @@ namespace EM
 
 		vec2D operator -() const;
 
-		void Vec2Set(vec2D& curr, float x_, float y_);
+		//void Vec2Set(vec2D& curr, float x_, float y_);
 
 
 		//tools

@@ -7,6 +7,9 @@
 \section		A
 \date			9-28-2022
 \brief			This file contain the main game loop
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"
@@ -118,7 +121,7 @@ Run loop for application
 		//Entity Background = p_ecs.CreateEntity();
 		//name.SetNameTag("BackGround");
 		//p_ecs.AddComponent<NameTag>(Background, name);
-		//p_ecs.AddComponent<Transform>(Background, TransformComponent);
+		//p_ecs.AddComponent<Transform>(Background, C_TransformComponent);
 		//p_ecs.AddComponent<Sprite>(Background, SpriteComponent);
 		//p_ecs.AddComponent<RigidBody>(Background, rb);
 		//p_ecs.AddComponent<Collider>(Background, ColliderComponent);
@@ -128,7 +131,7 @@ Run loop for application
 		//Entity player = p_ecs.CreateEntity();
 		//name.SetNameTag("Player");
 		//sprite.SetTexture("Idle");
-		//p_ecs.AddComponent<Transform>(player, TransformComponent);
+		//p_ecs.AddComponent<Transform>(player, C_TransformComponent);
 		//p_ecs.AddComponent<RigidBody>(player, rb);
 		//p_ecs.AddComponent<Sprite>(player, sprite);
 		//p_ecs.AddComponent<NameTag>(player, name);
@@ -142,7 +145,7 @@ Run loop for application
 
 		//Entity enemy = p_ecs.CreateEntity();
 		//Logic logic2;
-		//p_ecs.AddComponent<Transform>(enemy, TransformComponent);
+		//p_ecs.AddComponent<Transform>(enemy, C_TransformComponent);
 		//p_ecs.AddComponent<RigidBody>(enemy, rb);
 		//p_ecs.AddComponent<Sprite>(enemy, sprite);
 		//p_ecs.AddComponent<Collider>(enemy, ColliderComponent);
@@ -158,7 +161,7 @@ Run loop for application
 		//p_ecs.GetComponent<Tag>(col).SetTag("PlayerAttack");
 		//p_ecs.GetComponent<Tag>(col).SetTargetTag("Enemy");
 		//p_ecs.AddComponent<Sprite>(col, SpriteComponent);
-		//p_ecs.AddComponent<Transform>(col, TransformComponent);
+		//p_ecs.AddComponent<Transform>(col, C_TransformComponent);
 		//p_ecs.GetComponent<Transform>(col).SetComponentEntityID(player);
 		//p_ecs.GetComponent<Transform>(col).GetComponentEntityID();
 		//p_ecs.AddComponent<RigidBody>(col, rb);
@@ -177,7 +180,7 @@ Run loop for application
 			{
 				p_Audio->Update();
 				p_Editor->Update();
-				if (p_Editor->show_window)
+				if (p_Editor->is_ShowWindow)
 				{
 					p_Editor->Draw();
 				}

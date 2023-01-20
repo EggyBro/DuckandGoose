@@ -9,6 +9,8 @@
 \brief  This file contains the function declarations for calculating acceleration
         and deceleration as well as detecting collision
  
+ Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 *******************************************************************************/
 #pragma once
 

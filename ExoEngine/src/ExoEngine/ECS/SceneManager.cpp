@@ -11,6 +11,8 @@
 level data into a JSON file. Currently on application end the ecs will be
 saved into a json file for future loading
 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"

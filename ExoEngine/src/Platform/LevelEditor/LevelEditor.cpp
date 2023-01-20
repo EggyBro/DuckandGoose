@@ -10,6 +10,9 @@
 \brief  This program utilises Dear ImGui and OpenGL to create a editor interface
         to allow us to edit object, create entities and modify the
         properties of the components and save them accordingly.
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"
@@ -38,15 +41,15 @@
 
 namespace EM {
 
-    std::unique_ptr<LevelEditor> LevelEditor::m_instance{ nullptr };
+    std::unique_ptr<LevelEditor> LevelEditor::mInstance{ nullptr };
 
     std::unique_ptr<LevelEditor>& LevelEditor::GetInstance()
     {
-        if (m_instance == nullptr)
+        if (mInstance == nullptr)
         {
-            m_instance = std::make_unique<LevelEditor>();
+            mInstance = std::make_unique<LevelEditor>();
         }
-        return m_instance;
+        return mInstance;
     }
 
     bool color_picker = false;
@@ -59,7 +62,7 @@ namespace EM {
     ****************************************************************************/
     void LevelEditor::Init(Window* window)
     {
-        m_window = window;
+        mWindow = window;
 
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
@@ -85,14 +88,14 @@ namespace EM {
         //MainMenuBar();
         if (p_Input->KeyPressed(GLFW_KEY_P))
         {
-            show_window = !show_window;
+            is_ShowWindow = !is_ShowWindow;
         }
-        if (!p_Editor->show_window)
+        if (!p_Editor->is_ShowWindow)
         {
-            glViewport(0, 0, m_window->Getter().m_Width, m_window->Getter().m_Height);
-            EM::Graphic::camera.Resize(static_cast<float>(m_window->Getter().m_Width), static_cast<float>(m_window->Getter().m_Height));
+            glViewport(0, 0, mWindow->Getter().m_Width, mWindow->Getter().m_Height);
+            EM::Graphic::camera.Resize(static_cast<float>(mWindow->Getter().m_Width), static_cast<float>(mWindow->Getter().m_Height));
         }
-        if (show_window)
+        if (is_ShowWindow)
         {
             ImGui_ImplOpenGL3_NewFrame();
             ImGui_ImplGlfw_NewFrame();
@@ -123,10 +126,10 @@ namespace EM {
         ImGuiIO& io = ImGui::GetIO();
         if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
         {
-            auto* mWindow = glfwGetCurrentContext();
+            auto* Window = glfwGetCurrentContext();
             ImGui::UpdatePlatformWindows();
             ImGui::RenderPlatformWindowsDefault();
-            glfwMakeContextCurrent(mWindow);
+            glfwMakeContextCurrent(Window);
         }
 
     }
@@ -214,14 +217,14 @@ namespace EM {
             {
                 if (ImGui::MenuItem("Open"))
                 {
-                    show_window = true;
+                    is_ShowWindow = true;
                 }
 
                 ImGui::Separator();
 
                 if (ImGui::MenuItem("Close"))
                 {
-                    show_window = false;
+                    is_ShowWindow = false;
                 }
                 ImGui::EndMenu();
             }
@@ -385,19 +388,19 @@ namespace EM {
    ****************************************************************************/
     void LevelEditor::ContentBrowser()
     {
-        if (show_window)
+        if (is_ShowWindow)
         {
             ImGui::Begin("Content Browser");
-            if (m_CurrentDirectory != std::filesystem::path(mAssetsPath))
+            if (mCurrentDirectory != std::filesystem::path(mAssetsPath))
             {
                 if (ImGui::ImageButton((void*)(intptr_t)ResourceManager::GetIcon("BackIcon")->GetRendererID(),
                     { 25.f,25.f }, { 0, 1 }, { 1, 0 }))
                 {
-                    m_CurrentDirectory = m_CurrentDirectory.parent_path();
+                    mCurrentDirectory = mCurrentDirectory.parent_path();
                 }
             }
 
-            for (auto& Directory : std::filesystem::directory_iterator(m_CurrentDirectory))
+            for (auto& Directory : std::filesystem::directory_iterator(mCurrentDirectory))
             {
                 const auto& directorypath = Directory.path(); //the path for folders in Assets(assets/fonts)
 
@@ -416,7 +419,7 @@ namespace EM {
                 if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
                 {
                     if (Directory.is_directory())
-                        m_CurrentDirectory /= directorypath.filename();
+                        mCurrentDirectory /= directorypath.filename();
                 }
 
                 ImGui::TextWrapped(filename.c_str()); ImGui::NextColumn(); //indicate the folder name
@@ -425,8 +428,8 @@ namespace EM {
 
             ImGui::End();
 
-            ImGui::Begin(m_CurrentDirectory.filename().string().c_str(), (bool*)0, ImGuiWindowFlags_HorizontalScrollbar);
-            if (m_CurrentDirectory.filename() == "Textures")
+            ImGui::Begin(mCurrentDirectory.filename().string().c_str(), (bool*)0, ImGuiWindowFlags_HorizontalScrollbar);
+            if (mCurrentDirectory.filename() == "Textures")
             {
                 for (auto& [name, texObj] : ResourceManager::textures)
                 {
@@ -454,7 +457,7 @@ namespace EM {
                     }
                 }
             }
-            else if (m_CurrentDirectory.filename() == "Icons")
+            else if (mCurrentDirectory.filename() == "Icons")
             {
                 for (auto& [name, texObj] : ResourceManager::Icons)
                 {
@@ -484,7 +487,7 @@ namespace EM {
    ****************************************************************************/
     void LevelEditor::Logger()
     {
-        if (show_window)
+        if (is_ShowWindow)
         {
 
             if (ImGui::Begin("Logger"))
@@ -615,7 +618,7 @@ namespace EM {
     ****************************************************************************/
     void LevelEditor::Profiler()
     {
-        if (show_window)
+        if (is_ShowWindow)
         {
             ImGui::Begin("Profiler");
             //Opengl information
@@ -672,12 +675,12 @@ namespace EM {
   ****************************************************************************/
     void LevelEditor::Hierarchy()
     {
-        if (show_window)
+        if (is_ShowWindow)
         {
             ImGui::Begin("Hierarchy");
             if (ImGui::Button("Create Entity") && p_ecs.GetTotalEntities() != MAX_ENTITIES)
             {
-                p_ecs.AddComponent<NameTag>(p_ecs.CreateEntity(), NameTagComponent);
+                p_ecs.AddComponent<NameTag>(p_ecs.CreateEntity(), C_NameTagComponent);
             }
 
             if (p_ecs.GetTotalEntities() > 0)
@@ -739,7 +742,7 @@ namespace EM {
    ****************************************************************************/
     void LevelEditor::Inspector()
     {
-        if (show_window)
+        if (is_ShowWindow)
         {
             ImGui::Begin("Inspector");
             if (selectedEntity != MAX_ENTITIES && p_ecs.GetTotalEntities() != 0)// if the selectedEntityExist
@@ -754,25 +757,25 @@ namespace EM {
                     if (ImGui::MenuItem("Transform"))
                     {
                         if (!p_ecs.HaveComponent<Transform>(selectedEntity))
-                            p_ecs.AddComponent<Transform>(selectedEntity, TransformComponent);
+                            p_ecs.AddComponent<Transform>(selectedEntity, C_TransformComponent);
                         ImGui::CloseCurrentPopup();
                     }
                     if (ImGui::MenuItem("Sprite"))
                     {
                         if (!p_ecs.HaveComponent<Sprite>(selectedEntity))
-                            p_ecs.AddComponent<Sprite>(selectedEntity, SpriteComponent);
+                            p_ecs.AddComponent<Sprite>(selectedEntity, C_SpriteComponent);
                         ImGui::CloseCurrentPopup();
                     }
                     if (ImGui::MenuItem("Collider"))
                     {
                         if (!p_ecs.HaveComponent<Collider>(selectedEntity))
-                            p_ecs.AddComponent<Collider>(selectedEntity, ColliderComponent);
+                            p_ecs.AddComponent<Collider>(selectedEntity, C_ColliderComponent);
                         ImGui::CloseCurrentPopup();
                     }
                     if (ImGui::MenuItem("RigidBody"))
                     {
                         if (!p_ecs.HaveComponent<RigidBody>(selectedEntity))
-                            p_ecs.AddComponent<RigidBody>(selectedEntity, RigidBodyComponent);
+                            p_ecs.AddComponent<RigidBody>(selectedEntity, C_RigidBodyComponent);
                         ImGui::CloseCurrentPopup();
                     }
 
@@ -834,8 +837,8 @@ namespace EM {
                     if (ImGui::CollapsingHeader("Sprite", ImGuiTreeNodeFlags_None))
                     {
                         auto& sprite = p_ecs.GetComponent<Sprite>(selectedEntity);
-                        ImGui::Checkbox("SpriteSheet", &sprite.mIsSpriteSheet); ImGui::SameLine();
-                        ImGui::Checkbox("Animation", &sprite.mIsanimated);
+                        ImGui::Checkbox("SpriteSheet", &sprite.is_SpriteSheet); ImGui::SameLine();
+                        ImGui::Checkbox("Animation", &sprite.is_Animated);
                         ImGui::Text("Coordinates: "); ImGui::SameLine();
                         ImGui::Text("X"); ImGui::SameLine();
                         ImGui::DragFloat("##X", (float*)&sprite.GetIndex().x, 0.5f); ImGui::SameLine();
@@ -872,12 +875,12 @@ namespace EM {
                             }
                             ImGui::EndDragDropTarget();
                         }
-                        if (sprite.mIsanimated)
+                        if (sprite.is_Animated)
                         {
                             ImGui::Text("DisplayTime"); ImGui::SameLine();
                             ImGui::DragFloat("##DisplayTime", (float*)&sprite.GetDisplayTime(), 0.005f);
                         }
-                        if (sprite.mIsSpriteSheet)
+                        if (sprite.is_SpriteSheet)
                         {
                             ImGui::Text("UVCoordinates: "); ImGui::SameLine();
                             ImGui::Text("U"); ImGui::SameLine();
@@ -1007,7 +1010,7 @@ namespace EM {
                 }
             }
             ImGui::End();
-        } //end of show_window
+        } //end of is_ShowWindow
 
     }
 
@@ -1019,7 +1022,7 @@ namespace EM {
     ****************************************************************************/
     void LevelEditor::AudioManager()
     {
-        if (show_window)
+        if (is_ShowWindow)
         {
             std::vector<const char*> audiofilenames;
             const size_t arraysize = 100;
@@ -1053,7 +1056,7 @@ namespace EM {
                 //playinglist.emplace_back(std::to_string(current_sound).c_str());
             }
 
-            for (auto i = p_Audio->ChannelMap.begin(); i != p_Audio->ChannelMap.end(); i++)
+            for (auto i = p_Audio->mChannelMap.begin(); i != p_Audio->mChannelMap.end(); i++)
             {
                 //print out text indicating channel number
                 ImGui::Text("Playing Channel %s", std::to_string(i->first).c_str());

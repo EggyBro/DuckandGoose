@@ -9,6 +9,9 @@
 				to create a timer and use it as a tracker for our system
 				during runtime. It also have a deltatime for update and other
 				math implementation.
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #pragma once
@@ -37,9 +40,9 @@ namespace EM {
 		void GlobalUpdate();
 
 		// returns global delta time
-		float GetGlobalDT() const { return m_GlobalDT; }
-		float GetDT(Systems system) { return m_SystemDT[static_cast<int>(system)]; }
-		float GetFps() const { return m_fps; }
+		float GetGlobalDT() const { return mGlobalDT; }
+		float GetDT(Systems system) { return mSystemDT[static_cast<int>(system)]; }
+		float GetFps() const { return mFps; }
 
 		//Timer for system runtime
 		void Start(Systems system);
@@ -55,14 +58,14 @@ namespace EM {
 		}
 
 	public:
-		std::array<std::chrono::system_clock::time_point, TotalSystems> t_StartTime;
-		std::array<float, TotalSystems> m_SystemDT;
+		std::array<std::chrono::system_clock::time_point, TotalSystems> mStartTime;
+		std::array<float, TotalSystems> mSystemDT;
 
 	private:
-		std::chrono::system_clock::time_point m_Start, m_End;
-		std::chrono::duration<float, std::milli> m_DT;
-		clock_t GlobalStart, RuntimeStart;
-		float m_GlobalDT, m_TotalRuntime, m_fps, m_dt;
+		std::chrono::system_clock::time_point mStart, mEnd;
+		std::chrono::duration<float, std::milli> mDT;
+		clock_t mGlobalStart, mRunTimeStart;
+		float mGlobalDT, mTotalRuntime, mFps, mFloatDeltaTime;
 
 	private:
 		time_t GetSystemTimeNow();

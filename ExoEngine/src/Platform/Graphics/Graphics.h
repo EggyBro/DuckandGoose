@@ -6,6 +6,9 @@
 \par Course:	CSD2400 / GAM200
 \date			9-28-2022
 \brief			This file contain neccessary function for graphic class
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #pragma once
@@ -39,12 +42,11 @@ namespace EM {
 		inline static Camera2D camera { -1.0f, 1.0f, -1.0f , 1.0f };
 	private:
 		//for testing
-		std::shared_ptr<Texture> m_Texture = std::make_shared<Texture>();
-		std::unique_ptr<Renderer> m_Renderer = std::make_unique<Renderer>();
-		std::unique_ptr<Font> m_Font = std::make_unique<Font>();
-		MultiRefs<SpriteRender> index1;
-		WinData mwindow{};
-		Animation animator;
+		std::unique_ptr<Renderer> mRenderer = std::make_unique<Renderer>();
+		std::unique_ptr<Font> mFont = std::make_unique<Font>();
+		MultiRefs<SpriteRender> mIndex1;
+		WinData mWinData{};
+		Animation mAimator;
 	private:
 		void LoadTexture(std::string filename);
 		void LoadIconsTexture(std::string filename);

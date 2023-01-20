@@ -7,6 +7,9 @@
 \section		A
 \date			11-11-2022
 \brief			This file sets frame data for animations
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"
@@ -19,7 +22,7 @@ namespace EM {
 	Constructor for animation
 	****************************************************************************/
 	Animation::Animation()
-		:frames(0), CurrentFrameIndex(0), currentFrameTime(0)
+		:mFrame(0), mCurrentFrameIndex(0), mCurrentFrameTime(0)
 	{
 
 	}
@@ -33,9 +36,9 @@ namespace EM {
 		data.TextureId = GETTEXTURE(sprite.GetTexture())->GetRendererID();
 		data.DisplayTime = sprite.GetDisplayTime();
 		data.FrameIndex = sprite.GetIndex();
-		sprite.SetIndex(CurrentFrameIndex);
+		sprite.SetIndex(mCurrentFrameIndex);
 		data.MaxFrame = 8.0f;
-		frames.push_back(data);
+		mFrame.push_back(data);
 		//std::cout <<"Addframeinfo" << data.DisplayTime << std::endl;
 	}
 
@@ -44,7 +47,7 @@ namespace EM {
 	****************************************************************************/
 	void Animation::FrameIncrement()
 	{
-		CurrentFrameIndex++;
+		mCurrentFrameIndex++;
 	}
 
 	/*!*************************************************************************
@@ -52,8 +55,8 @@ namespace EM {
 	****************************************************************************/
 	const Animation::FrameData* Animation::GetCurrentFrame() const
 	{
-		if (frames.size() > 0)
-			return &frames[(int)CurrentFrameIndex];
+		if (mFrame.size() > 0)
+			return &mFrame[(int)mCurrentFrameIndex];
 
 		return nullptr;
 	}
@@ -63,17 +66,17 @@ namespace EM {
 	****************************************************************************/
 	bool Animation::UpdateAnimation(float deltatime)
 	{
-		if (frames.size() > 0)
+		if (mFrame.size() > 0)
 		{
-			currentFrameTime += deltatime;
+			mCurrentFrameTime += deltatime;
 			
-			if (currentFrameTime >= frames[(int)CurrentFrameIndex].DisplayTime )
+			if (mCurrentFrameTime >= mFrame[(int)mCurrentFrameIndex].DisplayTime )
 			{
-				//std::cout <<"Updateanimation" << frames[(int)CurrentFrameIndex].DisplayTime << std::endl;
-				currentFrameTime = 0.0f;
+				//std::cout <<"Updateanimation" << mFrame[(int)mCurrentFrameIndex].DisplayTime << std::endl;
+				mCurrentFrameTime = 0.0f;
 				FrameIncrement();
 
-				if (CurrentFrameIndex >= 8.0f)
+				if (mCurrentFrameIndex >= 8.0f)
 					ResetFrame();
 				return true;
 			}
@@ -86,7 +89,7 @@ namespace EM {
 	****************************************************************************/
 	void Animation::ResetFrame()
 	{
-		CurrentFrameIndex = 0;
-		currentFrameTime = 0;
+		mCurrentFrameIndex = 0;
+		mCurrentFrameTime = 0;
 	}
 }

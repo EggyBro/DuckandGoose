@@ -6,7 +6,10 @@
 \par Course:	CSD2400 / GAM200
 \date			11-2-2022
 \brief			This file contain the main entry point for all our functions
-				and input an algorithm to check for memory leak 
+				and input an algorithm to check for memory leak
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #pragma once

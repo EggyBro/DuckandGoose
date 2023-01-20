@@ -9,6 +9,8 @@
 \brief  This file contains function definitions for some of the collider
 		component's member functions
  
+ Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 *******************************************************************************/
 #include "empch.h"
 #include "Collider.h"
@@ -20,7 +22,7 @@ namespace EM
 	Data members will be changed during the de-serialization function call if the
 	specific entity has serialized collider information
 	****************************************************************************/
-	Collider::Collider() : mCol{ ColliderType::none }, mMin{ vec2D(1.0f,1.0f) }, mMax{ vec2D(1.0f,1.0f) }, mRadius{ 0.3f }, hit{ 0 }, CollisionNormal{ vec2D() }, mAlive{true} {}
+	Collider::Collider() : mCol{ ColliderType::none }, mMin{ vec2D(1.0f,1.0f) }, mMax{ vec2D(1.0f,1.0f) }, mRadius{ 0.3f }, mHit{ 0 }, mCollisionNormal{ vec2D() }, is_Alive{true} {}
 	/*!*************************************************************************
 	This function de-serializes the level colliders from the given level json file
 	****************************************************************************/
@@ -29,7 +31,7 @@ namespace EM
 		mCol = static_cast<ColliderType>(obj["ColliderType"].GetInt());
 		mMin = vec2D(obj["minX"].GetFloat(), obj["minY"].GetFloat());
 		mMax = vec2D(obj["maxX"].GetFloat(), obj["maxY"].GetFloat());
-		offset = vec2D(obj["offsetX"].GetFloat(), obj["offsetY"].GetFloat());
+		mOffset = vec2D(obj["offsetX"].GetFloat(), obj["offsetY"].GetFloat());
 		mRadius = obj["radius"].GetFloat();
 		return true;
 	}
@@ -51,9 +53,9 @@ namespace EM
 		writer->Key("maxY");
 		writer->Double(mMax.y);
 		writer->Key("offsetX");
-		writer->Double(offset.x);
+		writer->Double(mOffset.x);
 		writer->Key("offsetY");
-		writer->Double(offset.y);
+		writer->Double(mOffset.y);
 		writer->Key("radius");
 		writer->Double(mRadius);
 		writer->EndObject();

@@ -10,6 +10,9 @@
 \brief  This file contains a general implementation of a System Manager in
 place of the ECS which is not integrated with the rest of the solution. 
 It stores a vector of systems registered during runtime.
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 

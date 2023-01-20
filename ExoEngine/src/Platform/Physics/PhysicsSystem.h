@@ -9,6 +9,8 @@
 \brief  This file contains the system declaration for the physics system to update
 		the entity's position. 
  
+ Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 *******************************************************************************/
 #pragma once
 #include "ExoEngine/Math/Physics.h"

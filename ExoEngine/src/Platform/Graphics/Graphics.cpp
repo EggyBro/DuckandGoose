@@ -8,6 +8,8 @@
 \brief			This file contain a temporarily rendering class which will be bring over
 				once render class is up.
 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"
@@ -68,11 +70,11 @@ namespace EM {
 		
 		FrameBufferSpecification fbspec;
 		fbspec.Attachments = { FrameBufferTextureFormat::RGBA8, FrameBufferTextureFormat::RED_INTEGER, FrameBufferTextureFormat::DEPTH };
-		fbspec.Width = mwindow.GetWidth();
-		fbspec.Height = mwindow.GetHeight();
+		fbspec.Width = mWinData.GetWidth();
+		fbspec.Height = mWinData.GetHeight();
 		p_FrameBuffer->SetFrameBufferSpecification(fbspec);
 		Renderer::Init();
-		m_Font->Init();
+		mFont->Init();
 	}
 
 	/*!*************************************************************************
@@ -87,24 +89,24 @@ namespace EM {
 		if (FrameBufferSpecification spec = p_FrameBuffer->GetSpecification();
 			p_Editor->mViewportSize.x > 0.0f && p_Editor->mViewportSize.y > 0.0f && // zero sized framebuffer is invalid
 			(spec.Width != p_Editor->mViewportSize.x || spec.Height != p_Editor->mViewportSize.y)
-			&& p_Editor->show_window)
+			&& p_Editor->is_ShowWindow)
 		{
 			p_FrameBuffer->Resize((uint32_t)p_Editor->mViewportSize.x, (uint32_t)p_Editor->mViewportSize.y);
 			camera.Resize(p_Editor->mViewportSize.x, p_Editor->mViewportSize.y);
 		}
 		
 	
-		m_Renderer->ResetInfo();
-		m_Renderer->Clear();
-		if (p_Editor->show_window)
+		mRenderer->ResetInfo();
+		mRenderer->Clear();
+		if (p_Editor->is_ShowWindow)
 		{
 			p_FrameBuffer->Bind();
 			glClearTexImage(p_FrameBuffer->GetColorAttachmentRendererID(1), 0, GL_RED_INTEGER, GL_INT, 0);
 		}
 		
-		m_Renderer->SetClearColor({ 0.0f, 0.1f, 0.1f, 1.0f });
-		m_Renderer->Clear();
-		m_Renderer->Begin(camera);// begin of the renderer 
+		mRenderer->SetClearColor({ 0.0f, 0.1f, 0.1f, 1.0f });
+		mRenderer->Clear();
+		mRenderer->Begin(camera);// begin of the renderer 
 		p_GUI->VPmat = camera.GetViewProjectionMatrix();
 		
 
@@ -112,22 +114,22 @@ namespace EM {
 		{
 			auto& transform = p_ecs.GetComponent<Transform>(entity);
 			auto& sprite = p_ecs.GetComponent<Sprite>(entity);
-			if (sprite.mIsanimated)
+			if (sprite.is_Animated)
 			{
-				animator.AddFrameInfo(p_ecs.GetComponent<Sprite>(entity));
-				animator.UpdateAnimation(frametime);
+				mAimator.AddFrameInfo(p_ecs.GetComponent<Sprite>(entity));
+				mAimator.UpdateAnimation(frametime);
 			}
-			if (sprite.mIsSpriteSheet)
+			if (sprite.is_SpriteSheet)
 			{
-				index1 = SpriteRender::CreateSprite(GETTEXTURE(sprite.GetTexture()), { sprite.GetIndex().x, sprite.GetIndex().y }, 
+				mIndex1 = SpriteRender::CreateSprite(GETTEXTURE(sprite.GetTexture()), { sprite.GetIndex().x, sprite.GetIndex().y }, 
 					{sprite.GetUVCoor().x, sprite.GetUVCoor().y});
 
-				m_Renderer->DrawSprite({ transform.GetPos().x , transform.GetPos().y }, { transform.GetScale().x , transform.GetScale().y },
-					transform.GetRot(), index1);
+				mRenderer->DrawSprite({ transform.GetPos().x , transform.GetPos().y }, { transform.GetScale().x , transform.GetScale().y },
+					transform.GetRot(), mIndex1);
 			}
 			else
 			{
-				m_Renderer->DrawQuad({ transform.GetPos().x, transform.GetPos().y }, { transform.GetScale().x, transform.GetScale().y },
+				mRenderer->DrawQuad({ transform.GetPos().x, transform.GetPos().y }, { transform.GetScale().x, transform.GetScale().y },
 					 transform.GetRot(),GETTEXTURE(sprite.GetTexture()));
 			}
 
@@ -136,13 +138,13 @@ namespace EM {
 				if (p_ecs.HaveComponent<Collider>(entity) && (p_ecs.GetComponent<Collider>(entity).GetCollider() == Collider::ColliderType::rect) && (p_ecs.GetComponent<Collider>(entity).GetAlive()))
 				{
 					auto& collider = p_ecs.GetComponent<Collider>(entity);
-					m_Renderer->DrawRect({ transform.GetPos().x + collider.GetOffset().x , transform.GetPos().y + collider.GetOffset().y, 0.0f },
+					mRenderer->DrawRect({ transform.GetPos().x + collider.GetOffset().x , transform.GetPos().y + collider.GetOffset().y, 0.0f },
 						{ collider.GetMin().x - collider.GetMax().x , collider.GetMin().y - collider.GetMax().y },
 						{ 1.0f, 0.0f, 0.0f,1.0f });
 				}
 
 				/*if (p_ecs.HaveComponent<Collider>(entity) && (p_ecs.GetComponent<Collider>(entity).GetCollider() == Collider::ColliderType::line))
-					m_Renderer->DrawLine({ transform.GetPos().x + collider.GetOffset().x, transform.GetPos().y + collider.GetOffset().y, 0.0f },
+					mRenderer->DrawLine({ transform.GetPos().x + collider.GetOffset().x, transform.GetPos().y + collider.GetOffset().y, 0.0f },
 						{ (transform.GetPos().x + (25 * velocity.GetVel().x)), (transform.GetPos().y + (25 * velocity.GetVel().y)),0.0f },
 						{ 0.0f, 1.0f, 0.0f, 1.0f });*/
 
@@ -151,13 +153,13 @@ namespace EM {
 					auto& collider = p_ecs.GetComponent<Collider>(entity);
 					glm::mat4 Transform = glm::translate(glm::mat4(1.0f), { transform.GetPos().x + collider.GetOffset().x, transform.GetPos().y + collider.GetOffset().y, 0.0f }) *
 						glm::scale(glm::mat4(1.0f), glm::vec3(collider.GetRad() * 2));
-					m_Renderer->DrawCircle(Transform, { 0.5f,0.4f,1.0f, 1.0f }, 0.01f);
+					mRenderer->DrawCircle(Transform, { 0.5f,0.4f,1.0f, 1.0f }, 0.01f);
 				}
 			}
-			if (p_Editor->selectedEntity == entity && p_Editor->show_window)
+			if (p_Editor->selectedEntity == entity && p_Editor->is_ShowWindow)
 			{
 				auto& trans = p_ecs.GetComponent<Transform>(p_Editor->selectedEntity);
-				m_Renderer->DrawRect({ trans.GetPos().x , trans.GetPos().y, 0.0f },
+				mRenderer->DrawRect({ trans.GetPos().x , trans.GetPos().y, 0.0f },
 					{trans.GetScale().x/2.0f, trans.GetScale().y/2.0f},
 					{ 1.0f, 0.0f, 1.0f,1.0f });
 			}
@@ -189,52 +191,52 @@ namespace EM {
 		if (p_GUI->check_pause() == true)
 		{
 			//UI background
-			m_Renderer->DrawQuad({ camera.GetPosition().x, camera.GetPosition().y}, { 3.52f, 1.89f }, 0.0f, GETTEXTURE("EndGameUI"));
-			m_Renderer->DrawQuad({ camera.GetPosition().x + -0.89f, camera.GetPosition().y + -0.01f }, { 1.21f, 1.54f }, 0.0f, GETTEXTURE("Avatar"));
-			m_Renderer->DrawQuad({ camera.GetPosition().x + 0.522f, camera.GetPosition().y + 0.118f }, { 1.125f, 1.222f }, 0.0f, GETTEXTURE("MenuPanel"));
-			m_Renderer->DrawQuad({ camera.GetPosition().x + 0.526f,camera.GetPosition().y + 0.361f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
-			m_Renderer->DrawQuad({ camera.GetPosition().x + 0.526f, camera.GetPosition().y + 0.186f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
-			m_Renderer->DrawQuad({ camera.GetPosition().x + 0.526f, camera.GetPosition().y + -0.007f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
-			m_Renderer->DrawQuad({ camera.GetPosition().x + 0.526f, camera.GetPosition().y + -0.198f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
-			m_Renderer->DrawQuad({ camera.GetPosition().x + 0.526f, camera.GetPosition().y + -0.556f }, { 1.350f, 0.175f }, 0.0f, GETTEXTURE("ResumeButton"));
+			mRenderer->DrawQuad({ camera.GetPosition().x, camera.GetPosition().y}, { 3.52f, 1.89f }, 0.0f, GETTEXTURE("EndGameUI"));
+			mRenderer->DrawQuad({ camera.GetPosition().x + -0.89f, camera.GetPosition().y + -0.01f }, { 1.21f, 1.54f }, 0.0f, GETTEXTURE("Avatar"));
+			mRenderer->DrawQuad({ camera.GetPosition().x + 0.522f, camera.GetPosition().y + 0.118f }, { 1.125f, 1.222f }, 0.0f, GETTEXTURE("MenuPanel"));
+			mRenderer->DrawQuad({ camera.GetPosition().x + 0.526f,camera.GetPosition().y + 0.361f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
+			mRenderer->DrawQuad({ camera.GetPosition().x + 0.526f, camera.GetPosition().y + 0.186f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
+			mRenderer->DrawQuad({ camera.GetPosition().x + 0.526f, camera.GetPosition().y + -0.007f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
+			mRenderer->DrawQuad({ camera.GetPosition().x + 0.526f, camera.GetPosition().y + -0.198f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
+			mRenderer->DrawQuad({ camera.GetPosition().x + 0.526f, camera.GetPosition().y + -0.556f }, { 1.350f, 0.175f }, 0.0f, GETTEXTURE("ResumeButton"));
 
 		}
-		m_Renderer->End();
+		mRenderer->End();
 	
 		p_FrameBuffer->UnBind();
 		
 		
 		if (p_GUI->check_pause() == true)
 		{
-			m_Font->RenderText("VOLUME", { camera.GetPosition().x + 0.326f, camera.GetPosition().y + 0.321f }, 
+			mFont->RenderText("VOLUME", { camera.GetPosition().x + 0.326f, camera.GetPosition().y + 0.321f }, 
 				0.002f, camera, { 0.87f, 0.92f, 0.18f });//render the text for the continue button
 
-			m_Font->RenderText("CONTROL", { camera.GetPosition().x + 0.296f, camera.GetPosition().y + 0.156f },
+			mFont->RenderText("CONTROL", { camera.GetPosition().x + 0.296f, camera.GetPosition().y + 0.156f },
 				0.002f, camera, { 0.87f, 0.92f, 0.18f });//render the text for the first button
 
-			m_Font->RenderText("MAIN MENU", { camera.GetPosition().x + 0.236f, camera.GetPosition().y + -0.037f }, 0.002f, camera, { 0.87f, 0.92f, 0.18f });//to render text for the quit button
+			mFont->RenderText("MAIN MENU", { camera.GetPosition().x + 0.236f, camera.GetPosition().y + -0.037f }, 0.002f, camera, { 0.87f, 0.92f, 0.18f });//to render text for the quit button
 			
-			m_Font->RenderText("QUIT", { camera.GetPosition().x + 0.426f, camera.GetPosition().y + -0.24f }, 0.002f, camera, { 0.87f, 0.92f, 0.18f });//to render text for the quit button
+			mFont->RenderText("QUIT", { camera.GetPosition().x + 0.426f, camera.GetPosition().y + -0.24f }, 0.002f, camera, { 0.87f, 0.92f, 0.18f });//to render text for the quit button
 			
-			m_Font->RenderText("RESUME", { camera.GetPosition().x + 0.326f, camera.GetPosition().y + -0.586f }, 0.002f, camera, { 0.87f, 0.92f, 0.18f });//to render text for the quit button
+			mFont->RenderText("RESUME", { camera.GetPosition().x + 0.326f, camera.GetPosition().y + -0.586f }, 0.002f, camera, { 0.87f, 0.92f, 0.18f });//to render text for the quit button
 
 			p_GUI->set_continue_button({ 0.526f, -0.556f }, 1.350f, 0.175f);//assign position and scale into the GUI
 			p_GUI->set_pause_button({ 0.526f, -0.198f }, 0.802f, 0.123f);//assign position and scale into the GUI
 		}
 
 
-		if (p_Input->isKeyPressed(GLFW_KEY_ESCAPE) && p_GUI->pause_switch == false)//toggle menu with escape
+		if (p_Input->isKeyPressed(GLFW_KEY_ESCAPE) && p_GUI->mPauseSwitch == false)//toggle menu with escape
 		{
-			p_GUI->pause_switch = true;//set first boolean to true to prevent flickering
+			p_GUI->mPauseSwitch = true;//set first boolean to true to prevent flickering
 			//camera.resetZoomLevel();//reset zoom back to default
 			p_GUI->toggle_pause();//set pause to true thus pausing the game
 		}
 		if (p_Input->KeyReleased(GLFW_KEY_ESCAPE))
 		{
-			p_GUI->pause_switch = false;//set pause to false, exit pause menu
+			p_GUI->mPauseSwitch = false;//set pause to false, exit pause menu
 		}
 		
-		if (p_Editor->mViewportFocused && p_Editor->show_window)
+		if (p_Editor->mViewportFocused && p_Editor->is_ShowWindow)
 			camera.MouseScrolling();
 		
 

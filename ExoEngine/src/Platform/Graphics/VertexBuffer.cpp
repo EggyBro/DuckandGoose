@@ -7,6 +7,8 @@
 \date			9-28-2022
 \brief			This file handle vertexbuffer, indexbuffer, vertaxarray
 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"
@@ -21,8 +23,8 @@ namespace EM{
 	****************************************************************************/
 	VBuffer::VBuffer(uint32_t size)
 	{
-		glCreateBuffers(1, &m_RenderID);
-		glBindBuffer(GL_ARRAY_BUFFER, m_RenderID);
+		glCreateBuffers(1, &mRenderID);
+		glBindBuffer(GL_ARRAY_BUFFER, mRenderID);
 		glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW);
 	}
 
@@ -31,8 +33,8 @@ namespace EM{
 	****************************************************************************/
 	VBuffer::VBuffer(float* vertices, unsigned int size)
 	{
-		glCreateBuffers(1, &m_RenderID);
-		glBindBuffer(GL_ARRAY_BUFFER, m_RenderID);
+		glCreateBuffers(1, &mRenderID);
+		glBindBuffer(GL_ARRAY_BUFFER, mRenderID);
 		glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
 	}
 
@@ -41,7 +43,7 @@ namespace EM{
 	****************************************************************************/
 	VBuffer::~VBuffer()
 	{
-		glDeleteBuffers(1, &m_RenderID);
+		glDeleteBuffers(1, &mRenderID);
 	}
 
 	/*!*************************************************************************
@@ -49,7 +51,7 @@ namespace EM{
 	****************************************************************************/
 	void VBuffer::Bind() const
 	{
-		glBindBuffer(GL_ARRAY_BUFFER, m_RenderID);
+		glBindBuffer(GL_ARRAY_BUFFER, mRenderID);
 	}
 
 	/*!*************************************************************************
@@ -65,7 +67,7 @@ namespace EM{
 	****************************************************************************/
 	void VBuffer::SetBufferData(const void* data, unsigned int size)
 	{
-		glBindBuffer(GL_ARRAY_BUFFER, m_RenderID);
+		glBindBuffer(GL_ARRAY_BUFFER, mRenderID);
 		glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
 	}
 
@@ -75,10 +77,10 @@ namespace EM{
 	Constructor for IBuffer
 	****************************************************************************/
 	IBuffer::IBuffer(unsigned int* indices, unsigned int count)
-		:m_count(count)
+		:mCount(count)
 	{
-		glCreateBuffers(1, &m_RenderID);
-		glBindBuffer(GL_ARRAY_BUFFER, m_RenderID);
+		glCreateBuffers(1, &mRenderID);
+		glBindBuffer(GL_ARRAY_BUFFER, mRenderID);
 		glBufferData(GL_ARRAY_BUFFER, count * sizeof(unsigned int), indices, GL_STATIC_DRAW);
 	}
 
@@ -87,7 +89,7 @@ namespace EM{
 	****************************************************************************/
 	IBuffer::~IBuffer()
 	{
-		glDeleteBuffers(1, &m_RenderID);
+		glDeleteBuffers(1, &mRenderID);
 	}
 
 	/*!*************************************************************************
@@ -95,7 +97,7 @@ namespace EM{
 	****************************************************************************/
 	void IBuffer::Bind() const
 	{
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RenderID);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mRenderID);
 	}
 
 	/*!*************************************************************************

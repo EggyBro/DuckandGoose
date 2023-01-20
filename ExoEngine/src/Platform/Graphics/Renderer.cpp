@@ -8,6 +8,9 @@
 \brief			This file contain all the require draw call function defintion
 				for our graphic. There batch rendering doing in here too.
 				To maintain as less draw call as possible
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"

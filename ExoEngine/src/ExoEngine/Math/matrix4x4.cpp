@@ -9,6 +9,8 @@
 \brief			This file contain the matrix4x4 liabry
 				and its corresponding functions for creation and computation
 
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************/
 #include "empch.h"
 #include"Platform/Window/Window.h"
