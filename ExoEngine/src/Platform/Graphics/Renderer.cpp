@@ -15,7 +15,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #include "empch.h"
 #include "Renderer.h"
-
+#include "ExoEngine/Math/Math.h"
 #include <glm/gtc/matrix_transform.hpp>
 namespace EM {
 	Singleton<Renderer::SceneData> Renderer::s_SceneData = CreateSingleton<Renderer::SceneData>();
@@ -23,42 +23,42 @@ namespace EM {
 	//whats inside a quad
 	struct QuadVertex
 	{
-		glm::vec3 Position;
-		glm::vec4 Color;
-		glm::vec2 TexCoord;
-		float TextureIndex;
+		Vec3 Position;
+		Vec4 Color;
+		vec2D TexCoord;
+		float TextureIndex{0.0f};
 	};
 	//whats inside a line
 	struct LineVertex
 	{
-		glm::vec3 Position;
-		glm::vec4 Color;
+		Vec3 Position;
+		Vec4 Color;
 	};
 
 	//whats inside a quad with color only
 	struct BoxVertex
 	{
-		glm::vec3 Position;
-		glm::vec4 Color;
+		Vec3 Position;
+		Vec4 Color;
 	};
 	
 	//whats inside a circle
 	struct CircleVertex
 	{
-		glm::vec3 Wposition; //world position
-		glm::vec3 Lposition; //Local position
-		glm::vec4 color;
-		float depth;		// the thickness
-		float decline;		// fade
+		Vec3 Wposition; //world position
+		Vec3 Lposition; //Local position
+		Vec4 color;
+		float depth{0.0f};		// the thickness
+		float decline{0.0f};		// fade
 	};
 	struct RendererData
 	{
-		glm::vec4 QuadVertexPosition[4] = { { -0.5f, -0.5f, 0.0f, 1.0f },
+			   Vec4 QuadVertexPosition[4] = { { -0.5f, -0.5f, 0.0f, 1.0f },
 											{  0.5f, -0.5f, 0.0f, 1.0f },
 											{  0.5f,  0.5f, 0.0f, 1.0f },
 											{ -0.5f,  0.5f, 0.0f, 1.0f } };
 
-		static const unsigned int MaxQuads = 20000;			//max number of square or triangles can be adjust
+		static const unsigned int MaxQuads = 40000;			//max number of square or triangles can be adjust
 		static const unsigned int MaxVertices = MaxQuads * 4;	//since one quard have 4 vertices we multi by 4
 		static const unsigned int MaxIndices = MaxQuads * 6;	//{0, 1, 2, 2, 3, 0} 6 indices per quad
 
@@ -110,9 +110,9 @@ namespace EM {
 	/*!*************************************************************************
 	Set Clear Color
 	****************************************************************************/
-	void Renderer::SetClearColor(const glm::vec4& color)
+	void Renderer::SetClearColor(const Vec4& color)
 	{
-		glClearColor(color.r, color.g, color.b, color.a);
+		glClearColor(color.x, color.y, color.z, color.w);
 	}
 
 	/*!*************************************************************************
@@ -172,11 +172,11 @@ namespace EM {
 
 		//Shader
 		r_Data.QuadShader = ResourceManager::GetShader("QuadShader");
-		int TextureSamplers[32];
-		for (int i = 0; i < 32; i++)
+		int TextureSamplers[64];
+		for (int i = 0; i < 64; i++)
 			TextureSamplers[i] = i;
 		r_Data.QuadShader->Bind();
-		r_Data.QuadShader->SetUniform("u_Texture", TextureSamplers, 32);
+		r_Data.QuadShader->SetUniform("u_Texture", TextureSamplers, 64);
 
 		//set first texture unit 0 to be blanktexture
 		r_Data.TextureUnits[0] = r_Data.BlankTexture;
@@ -251,7 +251,8 @@ namespace EM {
 	****************************************************************************/
 	void Renderer::Begin(Camera2D& camera)
 	{
-		s_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
+		s_SceneData->ViewProjectionMatrix = basemtx_adapterC(camera.GetViewProjectionMatrix());
+		
 
 		StartBatch();
 	
@@ -306,7 +307,7 @@ namespace EM {
 
 			//reset count
 			r_Data.QuadShader->Bind();
-			r_Data.QuadShader->SetUniform("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
+			r_Data.QuadShader->SetUniform("u_ViewProjection", mtx_adapter(s_SceneData->ViewProjectionMatrix));
 			Renderer::DrawIndexed(r_Data.QuadVertexArray, r_Data.QuadIndexCount);
 			r_Data.Infos.n_DrawCalls++;
 		}
@@ -317,7 +318,7 @@ namespace EM {
 			r_Data.LineVertexBuffer->SetBufferData(r_Data.LineVertexBufferBase, LineDataSize);
 
 			r_Data.LineShader->Bind();
-			r_Data.LineShader->SetUniform("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
+			r_Data.LineShader->SetUniform("u_ViewProjection", mtx_adapter(s_SceneData->ViewProjectionMatrix));
 			glLineWidth(1.0f);
 			Renderer::DrawForLine(r_Data.LineVertexArray, r_Data.LineVertexCount);
 			r_Data.Infos.n_DrawCalls++;
@@ -330,7 +331,7 @@ namespace EM {
 
 			//reset count
 			r_Data.BoxShader->Bind();
-			r_Data.BoxShader->SetUniform("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
+			r_Data.BoxShader->SetUniform("u_ViewProjection", mtx_adapter(s_SceneData->ViewProjectionMatrix));
 			Renderer::DrawIndexed(r_Data.BoxVertexArray, r_Data.BoxIndexCount);
 			r_Data.Infos.n_DrawCalls++;
 		}
@@ -341,7 +342,7 @@ namespace EM {
 
 			//reset count
 			r_Data.CircleShader->Bind();
-			r_Data.CircleShader->SetUniform("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
+			r_Data.CircleShader->SetUniform("u_ViewProjection", mtx_adapter(s_SceneData->ViewProjectionMatrix));
 			Renderer::DrawIndexed(r_Data.CircleVertexArray, r_Data.CircleIndexCount);
 			r_Data.Infos.n_DrawCalls++;
 		}
@@ -384,24 +385,31 @@ namespace EM {
 	/*!*************************************************************************
 	Overload function for Draw Quad using vec2 position with no texture just shader
 	****************************************************************************/
-	void Renderer::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color)
+	void Renderer::DrawQuad(const vec2D& position, const vec2D& size, const Vec4& color)
 	{
 		DrawQuad({ position.x, position.y, 0.0f }, size, color);
 	}
 	/*!*************************************************************************
 	Overload function for Draw Quad using vec3 position with no texture just shader
 	****************************************************************************/
-	void Renderer::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
+	void Renderer::DrawQuad(const Vec3& position, const vec2D& size, const Vec4& color)
 	{
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
-
+		/*Mat4x4 transform = glm::translate(Mat4x4(1.0f), position)
+			* glm::scale(Mat4x4(1.0f), { size.x, size.y, 1.0f });
+		*/
+		Mat4x4 transform(1.0f);	
+		Mat4x4 translate(1.0f);
+		Mat4x4 scale(1.0f);
+		Translate4x4(translate, position.x, position.y, position.z);
+		Scale4x4(scale, size.x, size.y, 1.0f);
+		transform = translate * scale;
 		DrawQuad(transform, color);
 	}
 	/*!*************************************************************************
 	Overload function for Draw Quad using transform with no texture just shader
 	****************************************************************************/
-	void Renderer::DrawQuad(const glm::mat4& transform, const glm::vec4& color)
+	void Renderer::DrawQuad(const Mat4x4& transform, const Vec4& color)
+		 
 	{
 		constexpr size_t BoxCount = 4;
 
@@ -410,10 +418,11 @@ namespace EM {
 
 		for (size_t i = 0; i < BoxCount; i++)
 		{
-			r_Data.BoxVertexBufferPtr->Position = transform * r_Data.QuadVertexPosition[i];
+			r_Data.BoxVertexBufferPtr->Position = transform * r_Data.QuadVertexPosition[i];		
 			r_Data.BoxVertexBufferPtr->Color = color;
 			r_Data.BoxVertexBufferPtr++;
-		}
+		}	
+
 		r_Data.BoxIndexCount += 6;
 
 		r_Data.Infos.n_Quad++;
@@ -421,7 +430,7 @@ namespace EM {
 	/*!*************************************************************************
 	Overload function for Draw Quad using vec2 position with texture
 	****************************************************************************/
-	void Renderer:: DrawQuad(const glm::vec2& position, const glm::vec2& size, const MultiRefs<Texture>& texture)
+	void Renderer:: DrawQuad(const vec2D& position, const vec2D& size, const MultiRefs<Texture>& texture)
 	{
 		DrawQuad({ position.x, position.y, 0.0f }, size, texture);
 	}
@@ -429,11 +438,18 @@ namespace EM {
 	/*!*************************************************************************
 Overload function for Draw Quad using vec3 position with texture
 ****************************************************************************/
-	void Renderer::DrawQuad(const glm::vec3& position, const glm::vec2& size, const MultiRefs<Texture>& texture)
+	void Renderer::DrawQuad(const Vec3& position, const vec2D& size, const MultiRefs<Texture>& texture)
 	{
+		/*Mat4x4 transform = glm::translate(Mat4x4(1.0f), position)
+			* glm::scale(Mat4x4(1.0f), { size.x, size.y, 1.0f });
+			*/
 
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+		Mat4x4 transform(1.0f);
+		Mat4x4 translate(1.0f);
+		Mat4x4 scale(1.0f);
+		Translate4x4(translate, position.x, position.y, position.z);
+		Scale4x4(scale, size.x, size.y, 1.0f);
+		transform = translate * scale;
 
 		DrawQuad(transform, texture);
 	}
@@ -441,7 +457,7 @@ Overload function for Draw Quad using vec3 position with texture
 	/*!*************************************************************************
 	Overload function for Draw Quad using transform with texture
 	****************************************************************************/
-	void Renderer::DrawQuad(const glm::mat4& transform, const MultiRefs<Texture>& texture)
+	void Renderer::DrawQuad(const Mat4x4& transform, const MultiRefs<Texture>& texture)
 	{
 
 		float textureIndex = 0.0f;
@@ -456,7 +472,7 @@ Overload function for Draw Quad using vec3 position with texture
 
 		if (textureIndex == 0.0f)
 		{
-			if (r_Data.TextureUnitIndex >= 32)
+			if (r_Data.TextureUnitIndex >= 64)
 				NextBatch();
 
 			textureIndex = (float)r_Data.TextureUnitIndex;
@@ -469,7 +485,7 @@ Overload function for Draw Quad using vec3 position with texture
 		{
 			r_Data.QuadVertexBufferPtr->Position = transform * r_Data.QuadVertexPosition[i];
 			r_Data.QuadVertexBufferPtr->Color = { 1.0f, 1.0f, 1.0f, 1.0f };
-			r_Data.QuadVertexBufferPtr->TexCoord = textureCoors[i];
+			r_Data.QuadVertexBufferPtr->TexCoord = EM::vec2D(textureCoors[i].x, textureCoors[i].y);
 			r_Data.QuadVertexBufferPtr->TextureIndex = textureIndex;
 			r_Data.QuadVertexBufferPtr++;
 		}
@@ -480,7 +496,7 @@ Overload function for Draw Quad using vec3 position with texture
 	/*!*************************************************************************
 	Overload function for Draw Quad using vec2 position with no texture just shader and rotation 
 	****************************************************************************/
-	void Renderer::DrawQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const glm::vec4& color)
+	void Renderer::DrawQuad(const vec2D& position, const vec2D& size, float rotation, const Vec4& color)
 	{
 		DrawQuad({ position.x, position.y, 0.0f }, size, rotation, color);
 	}
@@ -488,11 +504,24 @@ Overload function for Draw Quad using vec3 position with texture
 	/*!*************************************************************************
 	Overload function for Draw Quad using vec3 position with no texture just shader and rotation
 	****************************************************************************/
-	void Renderer::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color)
+	void Renderer::DrawQuad(const Vec3& position, const vec2D& size, float rotation, const Vec4& color)
 	{
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-			* glm::rotate(glm::mat4(1.0f), glm::radians(rotation), {0.0f, 0.0f, 1.0f})
-			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+	
+		/*Mat4x4 transform = glm::translate(Mat4x4(1.0f), position)
+			* glm::rotate(Mat4x4(1.0f), glm::radians(rotation), {0.0f, 0.0f, 1.0f})
+			* glm::scale(Mat4x4(1.0f), { size.x, size.y, 1.0f });*/
+
+		Mat4x4 transform(1.0f);
+		Mat4x4 translate(1.0f);
+		Mat4x4 scale(1.0f);
+		Mat4x4 rot(1.0f);
+
+		Translate4x4(translate, position.x, position.y, position.z);
+		Scale4x4(scale, size.x, size.y, 1.0f);
+		RotDeg4x4(rot, rotation, { 0.0f, 0.0f, 1.0f });
+		transform = translate * rot* scale;
+
+
 
 		DrawQuad(transform, color);
 	}
@@ -500,7 +529,7 @@ Overload function for Draw Quad using vec3 position with texture
 	/*!*************************************************************************
 	Overload function for Draw Quad using vec2 position with rotation and texture
 	****************************************************************************/
-	void Renderer::DrawQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const MultiRefs<Texture>& texture)
+	void Renderer::DrawQuad(const vec2D& position, const vec2D& size, float rotation, const MultiRefs<Texture>& texture)
 	{
 		DrawQuad({ position.x, position.y, 0.0f }, size, rotation, texture);
 	}
@@ -508,18 +537,29 @@ Overload function for Draw Quad using vec3 position with texture
 	/*!*************************************************************************
 	Overload function for Draw Quad using vec3 position with rotation and texture
 	****************************************************************************/
-	void Renderer::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const MultiRefs<Texture>& texture)
+	void Renderer::DrawQuad(const Vec3& position, const vec2D& size, float rotation, const MultiRefs<Texture>& texture)
 	{
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-			* glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
-			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+		//Mat4x4 transform = glm::translate(Mat4x4(1.0f), position)
+			//* glm::rotate(Mat4x4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
+			//* glm::scale(Mat4x4(1.0f), { size.x, size.y, 1.0f });
+
+		Mat4x4 transform(1.0f);
+		Mat4x4 translate(1.0f);
+		Mat4x4 scale(1.0f);
+		Mat4x4 rot(1.0f);
+		Mat4x4 temp(1.0f);
+		Translate4x4(translate, position.x, position.y, position.z);
+		Scale4x4(scale, size.x, size.y, 1.0f);
+		RotRad4x4(rot, rotation, { 0.0f, 0.0f, 1.0f });
+		transform = translate* scale * rot ;
+		
 
 		DrawQuad(transform, texture);
 	}
 	/*!*************************************************************************
 	Overload function for Draw Quad using vec2 position with rotation and spritesheet
 	****************************************************************************/
-	void Renderer::DrawSprite(const glm::vec2& position, const glm::vec2& size, const float& rotation, const MultiRefs<SpriteRender>& sprite)
+	void Renderer::DrawSprite(const vec2D& position, const vec2D& size, const float& rotation, const MultiRefs<SpriteRender>& sprite)
 	{
 		DrawSprite({ position.x, position.y, 0.0f }, size, rotation, sprite);
 	}
@@ -527,18 +567,27 @@ Overload function for Draw Quad using vec3 position with texture
 	/*!*************************************************************************
 	Overload function for Draw Quad using vec3 position with rotation and spritesheet
 	****************************************************************************/
-	void Renderer::DrawSprite(const glm::vec3& position, const glm::vec2& size, const float& rotation, const MultiRefs<SpriteRender>& sprite)
+	void Renderer::DrawSprite(const Vec3& position, const vec2D& size, const float& rotation, const MultiRefs<SpriteRender>& sprite)
 	{
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-			* glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
-			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+		//Mat4x4 transform = glm::translate(Mat4x4(1.0f), position)
+		//	* glm::rotate(Mat4x4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
+		//	* glm::scale(Mat4x4(1.0f), { size.x, size.y, 1.0f });
+
+		Mat4x4 transform(1.0f);
+		Mat4x4 translate(1.0f);
+		Mat4x4 scale(1.0f);
+		Mat4x4 rot(1.0f);
+		Translate4x4(translate, position.x, position.y, position.z);
+		Scale4x4(scale, size.x, size.y, 1.0f);
+		RotRad4x4(rot, rotation, { 0.0f, 0.0f, 1.0f });
+		transform = translate * rot * scale;
 
 		DrawSprite(transform, sprite);
 	}
 	/*!*************************************************************************
 	Overload function for Draw Quad using mat4 transform with rotation and spritesheet
 	****************************************************************************/
-	void Renderer::DrawSprite(const glm::mat4& transform, const MultiRefs<SpriteRender>& sprite)
+	void Renderer::DrawSprite(const Mat4x4& transform, const MultiRefs<SpriteRender>& sprite)
 	{
 		float textureIndex = 0.0f;
 		for (unsigned int i = 1; i < r_Data.TextureUnitIndex; i++)
@@ -552,13 +601,14 @@ Overload function for Draw Quad using vec3 position with texture
 
 		if (textureIndex == 0.0f)
 		{
-			if (r_Data.TextureUnitIndex >= 32)
+			if (r_Data.TextureUnitIndex >= 64)
 				NextBatch();
 
 			textureIndex = (float)r_Data.TextureUnitIndex;
 			r_Data.TextureUnits[r_Data.TextureUnitIndex] = sprite->GetTexture();
 			r_Data.TextureUnitIndex++;
 		}
+		
 		const glm::vec2* textureCoors = sprite->GetTexCoords();
 		constexpr size_t quadCount = 4;
 
@@ -566,17 +616,18 @@ Overload function for Draw Quad using vec3 position with texture
 		{
 			r_Data.QuadVertexBufferPtr->Position =  transform * r_Data.QuadVertexPosition[i];
 			r_Data.QuadVertexBufferPtr->Color = { 1.0f, 1.0f, 1.0f, 1.0f };
-			r_Data.QuadVertexBufferPtr->TexCoord = textureCoors[i];
+			r_Data.QuadVertexBufferPtr->TexCoord = basevec2_adapter(textureCoors[i]);
 			r_Data.QuadVertexBufferPtr->TextureIndex = textureIndex;
 			r_Data.QuadVertexBufferPtr++;
 		}
+		
 		r_Data.QuadIndexCount += 6;
 		r_Data.Infos.n_Quad++;
 	}
 	/*!*************************************************************************
 	This function draw line using shaders
 	****************************************************************************/
-	void Renderer::DrawLine(const glm::vec3& position0, const glm::vec3& position1, const glm::vec4& color)
+	void Renderer::DrawLine(const Vec3& position0, const Vec3& position1, const Vec4& color)
 	{
 		r_Data.LineVertexBufferPtr->Position = position0;
 		r_Data.LineVertexBufferPtr->Color = color;
@@ -591,12 +642,12 @@ Overload function for Draw Quad using vec3 position with texture
 	/*!*************************************************************************
 	This function draw rect using draw line 4 times
 	****************************************************************************/
-	void Renderer::DrawRect(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
+	void Renderer::DrawRect(const Vec3& position, const vec2D& size, const Vec4& color)
 	{
-		glm::vec3 p0 = glm::vec3(position.x - size.x * 0.5f, position.y - size.y * 0.5f, position.z);
-		glm::vec3 p1 = glm::vec3(position.x + size.x * 0.5f, position.y - size.y * 0.5f, position.z);
-		glm::vec3 p2 = glm::vec3(position.x + size.x * 0.5f, position.y + size.y * 0.5f, position.z);
-		glm::vec3 p3 = glm::vec3(position.x - size.x * 0.5f, position.y + size.y * 0.5f, position.z);
+		Vec3 p0 = Vec3(position.x - size.x * 0.5f, position.y - size.y * 0.5f, position.z);
+		Vec3 p1 = Vec3(position.x + size.x * 0.5f, position.y - size.y * 0.5f, position.z);
+		Vec3 p2 = Vec3(position.x + size.x * 0.5f, position.y + size.y * 0.5f, position.z);
+		Vec3 p3 = Vec3(position.x - size.x * 0.5f, position.y + size.y * 0.5f, position.z);
 
 		DrawLine(p0, p1, color);
 		DrawLine(p1, p2, color);
@@ -606,7 +657,7 @@ Overload function for Draw Quad using vec3 position with texture
 	/*!*************************************************************************
 	This function draw circle using shader
 	****************************************************************************/
-	void Renderer::DrawCircle(const glm::mat4& transform, const glm::vec4& color, float depth, float decline)
+	void Renderer::DrawCircle(const Mat4x4& transform, const Vec4& color, float depth, float decline)
 	{
 		for (size_t i = 0; i < 4; i++)
 		{
@@ -615,7 +666,7 @@ Overload function for Draw Quad using vec3 position with texture
 			r_Data.CircleVertexBufferPtr->color = color;
 			r_Data.CircleVertexBufferPtr->depth = depth;
 			r_Data.CircleVertexBufferPtr->decline= decline;
-			r_Data.CircleVertexBufferPtr++;
+			r_Data.CircleVertexBufferPtr++; 
 		}
 
 		r_Data.CircleIndexCount += 6;

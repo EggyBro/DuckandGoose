@@ -16,6 +16,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Core.h"
 
 #define p_Input EM::InputSystem::GetInstance()
+
 namespace EM {
 
 	template class EM_API std::vector <int, std::allocator<int>>;
@@ -50,7 +51,6 @@ namespace EM {
 		void ResetPressedMouse();
 
 		bool isKeyPressed(keycode key);
-
 		
 	public:
 		//data

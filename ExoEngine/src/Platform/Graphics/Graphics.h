@@ -31,7 +31,7 @@ namespace EM {
 	class Graphic : public System
 	{
 	public:
-
+		
 		//For Debugging Purposes
 		virtual std::string GetName() { return "graphic"; }
 
@@ -40,15 +40,18 @@ namespace EM {
 		virtual void End() override;
 		
 		inline static Camera2D camera { -1.0f, 1.0f, -1.0f , 1.0f };
+		inline static Camera2D scene_camera { -1.0f, 1.0f, -1.0f , 1.0f };
+		inline static Camera2D *mcamera = nullptr;
+		bool misFps = false;
 	private:
 		//for testing
 		std::unique_ptr<Renderer> mRenderer = std::make_unique<Renderer>();
-		std::unique_ptr<Font> mFont = std::make_unique<Font>();
+		std::shared_ptr<Font> mFont = std::make_shared<Font>();
 		MultiRefs<SpriteRender> mIndex1;
 		WinData mWinData{};
 		Animation mAimator;
 	private:
-		void LoadTexture(std::string filename);
+		//void LoadTexture(std::string filename);
 		void LoadIconsTexture(std::string filename);
 	};
 }

@@ -17,8 +17,8 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #include "empch.h"
 #include "Input.h"
-
-#include<GLFW/glfw3.h>
+#include"Platform/Window/Window.h"
+#include <GLFW/glfw3.h>
 
 namespace EM {
     
@@ -104,6 +104,14 @@ namespace EM {
     ****************************************************************************/
     bool InputSystem::MouseIsReleased(const int& key)
     {
+/*        if (MousePressed(key) || MouseHold(key))
+        {
+            if (mMouseStatus[key] == GLFW_RELEASE)
+            {
+                return true;
+            }
+        }
+        else return false;  */    
         return mMouseStatus[key] == GLFW_RELEASE;
     }
 

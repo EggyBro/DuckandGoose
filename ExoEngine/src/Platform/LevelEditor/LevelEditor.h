@@ -1,8 +1,8 @@
 /*!*************************************************************************
 ****
 \file LevelEditor.h
-\author Cheung Jun Yin Matthew
-\par DP email: j.cheung@digipen.edu
+\author Cheung Jun Yin Matthew, Tan Ek Hern
+\par DP email: j.cheung@digipen.edu, t.ekhern@digipen.edu
 \par Course: CSD2400 / GAM200
 \date 9-28-2022
 \brief  Header file for LevelEditor.cpp
@@ -41,12 +41,15 @@ namespace EM {
 
 		//for audio loading from files
 		void LoadAudioFromFile();
-		void AudioManager();
+		void LoadScriptsFromFile();
+		void AudioEditor();
 		void insertAudioFilePath(std::string in);
 		void insertTextureFilePath(std::string on);
 
 		//for textures loading from files
 		void LoadTextureFromFile();
+
+	
 	public:
 		bool is_ShowWindow = true;
 		static std::unique_ptr<LevelEditor>& GetInstance();
@@ -64,6 +67,7 @@ namespace EM {
 		ImVec2 mViewportBounds[2];
 		bool mViewportFocused = false;
 		ImVec2 mGameMousePosition = { 0.0f, 0.0f };
+		ImVec2 mSceneMouse = { 0.0f, 0.0f };
 	private:
 		void MainMenuBar();
 		void Docking();
@@ -107,5 +111,8 @@ namespace EM {
 		//load texture from file
 		std::vector<std::string> mTextureFile;
 		std::vector<std::filesystem::directory_entry> mTextureFileList;
+
+		//load script list from file
+		std::vector<std::string> mScriptList;
 	};
 }

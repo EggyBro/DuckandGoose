@@ -19,6 +19,7 @@
     <None Include="Assets\Shaders\text.shader" />
     <None Include="Assets\Shaders\texture.shader" />
     <None Include="glew32.dll" />
+    <None Include="imgui.ini" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ExoEngine\ExoEngine.vcxproj">
@@ -144,6 +145,10 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

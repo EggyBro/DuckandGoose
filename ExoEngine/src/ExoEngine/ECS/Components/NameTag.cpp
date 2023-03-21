@@ -37,10 +37,10 @@ namespace EM
 	****************************************************************************/
 	bool NameTag::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
-		writer->StartObject();
+		//writer->StartObject();
 		writer->Key("NameTag");
 		writer->String(mName.c_str());
-		writer->EndObject();
+		//writer->EndObject();
 		return true;
 	}
 }

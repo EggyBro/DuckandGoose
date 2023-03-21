@@ -36,6 +36,24 @@ namespace EM
 		
 	{} ///initialized each data of the matrix to the respective float given
 
+	Mat3D::Mat3D(Vec3 v1, Vec3 v2, Vec3 v3) :
+		m00{ v1.x }, m01{ v2.x },  m02{ v3.x },
+		m10{ v1.y},  m11{ v2.y },  m12{ v3.y },
+		m20{ v1.z},  m21{ v2.z },  m22{ v3.z }
+	{
+
+
+	}
+
+	Mat3D::Mat3D(float value) :
+		m00{ value }, m01{ 0 }, m02{ 0 },
+		m10{ 0 }, m11{ value}, m12{ 0 },
+		m20{ 0 }, m21{ 0 }, m22{ value }
+	{
+
+
+	}
+
 	Mat3D& Mat3D::operator=(const Mat3D& rhs) //copy ctor
 	{
 		 m00 = rhs. m00;

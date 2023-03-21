@@ -27,10 +27,10 @@ namespace EM
 		~Tag() = default;
 
 		void SetTag(std::string tag) {mTag = tag;}
-		std::string GetTag() {return mTag;}
+		std::string& GetTag() {return mTag;}
 
 		void SetTargetTag(std::string tag) { mTargetTag = tag; }
-		std::string GetTargetTag() { return mTargetTag; }
+		std::string& GetTargetTag() { return mTargetTag; }
 
 		virtual bool Deserialize(const rapidjson::Value& obj);
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
@@ -47,5 +47,6 @@ namespace EM
 	private:
 		std::string mTag;
 		std::string mTargetTag;
+		
 	};
 }

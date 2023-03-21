@@ -62,17 +62,17 @@ namespace EM
 		{
 			assert(entity < MAX_ENTITIES && "Entity out of range.");
 
-			// Invalidate the destroyed entity's signature
-			for (Entity i = 0; i < MAX_ENTITIES; ++i)
-			{
-				std::cout << mSignatures[i] << std::endl;
-			}
-			mSignatures[entity].reset();
-			std::cout << "--------------------------------------" << std::endl;
-			for (Entity i = 0; i < MAX_ENTITIES; ++i)
-			{
-				std::cout << mSignatures[i] << std::endl;
-			}
+			//// Invalidate the destroyed entity's signature
+			//for (Entity i = 0; i < MAX_ENTITIES; ++i)
+			//{
+			//	std::cout << mSignatures[i] << std::endl;
+			//}
+			//mSignatures[entity].reset();
+			//std::cout << "--------------------------------------" << std::endl;
+			//for (Entity i = 0; i < MAX_ENTITIES; ++i)
+			//{
+			//	std::cout << mSignatures[i] << std::endl;
+			//}
 
 
 			// Put the destroyed ID at the back of the queue
@@ -103,6 +103,7 @@ namespace EM
 			return mSignatures[entity];
 		}
 
+
 		/*!*************************************************************************
 		Returns the Total Entities in existence (both destroyed + alive)
 		****************************************************************************/
@@ -116,7 +117,7 @@ namespace EM
 		****************************************************************************/
 		void SetTotalEntitiesForWorld(Entity entity)
 		{
-			while(mLivingEntityCount < entity)
+			while(mAliveEntities.size() < entity)
 			{
 				CreateEntity();
 			}
@@ -128,6 +129,16 @@ namespace EM
 		const std::set<Entity> GetAliveEntities()
 		{
 			return mAliveEntities;
+		}
+
+		std::array<Signature, MAX_ENTITIES>& GetEntitySignatureArray()
+		{
+			return mSignatures;
+		}
+
+		void ResetAllEntitySignatures()
+		{
+			mSignatures.fill(0);
 		}
 
 		

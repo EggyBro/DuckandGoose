@@ -17,79 +17,51 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 
 namespace EM {
-	
+	std::unordered_map<std::string, std::vector<float>> Animation::spriteContainer;
 	/*!*************************************************************************
 	Constructor for animation
 	****************************************************************************/
 	Animation::Animation()
-		:mFrame(0), mCurrentFrameIndex(0), mCurrentFrameTime(0)
 	{
 
-	}
-
-	/*!*************************************************************************
-	Add frame information
-	****************************************************************************/
-	void Animation::AddFrameInfo(Sprite& sprite)
-	{
-		FrameData data;
-		data.TextureId = GETTEXTURE(sprite.GetTexture())->GetRendererID();
-		data.DisplayTime = sprite.GetDisplayTime();
-		data.FrameIndex = sprite.GetIndex();
-		sprite.SetIndex(mCurrentFrameIndex);
-		data.MaxFrame = 8.0f;
-		mFrame.push_back(data);
-		//std::cout <<"Addframeinfo" << data.DisplayTime << std::endl;
-	}
-
-	/*!*************************************************************************
-	Increment frame index
-	****************************************************************************/
-	void Animation::FrameIncrement()
-	{
-		mCurrentFrameIndex++;
-	}
-
-	/*!*************************************************************************
-	Return frame index if frame size > 0
-	****************************************************************************/
-	const Animation::FrameData* Animation::GetCurrentFrame() const
-	{
-		if (mFrame.size() > 0)
-			return &mFrame[(int)mCurrentFrameIndex];
-
-		return nullptr;
 	}
 
 	/*!*************************************************************************
 	Update animations based on delta time
 	****************************************************************************/
-	bool Animation::UpdateAnimation(float deltatime)
+	void Animation::UpdateAnimation(float deltatime, Sprite& sprite)
 	{
-		if (mFrame.size() > 0)
+		sprite.internaltimer += deltatime;
+	
+		std::unordered_map <std::string, std::vector <float>> ::const_iterator got = spriteContainer.find(sprite.GetTexture());
+		if (got == spriteContainer.end())// always check the sprite container whether there is any data for the current texture. if no, prompt the user
 		{
-			mCurrentFrameTime += deltatime;
-			
-			if (mCurrentFrameTime >= mFrame[(int)mCurrentFrameIndex].DisplayTime )
+			//std::cout << sprite.GetTexture() << " not in  the container" << std::endl;
+		}
+		else
+		{
+			sprite.GetMaxIndex() = static_cast<int>(GETTEXTURE(sprite.GetTexture())->GetWidth() / 512.f);
+			if (sprite.internaltimer >= spriteContainer[sprite.GetTexture()][sprite.GetIndex().x])
 			{
-				//std::cout <<"Updateanimation" << mFrame[(int)mCurrentFrameIndex].DisplayTime << std::endl;
-				mCurrentFrameTime = 0.0f;
-				FrameIncrement();
+				////for debug
+				//if(sprite.GetTexture() == "Attack")
+				//	std::cout <<"Att " << sprite.GetIndex().x << ":  " << spriteContainer[sprite.GetTexture()][sprite.GetIndex().x] << std::endl;
+				//
+				//if (sprite.GetTexture() == "Idle")
+				//	std::cout << "Idle " << sprite.GetIndex().x << ":  " << spriteContainer[sprite.GetTexture()][sprite.GetIndex().x] << std::endl;
 
-				if (mCurrentFrameIndex >= 8.0f)
-					ResetFrame();
-				return true;
+				//if (sprite.GetTexture() == "Running")
+				//	std::cout << "Running " << sprite.GetIndex().x << ":  " << spriteContainer[sprite.GetTexture()][sprite.GetIndex().x] << std::endl;
+				//
+				//end of debug
+				sprite.GetIndex().x++;
+				sprite.internaltimer = 0.0f;
+				if (sprite.GetIndex().x >= sprite.GetMaxIndex())
+				{
+					sprite.GetIndex().x = 0;
+				}
 			}
 		}
-		return false;
 	}
 
-	/*!*************************************************************************
-	Set frame index and frame time to 0
-	****************************************************************************/
-	void Animation::ResetFrame()
-	{
-		mCurrentFrameIndex = 0;
-		mCurrentFrameTime = 0;
-	}
 }

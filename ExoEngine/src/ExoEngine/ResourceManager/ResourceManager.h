@@ -22,11 +22,11 @@ namespace EM {
 	class ResourceManager
 	{
 	public:
-		static std::map<std::string, std::shared_ptr<Texture>> textures;
-		static std::map<std::string, std::shared_ptr<Shader>> shaders;
-		static std::map<std::string, std::shared_ptr<Font>> fonts;
-		static std::map<std::string, std::shared_ptr<CAudioEngine>> audios;
-		static std::map<std::string, std::shared_ptr<Texture>> Icons;
+		static std::unordered_map<std::string, std::shared_ptr<Texture>> textures;
+		static std::unordered_map<std::string, std::shared_ptr<Shader>> shaders;
+		static std::unordered_map<std::string, std::shared_ptr<Font>> fonts;
+		static std::unordered_map<std::string, std::shared_ptr<CAudioEngine>> audios;
+		static std::unordered_map<std::string, std::shared_ptr<Texture>> Icons;
 	public:
 		//load texture from file
 		static std::shared_ptr<Texture> LoadTexture(std::string name, const std::string& filepath);

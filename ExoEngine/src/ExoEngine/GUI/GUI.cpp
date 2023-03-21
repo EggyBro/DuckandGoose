@@ -14,10 +14,12 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ****************************************************************************
 ***/
 #include "empch.h"
-#include"Platform/Window/Window.h"
+#include "Platform/Window/Window.h"
 #include "ExoEngine/Input/Input.h"
 #include "ExoEngine/Application.h"
+#include "Platform/Graphics/Graphics.h"
 #include "GUI.h"
+
 
 namespace EM
 {
@@ -73,10 +75,10 @@ namespace EM
 	bool  gui_system::Update(Window* screen)
 	{
 		
-		
 		glm::vec2 mouse_pos{ static_cast<float>(screen->Getter().mouseX) , static_cast<float>(screen->Getter().mouseY) };//store the mouse position into a vector
 		glm::vec2 screen_size{ static_cast<float>(screen->Getter().m_Width),static_cast<float>(screen->Getter().m_Height) };//store the screen size into a vector
 		mAspectRatio = screen_size.x / screen_size.y;//find and store the aspect ratio of the screen
+		
 		
 
 		//function to convert mouse to screen position
@@ -86,7 +88,8 @@ namespace EM
 		mouse_pos -= glm::vec2{ 1, 1 };
 		mouse_pos.y *= -1;
 
-		if (is_Pause == true)//check if the system is pause
+		MousePosition = { mouse_pos.x * mAspectRatio * 1/Graphic::camera.GetZoomLevel() , mouse_pos.y};
+		if (is_Pause == true && is_menu == false)//check if the system is pause
 		{	
 			if (is_within_box(mouse_pos, mPauseButton) && p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))//if system is pause and the quit button is pressed, tell the system to quit the game
 			{
@@ -100,6 +103,10 @@ namespace EM
 			else return false;
 				
 		}
+		if (Script_End == true)
+		{
+			return true;
+		}
 		return false;
 	}
 
@@ -110,6 +117,18 @@ namespace EM
 	bool gui_system::check_pause()//getter function for pause state
 	{
 		return is_Pause;
+	}
+	bool gui_system::Check_script()
+	{
+		return Script_End;
+	}
+	bool gui_system::Check_menu()
+	{
+		return is_menu;
+	}
+	bool gui_system::Check_HTP()
+	{
+		return HTP;
 	}
 	/*!*************************************************************************
 	Pause states toggling

@@ -14,6 +14,7 @@
     <None Include="Assets\Shaders\text.shader">
       <Filter>Assets\Shaders</Filter>
     </None>
+    <None Include="imgui.ini" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">

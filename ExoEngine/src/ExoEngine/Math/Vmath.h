@@ -3,6 +3,8 @@
 #include <iostream>
 #include <math.h>
 #include "empch.h"
+#include <glm/gtc/matrix_transform.hpp>
+
 
 namespace EM
 {
@@ -29,6 +31,7 @@ namespace EM
 		vec2D operator *= (const vec2D& rhs);
 		vec2D operator /= (const vec2D& rhs);
 		vec2D operator = (const vec2D& lhs);
+		
 		vec2D& operator += (float& rhs);
 		vec2D& operator -= (float& rhs);
 
@@ -65,6 +68,9 @@ namespace EM
 	float crossproduct(const vec2D& Vec0, const vec2D& Vec1);
 
 	vec2D  ADV_OrthProj(const vec2D& Vec0, const vec2D& Vec1);
+	
+	glm::vec2 vec2_adapter(vec2D& rhs);
+	vec2D basevec2_adapter(const glm::vec2& rhs);
 
 
 

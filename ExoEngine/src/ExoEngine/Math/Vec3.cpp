@@ -19,7 +19,8 @@ namespace EM
 {
 	Vec3::Vec3()
 	{
-
+		
+	
 	}
 
 	Vec3::Vec3(float _x, float _y, float _z)
@@ -63,6 +64,15 @@ namespace EM
 		return *this;
 	}
 	Vec3 Vec3::operator = (const Vec3& rhs)
+	{
+		x = rhs.x;
+		y = rhs.y;
+		z = rhs.z;
+
+		return *this;
+	}
+
+	Vec3 Vec3::operator = (const Vec4& rhs)
 	{
 		x = rhs.x;
 		y = rhs.y;

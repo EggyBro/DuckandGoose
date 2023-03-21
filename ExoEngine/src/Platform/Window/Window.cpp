@@ -145,19 +145,32 @@ namespace EM{
 
 			else if (std::filesystem::path(paths[i]).extension() == ".png")
 			{
-				auto folder = std::filesystem::path("Assets/Textures");
 				auto filename = std::filesystem::path(paths[i]).filename();
+				std::filesystem::path folder = {};
+				if (filename.string().at(0) == 'C')
+				{
+					folder = "Assets/Textures/Characters";
+				}
+				else if (filename.string().at(0) == 'E')
+				{
+					folder = "Assets/Textures/Environment";
+				}
+				else if (filename.string().at(0) == 'U')
+				{
+					folder = "Assets/Textures/UI";
+				}
+				else if (filename.string().at(0) == 'V')
+				{
+					folder = "Assets/Textures/VFX";
+				}
+				else EM_EXO_INFO("The name convention for this png {0} is wrong", filename.string().c_str());
+
 				std::filesystem::copy(std::filesystem::path(paths[i]), folder / filename);
-				//insert entry into audio file paths
-				p_Editor->insertTextureFilePath(paths[i]);
 			}
 			else
 			{
 				EM_EXO_INFO("Error Detected The extenstion is {0}", std::filesystem::path(paths[i]).extension().string().c_str());
 			}
-			//sort by extension
-			//use filesystem to copy filepathing to editor
-			//use filesystem to copy files into relevant asset folders
 		}
 	}
 

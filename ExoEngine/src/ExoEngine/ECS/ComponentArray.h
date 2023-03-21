@@ -72,7 +72,7 @@ namespace EM
 			mComponentArray[newIndex] = component;
 			component.SetComponentEntityID(entity);
 			++mSize;
-			EM_EXO_INFO("Size of m_size{0}", mSize);
+			//EM_EXO_INFO("Size of m_size{0}", mSize);
 		}
 
 		/*!*************************************************************************
@@ -88,20 +88,21 @@ namespace EM
 			size_t indexOfRemovedEntity = mEntityToIndexMap[entity];
 			size_t indexOfLastElement = mSize - 1;
 			mComponentArray[indexOfRemovedEntity] = mComponentArray[indexOfLastElement];
-			std::cout << "Index of removed  entity " << indexOfRemovedEntity << std::endl;
-			std::cout << "Index of Last Element " << indexOfLastElement << std::endl;
+
+			/*std::cout << "Index of removed  entity " << indexOfRemovedEntity << std::endl;
+			std::cout << "Index of Last Element " << indexOfLastElement << std::endl;*/
 		
 			
 			// Update map to point to moved spot
 			Entity entityOfLastElement = mIndexToEntityMap[indexOfLastElement];
 			mEntityToIndexMap[entityOfLastElement] = indexOfRemovedEntity;
 			mIndexToEntityMap[indexOfRemovedEntity] = entityOfLastElement;
-			std::cout << "entity Of Last Element " << entityOfLastElement << std::endl;
+			//std::cout << "entity Of Last Element " << entityOfLastElement << std::endl;
 			mEntityToIndexMap[entity] = MAX_ENTITIES;
 			mIndexToEntityMap[indexOfLastElement] = MAX_ENTITIES;
 
 			--mSize;
-			EM_EXO_INFO("Size of m_size{0}", mSize);
+			//EM_EXO_INFO("Size of m_size{0}", mSize);
 		}
 
 		/*!*************************************************************************
@@ -109,7 +110,7 @@ namespace EM
 		****************************************************************************/
 		T& GetData(Entity entity)
 		{
-			//assert(mEntityToIndexMap[entity] != MAX_ENTITIES && "Retrieving non-existent component.");
+			assert(mEntityToIndexMap[entity] != MAX_ENTITIES && "Retrieving non-existent component.");
 			// Return a reference to the entity's component
 			return mComponentArray[mEntityToIndexMap[entity]];
 		}
@@ -180,8 +181,13 @@ namespace EM
 		****************************************************************************/
 		void ClearForWorldBuild()
 		{
+			/*for (Entity i = 0; i < MAX_ENTITIES; ++i)
+			{
+				EntityDestroyed(i);
+			}*/
 			std::fill(mEntityToIndexMap.begin(), mEntityToIndexMap.end(), MAX_ENTITIES);
 			std::fill(mIndexToEntityMap.begin(), mIndexToEntityMap.end(), MAX_ENTITIES);
+			std::cout << mComponentArray.empty() << std::endl;
 		}
 
 	private:

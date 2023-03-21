@@ -25,7 +25,7 @@ namespace EM {
 		const float x_ndc = p_Editor->mGameMousePosition.x;
 		const float y_ndc = p_Editor->mGameMousePosition.y;
 
-		if (abs(x_ndc) > 1100.0f || abs(y_ndc) > 700.0f)
+		if (abs(x_ndc) > 1.0f || abs(y_ndc) > 1.0f)
 			return p_Editor->selectedEntity;
 
 		glm::vec4 clip{ x_ndc, y_ndc, 0.0f, 1.0f };
@@ -37,7 +37,8 @@ namespace EM {
 
 		for (Entity entity = 0; entity < p_ecs.GetTotalEntities(); entity++)
 		{
-			EntityTransform.insert({ &p_ecs.GetComponent<Transform>(entity), entity });
+			if(p_ecs.HaveComponent<Transform>(entity))
+				EntityTransform.insert({ &p_ecs.GetComponent<Transform>(entity), entity });
 		}
 		
 		int index = -1;
@@ -54,11 +55,6 @@ namespace EM {
 
 			bounding.max.x = 0.5f * std::abs(it->second->GetScale().x) + it->second->GetPos().x;
 			bounding.max.y = 0.5f * std::abs(it->second->GetScale().y) + it->second->GetPos().y;
-
-			std::cout << "Bounding box min x : " << bounding.min.x << std::endl;
-			std::cout << "Bounding box min y : " << bounding.min.y << std::endl;
-			std::cout << "Bounding box max x : " << bounding.max.x << std::endl;
-			std::cout << "Bounding box max y : " << bounding.max.y << std::endl;
 
 			if (World.x < bounding.min.x || World.x > bounding.max.x || World.y < bounding.min.y || World.y > bounding.max.y)
 				continue;

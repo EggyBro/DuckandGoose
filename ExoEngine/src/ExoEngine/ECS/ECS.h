@@ -137,12 +137,16 @@ namespace EM
 			
 		}
 
-		// Component methods
-		template<typename T>
+		void ResetAllEntitySignatures()
+		{
+			mEntityManager->ResetAllEntitySignatures();
+		}
 
+		// Component methods
 		/*!*************************************************************************
 		Registers Component for use in ECS
 		****************************************************************************/
+		template<typename T>
 		void RegisterComponent()
 		{
 			mComponentManager->RegisterComponent<T>();
@@ -156,7 +160,6 @@ namespace EM
 		{
 			component.SetComponentEntityID(entity);
 			mComponentManager->AddComponent<T>(entity, component);
-
 			auto signature = mEntityManager->GetSignature(entity);
 			signature.set(mComponentManager->GetComponentType<T>(), true);
 			mEntityManager->SetSignature(entity, signature);
@@ -250,7 +253,8 @@ namespace EM
 		****************************************************************************/
 		void ClearArrayForWorldBuild(ComponentType Type)
 		{
-			return mComponentManager->ClearArrayForWorldBuild(Type);
+			//ResetEntities();
+			mComponentManager->ClearArrayForWorldBuild(Type);
 		}
 
 		/*!*************************************************************************

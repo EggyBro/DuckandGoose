@@ -21,27 +21,10 @@ namespace EM {
 	class Animation
 	{
 	public:
-		struct FrameData
-		{
-			unsigned int TextureId{}; // which spritesheet is it using
-			float DisplayTime{};		// how long does the frame last before changing the next frame
-			vec2D FrameIndex{};		// the increment of the frame set to 0 when reach the last frame and y will always remind 0
-			float MaxFrame{};			// To check for the last frame
-		};
+	    static std::unordered_map<std::string, std::vector<float>> spriteContainer;// to store all animation info
 		Animation();
-		void AddFrameInfo(Sprite& sprite);
-		const FrameData* GetCurrentFrame() const;
-		bool UpdateAnimation(float deltatime);
-		void ResetFrame();
-
+		void UpdateAnimation(float deltatime, Sprite& sprite);
+		//std::unordered_map<std::string, std::vector<float>>& GetContainers() { return spriteContainer; }
 	private:
-		void FrameIncrement();
-
-	private:
-		
-		std::vector<FrameData> mFrame;
-		float mCurrentFrameIndex;// mCurrentFrameIndex
-		float mCurrentFrameTime; // decide when to transition to the next frame
-		
 	};
 }

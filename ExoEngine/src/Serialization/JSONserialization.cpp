@@ -17,6 +17,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #include "empch.h"
 #include "JSONserialization.h"
+#include "ExoEngine/Audio/AudioEngine.h"
 
 namespace EM
 {
@@ -47,6 +48,9 @@ namespace EM
 		}
 		else
 		{
+			p_Audio->StopChannel(CAudioEngine::channel_groups::master);
+			p_Audio->StopChannel(CAudioEngine::channel_groups::bgm);
+			p_Audio->StopChannel(CAudioEngine::channel_groups::sfx);
 			Deserialize(doc);
 		}
 		return true;

@@ -30,6 +30,7 @@ namespace EM
 
 		void SetNameTag(std::string name) { mName = name; }
 		std::string& GetNameTag() { return mName; }
+
 		/*!*************************************************************************
 		Retrieves Component Entity ID
 		****************************************************************************/

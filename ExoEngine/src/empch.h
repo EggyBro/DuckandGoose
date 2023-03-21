@@ -1,6 +1,7 @@
 #pragma once
 //precompile header
 
+#define _USE_MATH_DEFINES
 #include <iostream>
 #include <memory>
 #include <utility>
@@ -9,7 +10,9 @@
 #include <array>
 #include <bitset>
 #include <utility>
+#include <cstdlib>
 #include <random>
+#include <math.h>
 
 #include <string>
 #include <sstream>

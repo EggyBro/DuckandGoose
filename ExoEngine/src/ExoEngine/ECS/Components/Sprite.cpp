@@ -16,14 +16,15 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #include "empch.h"
 #include "Sprite.h"
-#include "ExoEngine/ResourceManager/ResourceManager.h"
+//#include "ExoEngine/ResourceManager/ResourceManager.h"
+#include "ExoEngine/Animation/Animation.h"
 namespace EM {
 
 	/*!*************************************************************************
 	Ctor for Sprite Component
 	****************************************************************************/
-	Sprite::Sprite() : mTextureName("Blank"), mIndex({ 0.0f,0.0f }), mUVcooridnates({ 512.0f, 512.0f }),
-		is_SpriteSheet(false), is_Animated(false), mDisplayTime(0.1667f){}
+	Sprite::Sprite() : mTextureName("Blank"), Index({ 0,0 }), mUVcooridnates({ 512.0f, 512.0f }),
+		is_SpriteSheet(false), is_Animated(false), mAlpha(1), MaxIndex_X(0),displayTime(GetMaxIndex()), internaltimer(0){}
 
 	/*!*************************************************************************
 	Deserialize for Sprite Component
@@ -31,11 +32,24 @@ namespace EM {
 	bool Sprite::Deserialize(const rapidjson::Value& obj)
 	{
 		mTextureName = std::string(obj["TextureName"].GetString());
-		mIndex = vec2D(obj["Index_X"].GetFloat(), obj["Index_Y"].GetFloat());
+		Index.x = int(obj["Index_X"].GetInt());
+		Index.y = int(obj["Index_Y"].GetInt());
 		mUVcooridnates = vec2D(obj["Ucoordinates"].GetFloat(), obj["Vcoordinates"].GetFloat());
 		is_SpriteSheet = bool(obj["IsSpriteSheet"].GetBool());
 		is_Animated = bool(obj["IsAnimated"].GetBool());
-		mDisplayTime = float(obj["DisplayTime"].GetFloat());
+		MaxIndex_X = int(obj["MaxIndex"].GetInt());
+		for (auto i = 0; i < MaxIndex_X; i++)
+		{
+			std::string DpNum;
+			DpNum = "DisplayTime " + std::to_string(i);
+			float individualtime = float(obj[DpNum.c_str()].GetFloat());
+			displayTime.push_back(individualtime);
+		}
+		if (is_Animated)
+		{
+			Animation::spriteContainer.emplace(mTextureName, displayTime);
+		}
+			
 		return true;
 	}
 
@@ -44,13 +58,13 @@ namespace EM {
 	****************************************************************************/
 	bool Sprite::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
-		writer->StartObject();
+		//writer->StartObject();
 		writer->Key("TextureName");
 		writer->String(mTextureName.c_str());
 		writer->Key("Index_X");
-		writer->Double(mIndex.x);
+		writer->Int(Index.x);
 		writer->Key("Index_Y");
-		writer->Double(mIndex.y);
+		writer->Int(Index.y);
 		writer->Key("Ucoordinates");
 		writer->Double(mUVcooridnates.x);
 		writer->Key("Vcoordinates");
@@ -59,9 +73,16 @@ namespace EM {
 		writer->Bool(is_SpriteSheet);
 		writer->Key("IsAnimated");
 		writer->Bool(is_Animated);
-		writer->Key("DisplayTime");
-		writer->Double(mDisplayTime);
-		writer->EndObject();
+		writer->Key("MaxIndex");
+		writer->Int(MaxIndex_X);
+		for (auto i = 0; i < displayTime.size(); i++)
+		{
+			std::string DpNum;
+			DpNum = "DisplayTime " + std::to_string(i);
+			writer->Key(DpNum.c_str());
+			writer->Double(displayTime[i]);
+		}
+		//writer->EndObject();
 		return true;
 	}
 	

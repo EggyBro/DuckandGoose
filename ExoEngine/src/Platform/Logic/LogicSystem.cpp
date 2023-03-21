@@ -17,6 +17,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #include "empch.h"
 #include "LogicSystem.h"
+#include "ExoEngine/GUI/GUI.h"
 #include "ExoEngine/Timer/Time.h"
 
 namespace EM
@@ -26,24 +27,7 @@ namespace EM
 	****************************************************************************/
 	void LogicSystem::Init()
 	{
-		/*auto mLogic = p_ecs.RegisterSystem<LogicSystem>();
-		{
-			Signature signature;
-			signature.set(p_ecs.GetComponentType<Logic>());
-			p_ecs.SetSystemSignature<LogicSystem>(signature);
-		}*/
-		for (const auto& entity : mEntities)
-		{
-			auto& LogicComp = p_ecs.GetComponent<Logic>(entity);
-			for (auto i = LogicComp.GetScript().begin(); i != LogicComp.GetScript().end(); ++i)
-			{
-				if ((*i)->GetScriptEntityID() != entity)
-				{
-					LogicComp.SetScriptEntity(entity);
-				}
-				(*i)->Start();
-			}
-		}
+
 	}
 
 	/*!*************************************************************************
@@ -53,16 +37,26 @@ namespace EM
 	{
 		Timer::GetInstance().Start(Systems::LOGIC);
 		Timer::GetInstance().GetDT(Systems::LOGIC);
-		for (const auto& entity : mEntities)
+
+		for (const auto &entity : mEntities)
 		{
 			auto& LogicComp = p_ecs.GetComponent<Logic>(entity);
-			for (auto i = LogicComp.GetScript().begin(); i != LogicComp.GetScript().end(); ++i)
+			LogicComp.SetScriptEntity(entity);
+			if (!LogicComp.GetScript().empty())
 			{
-				if ((*i)->GetScriptEntityID() != entity)
+				for (auto i = LogicComp.GetScript().begin(); i != LogicComp.GetScript().end(); ++i)
 				{
-					LogicComp.SetScriptEntity(entity);
+					if ((p_GUI->check_pause() == false || (*i)->GetScriptName() == "PauseMenu"))
+					{
+						if (!(*i)->GetScriptInit())
+						{
+							(*i)->Start();
+							(*i)->SetScriptInit();
+						}
+						if(!(*i)->GetScriptPaused())
+							(*i)->Update(Frametime);
+					}
 				}
-				(*i)->Update(Frametime);
 			}
 		}
 		Timer::GetInstance().Update(Systems::LOGIC);

@@ -25,7 +25,7 @@ namespace EM
 	class CollisionResponse : public IScript
 	{
 	public:
-		CollisionResponse() = default;
+		CollisionResponse() : mTotalEnemies{ 0 }, mTotalDeadEnemies{ 0 } {}
 		~CollisionResponse() = default;
 		/*!*************************************************************************
 		This function initialises the script. As there are no data members that require
@@ -51,7 +51,16 @@ namespace EM
 		This function returns the purpose of the script as a flag for when it is called
 		****************************************************************************/
 		virtual std::string GetScriptName() override;
+
+		virtual void SetScriptEntityID(Entity& entity) override { entityID = entity; }
+
+		virtual Entity& GetScriptEntityID() override { return entityID; }
+
 	private:
 		entityPhysics mPhys;
+		Entity mEntityTarget{};
+		Entity mEntityMain{};
+		Entity mTotalEnemies;
+		Entity mTotalDeadEnemies;
 	};
 }

@@ -51,9 +51,16 @@ namespace EM
 		Serializes ECS entities and data to JSON file to save ECS (File saving)
 		****************************************************************************/
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
+
+		// temp: scene to load code
+		void setSceneToLoad(std::string s);
+		void checkForSceneToLoad();
+		void changeScene(std::string s);
 		
 	private:
 		// Unique pointer to SceneManager
 		static std::unique_ptr<SceneManager> m_instance;
+
+		std::string sceneToLoad;
 	};
 }

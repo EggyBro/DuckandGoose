@@ -16,7 +16,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "Camera2D.h"
 #include "glm/gtc/matrix_transform.hpp"
 #include "ExoEngine/Timer/Time.h"
-
+#include "Platform/LevelEditor/LevelEditor.h"
 namespace EM {
 
 	/*!*************************************************************************
@@ -45,19 +45,26 @@ namespace EM {
 	****************************************************************************/
 	bool Camera2D::MouseScrolling()
 	{
-		
-		if (p_Input->mMouseScrollStatus < 0 )
+		p_Editor->mSceneMouse = ImGui::GetMousePos();
+		if (p_Editor->mSceneMouse.x >= p_Editor->mViewportBounds[0].x &&
+			p_Editor->mSceneMouse.x <= p_Editor->mViewportBounds[1].x &&
+			p_Editor->mSceneMouse.y >= p_Editor->mViewportBounds[0].y &&
+			p_Editor->mSceneMouse.y <= p_Editor->mViewportBounds[1].y &&
+			p_Editor->is_ShowWindow && p_Editor->p_Editor->mViewportFocused)
 		{
-			mZoomLevel -= 10.0f * Timer::GetInstance().GetGlobalDT();
-		}
-		else if (p_Input->mMouseScrollStatus > 0)
-		{
-			mZoomLevel += 10.0f * Timer::GetInstance().GetGlobalDT();;
+			if (p_Input->mMouseScrollStatus < 0)
+			{
+				mZoomLevel -= 10.0f * Timer::GetInstance().GetGlobalDT();
+			}
+			else if (p_Input->mMouseScrollStatus > 0)
+			{
+				mZoomLevel += 10.0f * Timer::GetInstance().GetGlobalDT();
+			}
 		}
 		mZoomLevel = std::max(mZoomLevel, 0.25f);
 		mZoomLevel = std::min(mZoomLevel, 5.00f);
 		p_Input->mMouseScrollStatus = 0.0f;
-
+		
 		SetProjection(-mAspectRatio * mZoomLevel, mAspectRatio * mZoomLevel, -mZoomLevel, mZoomLevel);
 		RecalculateMatrix();
 		return false;
@@ -73,7 +80,7 @@ namespace EM {
 	}
 
 	/*!*************************************************************************
-	Reset zoom level
+	////Reset zoom level
 	****************************************************************************/
 	void Camera2D::resetZoomLevel()
 	{

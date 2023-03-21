@@ -39,12 +39,12 @@ namespace EM
 	****************************************************************************/
 	bool Tag::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
-		writer->StartObject();
+		//writer->StartObject();
 		writer->Key("Tag");
 		writer->String(mTag.c_str());
 		writer->Key("TargetTag");
 		writer->String(mTargetTag.c_str());
-		writer->EndObject();
+		//writer->EndObject();
 		return true;
 	}
 }

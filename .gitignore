@@ -42,3 +42,8 @@
 x64/Debug/ExoEngine.dll
 x64/Debug/ExoEngine.pdb
 /x64/Debug
+*.log
+*.log
+*.iobj
+*.log
+*.tlog

@@ -17,10 +17,10 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ResourceManager.h"
 
 namespace EM {
-	std::map <std::string, std::shared_ptr<Texture>> ResourceManager::textures;
-	std::map <std::string, std::shared_ptr<Shader>> ResourceManager::shaders;
-	std::map <std::string, std::shared_ptr<CAudioEngine>> ResourceManager::audios;
-	std::map <std::string, std::shared_ptr<Texture>> ResourceManager::Icons;
+	std::unordered_map <std::string, std::shared_ptr<Texture>> ResourceManager::textures;
+	std::unordered_map <std::string, std::shared_ptr<Shader>> ResourceManager::shaders;
+	std::unordered_map <std::string, std::shared_ptr<CAudioEngine>> ResourceManager::audios;
+	std::unordered_map <std::string, std::shared_ptr<Texture>> ResourceManager::Icons;
 	//TODO to load different fonts and maybe audio/music
 	//std::map <std::string, std::shared_ptr<Font>> ResourceManager::fonts;
 

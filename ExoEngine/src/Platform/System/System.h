@@ -19,8 +19,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/ECS/Types.h"
 namespace EM {
 	template class EM_API std::set<Entity>;
-	//template class EM_API std::basic_string<char, std::char_traits<char>, std::allocator<char>>;
-
+	
 	class EM_API System
 	{
 	public:

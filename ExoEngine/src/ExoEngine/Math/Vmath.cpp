@@ -16,6 +16,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "Vmath.h"
 
 
+
 namespace EM
 {
 	/*!*************************************************************************
@@ -234,5 +235,16 @@ namespace EM
 		float temp = dot_prod / Vec1_length;
 		return (temp * Vec1);
 	}
+
+	glm::vec2 vec2_adapter(vec2D& rhs)
+	{
+		return (glm::vec2{ rhs.x,rhs.y });
+	}
+	vec2D basevec2_adapter(const glm::vec2& rhs)
+	
+		{
+			return (vec2D{ rhs.x,rhs.y });
+		}
+	
 
 }

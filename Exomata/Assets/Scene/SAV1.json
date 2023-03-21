@@ -1,0 +1,3079 @@
+{
+    "Number of Entities": {
+        "Entities": 59
+    },
+    "EntitySignatures": [
+        "00000000000000000000000000001000",
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011111",
+        "00000000000000000000000000011111",
+        "00000000000000000000000000011111",
+        "00000000000000000000000000011111",
+        "00000000000000000000000000011111",
+        "00000000000000000000000000011111",
+        "00000000000000000000000000011111",
+        "00000000000000000000000000011111",
+        "00000000000000000000000000011111",
+        "00000000000000000000000000011111",
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011001",
+        "00000000000000000000010011111111",
+        "00000000000000000000000000011000",
+        "00000000000000000000000000011000",
+        "00000000000000000000000000011000",
+        "00000000000000000000000000011000",
+        "00000000000000000000000000011000",
+        "00000000000000000000000000011111",
+        "00000000000000000000000000011111",
+        "00000000000000000000100111111111",
+        "00000000000000000000000000011000",
+        "00000000000000000000000000011000",
+        "00000000000000000000000000011000",
+        "00000000000000000000000000011000",
+        "00000000000000000000000010111111",
+        "00000000000000000000000000011001",
+        "00000000000000000000000000111111",
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011001",
+        "00000000000000000000100111111111",
+        "00000000000000000000100111111111",
+        "00000000000000000000100111111111",
+        "00000000000000000000100111111111",
+        "00000000000000000000000010101001",
+        "00000000000000000000000100111001",
+        "00000000000000000000000100111001",
+        "00000000000000000000000100111001",
+        "00000000000000000000000100111001",
+        "00000000000000000000000001111001",
+        "00000000000000000000000000011001",
+        "00000000000000000000000001111101",
+        "00000000000000000000000001111101",
+        "00000000000000000000000001111101",
+        "00000000000000000000000001111101",
+        "00000000000000000000000001111101"
+    ],
+    "Components": {
+        "0": [
+            {},
+            {},
+            {},
+            {
+                "NameTag": "PlayerHUDStatic"
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "1": [
+            {
+                "posX": 0.0,
+                "posY": 0.0,
+                "scaleX": 11.0,
+                "scaleY": 1.0,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "background"
+            },
+            {
+                "TextureName": "ENVIRONMENT_COMPILED _FINAL_V2 ",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "2": [
+            {
+                "posX": -1.2790672779083252,
+                "posY": 0.2983676493167877,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "Rot": 0.0
+            },
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 0.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 5,
+                "ColliderType2": 0,
+                "minX1": 4.0,
+                "minX2": 0.0,
+                "minY1": 0.07500000298023224,
+                "minY2": 0.0,
+                "maxX1": 4.0,
+                "maxX2": 0.0,
+                "maxY1": 0.07500000298023224,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "top boundary"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "3": [
+            {
+                "posX": -3.550370931625366,
+                "posY": -0.10031422972679138,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "Rot": 0.0
+            },
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 0.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 5,
+                "ColliderType2": 0,
+                "minX1": 1.9500000476837158,
+                "minX2": 0.0,
+                "minY1": 0.10000000149011612,
+                "minY2": 0.0,
+                "maxX1": 1.600000023841858,
+                "maxX2": 0.0,
+                "maxY1": 0.0,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "bottom boundary left 1"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "4": [
+            {
+                "posX": -1.27644944190979,
+                "posY": -0.31090936064720154,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "Rot": 0.0
+            },
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 0.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 5,
+                "ColliderType2": 0,
+                "minX1": 0.5,
+                "minX2": 0.0,
+                "minY1": 0.10999999940395355,
+                "minY2": 0.0,
+                "maxX1": 0.5,
+                "maxX2": 0.0,
+                "maxY1": 0.0,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "bottom boundary middle left"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "5": [
+            {
+                "posX": 0.5165082812309265,
+                "posY": -0.1360795646905899,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "Rot": 0.0
+            },
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 0.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 5,
+                "ColliderType2": 0,
+                "minX1": 1.2999999523162842,
+                "minX2": 0.0,
+                "minY1": 0.09000000357627869,
+                "minY2": 0.0,
+                "maxX1": 1.2999999523162842,
+                "maxX2": 0.0,
+                "maxY1": 0.09000000357627869,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "bottom boundary middle right"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "6": [
+            {
+                "posX": 4.267552375793457,
+                "posY": -0.35117077827453613,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "Rot": 0.0
+            },
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 0.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 5,
+                "ColliderType2": 0,
+                "minX1": 0.800000011920929,
+                "minX2": 0.0,
+                "minY1": 0.10999999940395355,
+                "minY2": 0.0,
+                "maxX1": 0.800000011920929,
+                "maxX2": 0.0,
+                "maxY1": 0.0,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "bottom right boundary"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "7": [
+            {
+                "posX": -1.8197766542434692,
+                "posY": -0.19335085153579712,
+                "scaleX": 0.9999980330467224,
+                "scaleY": 0.9999980330467224,
+                "Rot": 0.0
+            },
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 0.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 5,
+                "ColliderType2": 0,
+                "minX1": 0.25,
+                "minX2": 0.0,
+                "minY1": 0.20999999344348907,
+                "minY2": 0.0,
+                "maxX1": 0.05000000074505806,
+                "maxX2": 0.0,
+                "maxY1": 0.10000000149011612,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "bottom left corner"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "8": [
+            {
+                "posX": -0.6765095591545105,
+                "posY": -0.3232313394546509,
+                "scaleX": 0.9999980330467224,
+                "scaleY": 0.9999980330467224,
+                "Rot": 0.0
+            },
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 0.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 5,
+                "ColliderType2": 0,
+                "minX1": 0.10000000149011612,
+                "minX2": 0.0,
+                "minY1": 0.10000000149011612,
+                "minY2": 0.0,
+                "maxX1": 0.10000000149011612,
+                "maxX2": 0.0,
+                "maxY1": 0.10000000149011612,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "bottom right corner"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "9": [
+            {
+                "posX": 3.5839662551879883,
+                "posY": -0.23198945820331573,
+                "scaleX": 0.9999980330467224,
+                "scaleY": 0.9999980330467224,
+                "Rot": 0.0
+            },
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 0.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 5,
+                "ColliderType2": 0,
+                "minX1": 0.10000000149011612,
+                "minX2": 0.0,
+                "minY1": 0.11999999731779099,
+                "minY2": 0.0,
+                "maxX1": 0.10000000149011612,
+                "maxX2": 0.0,
+                "maxY1": 0.12999999523162842,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "bottom far right corner"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "10": [
+            {
+                "posX": -4.263725280761719,
+                "posY": 0.03749954700469971,
+                "scaleX": 0.9999980330467224,
+                "scaleY": 0.9999980330467224,
+                "Rot": 0.0
+            },
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 0.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 5,
+                "ColliderType2": 0,
+                "minX1": 0.125,
+                "minX2": 0.0,
+                "minY1": 0.27000001072883606,
+                "minY2": 0.0,
+                "maxX1": 0.125,
+                "maxX2": 0.0,
+                "maxY1": 0.27000001072883606,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "bottom most left corner"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "11": [
+            {
+                "posX": 4.4164581298828125,
+                "posY": 0.04219485819339752,
+                "scaleX": 0.9999980330467224,
+                "scaleY": 0.9999980330467224,
+                "Rot": 0.0
+            },
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 0.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 5,
+                "ColliderType2": 0,
+                "minX1": 0.15000000596046448,
+                "minX2": 0.0,
+                "minY1": 0.5099999904632568,
+                "minY2": 0.0,
+                "maxX1": 0.15000000596046448,
+                "maxX2": 0.0,
+                "maxY1": 0.30000001192092896,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "bottom most top right corner"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "12": [
+            {
+                "posX": -4.260199546813965,
+                "posY": 0.12532055377960205,
+                "scaleX": 0.41499999165534973,
+                "scaleY": 0.20999999344348907,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "starting debris 1"
+            },
+            {
+                "TextureName": "ENVIRONMENT_PROPS_TILESET",
+                "Index_X": 0,
+                "Index_Y": 5,
+                "Ucoordinates": 1114.0,
+                "Vcoordinates": 530.5,
+                "IsSpriteSheet": true,
+                "IsAnimated": false,
+                "MaxIndex": 9,
+                "DisplayTime 0": 0.0,
+                "DisplayTime 1": 0.0,
+                "DisplayTime 2": 0.0,
+                "DisplayTime 3": 0.0,
+                "DisplayTime 4": 0.0,
+                "DisplayTime 5": 0.0,
+                "DisplayTime 6": 0.0,
+                "DisplayTime 7": 0.0,
+                "DisplayTime 8": 0.0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "13": [
+            {
+                "posX": -4.255789279937744,
+                "posY": -0.009188711643218994,
+                "scaleX": 0.41499999165534973,
+                "scaleY": 0.20999999344348907,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "starting debris 2"
+            },
+            {
+                "TextureName": "ENVIRONMENT_PROPS_TILESET",
+                "Index_X": 0,
+                "Index_Y": 5,
+                "Ucoordinates": 1114.0,
+                "Vcoordinates": 530.5,
+                "IsSpriteSheet": true,
+                "IsAnimated": false,
+                "MaxIndex": 9,
+                "DisplayTime 0": 0.0,
+                "DisplayTime 1": 0.0,
+                "DisplayTime 2": 0.0,
+                "DisplayTime 3": 0.0,
+                "DisplayTime 4": 0.0,
+                "DisplayTime 5": 0.0,
+                "DisplayTime 6": 0.0,
+                "DisplayTime 7": 0.0,
+                "DisplayTime 8": 0.0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "14": [
+            {
+                "posX": -4.317531585693359,
+                "posY": 0.07019389420747757,
+                "scaleX": 0.41499999165534973,
+                "scaleY": 0.20999999344348907,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "starting debris 3"
+            },
+            {
+                "TextureName": "ENVIRONMENT_PROPS_TILESET",
+                "Index_X": 0,
+                "Index_Y": 5,
+                "Ucoordinates": 1114.0,
+                "Vcoordinates": 530.5,
+                "IsSpriteSheet": true,
+                "IsAnimated": false,
+                "MaxIndex": 9,
+                "DisplayTime 0": 0.0,
+                "DisplayTime 1": 0.0,
+                "DisplayTime 2": 0.0,
+                "DisplayTime 3": 0.0,
+                "DisplayTime 4": 0.0,
+                "DisplayTime 5": 0.0,
+                "DisplayTime 6": 0.0,
+                "DisplayTime 7": 0.0,
+                "DisplayTime 8": 0.0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "15": [
+            {
+                "posX": -1.8096297979354858,
+                "posY": -0.11650235950946808,
+                "scaleX": 0.41499999165534973,
+                "scaleY": 0.20999999344348907,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "starting debris 4"
+            },
+            {
+                "TextureName": "ENVIRONMENT_PROPS_TILESET",
+                "Index_X": 1,
+                "Index_Y": 5,
+                "Ucoordinates": 990.0,
+                "Vcoordinates": 530.5,
+                "IsSpriteSheet": true,
+                "IsAnimated": false,
+                "MaxIndex": 9,
+                "DisplayTime 0": 0.0,
+                "DisplayTime 1": 0.0,
+                "DisplayTime 2": 0.0,
+                "DisplayTime 3": 0.0,
+                "DisplayTime 4": 0.0,
+                "DisplayTime 5": 0.0,
+                "DisplayTime 6": 0.0,
+                "DisplayTime 7": 0.0,
+                "DisplayTime 8": 0.0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "16": [
+            {
+                "posX": -1.770857572555542,
+                "posY": -0.19717082381248474,
+                "scaleX": 0.41499999165534973,
+                "scaleY": 0.20999999344348907,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "starting debris 5"
+            },
+            {
+                "TextureName": "ENVIRONMENT_PROPS_TILESET",
+                "Index_X": 0,
+                "Index_Y": 5,
+                "Ucoordinates": 1114.0,
+                "Vcoordinates": 530.5,
+                "IsSpriteSheet": true,
+                "IsAnimated": false,
+                "MaxIndex": 9,
+                "DisplayTime 0": 0.0,
+                "DisplayTime 1": 0.0,
+                "DisplayTime 2": 0.0,
+                "DisplayTime 3": 0.0,
+                "DisplayTime 4": 0.0,
+                "DisplayTime 5": 0.0,
+                "DisplayTime 6": 0.0,
+                "DisplayTime 7": 0.0,
+                "DisplayTime 8": 0.0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "17": [
+            {
+                "posX": -0.7545028924942017,
+                "posY": -0.19055604934692383,
+                "scaleX": -0.41499999165534973,
+                "scaleY": 0.20999999344348907,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "starting debris 6"
+            },
+            {
+                "TextureName": "ENVIRONMENT_PROPS_TILESET",
+                "Index_X": 1,
+                "Index_Y": 5,
+                "Ucoordinates": 990.0,
+                "Vcoordinates": 530.5,
+                "IsSpriteSheet": true,
+                "IsAnimated": false,
+                "MaxIndex": 9,
+                "DisplayTime 0": 0.0,
+                "DisplayTime 1": 0.0,
+                "DisplayTime 2": 0.0,
+                "DisplayTime 3": 0.0,
+                "DisplayTime 4": 0.0,
+                "DisplayTime 5": 0.0,
+                "DisplayTime 6": 0.0,
+                "DisplayTime 7": 0.0,
+                "DisplayTime 8": 0.0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "18": [
+            {
+                "posX": -0.7631397247314453,
+                "posY": -0.22308024764060974,
+                "scaleX": 0.41499999165534973,
+                "scaleY": 0.20999999344348907,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "starting debris 7"
+            },
+            {
+                "TextureName": "ENVIRONMENT_PROPS_TILESET",
+                "Index_X": 0,
+                "Index_Y": 5,
+                "Ucoordinates": 1114.0,
+                "Vcoordinates": 530.5,
+                "IsSpriteSheet": true,
+                "IsAnimated": false,
+                "MaxIndex": 9,
+                "DisplayTime 0": 0.0,
+                "DisplayTime 1": 0.0,
+                "DisplayTime 2": 0.0,
+                "DisplayTime 3": 0.0,
+                "DisplayTime 4": 0.0,
+                "DisplayTime 5": 0.0,
+                "DisplayTime 6": 0.0,
+                "DisplayTime 7": 0.0,
+                "DisplayTime 8": 0.0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "19": [
+            {
+                "posX": 3.510148286819458,
+                "posY": -0.10116206854581833,
+                "scaleX": 0.41499999165534973,
+                "scaleY": 0.20999999344348907,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "starting debris 8"
+            },
+            {
+                "TextureName": "ENVIRONMENT_PROPS_TILESET",
+                "Index_X": 0,
+                "Index_Y": 5,
+                "Ucoordinates": 1114.0,
+                "Vcoordinates": 530.5,
+                "IsSpriteSheet": true,
+                "IsAnimated": false,
+                "MaxIndex": 9,
+                "DisplayTime 0": 0.0,
+                "DisplayTime 1": 0.0,
+                "DisplayTime 2": 0.0,
+                "DisplayTime 3": 0.0,
+                "DisplayTime 4": 0.0,
+                "DisplayTime 5": 0.0,
+                "DisplayTime 6": 0.0,
+                "DisplayTime 7": 0.0,
+                "DisplayTime 8": 0.0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "20": [
+            {
+                "posX": 3.6988232135772705,
+                "posY": -0.27637001872062683,
+                "scaleX": 0.41499999165534973,
+                "scaleY": 0.20999999344348907,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "starting debris 9"
+            },
+            {
+                "TextureName": "ENVIRONMENT_PROPS_TILESET",
+                "Index_X": 1,
+                "Index_Y": 5,
+                "Ucoordinates": 990.0,
+                "Vcoordinates": 530.5,
+                "IsSpriteSheet": true,
+                "IsAnimated": false,
+                "MaxIndex": 9,
+                "DisplayTime 0": 0.0,
+                "DisplayTime 1": 0.0,
+                "DisplayTime 2": 0.0,
+                "DisplayTime 3": 0.0,
+                "DisplayTime 4": 0.0,
+                "DisplayTime 5": 0.0,
+                "DisplayTime 6": 0.0,
+                "DisplayTime 7": 0.0,
+                "DisplayTime 8": 0.0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "21": [
+            {
+                "posX": -3.3908283710479736,
+                "posY": 0.1804599016904831,
+                "scaleX": 0.25,
+                "scaleY": 0.25,
+                "Rot": 0.0
+            },
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 1,
+                "ColliderType2": 4,
+                "minX1": 0.0,
+                "minX2": 0.07999999821186066,
+                "minY1": 0.0,
+                "minY2": 0.05000000074505806,
+                "maxX1": 0.0,
+                "maxX2": 0.07999999821186066,
+                "maxY1": 0.0,
+                "maxY2": 0.05000000074505806,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.05000000074505806,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "player"
+            },
+            {
+                "TextureName": "Idle",
+                "Index_X": 1,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 8,
+                "DisplayTime 0": 0.25999999046325684,
+                "DisplayTime 1": 0.20000000298023224,
+                "DisplayTime 2": 0.05999999865889549,
+                "DisplayTime 3": 0.05999999865889549,
+                "DisplayTime 4": 0.25999999046325684,
+                "DisplayTime 5": 0.20000000298023224,
+                "DisplayTime 6": 0.0,
+                "DisplayTime 7": 0.0
+            },
+            {
+                "0": "PlayerControl",
+                "1": "CollisionResponse",
+                "2": "AudioManager",
+                "ScriptCount": 3
+            },
+            {
+                "Tag": "Player",
+                "TargetTag": ""
+            },
+            {
+                "0": {
+                    "AudioPath": "Attack2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "1": {
+                    "AudioPath": "FStep1.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "2": {
+                    "AudioPath": "FStep8.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "3": {
+                    "AudioPath": "ShieldTing2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "4": {
+                    "AudioPath": "Whoosh2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "5": {
+                    "AudioPath": "PlayerDamaged3.mp3",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 6,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
+            {},
+            {},
+            {
+                "Health": 80,
+                "Max Health": 100,
+                "Damage": 20
+            },
+            {}
+        ],
+        "22": [
+            {},
+            {},
+            {},
+            {
+                "NameTag": "player blocking animation"
+            },
+            {
+                "TextureName": "Block",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 8,
+                "DisplayTime 0": 0.05999999865889549,
+                "DisplayTime 1": 0.05999999865889549,
+                "DisplayTime 2": 0.05999999865889549,
+                "DisplayTime 3": 0.05999999865889549,
+                "DisplayTime 4": 0.05999999865889549,
+                "DisplayTime 5": 0.05999999865889549,
+                "DisplayTime 6": 0.05999999865889549,
+                "DisplayTime 7": 2.0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "23": [
+            {},
+            {},
+            {},
+            {
+                "NameTag": "player damage animation"
+            },
+            {
+                "TextureName": "Damage",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 9,
+                "DisplayTime 0": 0.05999999865889549,
+                "DisplayTime 1": 0.05999999865889549,
+                "DisplayTime 2": 0.05999999865889549,
+                "DisplayTime 3": 0.05999999865889549,
+                "DisplayTime 4": 0.05999999865889549,
+                "DisplayTime 5": 0.05999999865889549,
+                "DisplayTime 6": 0.05999999865889549,
+                "DisplayTime 7": 0.05999999865889549,
+                "DisplayTime 8": 0.05999999865889549
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "24": [
+            {},
+            {},
+            {},
+            {
+                "NameTag": "player running animation"
+            },
+            {
+                "TextureName": "Running",
+                "Index_X": 7,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 8,
+                "DisplayTime 0": 0.05999999865889549,
+                "DisplayTime 1": 0.05999999865889549,
+                "DisplayTime 2": 0.05999999865889549,
+                "DisplayTime 3": 0.05999999865889549,
+                "DisplayTime 4": 0.05999999865889549,
+                "DisplayTime 5": 0.05999999865889549,
+                "DisplayTime 6": 0.05999999865889549,
+                "DisplayTime 7": 0.05999999865889549
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "25": [
+            {},
+            {},
+            {},
+            {
+                "NameTag": "player attack swing 1"
+            },
+            {
+                "TextureName": "Normal_Attack_Swing1",
+                "Index_X": 5,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 6,
+                "DisplayTime 0": 0.05999999865889549,
+                "DisplayTime 1": 0.05999999865889549,
+                "DisplayTime 2": 0.05999999865889549,
+                "DisplayTime 3": 0.05999999865889549,
+                "DisplayTime 4": 0.05999999865889549,
+                "DisplayTime 5": 0.05999999865889549
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "26": [
+            {},
+            {},
+            {},
+            {
+                "NameTag": "player attack swing 2"
+            },
+            {
+                "TextureName": "Normal_Attack_Swing2",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 6,
+                "DisplayTime 0": 0.05999999865889549,
+                "DisplayTime 1": 0.05999999865889549,
+                "DisplayTime 2": 0.05999999865889549,
+                "DisplayTime 3": 0.05999999865889549,
+                "DisplayTime 4": 0.05999999865889549,
+                "DisplayTime 5": 0.05999999865889549
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "27": [
+            {
+                "posX": 2.6522724628448486,
+                "posY": -0.20649859309196472,
+                "scaleX": 0.9999980330467224,
+                "scaleY": 0.9999980330467224,
+                "Rot": 0.0
+            },
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 0.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 5,
+                "ColliderType2": 0,
+                "minX1": 0.8500000238418579,
+                "minX2": 0.0,
+                "minY1": 0.10000000149011612,
+                "minY2": 0.0,
+                "maxX1": 0.8500000238418579,
+                "maxX2": 0.0,
+                "maxY1": 0.10000000149011612,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "bottom bridge left corner"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "28": [
+            {
+                "posX": 2.5463385581970215,
+                "posY": 0.277473509311676,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "Rot": 0.0
+            },
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 0.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 5,
+                "ColliderType2": 0,
+                "minX1": 2.0,
+                "minX2": 0.0,
+                "minY1": 0.07500000298023224,
+                "minY2": 0.0,
+                "maxX1": 2.0,
+                "maxX2": 0.0,
+                "maxY1": 0.07500000298023224,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "top boundary right"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "29": [
+            {
+                "posX": -2.6317834854125977,
+                "posY": 0.02610764652490616,
+                "scaleX": 0.30000001192092896,
+                "scaleY": 0.30000001192092896,
+                "Rot": 0.0
+            },
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 1,
+                "ColliderType2": 4,
+                "minX1": 0.0,
+                "minX2": 0.07999999821186066,
+                "minY1": 0.0,
+                "minY2": 0.05000000074505806,
+                "maxX1": 0.0,
+                "maxX2": 0.07999999821186066,
+                "maxY1": 0.0,
+                "maxY2": 0.05000000074505806,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.05000000074505806,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Enemy"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 1,
+                "DisplayTime 0": 0.05999999865889549
+            },
+            {
+                "0": "EnemyScript",
+                "1": "CollisionResponse",
+                "2": "AudioManager",
+                "ScriptCount": 3
+            },
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
+            {
+                "0": {
+                    "AudioPath": "ThudStrike2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "1": {
+                    "AudioPath": "Melee_EnemyImpact4.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "2": {
+                    "AudioPath": "PlayerDamaged4.mp3",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 3,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
+            {
+                "ElementType": 1,
+                "offsetX": -0.10000000149011612,
+                "offsetY": 0.10000000149011612
+            },
+            {},
+            {},
+            {
+                "Health": 100,
+                "Max Health": 100,
+                "Damage": 20
+            }
+        ],
+        "30": [
+            {},
+            {},
+            {},
+            {
+                "NameTag": "Enemy attack animation "
+            },
+            {
+                "TextureName": "EXOMATA_ENEMY_MELEE_ATTACKING_SPRITESHEET",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 23,
+                "DisplayTime 0": 0.029999999329447746,
+                "DisplayTime 1": 0.029999999329447746,
+                "DisplayTime 2": 0.029999999329447746,
+                "DisplayTime 3": 0.029999999329447746,
+                "DisplayTime 4": 0.029999999329447746,
+                "DisplayTime 5": 0.029999999329447746,
+                "DisplayTime 6": 0.029999999329447746,
+                "DisplayTime 7": 0.029999999329447746,
+                "DisplayTime 8": 0.029999999329447746,
+                "DisplayTime 9": 0.029999999329447746,
+                "DisplayTime 10": 0.029999999329447746,
+                "DisplayTime 11": 0.029999999329447746,
+                "DisplayTime 12": 0.029999999329447746,
+                "DisplayTime 13": 0.029999999329447746,
+                "DisplayTime 14": 0.029999999329447746,
+                "DisplayTime 15": 0.029999999329447746,
+                "DisplayTime 16": 0.029999999329447746,
+                "DisplayTime 17": 0.029999999329447746,
+                "DisplayTime 18": 0.029999999329447746,
+                "DisplayTime 19": 0.029999999329447746,
+                "DisplayTime 20": 0.029999999329447746,
+                "DisplayTime 21": 0.029999999329447746,
+                "DisplayTime 22": 0.029999999329447746
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "31": [
+            {},
+            {},
+            {},
+            {
+                "NameTag": "Enemy damaged animation"
+            },
+            {
+                "TextureName": "Enemy_Damaged_Normal_Attack",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 12,
+                "DisplayTime 0": 0.05999999865889549,
+                "DisplayTime 1": 0.05999999865889549,
+                "DisplayTime 2": 0.05999999865889549,
+                "DisplayTime 3": 0.05999999865889549,
+                "DisplayTime 4": 0.05999999865889549,
+                "DisplayTime 5": 0.05999999865889549,
+                "DisplayTime 6": 0.05999999865889549,
+                "DisplayTime 7": 0.05999999865889549,
+                "DisplayTime 8": 0.05999999865889549,
+                "DisplayTime 9": 0.05999999865889549,
+                "DisplayTime 10": 0.05999999865889549,
+                "DisplayTime 11": 0.05999999865889549
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "32": [
+            {},
+            {},
+            {},
+            {
+                "NameTag": "Enemy death animation"
+            },
+            {
+                "TextureName": "EXOMATA_MELEE_ENEMY_DEATH",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 30,
+                "DisplayTime 0": 0.009999999776482582,
+                "DisplayTime 1": 0.009999999776482582,
+                "DisplayTime 2": 0.009999999776482582,
+                "DisplayTime 3": 0.009999999776482582,
+                "DisplayTime 4": 0.009999999776482582,
+                "DisplayTime 5": 0.009999999776482582,
+                "DisplayTime 6": 0.009999999776482582,
+                "DisplayTime 7": 0.009999999776482582,
+                "DisplayTime 8": 0.009999999776482582,
+                "DisplayTime 9": 0.009999999776482582,
+                "DisplayTime 10": 0.009999999776482582,
+                "DisplayTime 11": 0.009999999776482582,
+                "DisplayTime 12": 0.009999999776482582,
+                "DisplayTime 13": 0.009999999776482582,
+                "DisplayTime 14": 0.009999999776482582,
+                "DisplayTime 15": 0.009999999776482582,
+                "DisplayTime 16": 0.009999999776482582,
+                "DisplayTime 17": 0.009999999776482582,
+                "DisplayTime 18": 0.009999999776482582,
+                "DisplayTime 19": 0.009999999776482582,
+                "DisplayTime 20": 0.009999999776482582,
+                "DisplayTime 21": 0.009999999776482582,
+                "DisplayTime 22": 0.009999999776482582,
+                "DisplayTime 23": 0.009999999776482582,
+                "DisplayTime 24": 0.009999999776482582,
+                "DisplayTime 25": 0.009999999776482582,
+                "DisplayTime 26": 0.009999999776482582,
+                "DisplayTime 27": 0.009999999776482582,
+                "DisplayTime 28": 0.009999999776482582,
+                "DisplayTime 29": 0.009999999776482582
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "33": [
+            {},
+            {},
+            {},
+            {
+                "NameTag": "player dashing animation"
+            },
+            {
+                "TextureName": "Dash",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 1024.0,
+                "Vcoordinates": 514.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 10,
+                "DisplayTime 0": 0.019999999552965164,
+                "DisplayTime 1": 0.019999999552965164,
+                "DisplayTime 2": 0.019999999552965164,
+                "DisplayTime 3": 0.019999999552965164,
+                "DisplayTime 4": 0.019999999552965164,
+                "DisplayTime 5": -0.009999999776482582,
+                "DisplayTime 6": -0.009999999776482582,
+                "DisplayTime 7": -0.009999999776482582,
+                "DisplayTime 8": -0.009999999776482582,
+                "DisplayTime 9": -0.009999999776482582
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "34": [
+            {
+                "posX": -2.190999984741211,
+                "posY": 0.1469999998807907,
+                "scaleX": 0.30000001192092896,
+                "scaleY": 0.30000001192092896,
+                "Rot": 0.0
+            },
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 5,
+                "ColliderType2": 0,
+                "minX1": 0.10000000149011612,
+                "minX2": 0.0,
+                "minY1": 0.30000001192092896,
+                "minY2": 0.0,
+                "maxX1": 0.10000000149011612,
+                "maxX2": 0.0,
+                "maxY1": 0.30000001192092896,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Gate Back 1"
+            },
+            {
+                "TextureName": "LASERGATE_BG_V2",
+                "Index_X": 16,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 20,
+                "DisplayTime 0": 0.019999999552965164,
+                "DisplayTime 1": 0.019999999552965164,
+                "DisplayTime 2": 0.019999999552965164,
+                "DisplayTime 3": 0.019999999552965164,
+                "DisplayTime 4": 0.019999999552965164,
+                "DisplayTime 5": 0.019999999552965164,
+                "DisplayTime 6": 0.019999999552965164,
+                "DisplayTime 7": 0.019999999552965164,
+                "DisplayTime 8": 0.019999999552965164,
+                "DisplayTime 9": 0.019999999552965164,
+                "DisplayTime 10": 0.019999999552965164,
+                "DisplayTime 11": 0.019999999552965164,
+                "DisplayTime 12": 0.019999999552965164,
+                "DisplayTime 13": 0.019999999552965164,
+                "DisplayTime 14": 0.019999999552965164,
+                "DisplayTime 15": 0.019999999552965164,
+                "DisplayTime 16": 0.019999999552965164,
+                "DisplayTime 17": 0.019999999552965164,
+                "DisplayTime 18": 0.019999999552965164,
+                "DisplayTime 19": 0.019999999552965164
+            },
+            {
+                "0": "GateController",
+                "1": "CollisionResponse",
+                "2": "AudioManager",
+                "ScriptCount": 3
+            },
+            {},
+            {
+                "0": {
+                    "AudioPath": "FStep4.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
+            {},
+            {},
+            {},
+            {}
+        ],
+        "35": [
+            {
+                "posX": -2.1600000858306885,
+                "posY": 0.1080000028014183,
+                "scaleX": 0.4000000059604645,
+                "scaleY": 0.4000000059604645,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "Gate Front 1"
+            },
+            {
+                "TextureName": "LASERGATE_FG_V2",
+                "Index_X": 12,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 20,
+                "DisplayTime 0": 0.019999999552965164,
+                "DisplayTime 1": 0.019999999552965164,
+                "DisplayTime 2": 0.019999999552965164,
+                "DisplayTime 3": 0.019999999552965164,
+                "DisplayTime 4": 0.019999999552965164,
+                "DisplayTime 5": 0.019999999552965164,
+                "DisplayTime 6": 0.019999999552965164,
+                "DisplayTime 7": 0.019999999552965164,
+                "DisplayTime 8": 0.019999999552965164,
+                "DisplayTime 9": 0.019999999552965164,
+                "DisplayTime 10": 0.019999999552965164,
+                "DisplayTime 11": 0.019999999552965164,
+                "DisplayTime 12": 0.019999999552965164,
+                "DisplayTime 13": 0.019999999552965164,
+                "DisplayTime 14": 0.019999999552965164,
+                "DisplayTime 15": 0.019999999552965164,
+                "DisplayTime 16": 0.019999999552965164,
+                "DisplayTime 17": 0.019999999552965164,
+                "DisplayTime 18": 0.019999999552965164,
+                "DisplayTime 19": 0.019999999552965164
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "36": [
+            {
+                "posX": -0.6970000267028809,
+                "posY": 0.164000004529953,
+                "scaleX": 0.30000001192092896,
+                "scaleY": 0.30000001192092896,
+                "Rot": 0.0
+            },
+            {
+                "velX": 0.0,
+                "velY": 0.0,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 5,
+                "ColliderType2": 0,
+                "minX1": 0.10000000149011612,
+                "minX2": 0.0,
+                "minY1": 0.30000001192092896,
+                "minY2": 0.0,
+                "maxX1": 0.10000000149011612,
+                "maxX2": 0.0,
+                "maxY1": 0.30000001192092896,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Gate Back 2"
+            },
+            {
+                "TextureName": "LASERGATE_BG_V2",
+                "Index_X": 16,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 20,
+                "DisplayTime 0": 0.019999999552965164,
+                "DisplayTime 1": 0.019999999552965164,
+                "DisplayTime 2": 0.019999999552965164,
+                "DisplayTime 3": 0.019999999552965164,
+                "DisplayTime 4": 0.019999999552965164,
+                "DisplayTime 5": 0.019999999552965164,
+                "DisplayTime 6": 0.019999999552965164,
+                "DisplayTime 7": 0.019999999552965164,
+                "DisplayTime 8": 0.019999999552965164,
+                "DisplayTime 9": 0.019999999552965164,
+                "DisplayTime 10": 0.019999999552965164,
+                "DisplayTime 11": 0.019999999552965164,
+                "DisplayTime 12": 0.019999999552965164,
+                "DisplayTime 13": 0.019999999552965164,
+                "DisplayTime 14": 0.019999999552965164,
+                "DisplayTime 15": 0.019999999552965164,
+                "DisplayTime 16": 0.019999999552965164,
+                "DisplayTime 17": 0.019999999552965164,
+                "DisplayTime 18": 0.019999999552965164,
+                "DisplayTime 19": 0.019999999552965164
+            },
+            {
+                "0": "CollisionResponse",
+                "1": "GateController",
+                "ScriptCount": 2
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "37": [
+            {
+                "posX": -0.6759999990463257,
+                "posY": 0.13600000739097595,
+                "scaleX": 0.4000000059604645,
+                "scaleY": 0.3799999952316284,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "Gate Front 2"
+            },
+            {
+                "TextureName": "LASERGATE_FG_V2",
+                "Index_X": 12,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 20,
+                "DisplayTime 0": 0.019999999552965164,
+                "DisplayTime 1": 0.019999999552965164,
+                "DisplayTime 2": 0.019999999552965164,
+                "DisplayTime 3": 0.019999999552965164,
+                "DisplayTime 4": 0.019999999552965164,
+                "DisplayTime 5": 0.019999999552965164,
+                "DisplayTime 6": 0.019999999552965164,
+                "DisplayTime 7": 0.019999999552965164,
+                "DisplayTime 8": 0.019999999552965164,
+                "DisplayTime 9": 0.019999999552965164,
+                "DisplayTime 10": 0.019999999552965164,
+                "DisplayTime 11": 0.019999999552965164,
+                "DisplayTime 12": 0.019999999552965164,
+                "DisplayTime 13": 0.019999999552965164,
+                "DisplayTime 14": 0.019999999552965164,
+                "DisplayTime 15": 0.019999999552965164,
+                "DisplayTime 16": 0.019999999552965164,
+                "DisplayTime 17": 0.019999999552965164,
+                "DisplayTime 18": 0.019999999552965164,
+                "DisplayTime 19": 0.019999999552965164
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "38": [
+            {
+                "posX": 1.6679999828338623,
+                "posY": 0.15000000596046448,
+                "scaleX": 0.30000001192092896,
+                "scaleY": 0.30000001192092896,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "Gate Back 3"
+            },
+            {
+                "TextureName": "LASERGATE_BG_V2",
+                "Index_X": 11,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 20,
+                "DisplayTime 0": 0.019999999552965164,
+                "DisplayTime 1": 0.019999999552965164,
+                "DisplayTime 2": 0.019999999552965164,
+                "DisplayTime 3": 0.019999999552965164,
+                "DisplayTime 4": 0.019999999552965164,
+                "DisplayTime 5": 0.019999999552965164,
+                "DisplayTime 6": 0.019999999552965164,
+                "DisplayTime 7": 0.019999999552965164,
+                "DisplayTime 8": 0.019999999552965164,
+                "DisplayTime 9": 0.019999999552965164,
+                "DisplayTime 10": 0.019999999552965164,
+                "DisplayTime 11": 0.019999999552965164,
+                "DisplayTime 12": 0.019999999552965164,
+                "DisplayTime 13": 0.019999999552965164,
+                "DisplayTime 14": 0.019999999552965164,
+                "DisplayTime 15": 0.019999999552965164,
+                "DisplayTime 16": 0.019999999552965164,
+                "DisplayTime 17": 0.019999999552965164,
+                "DisplayTime 18": 0.019999999552965164,
+                "DisplayTime 19": 0.019999999552965164
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "39": [
+            {
+                "posX": 1.6970000267028809,
+                "posY": 0.13600000739097595,
+                "scaleX": 0.4000000059604645,
+                "scaleY": 0.3700000047683716,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "Gate Front 3"
+            },
+            {
+                "TextureName": "LASERGATE_FG_V2",
+                "Index_X": 12,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 20,
+                "DisplayTime 0": 0.019999999552965164,
+                "DisplayTime 1": 0.019999999552965164,
+                "DisplayTime 2": 0.019999999552965164,
+                "DisplayTime 3": 0.019999999552965164,
+                "DisplayTime 4": 0.019999999552965164,
+                "DisplayTime 5": 0.019999999552965164,
+                "DisplayTime 6": 0.019999999552965164,
+                "DisplayTime 7": 0.019999999552965164,
+                "DisplayTime 8": 0.019999999552965164,
+                "DisplayTime 9": 0.019999999552965164,
+                "DisplayTime 10": 0.019999999552965164,
+                "DisplayTime 11": 0.019999999552965164,
+                "DisplayTime 12": 0.019999999552965164,
+                "DisplayTime 13": 0.019999999552965164,
+                "DisplayTime 14": 0.019999999552965164,
+                "DisplayTime 15": 0.019999999552965164,
+                "DisplayTime 16": 0.019999999552965164,
+                "DisplayTime 17": 0.019999999552965164,
+                "DisplayTime 18": 0.019999999552965164,
+                "DisplayTime 19": 0.019999999552965164
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "40": [
+            {
+                "posX": 3.2890000343322754,
+                "posY": 0.13699999451637268,
+                "scaleX": 0.30000001192092896,
+                "scaleY": 0.30000001192092896,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "Gate Back 4"
+            },
+            {
+                "TextureName": "LASERGATE_BG_V2",
+                "Index_X": 11,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 20,
+                "DisplayTime 0": 0.019999999552965164,
+                "DisplayTime 1": 0.019999999552965164,
+                "DisplayTime 2": 0.019999999552965164,
+                "DisplayTime 3": 0.019999999552965164,
+                "DisplayTime 4": 0.019999999552965164,
+                "DisplayTime 5": 0.019999999552965164,
+                "DisplayTime 6": 0.019999999552965164,
+                "DisplayTime 7": 0.019999999552965164,
+                "DisplayTime 8": 0.019999999552965164,
+                "DisplayTime 9": 0.019999999552965164,
+                "DisplayTime 10": 0.019999999552965164,
+                "DisplayTime 11": 0.019999999552965164,
+                "DisplayTime 12": 0.019999999552965164,
+                "DisplayTime 13": 0.019999999552965164,
+                "DisplayTime 14": 0.019999999552965164,
+                "DisplayTime 15": 0.019999999552965164,
+                "DisplayTime 16": 0.019999999552965164,
+                "DisplayTime 17": 0.019999999552965164,
+                "DisplayTime 18": 0.019999999552965164,
+                "DisplayTime 19": 0.019999999552965164
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "41": [
+            {
+                "posX": 3.319000005722046,
+                "posY": 0.08299999684095383,
+                "scaleX": 0.4000000059604645,
+                "scaleY": 0.4000000059604645,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "Gate Front 4"
+            },
+            {
+                "TextureName": "LASERGATE_FG_V2",
+                "Index_X": 12,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 20,
+                "DisplayTime 0": 0.019999999552965164,
+                "DisplayTime 1": 0.019999999552965164,
+                "DisplayTime 2": 0.019999999552965164,
+                "DisplayTime 3": 0.019999999552965164,
+                "DisplayTime 4": 0.019999999552965164,
+                "DisplayTime 5": 0.019999999552965164,
+                "DisplayTime 6": 0.019999999552965164,
+                "DisplayTime 7": 0.019999999552965164,
+                "DisplayTime 8": 0.019999999552965164,
+                "DisplayTime 9": 0.019999999552965164,
+                "DisplayTime 10": 0.019999999552965164,
+                "DisplayTime 11": 0.019999999552965164,
+                "DisplayTime 12": 0.019999999552965164,
+                "DisplayTime 13": 0.019999999552965164,
+                "DisplayTime 14": 0.019999999552965164,
+                "DisplayTime 15": 0.019999999552965164,
+                "DisplayTime 16": 0.019999999552965164,
+                "DisplayTime 17": 0.019999999552965164,
+                "DisplayTime 18": 0.019999999552965164,
+                "DisplayTime 19": 0.019999999552965164
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "42": [
+            {
+                "posX": 3.57116961479187,
+                "posY": -0.16944767534732819,
+                "scaleX": 0.41499999165534973,
+                "scaleY": 0.20999999344348907,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "starting debris 9"
+            },
+            {
+                "TextureName": "ENVIRONMENT_PROPS_TILESET",
+                "Index_X": 0,
+                "Index_Y": 5,
+                "Ucoordinates": 1114.0,
+                "Vcoordinates": 530.5,
+                "IsSpriteSheet": true,
+                "IsAnimated": false,
+                "MaxIndex": 9,
+                "DisplayTime 0": 0.0,
+                "DisplayTime 1": 0.0,
+                "DisplayTime 2": 0.0,
+                "DisplayTime 3": 0.0,
+                "DisplayTime 4": 0.0,
+                "DisplayTime 5": 0.0,
+                "DisplayTime 6": 0.0,
+                "DisplayTime 7": 0.0,
+                "DisplayTime 8": 0.0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "43": [
+            {
+                "posX": -3.7923731803894043,
+                "posY": 0.1733415275812149,
+                "scaleX": -0.30000001192092896,
+                "scaleY": 0.30000001192092896,
+                "Rot": 0.0
+            },
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": -0.40154480934143066,
+                "dirY": -0.0071183741092681885,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 1,
+                "ColliderType2": 4,
+                "minX1": 0.0,
+                "minX2": 0.07999999821186066,
+                "minY1": 0.0,
+                "minY2": 0.05000000074505806,
+                "maxX1": 0.0,
+                "maxX2": 0.07999999821186066,
+                "maxY1": 0.0,
+                "maxY2": 0.05000000074505806,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.05000000074505806,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Enemy"
+            },
+            {
+                "TextureName": "EXOMATA_MELEE_ENEMY_HOVERING",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 12,
+                "DisplayTime 0": 0.05999999865889549
+            },
+            {
+                "0": "EnemyScript",
+                "1": "CollisionResponse",
+                "2": "AudioManager",
+                "ScriptCount": 3
+            },
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
+            {
+                "0": {
+                    "AudioPath": "ThudStrike2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "1": {
+                    "AudioPath": "Melee_EnemyImpact4.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "2": {
+                    "AudioPath": "PlayerDamaged4.mp3",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 3,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
+            {
+                "ElementType": 1,
+                "offsetX": -0.10000000149011612,
+                "offsetY": 0.10000000149011612
+            },
+            {},
+            {},
+            {
+                "Health": 60,
+                "Max Health": 100,
+                "Damage": 20
+            }
+        ],
+        "44": [
+            {
+                "posX": -1.0027046203613281,
+                "posY": -0.2129242718219757,
+                "scaleX": 0.30000001192092896,
+                "scaleY": 0.30000001192092896,
+                "Rot": 0.0
+            },
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 1,
+                "ColliderType2": 4,
+                "minX1": 0.0,
+                "minX2": 0.07999999821186066,
+                "minY1": 0.0,
+                "minY2": 0.05000000074505806,
+                "maxX1": 0.0,
+                "maxX2": 0.07999999821186066,
+                "maxY1": 0.0,
+                "maxY2": 0.05000000074505806,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.05000000074505806,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Enemy"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 1,
+                "DisplayTime 0": 0.05999999865889549
+            },
+            {
+                "0": "EnemyScript",
+                "1": "CollisionResponse",
+                "2": "AudioManager",
+                "ScriptCount": 3
+            },
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
+            {
+                "0": {
+                    "AudioPath": "ThudStrike2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "1": {
+                    "AudioPath": "Melee_EnemyImpact4.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "2": {
+                    "AudioPath": "PlayerDamaged4.mp3",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 3,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
+            {
+                "ElementType": 1,
+                "offsetX": -0.10000000149011612,
+                "offsetY": 0.10000000149011612
+            },
+            {},
+            {},
+            {
+                "Health": 100,
+                "Max Health": 100,
+                "Damage": 20
+            }
+        ],
+        "45": [
+            {
+                "posX": -1.0423575639724731,
+                "posY": 0.05939039587974548,
+                "scaleX": 0.30000001192092896,
+                "scaleY": 0.30000001192092896,
+                "Rot": 0.0
+            },
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 1,
+                "ColliderType2": 4,
+                "minX1": 0.0,
+                "minX2": 0.07999999821186066,
+                "minY1": 0.0,
+                "minY2": 0.05000000074505806,
+                "maxX1": 0.0,
+                "maxX2": 0.07999999821186066,
+                "maxY1": 0.0,
+                "maxY2": 0.05000000074505806,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.05000000074505806,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Enemy"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 1,
+                "DisplayTime 0": 0.05999999865889549
+            },
+            {
+                "0": "EnemyScript",
+                "1": "CollisionResponse",
+                "2": "AudioManager",
+                "ScriptCount": 3
+            },
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
+            {
+                "0": {
+                    "AudioPath": "ThudStrike2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "1": {
+                    "AudioPath": "Melee_EnemyImpact4.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "2": {
+                    "AudioPath": "PlayerDamaged4.mp3",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 3,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
+            {
+                "ElementType": 1,
+                "offsetX": -0.10000000149011612,
+                "offsetY": 0.10000000149011612
+            },
+            {},
+            {},
+            {
+                "Health": 100,
+                "Max Health": 100,
+                "Damage": 20
+            }
+        ],
+        "46": [
+            {
+                "posX": -1.3397554159164429,
+                "posY": -0.12820425629615784,
+                "scaleX": 0.30000001192092896,
+                "scaleY": 0.30000001192092896,
+                "Rot": 0.0
+            },
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 1,
+                "ColliderType2": 4,
+                "minX1": 0.0,
+                "minX2": 0.07999999821186066,
+                "minY1": 0.0,
+                "minY2": 0.05000000074505806,
+                "maxX1": 0.0,
+                "maxX2": 0.07999999821186066,
+                "maxY1": 0.0,
+                "maxY2": 0.05000000074505806,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.05000000074505806,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Enemy"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 1,
+                "DisplayTime 0": 0.05999999865889549
+            },
+            {
+                "0": "EnemyScript",
+                "1": "CollisionResponse",
+                "2": "AudioManager",
+                "ScriptCount": 3
+            },
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
+            {
+                "0": {
+                    "AudioPath": "ThudStrike2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "1": {
+                    "AudioPath": "Melee_EnemyImpact4.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "2": {
+                    "AudioPath": "PlayerDamaged4.mp3",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 3,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
+            {
+                "ElementType": 1,
+                "offsetX": -0.10000000149011612,
+                "offsetY": 0.10000000149011612
+            },
+            {},
+            {},
+            {
+                "Health": 100,
+                "Max Health": 100,
+                "Damage": 20
+            }
+        ],
+        "47": [
+            {
+                "posX": 0.015107512474060059,
+                "posY": 0.20499999821186066,
+                "scaleX": 1.0,
+                "scaleY": 0.10000000149011612,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "BGM"
+            },
+            {},
+            {
+                "0": "AudioManager",
+                "1": "BackgroundAudio",
+                "ScriptCount": 2
+            },
+            {},
+            {
+                "0": {
+                    "AudioPath": "HeroFightBossMusic.wav",
+                    "Channel": 2,
+                    "IsLooping": true
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
+            {},
+            {},
+            {},
+            {}
+        ],
+        "48": [
+            {
+                "posX": -3.631338596343994,
+                "posY": 0.3754599094390869,
+                "scaleX": 0.2612244784832001,
+                "scaleY": 0.05999999865889549,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "PlayerHUDHealth"
+            },
+            {
+                "TextureName": "HPBar",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 1,
+                "DisplayTime 0": 0.0
+            },
+            {
+                "0": "HUDController",
+                "ScriptCount": 1
+            },
+            {},
+            {},
+            {
+                "ElementType": 1,
+                "offsetX": -0.3449999988079071,
+                "offsetY": 0.19499999284744263
+            },
+            {},
+            {},
+            {}
+        ],
+        "49": [
+            {
+                "posX": -3.7108283042907715,
+                "posY": 0.3444598913192749,
+                "scaleX": 0.0,
+                "scaleY": 0.03999999910593033,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "PlayerHUDDash"
+            },
+            {
+                "TextureName": "DashBar",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "0": "HUDController",
+                "ScriptCount": 1
+            },
+            {},
+            {},
+            {
+                "ElementType": 3,
+                "offsetX": -0.3199999928474426,
+                "offsetY": 0.164000004529953
+            },
+            {},
+            {},
+            {}
+        ],
+        "50": [
+            {
+                "posX": -3.7810919284820557,
+                "posY": 0.29045990109443665,
+                "scaleX": -0.0006583875510841608,
+                "scaleY": 0.03999999910593033,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "PlayerHUDBlock"
+            },
+            {
+                "TextureName": "DashBar",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "0": "HUDController",
+                "ScriptCount": 1
+            },
+            {},
+            {},
+            {
+                "ElementType": 2,
+                "offsetX": -0.38999998569488525,
+                "offsetY": 0.10999999940395355
+            },
+            {},
+            {},
+            {}
+        ],
+        "51": [
+            {
+                "posX": -3.6558284759521484,
+                "posY": 0.345459908246994,
+                "scaleX": 0.4000000059604645,
+                "scaleY": 0.20000000298023224,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "PlayerHUDStatic"
+            },
+            {
+                "TextureName": "HPStatic",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "0": "HUDController",
+                "ScriptCount": 1
+            },
+            {},
+            {},
+            {
+                "ElementType": 0,
+                "offsetX": -0.26499998569488525,
+                "offsetY": 0.16500000655651093
+            },
+            {},
+            {},
+            {}
+        ],
+        "52": [
+            {
+                "posX": 0.0,
+                "posY": -4.0,
+                "scaleX": 4.170000076293945,
+                "scaleY": 2.0,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "Pause_BackGround"
+            },
+            {
+                "TextureName": "Main_Background",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "ScriptCount": 0
+            },
+            {
+                "Tag": "Untagged",
+                "TargetTag": ""
+            },
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "53": [
+            {
+                "posX": 0.0,
+                "posY": -4.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "Menu_UI"
+            },
+            {
+                "TextureName": "MenuPanel",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "54": [
+            {
+                "posX": -0.006183624267578125,
+                "posY": -3.767016649246216,
+                "scaleX": 1.0,
+                "scaleY": 0.20000000298023224,
+                "Rot": 0.0
+            },
+            {},
+            {
+                "ColliderType1": 0,
+                "ColliderType2": 0,
+                "minX1": 0.0,
+                "minX2": 0.0,
+                "minY1": 0.0,
+                "minY2": 0.0,
+                "maxX1": 0.0,
+                "maxX2": 0.0,
+                "maxY1": 0.0,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Resume"
+            },
+            {
+                "TextureName": "RESTART_R",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "ScriptCount": 0
+            },
+            {
+                "Tag": "Untagged",
+                "TargetTag": ""
+            },
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "55": [
+            {
+                "posX": 4.656612873077393e-10,
+                "posY": -3.9244377613067627,
+                "scaleX": 1.0,
+                "scaleY": 0.20000000298023224,
+                "Rot": 0.0
+            },
+            {},
+            {
+                "ColliderType1": 0,
+                "ColliderType2": 0,
+                "minX1": 0.0,
+                "minX2": 0.0,
+                "minY1": 0.0,
+                "minY2": 0.0,
+                "maxX1": 0.0,
+                "maxX2": 0.0,
+                "maxY1": 0.0,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Quit"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "ScriptCount": 0
+            },
+            {
+                "Tag": "Untagged",
+                "TargetTag": ""
+            },
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "56": [
+            {
+                "posX": 0.0,
+                "posY": -3.799999952316284,
+                "scaleX": 1.0,
+                "scaleY": 0.20000000298023224,
+                "Rot": 0.0
+            },
+            {},
+            {
+                "ColliderType1": 0,
+                "ColliderType2": 0,
+                "minX1": 0.0,
+                "minX2": 0.0,
+                "minY1": 0.0,
+                "minY2": 0.0,
+                "maxX1": 0.0,
+                "maxX2": 0.0,
+                "maxY1": 0.0,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Resume"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "0": "PauseMenu",
+                "ScriptCount": 1
+            },
+            {
+                "Tag": "Untagged",
+                "TargetTag": ""
+            },
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "57": [
+            {
+                "posX": 0.0,
+                "posY": -3.799999952316284,
+                "scaleX": 1.0,
+                "scaleY": 0.20000000298023224,
+                "Rot": 0.0
+            },
+            {},
+            {
+                "ColliderType1": 0,
+                "ColliderType2": 0,
+                "minX1": 0.0,
+                "minX2": 0.0,
+                "minY1": 0.0,
+                "minY2": 0.0,
+                "maxX1": 0.0,
+                "maxX2": 0.0,
+                "maxY1": 0.0,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Resume"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "ScriptCount": 0
+            },
+            {
+                "Tag": "Untagged",
+                "TargetTag": ""
+            },
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "58": [
+            {
+                "posX": 0.0,
+                "posY": -3.799999952316284,
+                "scaleX": 1.0,
+                "scaleY": 0.20000000298023224,
+                "Rot": 0.0
+            },
+            {},
+            {
+                "ColliderType1": 0,
+                "ColliderType2": 0,
+                "minX1": 0.0,
+                "minX2": 0.0,
+                "minY1": 0.0,
+                "minY2": 0.0,
+                "maxX1": 0.0,
+                "maxX2": 0.0,
+                "maxY1": 0.0,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Resume"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "ScriptCount": 0
+            },
+            {
+                "Tag": "Untagged",
+                "TargetTag": ""
+            },
+            {},
+            {},
+            {},
+            {},
+            {}
+        ]
+    }
+}

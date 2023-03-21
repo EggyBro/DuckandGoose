@@ -15,13 +15,17 @@
     <ClInclude Include="src\ExoEngine\Audio\AudioEngine.h" />
     <ClInclude Include="src\ExoEngine\ECS\ComponentArray.h" />
     <ClInclude Include="src\ExoEngine\ECS\ComponentManager.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\Attributes.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Audio.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\CameraComponent.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Collider.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Components.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\EnemyAttributes.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\HUDComponent.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Logic.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\NameTag.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\IComponent.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\PlayerAttributes.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Tag.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\RigidBody.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Sprite.h" />
@@ -39,10 +43,45 @@
     <ClInclude Include="src\ExoEngine.h" />
     <ClInclude Include="src\ExoEngine\Application.h" />
     <ClInclude Include="src\ExoEngine\Core.h" />
+    <ClInclude Include="src\ExoEngine\Math\Vec4.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\AudioManager.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\BackgroundAudio.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\ButtonResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\CollisionResponse.h" />
-    <ClInclude Include="src\ExoEngine\Scripts\PlayerController.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\CutScene.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\DialogueManager.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\EnemyScript.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\GateController.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\HUDController.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\HazardScript.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\PlayerControl.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\SliderScript.h" />
+    <ClInclude Include="src\Platform\Logic\StateMachines\StateMachine.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\ScenerioScript.h" />
     <ClInclude Include="src\Platform\Graphics\Camera.h" />
     <ClInclude Include="src\Platform\LevelEditor\Picker.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyAttack.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyChase.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyDamaged.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyDeath.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyIdle.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyNotActive.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyRetreat.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyTransition.h" />
+    <ClInclude Include="src\Platform\Logic\States\GateStates\GateLocked.h" />
+    <ClInclude Include="src\Platform\Logic\States\GateStates\GateUnlocked.h" />
+    <ClInclude Include="src\Platform\Logic\States\HazardStates\HazardCharging.h" />
+    <ClInclude Include="src\Platform\Logic\States\HazardStates\HazardFire.h" />
+    <ClInclude Include="src\Platform\Logic\States\HazardStates\HazardIdle.h" />
+    <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnAttack_1.h" />
+    <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnAttack_2.h" />
+    <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnBlock.h" />
+    <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnDamaged.h" />
+    <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnDash.h" />
+    <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnDieded.h" />
+    <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnIdle.h" />
+    <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnMove.h" />
+    <ClInclude Include="src\Platform\Logic\States\IStates.h" />
     <ClInclude Include="src\Platform\Physics\CollisionSystem.h" />
     <ClInclude Include="src\ExoEngine\Math\Math.h" />
     <ClInclude Include="src\ExoEngine\Math\matrix3D.h" />
@@ -54,7 +93,6 @@
     <ClInclude Include="src\ExoEngine\Math\Vec3.h" />
     <ClInclude Include="src\ExoEngine\Math\Vmath.h" />
     <ClInclude Include="src\ExoEngine\ResourceManager\ResourceManager.h" />
-    <ClInclude Include="src\ExoEngine\Scripts\EnemyMovement.h" />
     <ClInclude Include="src\ExoEngine\Scripts\IScript.h" />
     <ClInclude Include="src\ExoEngine\Timer\Fps.h" />
     <ClInclude Include="src\ExoEngine\Timer\Time.h" />
@@ -188,12 +226,16 @@
     <ClInclude Include="vendor\spdlog\include\spdlog\version.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ExoEngine\ECS\Components\Attributes.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Audio.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\CameraComponent.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Collider.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Components.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\EnemyAttributes.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\HUDComponent.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Logic.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\NameTag.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\PlayerAttributes.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Tag.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\RigidBody.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Sprite.cpp" />
@@ -210,9 +252,38 @@
     </ClCompile>
     <ClCompile Include="src\ExoEngine\Log.cpp" />
     <ClCompile Include="src\ExoEngine\Application.cpp" />
+    <ClCompile Include="src\ExoEngine\Math\Vec4.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\AudioManager.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\BackgroudAudio.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\ButtonResponse.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\CollisionResponse.cpp" />
-    <ClCompile Include="src\ExoEngine\Scripts\PlayerController.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\HUDController.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\ScenerioScript.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\SliderScript.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\PauseMenu.cpp" />
     <ClCompile Include="src\Platform\LevelEditor\Picker.cpp" />
+    <ClCompile Include="src\Platform\Logic\StateMachines\StateMachine.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyAttack.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyChase.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyDamaged.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyDeath.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyIdle.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyNotActive.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyRetreat.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyTransition.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\GateStates\GateLocked.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\GateStates\GateUnlocked.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\HazardStates\HazardCharging.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\HazardStates\HazardFire.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\HazardStates\HazardIdle.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnAttack_1.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnAttack_2.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnBlock.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDamaged.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDash.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDieded.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnIdle.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnMove.cpp" />
     <ClCompile Include="src\Platform\Physics\CollisionSystem.cpp" />
     <ClCompile Include="src\ExoEngine\Math\matrix3D.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
@@ -227,7 +298,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\ExoEngine\ResourceManager\ResourceManager.cpp" />
-    <ClCompile Include="src\ExoEngine\Scripts\EnemyMovement.cpp" />
     <ClCompile Include="src\ExoEngine\Timer\Time.cpp" />
     <ClCompile Include="src\Platform\Graphics\Buffer.cpp" />
     <ClCompile Include="src\Platform\Graphics\Camera2D.cpp" />
@@ -345,6 +415,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <OmitDefaultLibName>false</OmitDefaultLibName>
       <ProgramDataBaseFileName>$(OutDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -371,6 +442,7 @@
       <PrecompiledHeaderFile>empch.h</PrecompiledHeaderFile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -381,7 +453,7 @@
       <AdditionalLibraryDirectories>$(SolutionDir)ExoEngine\vendor\glew-2.1.0\lib\Release\x64;$(SolutionDir)ExoEngine\vendor\freetype\libs;$(SolutionDir)ExoEngine\vendor\fmodL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(TargetDir)ExoEngine.dll" "$(SolutionDir)bin\Release-x64\Exomata"</Command>
+      <Command>copy "$(TargetDir)ExoEngine.dll" "$(SolutionDir)bin\Release-x64\Exomata\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

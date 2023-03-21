@@ -1,8 +1,8 @@
 /*!*************************************************************************
 ****
 \file AudioEngine.cpp
-\author Cheung Jun Yin Matthew
-\par DP email: j.cheung@digipen.edu
+\author Cheung Jun Yin Matthew, Tan Ek Hern
+\par DP email: j.cheung@digipen.edu, t.ekhern@digipen.edu
 \par Course: csd2400
 \par Section: a
 \par Milestone 2
@@ -22,11 +22,11 @@ std::unique_ptr<CAudioEngine> m_Instance;
 
 std::unique_ptr<CAudioEngine>& CAudioEngine::GetInstance()
 {
-        if (!m_Instance)
-        {
-            m_Instance = std::make_unique<CAudioEngine>();
-        }
-        return m_Instance;
+    if (!m_Instance)
+    {
+        m_Instance = std::make_unique<CAudioEngine>();
+    }
+    return m_Instance;
 }
 
 /*!*************************************************************************
@@ -34,13 +34,13 @@ Error check for FMOD audio
 ****************************************************************************/
 void CAudioEngine::ErrorCheck(FMOD_RESULT result)
 {
-	if (result != FMOD_OK) {
-		//cout << "FMOD ERROR " << result << endl;
-	}
+    if (result != FMOD_OK) {
+        //cout << "FMOD ERROR " << result << endl;
+    }
 }
 
 /*!*************************************************************************
-Load sound function stores the audio selected into a map and calls the FMOD 
+Load sound function stores the audio selected into a map and calls the FMOD
 API create sound
 ****************************************************************************/
 FMOD::Sound* CAudioEngine::Loadsound(const std::string& strSoundName, bool b_Looping)
@@ -54,23 +54,24 @@ FMOD::Sound* CAudioEngine::Loadsound(const std::string& strSoundName, bool b_Loo
     eMode |= b_Looping ? FMOD_LOOP_NORMAL : FMOD_LOOP_OFF;
 
     CAudioEngine::ErrorCheck(mpSystem->createSound(strSoundName.c_str(), eMode, NULL, &pSound));
-    if (pSound) 
+    if (pSound)
     {
         mSoundMap[strSoundName] = pSound; //if sound is created store in sound map
     }
+    //std::cout << "Loaded Sound:" << strSoundName << "\n";
     return pSound;
 }
 
 /*!*************************************************************************
-Play sound searches for the audio laoaded into the soumd map, then calls 
+Play sound searches for the audio laoaded into the soumd map, then calls
 FMOD API play sound using loaded audio
 ****************************************************************************/
-int CAudioEngine::PlaySound(const std::string& strSoundName,  float fVolumedB)
+int CAudioEngine::PlaySound(const std::string& strSoundName, EM::Audio::AudioType chgrp)
 {
-
+    //std::cout << "Function called" << std::endl;
     auto tFoundIt = mSoundMap.find(strSoundName);
     FMOD::Sound* pSound;
-    
+
     if (tFoundIt == mSoundMap.end()) //iterate through channels, if not in any, load sound into a channel
     {
         pSound = Loadsound(strSoundName);
@@ -79,7 +80,7 @@ int CAudioEngine::PlaySound(const std::string& strSoundName,  float fVolumedB)
     {
         pSound = tFoundIt->second;
     }
-    
+
     FMOD::Channel* pChannel = nullptr;
 
     //create new channel if no empty channels found
@@ -89,10 +90,22 @@ int CAudioEngine::PlaySound(const std::string& strSoundName,  float fVolumedB)
     {
         FMOD_MODE currMode;
         pSound->getMode(&currMode);
-        CAudioEngine::ErrorCheck(pChannel->setVolume(VolumeTodB(fVolumedB)));
+        //CAudioEngine::ErrorCheck(pChannel->setVolume());
         mChannelMap[nChannelId] = pChannel;
+        //assign channel group to audio
+        if (chgrp == EM::Audio::AudioType::MASTER) {
+            pChannel->setChannelGroup(Master);
+        }
+        if (chgrp == EM::Audio::AudioType::BGM) {
+            pChannel->setChannelGroup(BGM);
+        }
+        if (chgrp == EM::Audio::AudioType::SFX) {
+            pChannel->setChannelGroup(SFX);
+        }
+
     }
-    std::cout << mChannelMap.size() << std::endl;
+    //std::cout << "Playing: " << strSoundName << std::endl;
+    //std::cout << mChannelMap.size() << std::endl;
     return nChannelId;
 }
 
@@ -102,7 +115,7 @@ Uses FMOD setPaused() to pause audio
 void CAudioEngine::PauseSound(int channelID)
 {
     auto it = mChannelMap.find(channelID);
-    
+
     if (it != mChannelMap.end())
     {
         it->second->setPaused(true);
@@ -115,7 +128,7 @@ Uses FMOD setPaused() and sets to false to unpause audio
 void CAudioEngine::UnpauseSound(int channelID)
 {
     auto it = mChannelMap.find(channelID);
-    
+
     if (it != mChannelMap.end())
     {
         it->second->setPaused(false);
@@ -149,7 +162,7 @@ Sets audio volume
 void CAudioEngine::SetVolume(int channelID, float vol)
 {
     auto it = mChannelMap.find(channelID);
-    
+
     if (it != mChannelMap.end())
     {
         it->second->setVolume(VolumeTodB(vol));
@@ -161,12 +174,12 @@ Stop all audio channels
 ****************************************************************************/
 void CAudioEngine::StopChannel(int channelID)
 {
-    auto it = mChannelMap.find(channelID); 
-    
-    if(it != mChannelMap.end())
+    auto it = mChannelMap.find(channelID);
+
+    if (it != mChannelMap.end())
     {
-            it->second->stop();
-    }   
+        it->second->stop();
+    }
 }
 
 /*!*************************************************************************
@@ -176,11 +189,11 @@ float CAudioEngine::GetVolume(int channelID)
 {
     float audio_volume = 0.0f;
 
-    auto it = mChannelMap.find(channelID); 
-    
-    if(it != mChannelMap.end())
+    auto it = mChannelMap.find(channelID);
+
+    if (it != mChannelMap.end())
     {
-       it->second->getVolume(&audio_volume);
+        it->second->getVolume(&audio_volume);
     }
     return audio_volume;
 
@@ -191,17 +204,29 @@ Init loop of CAudioEngine
 ****************************************************************************/
 void CAudioEngine::Init()
 {
-	ErrorCheck(FMOD::System_Create(&mpSystem));
+    ErrorCheck(FMOD::System_Create(&mpSystem));
 
     //LoadAudio("Assets/audios.txt");
 
-	mpSystem->init(1024, FMOD_INIT_NORMAL, NULL);
-	mpSystem->createChannelGroup("Master", &Master);
-	mpSystem->createChannelGroup("BGM", &BGM);
-	mpSystem->createChannelGroup("SFX", &SFX);
+    mpSystem->init(1024, FMOD_INIT_NORMAL, NULL);
+    mpSystem->createChannelGroup("Master", &Master);
+    mpSystem->createChannelGroup("BGM", &BGM);
+    mpSystem->createChannelGroup("SFX", &SFX);
 
-	Master->addGroup(BGM);
-	Master->addGroup(SFX);
+    Master->addGroup(BGM);
+    Master->addGroup(SFX);
+
+    //load all audio files from metadigger folder
+    std::string audio_path = "Assets/metadigger/";
+    for (auto const& dir_entry : std::filesystem::directory_iterator{ audio_path }) //iterate files in metadigger file
+    {
+        //checks if given file status or path corresponds to a regular file
+        if (!dir_entry.is_regular_file())
+        {
+            continue;
+        }
+        //FMOD::Sound* temp = Loadsound(audio_path + dir_entry.path().filename().string(), false);
+    }
 }
 
 /*!*************************************************************************
@@ -214,7 +239,7 @@ void CAudioEngine::Update()
     {
         bool bIsPlaying = false;
         it->second->isPlaying(&bIsPlaying);
-        
+
         if (!bIsPlaying)
         {
             pStoppedChannels.push_back(it);
@@ -243,7 +268,7 @@ void CAudioEngine::Release()
     {
         sound_it->second->release();
     }
-    
+
     // release every channel group
     // release systems
     BGM->stop();
@@ -262,17 +287,19 @@ Checks if audio is playing
 ****************************************************************************/
 bool CAudioEngine::IsPlaying(int nChannelId) const
 {
+    //std::cout << "checking...\n";
     bool is_playing = false;
     auto it = mChannelMap.find(nChannelId);
     //if not found return false
     if (it != mChannelMap.end())
     {
-        return it->second->isPlaying(&is_playing);
+        //std::cout << "found channel\n";
+        it->second->isPlaying(&is_playing);
+        return is_playing;
     }
-
+    //std::cout << "cannot found channel\n";
     return false;
 }
-
 /*!*************************************************************************
 Converts decibels to volume
 ****************************************************************************/
@@ -298,3 +325,26 @@ float  CAudioEngine::VolumeTodB(float volume)
 }
 
 
+void CAudioEngine::SetLooping(const std::string& strSoundName, bool in) {
+    if (in) {
+        auto tFoundIt = mSoundMap.find(strSoundName);
+        if (tFoundIt != mSoundMap.end()) {
+            tFoundIt->second->setMode(FMOD_LOOP_NORMAL);
+            tFoundIt->second->setLoopCount(-1);
+        }
+    }
+    else {
+        auto tFoundIt = mSoundMap.find(strSoundName);
+        if (tFoundIt != mSoundMap.end()) {
+            tFoundIt->second->setMode(FMOD_LOOP_OFF);
+            //std::cout << "turned loop off\n";
+        }
+    }
+    //std::cout << "Updated looping\n";
+}
+
+float CAudioEngine::GetVolumeByChannel(FMOD::ChannelGroup* ch) {
+    float ret = 0;
+    ch->getVolume(&ret);
+    return ret;
+}

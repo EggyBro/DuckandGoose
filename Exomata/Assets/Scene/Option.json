@@ -1,0 +1,334 @@
+{
+    "Number of Entities": {
+        "Entities": 8
+    },
+    "EntitySignatures": [
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011001",
+        "00000000000000000000000001111101",
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011001",
+        "00000000000000000000000001111101",
+        "00000000000000000000000001111101"
+    ],
+    "Components": {
+        "0": [
+            {
+                "posX": -0.840136706829071,
+                "posY": 0.0,
+                "scaleX": 5.843409538269043,
+                "scaleY": 3.0,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "SFX"
+            },
+            {
+                "TextureName": "Main_Background2",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "1": [
+            {
+                "posX": 0.014064371585845947,
+                "posY": -0.13502119481563568,
+                "scaleX": 3.014554023742676,
+                "scaleY": 2.3258650302886963,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "Menu"
+            },
+            {
+                "TextureName": "MenuPanel",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "2": [
+            {
+                "posX": -0.4643329977989197,
+                "posY": 0.26722919940948486,
+                "scaleX": 1.639686942100525,
+                "scaleY": 0.24613748490810394,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "Master Slider"
+            },
+            {
+                "TextureName": "VolumeBar",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "3": [
+            {
+                "posX": -0.5099999904632568,
+                "posY": 0.2669999897480011,
+                "scaleX": 0.09000003337860107,
+                "scaleY": 0.09000003337860107,
+                "Rot": 0.0
+            },
+            {},
+            {
+                "ColliderType1": 0,
+                "ColliderType2": 0,
+                "minX1": 0.0,
+                "minX2": 0.0,
+                "minY1": 0.0,
+                "minY2": 0.0,
+                "maxX1": 0.0,
+                "maxX2": 0.0,
+                "maxY1": 0.0,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Master"
+            },
+            {
+                "TextureName": "VolumeBall",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "0": "SliderScript",
+                "ScriptCount": 1
+            },
+            {
+                "Tag": "Untagged",
+                "TargetTag": "Master"
+            },
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "4": [
+            {
+                "posX": -0.46399998664855957,
+                "posY": -0.16699999570846558,
+                "scaleX": 1.639686942100525,
+                "scaleY": 0.24613748490810394,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "BGM Slider"
+            },
+            {
+                "TextureName": "VolumeBar",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "5": [
+            {
+                "posX": -0.46399998664855957,
+                "posY": -0.5669999718666077,
+                "scaleX": 1.639686942100525,
+                "scaleY": 0.24613748490810394,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "SFX Slider"
+            },
+            {
+                "TextureName": "VolumeBar",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "6": [
+            {
+                "posX": -0.5099999904632568,
+                "posY": -0.16699999570846558,
+                "scaleX": 0.09000003337860107,
+                "scaleY": 0.09000003337860107,
+                "Rot": 0.0
+            },
+            {},
+            {
+                "ColliderType1": 0,
+                "ColliderType2": 0,
+                "minX1": 0.0,
+                "minX2": 0.0,
+                "minY1": 0.0,
+                "minY2": 0.0,
+                "maxX1": 0.0,
+                "maxX2": 0.0,
+                "maxY1": 0.0,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "BGM"
+            },
+            {
+                "TextureName": "VolumeBall",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "0": "SliderScript",
+                "ScriptCount": 1
+            },
+            {
+                "Tag": "Untagged",
+                "TargetTag": "BGM"
+            },
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "7": [
+            {
+                "posX": -0.5099999904632568,
+                "posY": -0.5669999718666077,
+                "scaleX": 0.09000003337860107,
+                "scaleY": 0.09000000357627869,
+                "Rot": 0.0
+            },
+            {},
+            {
+                "ColliderType1": 0,
+                "ColliderType2": 0,
+                "minX1": 0.0,
+                "minX2": 0.0,
+                "minY1": 0.0,
+                "minY2": 0.0,
+                "maxX1": 0.0,
+                "maxX2": 0.0,
+                "maxY1": 0.0,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "SFX"
+            },
+            {
+                "TextureName": "VolumeBall",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "0": "SliderScript",
+                "ScriptCount": 1
+            },
+            {
+                "Tag": "Untagged",
+                "TargetTag": "SFX"
+            },
+            {},
+            {},
+            {},
+            {},
+            {}
+        ]
+    }
+}

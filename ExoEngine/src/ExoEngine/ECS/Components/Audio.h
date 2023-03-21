@@ -1,8 +1,8 @@
 /*!*************************************************************************
 ****
 \file Audio.h
-\author Cheung Jun Yin Matthew
-\par DP email: j.cheung@digipen.edu
+\author Cheung Jun Yin Matthew, Tan Ek Hern
+\par DP email: j.cheung@digipen.edu, t.ekhern@digipen.edu
 \par Course: csd2400
 \par Section: a
 \par Milestone 2
@@ -15,7 +15,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #pragma once
 #include "IComponent.h"
-
+#pragma warning( disable : 26495 )
 namespace EM
 {
 
@@ -29,20 +29,25 @@ namespace EM
 			BGM,
 			SFX
 		};
+		struct AudioPiece {
+			std::string mAudioPath{};
+			AudioType mChannelGroup{};
+			int mChannel{};
+			bool is_Looping{};
+			bool should_play{};
+			bool should_stop{};
+			bool is_Playing{};
+			bool triggered{};
+		};
 		Audio();
 		~Audio() = default;
 		virtual bool Deserialize(const rapidjson::Value& obj);
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
 		
-		void SetAudioPath(std::string input) { mAudioPath = input; }
-		void SetChannelGroup(AudioType input) { mChannelGroup = input; }
-		void SetLooping(bool isplayed) { is_Looping = isplayed; }
-		void SetVolume(float vol) {mVolume = vol; }
-
-		std::string GetAudioPath() { return mAudioPath; }
-		AudioType GetChannelGroup() { return mChannelGroup; }
-		bool GetLooping() { return is_Looping; }
-		float GetVolume() { return mVolume; }
+		std::vector<AudioPiece>& GetArr() { return AudioArr; }
+		void SetArr(std::vector<AudioPiece> in) { AudioArr = in; }
+		int GetSize() { return (int)AudioArr.size(); }
+		AudioPiece& operator[](int i) { return AudioArr[i]; }
 
 		/*!*************************************************************************
 		Retrieves Component Entity ID
@@ -53,16 +58,23 @@ namespace EM
 		****************************************************************************/
 		void SetComponentEntityID(Entity& entity) { entityID = entity; }
 
+		float& GetBGMVolume() { return bgmVol; }
+		float& GetSFXVolume() { return sfxVol; }
+		float& GetMasterVolume() { return masterVol; }
+
+		void SetBGMVolume(float vol) { bgmVol = vol; }
+		void SetSFXVolume(float vol) { sfxVol = vol; }
+		void SetMasterVolume(float vol) { masterVol = vol; }
+
 		//Audio component
 		//	Singular piece of audio that can be set to play upon a specific event.
 		//	Toggle looping.
 		
 
 	private:
-		std::string mAudioPath{};
-		AudioType mChannelGroup{};
-		bool is_Looping{};
-		float mVolume{};
-
+		std::vector<AudioPiece> AudioArr;
+		float bgmVol;
+		float sfxVol;
+		float masterVol;
 	};
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "Vmath.h"
 #include "empch.h"
+#include "Vec3.h"
 
 namespace EM
 {
@@ -13,13 +14,17 @@ namespace EM
 			float m20, m21, m22;
 		};
 
-		float m[9];
+		float m[3][3];
 
 		Mat3D();
 		Mat3D(const float* pArray);
 		Mat3D(float _00, float _01, float _02,
 			float _10, float _11, float _12,
 			float _20, float _21, float _22);
+		Mat3D(Vec3 v1, Vec3 v2, Vec3 v3);
+		Mat3D(float value);
+
+
 
 		Mat3D& operator=(const Mat3D& rhs);
 
